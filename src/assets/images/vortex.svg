@@ -1,0 +1,27 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 328 326" width="328" height="326">
+	<title>vortex_369-svg</title>
+	<defs>
+		<linearGradient id="g1" x1="162.3" y1="4.1" x2="304.2" y2="249.9" gradientUnits="userSpaceOnUse">
+			<stop offset="0" stop-color="#e45f9b"/>
+			<stop offset="1" stop-color="#ffc86b"/>
+		</linearGradient>
+		<linearGradient id="g2" x1="23.8" y1="249.9" x2="165.7" y2="4.1" gradientUnits="userSpaceOnUse">
+			<stop offset="0" stop-color="#6a66cb"/>
+			<stop offset="1" stop-color="#e45f9b"/>
+		</linearGradient>
+	</defs>
+	<style>
+		.s0 { fill: none;stroke: #333333;stroke-linecap: round;stroke-linejoin: round;stroke-width: 3.3 } 
+		.s1 { fill: #333333 } 
+		.s2 { fill: none;stroke: url(#g1);stroke-linecap: round;stroke-width: 6.7 } 
+		.s3 { fill: none;stroke: url(#g2);stroke-linecap: round;stroke-width: 6.7 } 
+	</style>
+	<g id="Ebene_2">
+		<g id="Ebene_11">
+			<path id="Layer" class="s0" d="m266.7 44.3l-157.4 273.4-102.6-178.7 54.6-94.7 157.4 273.4 102.6-178.7-54.6-94.7z"/>
+			<path id="Layer" class="s1" d=""/>
+			<path id="Layer" class="s2" d="m164 7l138.6 240"/>
+			<path id="Layer" class="s3" d="m25.4 247l138.6-240"/>
+		</g>
+	</g>
+</svg>

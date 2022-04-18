@@ -10,7 +10,9 @@ module.exports = {
 	},
 	resolve: {
 		alias: {
-			svelte: path.dirname(require.resolve('svelte/package.json'))
+			svelte: path.dirname(require.resolve('svelte/package.json')),
+			'@': path.resolve(__dirname, 'src/'),
+			 comp: path.resolve(__dirname, 'src/components/'),
 		},
 		extensions: ['.mjs', '.js', '.svelte'],
 		mainFields: ['svelte', 'browser', 'module', 'main']
@@ -18,7 +20,8 @@ module.exports = {
 	output: {
 		path: path.join(__dirname, '/public'),
 		filename: '[name].js',
-		chunkFilename: '[name].[id].js'
+		chunkFilename: '[name].[id].js',
+		assetModuleFilename: '[name][ext]'
 	},
 	module: {
 		rules: [
@@ -47,11 +50,14 @@ module.exports = {
 				use: ['style-loader', 'css-loader', 'sass-loader']
 			},
 			{
-				// required to prevent errors from Svelte on Webpack 5+
 				test: /node_modules\/svelte\/.*\.mjs$/,
 				resolve: {
 					fullySpecified: false
 				}
+			},
+			{
+				test: /\.(svg|jpg|jpeg)$/i,
+				type: 'asset/resource'
 			}
 		]
 	},
@@ -68,8 +74,5 @@ module.exports = {
 		client: {
 			logging: 'warn',
 		},
-
-
 	},
-
 };

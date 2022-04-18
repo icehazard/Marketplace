@@ -1,0 +1,43 @@
+@import './spacing.scss';
+@import './size.scss';
+@import './helper.scss';
+@import './color.scss';
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+    font-family: Roboto;
+    color: white;
+  background-color: $almost-black;
+}
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+a, a:hover {
+    text-decoration: none;
+    color: black;
+}
+
+
+
+input,
+button {
+    border: none;
+    background-color: transparent;
+    font-family: roboto;
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: 0;
+    background: none;
+    color: inherit;
+    border: none;
+    font: inherit;
+    cursor: pointer;
+}

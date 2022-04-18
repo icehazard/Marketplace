@@ -1,0 +1,28 @@
+$black: #000000;
+$almost-black: #222222;
+$white: #ffffff;
+$red : #F44336;
+
+.black {
+    background-color: $black;
+}
+
+.white {
+    background-color: $white;
+}
+
+.red {
+    background-color: $red;
+}
+
+.black--text {
+    color: $black;
+}
+
+.white--text {
+    color: $white;
+}
+
+.red--text {
+    color: $red;
+}
