@@ -51,9 +51,6 @@
   flex-wrap: wrap;
 }
 
-.nonwrap {
-  flex-wrap: nowrap;
-}
 
 .align-center {
   display: flex;
@@ -159,6 +156,10 @@
   position: absolute;
 }
 
+.fixed {
+  position: fixed;
+}
+
 //TEXT
 
 .letter-spacing {
@@ -214,11 +215,9 @@
 
 .nowrap {
   white-space: nowrap;
+  flex-wrap: nowrap;
 }
 
-.white_space_pre {
-  white-space: nowrap;
-}
 
 .white_space_normal {
   white-space: normal;
@@ -230,6 +229,12 @@
 
 .underline {
   text-decoration: underline;
+}
+
+.ellipsis{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .font-10 {

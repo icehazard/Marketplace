@@ -1,7 +1,7 @@
 <script>
     import Item from './Item.svelte'
 </script>
-<div class="row wrap gap-20">
+<div class="row wrap gap-20 justify-center">
     <Item />
     <Item />
     <Item />

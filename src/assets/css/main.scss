@@ -11,6 +11,7 @@ body {
     font-family: Roboto;
     color: white;
     background-color: $almost-black;
+    overflow: overlay;
 }
 
 * {
@@ -57,3 +58,18 @@ hr {
 .border {
     border: 1px solid #646464;
 }
+
+*::-webkit-scrollbar {
+    width: 15px;
+  }
+  *::-webkit-scrollbar-track {
+    background: #1A1A1A;
+  }
+  *::-webkit-scrollbar-thumb {
+    background-color: #2C2C2E;
+    border-radius: 0px;
+  }
+  
+  ::-webkit-scrollbar-corner {
+    background: rgb(235, 10, 10);
+  }
