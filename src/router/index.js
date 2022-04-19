@@ -4,6 +4,6 @@ const Home = () => import("@/views/Home.svelte");
 const About = () => import("@/views/About.svelte");
 
 export default {
-    "/home": wrap({ asyncComponent: Home }),
+    "/": wrap({ asyncComponent: Home }),
     "/about": wrap({ asyncComponent: About })
 }

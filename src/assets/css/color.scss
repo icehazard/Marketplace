@@ -2,6 +2,8 @@ $black: #000000;
 $almost-black: #222222;
 $white: #ffffff;
 $red : #F44336;
+$blue: #191F2D;
+$grey: #2c2c2e;
 
 .black {
     background-color: $black;
@@ -15,6 +17,14 @@ $red : #F44336;
     background-color: $red;
 }
 
+.blue {
+    background-color: $blue;
+}
+
+.grey {
+    background-color: $grey;
+}
+
 .black--text {
     color: $black;
 }
@@ -25,4 +35,8 @@ $red : #F44336;
 
 .red--text {
     color: $red;
+}
+
+.grey--text {
+    color: $grey;
 }

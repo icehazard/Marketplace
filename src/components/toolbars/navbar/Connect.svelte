@@ -2,13 +2,12 @@
     // import Web3 from 'web3'
     import { ethers } from "ethers";
     import { onMount } from "svelte";
+
     let button = "connect";
 
     async function connect() {
-        const provider = new ethers.providers.Web3Provider(
-            window.ethereum,
-            "any"
-        );
+        let eth = window.ethereum;
+        const provider = new ethers.providers.Web3Provider(eth, "any");
         await provider.send("eth_requestAccounts", []);
         const signer = provider.getSigner();
         let add = await signer.getAddress();

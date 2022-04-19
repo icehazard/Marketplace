@@ -240,10 +240,6 @@
   font-size: 12px;
 }
 
-.font-13 {
-  font-size: 13px;
-}
-
 .font-14 {
   font-size: 14px;
 }
@@ -260,12 +256,24 @@
   font-size: 20px;
 }
 
+.font-22 {
+  font-size: 22px;
+}
+
 .font-24 {
   font-size: 24px;
 }
 
+.font-26 {
+  font-size: 26px;
+}
+
 .font-28 {
   font-size: 28px;
+}
+
+.font-30 {
+  font-size: 30px;
 }
 
 .font-36 {
@@ -276,8 +284,8 @@
   font-size: 40px;
 }
 
-.font-48 {
-  font-size: 48px;
+.font-46 {
+  font-size: 46px;
 }
 
 //UTILITY
@@ -341,6 +349,10 @@
 
 .round {
   border-radius: 50%;
+}
+
+.curve {
+  border-radius: 10px;
 }
 
 @media only screen and (max-width: 576px) {

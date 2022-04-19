@@ -10,7 +10,7 @@ body {
     min-height: 100%;
     font-family: Roboto;
     color: white;
-  background-color: $almost-black;
+    background-color: $almost-black;
 }
 
 * {
@@ -19,12 +19,11 @@ body {
     margin: 0;
 }
 
-a, a:hover {
+a,
+a:hover {
     text-decoration: none;
     color: black;
 }
-
-
 
 input,
 button {
@@ -40,4 +39,21 @@ button {
     border: none;
     font: inherit;
     cursor: pointer;
+}
+
+.container {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1700px;
+    width: 100%;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+hr {
+    border: 1px solid #222222;
+}
+
+.border {
+    border: 1px solid #646464;
 }
