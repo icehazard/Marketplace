@@ -3,7 +3,7 @@
 </script>
 
 <div class="w-300">
-    <aside class="grey w-300 px-20 curve fixed">
+    <aside class="shade3 w-300 px-20 curve fixed">
         <div class="row py-20 align-center space-between">
             <div class="row align-center gap-10">
                 <Icon icon="mdi:cannabis" width="22"  />

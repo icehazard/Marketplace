@@ -53,7 +53,7 @@ module.exports = {
 				test: /node_modules\/svelte\/.*\.mjs$/,
 				resolve: {
 					fullySpecified: false
-				}
+				},
 			},
 			{
 				test: /\.(svg|jpg|jpeg)$/i,

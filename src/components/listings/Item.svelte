@@ -8,13 +8,13 @@
     }
 </script>
 
-<button class="w-300 h-300 curve col" on:click={viewListing}>
+<button class="w-300 h-300 curve col shade1 fast" on:click={viewListing}>
     <section class="h-180 center w100">
         <img src={logo} alt="logo" class="h100 py-10" />
     </section>
     <section class="col pa-15  space-between h100 w100">
         <span class="ellipsis">Vortex - 150mg</span>
-        <span class="font-18 weight-600">$150</span>
+        <span class="weight-600">$150</span>
         <div class="row space-between gap-10">
             <div class="row center gap-5 nowrap grow justify-start">
                 <Rating />
@@ -28,11 +28,6 @@
 </button>
 
 <style>
-    button {
-        background-color: #1a1a1a;
-        transition: all 150ms ease;
-    }
-
     button:hover,
     button:focus {
         transform: translateY(-1px);

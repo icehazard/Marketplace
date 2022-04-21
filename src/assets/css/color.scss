@@ -1,9 +1,14 @@
 $black: #000000;
-$almost-black: #222222;
 $white: #ffffff;
 $red : #F44336;
 $blue: #191F2D;
-$grey: #2c2c2e;
+$green: #66BB6A;
+
+$shade1: #1a1a1a;
+$shade2: #222222;
+$shade3: #2C2C2E;
+$shade4: #646464;
+$shade5: #9f9f9f;
 
 .black {
     background-color: $black;
@@ -21,8 +26,8 @@ $grey: #2c2c2e;
     background-color: $blue;
 }
 
-.grey {
-    background-color: $grey;
+.green {
+    background-color: $green;
 }
 
 .black--text {
@@ -37,6 +42,54 @@ $grey: #2c2c2e;
     color: $red;
 }
 
-.grey--text {
-    color: $grey;
+.green--text {
+    color: $green;
+}
+
+.shade1 {
+    background-color: $shade1;
+}
+
+.shade2 {
+    background-color: $shade2;
+}
+
+.shade3 {
+    background-color: $shade3;
+}
+
+.shade4 {
+    background-color: $shade4;
+}
+
+.shade1--text {
+    color: $shade1;
+}
+
+.shade2--text {
+    color: $shade2;
+}
+
+.shade3--text {
+    color: $shade3;
+}
+
+.shade4--text {
+    color: $shade4;
+}
+
+.shade5--text {
+    color: $shade5;
+}
+
+.green--text {
+    color: $green;
+}
+
+.gradient--text{
+       font-weight: 600;
+        background-image: linear-gradient(to left bottom,  #ab7fd9, #c880d3, #f880b6, #ff8e95, #ffa878);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
 }
