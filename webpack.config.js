@@ -1,4 +1,5 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
 const path = require('path');
 
 const mode = process.env.NODE_ENV || 'development';
@@ -9,6 +10,10 @@ module.exports = {
 		'build/bundle': ['./src/main.js']
 	},
 	resolve: {
+		fallback: {
+            url: require.resolve('url/'),
+			crypto: require.resolve('crypto-browserify'),
+        },
 		alias: {
 			svelte: path.dirname(require.resolve('svelte/package.json')),
 			'@': path.resolve(__dirname, 'src/'),
@@ -65,7 +70,8 @@ module.exports = {
 	plugins: [
 		new MiniCssExtractPlugin({
 			filename: '[name].css'
-		})
+		}),
+
 	],
 	devtool: prod ? false : 'source-map',
 	stats: 'errors-warnings',

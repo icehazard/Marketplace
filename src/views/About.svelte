@@ -1,4 +1,7 @@
 <script>
+    import TodoListJSON from '../../build/contracts/TOdoList.json'
+    import Web3 from 'web3/dist/web3.min.js'
+    import contract from '@truffle/contract'
 
 </script>
 

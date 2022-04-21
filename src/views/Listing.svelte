@@ -3,7 +3,7 @@
     import Listing from "comp/listing/Listing.svelte";
 </script>
 
-<section class="row container mt-50 gap-50">
+<section class="row container my-50 gap-50">
     <Categories />
     <Listing />
 </section>

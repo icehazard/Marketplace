@@ -1,7 +1,8 @@
 <script>
     import Icon from "@iconify/svelte";
+    import  { mq } from '@/assets/library/MediaQuery.svelte'  
 </script>
-
+{#if $mq.lg_}
 <div class="w-300">
     <aside class="shade3 w-300 px-20 curve fixed">
         <div class="row py-20 align-center space-between">
@@ -64,3 +65,4 @@
     
     </aside>
 </div>
+{/if}
