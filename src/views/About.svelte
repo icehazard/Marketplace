@@ -1,7 +1,7 @@
 <script>
     import TodoListJSON from '../../build/contracts/TOdoList.json'
     import Web3 from 'web3'
-    var contract = require('@truffle/contract')
+    // var contract = require('@truffle/contract')
 
 
     export const load = async () => {

@@ -1,7 +1,7 @@
 <script>
     import { push } from "svelte-spa-router";
     import logo from "@/assets/images/logo.svg";
-    import Rating from "../listings/Rating.svelte";
+    import Rating from 'comp/atoms/Rating.svelte'
 
     function viewListing() {
         push("#/listing");
@@ -17,8 +17,8 @@
         <span class="weight-600 font-12">$150</span>
         <div class="col ">
             <div class="row center gap-5 nowrap">
-                <Rating />
-                <span>(323)</span>
+                <Rating rating={Math.random() * 5 }/>
+                <span>({Math.random() * 1000 | 0})</span>
             </div>
         </div>
     </section>
