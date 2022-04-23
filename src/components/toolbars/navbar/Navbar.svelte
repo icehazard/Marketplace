@@ -14,15 +14,15 @@
 				<Search />
 				{#if $mq.lg_}
 					<div class="row gap-10">
-						<Circle to="about" icon="ant-design:message-outlined" />
-						<Circle to="about" icon="akar-icons:cart" />
-						<Circle to="about" icon="clarity:settings-line" />
+						<Circle to="messages"icon="ant-design:message-outlined"/>
+						<Circle to="cart" icon="akar-icons:cart" />
+						<Circle to="settings" icon="clarity:settings-line" />
 					</div>
 				{/if}
 			</section>
 			<section class="row gap-20 align-center ">
 				{#if $mq.lg_}
-					<Circle to="about" icon="gg:profile" />
+					<Circle to="profile" icon="gg:profile" />
 					<Connect />
 				{/if}
 				{#if $mq._md}

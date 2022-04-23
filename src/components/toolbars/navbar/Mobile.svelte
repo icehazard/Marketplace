@@ -8,16 +8,16 @@
         <nav class="h-50 shade1 w100 fixed p-bottom col">
             <hr />
             <div class="row h100">
-                <a href="#/about" class="font-26 grow center ">
+                <a href="#/messages" class="font-26 grow center ">
                     <Icon icon="ant-design:message-outlined" class="shade5--text" />
                 </a>
-                <a href="#/about" class="font-26 grow center ">
+                <a href="#/cart" class="font-26 grow center ">
                     <Icon icon="akar-icons:cart" class="shade5--text" />
                 </a>
-                <a href="#/about" class="font-26 grow center ">
+                <a href="#/profile" class="font-26 grow center ">
                     <Icon icon="gg:profile" class="shade5--text" />
                 </a>
-                <a href="#/about" class="font-26 grow center ">
+                <a href="#/settings" class="font-26 grow center ">
                     <Icon icon="clarity:settings-line" class="shade5--text" />
                 </a>
             </div>
