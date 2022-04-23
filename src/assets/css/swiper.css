@@ -1,0 +1,28 @@
+.swiper-slide {
+  width: auto;
+ 
+}
+
+.swiper-pagination-bullet {
+
+  background: #ffffff;
+}
+
+.swiper-pagination-bullet-active {
+  color: #fff;
+  background: #DF0051;
+}
+
+.swiper{
+  flex-basis: fit-content;
+  width: 0;
+  height: 180px;
+  -webkit-touch-callout: none; 
+    -webkit-user-select: none; 
+     -khtml-user-select: none; 
+       -moz-user-select: none; 
+        -ms-user-select: none; 
+            user-select: none; 
+}
+
+

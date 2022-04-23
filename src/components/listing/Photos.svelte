@@ -3,7 +3,7 @@
 </script>
 
 <div class="shade1 pa-50 curve center">
-    <img src={logo} alt="">
+    <img src={logo} alt="" class="w100">
 </div>
 
 <style>

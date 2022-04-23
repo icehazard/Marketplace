@@ -29,6 +29,7 @@
     	nav {
 		backdrop-filter: blur(20px);
 		background-color: rgba(19, 18, 18, 0.53);
+        z-index: 4;
 	
 	}
 </style>

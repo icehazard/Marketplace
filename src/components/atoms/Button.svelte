@@ -38,11 +38,7 @@
         padding: 1px;
         border-radius: 16px;
         display: flex;
-        background: linear-gradient(
-            to right,
-            rgb(132, 213, 209),
-            rgb(91, 135, 225),
-            rgb(128, 108, 224)
-        );
+        background: #DF0051
+     
     }
 </style>

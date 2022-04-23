@@ -1,7 +1,37 @@
 <script>
     import TodoListJSON from '../../build/contracts/TOdoList.json'
-    import Web3 from 'web3/dist/web3.min.js'
-    import contract from '@truffle/contract'
+    import Web3 from 'web3'
+    var contract = require('@truffle/contract')
+
+
+    export const load = async () => {
+    await loadWeb3();
+    const addressAccount = await loadAccount();
+    console.log("🚀 ~ file: About.svelte ~ line 9 ~ load ~ addressAccount", addressAccount)
+
+};
+
+    const loadAccount = async () => {
+    const addressAccount = await web3.eth.getCoinbase();
+    return addressAccount;
+};
+
+    const loadWeb3 = async () => {
+    // Modern dapp browsers...
+    if (window.ethereum) {
+        window.web3 = new Web3(ethereum);
+        try {
+            // Request account access if needed
+            await ethereum.enable();
+            // Acccounts now exposed
+            //web3.eth.sendTransaction({/* ... */});
+        } catch (error) {
+            console.log('nope')
+        }
+    }
+};
+
+load()
 
 </script>
 

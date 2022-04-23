@@ -1,4 +1,5 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const NodePolyfillPlugin = require("node-polyfill-webpack-plugin")
 
 const path = require('path');
 
@@ -13,6 +14,11 @@ module.exports = {
 		fallback: {
             url: require.resolve('url/'),
 			crypto: require.resolve('crypto-browserify'),
+			stream: require.resolve('stream-browserify'),
+			http: require.resolve('stream-http'),
+			os: require.resolve('os-browserify/browser'),
+			https: require.resolve('https-browserify'),
+			path: require.resolve('path-browserify'),
         },
 		alias: {
 			svelte: path.dirname(require.resolve('svelte/package.json')),
@@ -71,6 +77,7 @@ module.exports = {
 		new MiniCssExtractPlugin({
 			filename: '[name].css'
 		}),
+		new NodePolyfillPlugin()
 
 	],
 	devtool: prod ? false : 'source-map',
@@ -79,6 +86,11 @@ module.exports = {
 		hot: true,
 		client: {
 			logging: 'warn',
+			overlay: {
+				errors: true,
+				warnings: false,
+			  },
 		},
+		
 	},
 };
