@@ -36,6 +36,11 @@
   overflow: overlay;
 }
 
+.basis{
+  flex-basis: fit-content;
+  width: 0;
+}
+
 .none {
   display: none !important;
 }

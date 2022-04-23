@@ -23,3 +23,10 @@
         <Seller />
     </div>
 </div>
+
+<style>
+    .col{
+        max-width: 590px;
+        
+    }
+</style>
