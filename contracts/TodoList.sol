@@ -25,12 +25,12 @@ contract TodoList{
        createTask("Hello world");
    }
 
-   function createTask(string memory _content) public{
-       uint taskCount = tasksCount[msg.sender];
-       tasks[msg.sender][taskCount] = Task(taskCount, _content, false);
-       emit TaskCreated(taskCount, _content, false);
-       tasksCount[msg.sender]++;
-   }
+   function createTask(string memory _content) public {
+        uint taskCount = tasksCount[msg.sender];
+        tasks[msg.sender][taskCount] = Task(taskCount, _content, false);
+        emit TaskCreated(taskCount, _content, false);
+        tasksCount[msg.sender]++;
+    }
 
     function toggleCompleted(uint _id) public{
        Task memory task = tasks[msg.sender][_id];

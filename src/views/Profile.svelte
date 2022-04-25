@@ -7,6 +7,11 @@
 <section>
     <div class="row container my-50 gap-50">
         <Categories />
-        Profile
+      <div class="row center grow">
+        <div class="col gap-20">
+            <a class='white--text border pa-20 center' href="#/todo">Todo</a>
+            <a class='white--text border pa-20 center' href="#/dappuni">dappuni</a>
+           </div>
+      </div>
     </div>
 </section>

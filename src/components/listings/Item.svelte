@@ -2,6 +2,7 @@
     import { push } from "svelte-spa-router";
     import logo from "@/assets/images/logo.svg";
     import Rating from 'comp/atoms/Rating.svelte'
+    import  { mq } from '@/assets/library/MediaQuery.svelte'  
 
     function viewListing() {
         push("#/listing");
@@ -15,11 +16,11 @@
     <hr class="hr w100">
     <section class="col pa-15  space-between h100 w100">
         <span class="ellipsis text-start">Vortex - 150mg</span>
-        <span class="weight-600 text-start">$150</span>
+        <span class="weight-600 text-start">$ {Math.random() * 100 | 1}</span>
         <div class="row space-between gap-10 opacity-60">
             <div class="row center gap-5 nowrap grow justify-start">
                 <Rating rating={Math.random() * 5 }/>
-                <span class="font-14">({Math.random() * 1000 | 0})</span>
+                <span class="font-14">({Math.random() * 1000 | 1})</span>
             </div>
             <div class=" grow justify-end ellipsis">
                 <span class="ellipsis ">Mr. iceman</span>
@@ -33,5 +34,11 @@
     button:focus {
         transform: translateY(-1px);
         filter: brightness(1.1);
+    }
+
+    @media only screen and (max-width: 576px) {
+        button {
+            width: 100%;
+        }
     }
 </style>

@@ -26,7 +26,7 @@
 					<Connect />
 				{/if}
 				{#if $mq._md}
-					<Circle to="about" icon="eva:menu-fill" />
+					<Circle to="profile" icon="eva:menu-fill" />
 				{/if}
 			</section>
 		</div>
