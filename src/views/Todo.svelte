@@ -1,6 +1,6 @@
 <script>
 	import { onMount } from 'svelte';
-    import TodoListJSON from "/build/contracts/TOdoList.json";
+    import TodoListJSON from "/build/contracts/TodoList.json";
     import Web3 from "web3";
 
     let tasks = [];
@@ -21,7 +21,6 @@
         const networkId = await web3.eth.net.getId()
         const networkData = TodoListJSON.networks[networkId]
         contract = new web3.eth.Contract(TodoListJSON.abi, networkData.address)
-        return await loadTasks(contract, addressAccount);
     };
 
     const loadTasks = async () => {
@@ -59,20 +58,23 @@
             bind:value={input}
             class="shade1 pa-10 w-400 curve"
         />
-        <button class="shade3 pa-10 curve" on:click={handleAddTask}>Add</button>
+        <button class="shade4 pa-10 curve w-100" on:click={handleAddTask}>Add</button>
     </div>
     <h1>To do list</h1>
     {#each tasks as task}
         <div class="row gap-20 align-center">
             <input
                 type="text"
+                disabled
                 value={task.content}
                 class="shade1 pa-10 w-400 curve"
             />
             <button
-                class="green pa-10 curve"
+                class:red={!task.completed}
+                class:green={task.completed}
+                class="pa-10 curve w-100"
                 on:click={handleToggled(task.id)}
-                >{task.completed}
+                >{task.completed ? 'Yes' : 'No'}
             </button>
         </div>
     {/each}

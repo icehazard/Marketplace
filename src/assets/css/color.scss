@@ -4,11 +4,15 @@ $red : #F44336;
 $blue: #191F2D;
 $green: #66BB6A;
 
+$shade0: #161616;
 $shade1: #1a1a1a;
 $shade2: #222222;
 $shade3: #2C2C2E;
 $shade4: #646464;
 $shade5: #9f9f9f;
+
+$primary: #df0051;
+$primaryActive: #ef6698;
 
 .black {
     background-color: $black;
@@ -30,6 +34,10 @@ $shade5: #9f9f9f;
     background-color: $green;
 }
 
+.primary {
+    background-color: $primary;
+}
+
 .black--text {
     color: $black;
 }
@@ -44,6 +52,21 @@ $shade5: #9f9f9f;
 
 .green--text {
     color: $green;
+}
+
+
+.primary--text {
+    color: $primary;
+}
+
+
+.link:hover {
+    color: $primaryActive;
+}
+
+
+.shade0 {
+    background-color: $shade0;
 }
 
 .shade1 {

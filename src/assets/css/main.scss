@@ -20,14 +20,13 @@ body {
     margin: 0;
 }
 
-a,
 a:hover {
-    text-decoration: none;
-    color: black;
+ color: $shade5;
 }
 
 input,
-button {
+button,
+a {
     border: none;
     background-color: transparent;
     font-family: roboto;
@@ -38,8 +37,11 @@ button {
     background: none;
     color: inherit;
     border: none;
+    text-align: inherit;
+    text-decoration: none;
     font: inherit;
     cursor: pointer;
+    
 }
 
 .container {
@@ -69,7 +71,7 @@ hr {
 }
 
 *::-webkit-scrollbar {
-    width: 15px;
+    width: 10px;
 }
 
 *::-webkit-scrollbar-track {

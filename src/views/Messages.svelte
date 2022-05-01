@@ -1,12 +1,11 @@
 <script>
-    import Categories from "comp/toolbars/categories/Categories.svelte";
-    import Listings from "comp/listings/Listings.svelte";
+
+    import Contacts from "comp/messages/Contacts.svelte";
+    import Chat from "comp/messages/Chat.svelte";
   
 </script>
 
-<section>
-    <div class="row container my-50 gap-50">
-        <Categories />
-       Messages
-    </div>
+<section class="row h100">
+      <Contacts />
+      <Chat />
 </section>

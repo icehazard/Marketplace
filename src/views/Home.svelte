@@ -5,7 +5,7 @@
 </script>
 
 <section>
-    <div class="row container my-50 gap-50">
+    <div class="row container my-50 gap-40">
         <Categories />
         <Listings />
     </div>
