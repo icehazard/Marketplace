@@ -1,21 +1,17 @@
 <script>
     // import Web3 from 'web3'
-    import { ethers } from "ethers";
     import { onMount } from "svelte";
+    import { createEventDispatcher } from "svelte";
+    const dispatch = createEventDispatcher();
 
-    let button = "BUY NOW";
-
-    async function connect() {
-     
-    }
-
-    onMount(() => {
-        connect();
-    });
+    export let text = "";
+    let connect = () => {
+        dispatch("click")
+    };
 </script>
 
-<div class="wrapper">
-    <button on:click={connect}>{button}</button>
+<div class="wrapper ">
+    <button class="w100 center" type="button" on:click={connect}>{text}</button>
 </div>
 
 <style>
@@ -37,8 +33,9 @@
         border: none;
         padding: 1px;
         border-radius: 16px;
-        display: flex;
-        background: #DF0051
-     
+        display: flex;  
+        background: #df0051;
+        background: #5dc24f;
+        
     }
 </style>

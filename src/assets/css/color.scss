@@ -1,3 +1,7 @@
+:root {
+    --primary: #5dc24f;
+}
+
 $black: #000000;
 $white: #ffffff;
 $red : #F44336;
@@ -12,6 +16,7 @@ $shade4: #646464;
 $shade5: #9f9f9f;
 
 $primary: #df0051;
+$primary: var(--primary);
 $primaryActive: #ef6698;
 
 .black {
@@ -36,6 +41,10 @@ $primaryActive: #ef6698;
 
 .primary {
     background-color: $primary;
+}
+
+.primary--text {
+    color: $primary;
 }
 
 .black--text {

@@ -1,6 +1,16 @@
 <script>
     import Icon from "@iconify/svelte";
-    import Button from 'comp/atoms/Button.svelte'
+    import Button from "comp/atoms/Button.svelte";
+    import { product } from "@/store/products.js";
+    import { cart } from "@/store/cart.js";
+    import { push } from "svelte-spa-router";
+
+    function handleClick() {
+        push("#/cart");
+       
+        cart.set([...$cart, $product]);
+        console.log([$cart]);
+    }
 </script>
 
 <div class="shade1 pa-50 curve col gap-20">
@@ -8,8 +18,8 @@
         <Icon icon="icomoon-free:price-tag" />
         <div>Price</div>
     </div>
-   <div class="row space-between align-center">
-    <div class="font-26">$150</div>
-    <Button />
-   </div>
+    <div class="row space-between align-center">
+        <div class="font-26">${$product.price}</div>
+        <Button on:click={handleClick} text="ADD TO CART" />
+    </div>
 </div>

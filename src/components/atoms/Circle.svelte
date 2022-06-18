@@ -10,11 +10,11 @@
 
 <style>
     a:hover {
-        background-color: #df0051;
+        background-color: var(--primary);
     }
 
     a:focus-visible {
-        outline: solid 1px #df0051;
+        outline: solid 1px var(--primary);
         background-color: #222222;
     }
 </style>

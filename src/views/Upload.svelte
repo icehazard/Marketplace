@@ -1,11 +1,12 @@
 <script>
     import Categories from "comp/toolbars/categories/Categories.svelte";
-    import Cart from "comp/cart/Cart.svelte";
+    import Upload from "comp/upload/upload.svelte";
+  
 </script>
 
 <section>
     <div class="row container my-50 gap-50">
         <Categories />
-        <Cart />
+        <Upload />
     </div>
 </section>

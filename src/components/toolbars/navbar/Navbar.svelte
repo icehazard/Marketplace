@@ -17,13 +17,14 @@
 						<Circle to="messages"icon="ant-design:message-outlined"/>
 						<Circle to="cart" icon="akar-icons:cart" />
 						<Circle to="settings" icon="clarity:settings-line" />
+						<Circle to="upload" icon="mdi:plus" />
 					</div>
 				{/if}
 			</section>
 			<section class="row gap-20 align-center ">
 				{#if $mq.lg_}
 					<Circle to="profile" icon="gg:profile" />
-					<Connect />
+					<!-- <Connect /> -->
 				{/if}
 				{#if $mq._md}
 					<Circle to="profile" icon="eva:menu-fill" />
