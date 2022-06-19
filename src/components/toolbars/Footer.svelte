@@ -8,7 +8,13 @@
             <span>|</span>
             <button> ฿ (THB) </button>
         </div>
-        <div class="row">© 2022 Metaroad, Inc. Terms of Use Privacy</div>
+        <div class="row gap-20">
+            <button> © Metaroad</button>
+            <span>|</span>
+            <button>Terms of Use</button>
+            <span>|</span>
+            <button>Privacy</button>
+        </div>
     </div>
 </footer>
 
