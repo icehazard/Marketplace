@@ -1,1 +1,4 @@
-RUN: NPM run dev
+RUN:
+
+npm install
+npm run dev
