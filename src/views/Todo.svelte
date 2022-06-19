@@ -1,6 +1,6 @@
 <script>
 	import { onMount } from 'svelte';
-    import TodoListJSON from "/build/contracts/TodoList.json";
+    // import TodoListJSON from "/build/contracts/TodoList.json";
     import Web3 from "web3";
 
     let tasks = [];

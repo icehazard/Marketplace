@@ -1,4 +1,4 @@
-<script>
+<!-- <script>
 	import { onMount } from 'svelte';
     import TodoListJSON from "/build/contracts/Counter.json";
     import Web3 from "web3";
@@ -45,4 +45,4 @@
     <button on:click={handleAddTask}>click</button>
 
 
-</div>
+</div> -->
