@@ -3,6 +3,7 @@
     import Item from "./Item.svelte";
     import { Swiper, SwiperSlide } from "swiper/svelte";
     import { Pagination } from "swiper";
+    import { products } from "@/store/products.js";
     import "swiper/css";
     import "swiper/css/pagination";
     import "@/assets/css/swiper.css";
@@ -21,22 +22,15 @@
                 clickable: true,
             }}
             modules={[Pagination]}
-
         >
-            <SwiperSlide><Item /></SwiperSlide>
-            <SwiperSlide><Item /></SwiperSlide>
-            <SwiperSlide><Item /></SwiperSlide>
-            <SwiperSlide><Item /></SwiperSlide>
-            <SwiperSlide><Item /></SwiperSlide>
-            <SwiperSlide><Item /></SwiperSlide>
-            <SwiperSlide><Item /></SwiperSlide>
-            <SwiperSlide><Item /></SwiperSlide>
-            <SwiperSlide><Item /></SwiperSlide>
+            {#each $products as product}
+                <SwiperSlide>
+                    <Item data={product} />
+                </SwiperSlide>
+            {/each}
         </Swiper>
     </div>
 </div>
 
 <style>
-
-
 </style>

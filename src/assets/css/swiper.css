@@ -16,7 +16,7 @@
 .swiper{
   flex-basis: fit-content;
   width: 0;
-  height: 180px;
+  height: auto;
   -webkit-touch-callout: none; 
     -webkit-user-select: none; 
      -khtml-user-select: none; 

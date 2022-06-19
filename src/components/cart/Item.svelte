@@ -10,7 +10,7 @@
     }
 </script>
 
-<div class="row shade1 curve">
+<div class="row shade1 curve wrapper">
     <img src={data.image} alt="" />
     <div class="row pa-20 grow gap-50">
         <div class="col grow description">
@@ -38,9 +38,17 @@
 
 <style>
     img {
-        width: 170px;
-        height: 150px;
+        width: 200px;
+        height: 200px;
         object-fit: cover;
         border-radius: 10px;
+    }
+
+    .wrapper{
+        max-height: 200px;
+    }
+
+    .description{
+        overflow: hidden;
     }
 </style>

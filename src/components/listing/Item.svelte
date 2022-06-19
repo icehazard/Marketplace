@@ -1,24 +1,28 @@
 <script>
     import { push } from "svelte-spa-router";
-    import logo from "@/assets/images/logo.svg";
     import Rating from 'comp/atoms/Rating.svelte'
+    export let data = [];
 
     function viewListing() {
         push("#/listing");
     }
 </script>
 
-<button class="w-120 h-140 curve col shade1 fast border pa-5" on:click={viewListing}>
-    <section class="h-80 center w100">
-        <img src={logo} alt="logo" class="h100 py-10" />
+<button class=" h-250 curve col shade1 fast" on:click={viewListing}>
+    <section class="h-150 center w100">
+        <img src={data.image} alt="logo" class="h100" />
     </section>
-    <section class="col space-between h100 w100 font-12">
-        <span class="ellipsis font-12">Vortex - 150mg</span>
-        <span class="weight-600 font-12">$150</span>
-        <div class="col ">
-            <div class="row center gap-5 nowrap">
-                <Rating rating={Math.random() * 5 }/>
-                <span>({Math.random() * 1000 | 0})</span>
+    <hr class="hr w100" />
+    <section class="col pa-15  space-between h100 w100">
+        <span class="ellipsis text-start">{data.title}</span>
+        <span class="weight-600 text-start">$ {data.price}</span>
+        <div class="row space-between gap-10 opacity-60">
+            <div class="row center gap-5 nowrap grow justify-start">
+                <Rating rating={Math.random() * 5} />
+                <span class="font-14">({(Math.random() * 1000) | 1})</span>
+            </div>
+            <div class=" grow justify-end ellipsis">
+                <span class="ellipsis ">Mr. iceman</span>
             </div>
         </div>
     </section>
@@ -29,4 +33,17 @@
     button:focus {
         filter: brightness(1.1);
     }
+
+    img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+    }
+    button:hover,
+    button:focus {
+        transform: translateY(-1px);
+        filter: brightness(1.1);
+    }
+
+
 </style>

@@ -20,8 +20,16 @@
                 <Item data={item} />
             {/each}
         </div>
+        {#if $cart.length !== 0}
         <div class="col">
             <HowPay />
         </div>
+        {/if}
     </div>
 </section>
+
+<style>
+    section{
+        min-height: 600px;
+    }
+</style>

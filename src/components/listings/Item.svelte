@@ -11,7 +11,7 @@
     }
 </script>
 
-<button class="w-300 h-300 curve col shade1 fast" on:click={viewListing}>
+<button class=" h-300 curve col shade1 fast" on:click={viewListing}>
     <section class="h-180 center w100">
         <img src={data.image} alt="logo" class="h100" />
     </section>

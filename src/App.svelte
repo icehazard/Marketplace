@@ -8,9 +8,9 @@
 	//import Web3 from 'web3/dist/web3.min.js'
 </script>
 
-<main>
+<main class="col vh100">
 	<Navbar />
-	<Router {routes}  />
+	<Router {routes}/>
 	<MediaQuery />
 	<Mobile />
 	<Footer />

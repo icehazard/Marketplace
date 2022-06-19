@@ -8,6 +8,10 @@
     const post = () => {
         let data = { title: $title, image: $image, price: $price, description: $description };
         products.set([...$products, data]);
+        title.set("");
+        image.set("");
+        price.set("");
+        description.set("");
         push("#/");
     };
 </script>

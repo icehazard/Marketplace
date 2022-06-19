@@ -26,7 +26,7 @@
                     </label>
                 </div>
             </div>
-            <hr />
+            <!-- <hr /> -->
             <div class="col py-20 justify-center space-between gap-20">
                 <div class="row align-center gap-10 space-between">
                     <div class="row center gap-10">
@@ -36,7 +36,7 @@
                     <div class="col align-center gap-10">THB 36,397.08</div>
                 </div>
             </div>
-            <hr />
+            <!-- <hr /> -->
             <div class="col py-20 justify-center space-between gap-20">
                 <div class="row align-center gap-10 space-between">
                     <div class="row center gap-10">
@@ -49,7 +49,7 @@
             <div class="font-14 weight-300 pb-20">
                 To Thailand
             </div>
-            <hr />
+            <!-- <hr /> -->
             <div class="col py-20 justify-center space-between gap-20">
                 <div class="row align-center gap-10 space-between">
                     <div class="row center gap-10">
@@ -59,7 +59,7 @@
                     <div class="col align-center gap-10">THB 49,045.61</div>
                 </div>
             </div>
-            <hr />
+            <!-- <hr /> -->
             <div class="py-20">
                 <Button text="PROCEED TO CHECKOUT" />
             </div>
@@ -137,6 +137,6 @@
         width: 8px;
         height: 8px;
         border-radius: 50%;
-        background: white;
+        background: #1a1a1a;
     }
 </style>

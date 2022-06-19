@@ -1,4 +1,4 @@
-<footer class="grow w100 pa-50 gap-20 col font-14 container">
+<footer class="grow w100 h-200 pa-50 gap-20 col font-14 container">
     <hr />
     <div class="row space-between">
         <div class="row gap-20">
@@ -15,5 +15,10 @@
 <style>
     hr {
         border: 1px solid #70707054;
+    }
+
+    footer{
+        max-height: 150px;
+        height: 150px;
     }
 </style>

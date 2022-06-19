@@ -8,6 +8,7 @@ const Cart = () => import("@/views/Cart.svelte");
 const Profile = () => import("@/views/Profile.svelte");
 const Messages = () => import("@/views/Messages.svelte");
 const Upload = () => import("@/views/Upload.svelte");
+const Seller = () => import("@/views/Seller.svelte");
 
 const Todo = () => import("@/views/Todo.svelte");
 const DappUni = () => import("@/views/DappUni.svelte");
@@ -20,6 +21,7 @@ export default {
     "/profile": wrap({ asyncComponent: Profile }),
     "/messages": wrap({ asyncComponent: Messages }),
     "/upload": wrap({ asyncComponent: Upload }),
+    "/seller": wrap({ asyncComponent: Seller }),
 
     "/todo": wrap({ asyncComponent: Todo }),
     "/dappuni": wrap({ asyncComponent: DappUni }),
