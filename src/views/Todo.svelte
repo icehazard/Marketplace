@@ -51,7 +51,7 @@
     })
 </script>
 
-<section class="container center pt-50 col gap-20">
+<section class="container center pt-50 col gap-20 grow">
     <div class="row gap-20">
         <input
             type="text"

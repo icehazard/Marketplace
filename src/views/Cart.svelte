@@ -3,9 +3,7 @@
     import Cart from "comp/cart/Cart.svelte";
 </script>
 
-<section>
-    <div class="row container my-50 gap-50">
-        <Categories />
-        <Cart />
-    </div>
+<section class="row container my-50 gap-50 grow">
+    <Categories />
+    <Cart />
 </section>

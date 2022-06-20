@@ -4,9 +4,9 @@
   
 </script>
 
-<section>
-    <div class="row container my-50 gap-50">
+
+    <section class="row container my-50 gap-50 grow">
         <Categories />
         <Upload />
-    </div>
-</section>
+    </section>
+
