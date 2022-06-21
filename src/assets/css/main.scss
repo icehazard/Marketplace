@@ -58,8 +58,16 @@ hr {
     border: 1px solid $shade2;
 }
 
+p{
+    line-height: 28px;
+}
+
 .border {
     border: 1px solid $shade3;
+}
+
+.borderStrong {
+    border: 1px solid $shade4;
 }
 
 .fast {

@@ -6,6 +6,10 @@
     height: 10px;
 }
 
+.h-10 {
+    height: 16px;
+}
+
 .h-20 {
     height: 20px;
 }
@@ -182,8 +186,17 @@
     width: 0px;
 }
 
+.w-sm{
+    max-width: 576px;
+    width: 100%;
+}
+
 .w-10 {
     width: 10px;
+}
+
+.w-16 {
+    width: 16px;
 }
 
 .w-20 {
