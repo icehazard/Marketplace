@@ -80,7 +80,7 @@ module.exports.register = async function(username, password, email) {
         return "ACCOUNT_CREATION_ERROR"
 }
 
-module.exports.mongo = mongo;
+module.exports = {mongo, colAccounts}
 
 
 
