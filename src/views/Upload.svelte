@@ -1,6 +1,6 @@
 <script>
     import Categories from "comp/toolbars/categories/Categories.svelte";
-    import Upload from "comp/upload/upload.svelte";
+    import Upload from "comp/upload/Wizard.svelte";
   
 </script>
 

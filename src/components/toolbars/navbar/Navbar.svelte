@@ -1,5 +1,6 @@
 <script>
 	import Connect from "./Connect.svelte";
+	import Button from "comp/atoms/Button.svelte";
 	import Search from "./Search.svelte";
 	import Title from "./Title.svelte";
 	import Circle from "comp/atoms/Circle.svelte";
@@ -23,11 +24,14 @@
 			</section>
 			<section class="row gap-20 align-center ">
 				{#if $mq.lg_}
-					<Circle to="profile" icon="gg:profile" />
+					<!-- <Circle to="profile" icon="gg:profile" /> -->
 					<!-- <Connect /> -->
+					<a class="primary--text" href="#/login">Log In</a>
+					<Button text="Sign Up" />
 				{/if}
 				{#if $mq._md}
 					<Circle to="profile" icon="eva:menu-fill" />
+					
 				{/if}
 			</section>
 		</div>

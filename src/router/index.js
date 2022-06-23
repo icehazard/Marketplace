@@ -10,6 +10,9 @@ const Messages = () => import("@/views/Messages.svelte");
 const Upload = () => import("@/views/Upload.svelte");
 const Seller = () => import("@/views/Seller.svelte");
 
+const Login = () => import("@/views/Login.svelte");
+const Signup = () => import("@/views/Signup.svelte");
+
 const Todo = () => import("@/views/Todo.svelte");
 const DappUni = () => import("@/views/DappUni.svelte");
 
@@ -22,6 +25,8 @@ export default {
     "/messages": wrap({ asyncComponent: Messages }),
     "/upload": wrap({ asyncComponent: Upload }),
     "/seller": wrap({ asyncComponent: Seller }),
+    "/login": wrap({ asyncComponent: Login }),
+    "/signup": wrap({ asyncComponent: Signup }),
 
     "/todo": wrap({ asyncComponent: Todo }),
     "/dappuni": wrap({ asyncComponent: DappUni }),
