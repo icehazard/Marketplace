@@ -27,7 +27,8 @@
 					<!-- <Circle to="profile" icon="gg:profile" /> -->
 					<!-- <Connect /> -->
 					<a class="primary--text" href="#/login">Log In</a>
-					<Button text="Sign Up" />
+					<a  href="#/signup">
+						<Button text="Sign Up" /></a>
 				{/if}
 				{#if $mq._md}
 					<Circle to="profile" icon="eva:menu-fill" />
