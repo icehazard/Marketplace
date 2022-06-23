@@ -14,11 +14,8 @@
     }
 </script>
 
-<div class="grow align-center a ">
-    <form
-        on:submit|preventDefault={handleOnSubmit}
-        class="gap-40 col w-sm bg shade2 justify-center pa-60 curve"
-    >
+<div class="grow align-center z-2">
+    <form on:submit|preventDefault={handleOnSubmit} class="gap-40 col w-sm pa-60 curve glass">
         <section class="gap-20 col  ">
             <div class="weight-600 font-14">START FOR FREE</div>
             <div class="font-36">Create new account</div>
@@ -31,21 +28,15 @@
             <Field bind:value={email} label="Email" />
             <Field bind:value={password} label="Password" />
         </section>
-        <Button text="CREATE ACCOUNT"  />
+        <Button text="CREATE ACCOUNT" />
     </form>
 </div>
 
 <style>
-    .a {
-        z-index: 2;
-    }
 
-    .bg {
-        background: rgba(211, 218, 211, 0.2);
-        border-radius: 16px;
-        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-        backdrop-filter: blur(5px);
-        -webkit-backdrop-filter: blur(5px);
-        border: 1px solid rgba(135, 109, 109, 0.3);
+    @media only screen and (max-width: 576px) {
+        form {
+            padding: 50px 15px;
+        }
     }
 </style>
