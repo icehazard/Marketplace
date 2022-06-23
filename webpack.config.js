@@ -5,6 +5,7 @@ const path = require('path');
 
 const mode = process.env.NODE_ENV || 'development';
 const prod = mode === 'production';
+const {API_URL} = require('./src/server/Config.json')
 
 module.exports = {
 	entry: {
@@ -90,6 +91,12 @@ module.exports = {
 				errors: true,
 				warnings: false,
 			  },
+		},
+
+		proxy: {
+			'/api': {
+				target: 'http://' + API_URL,
+			},
 		},
 		
 	},
