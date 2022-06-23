@@ -1,16 +1,22 @@
 <script>
     import Button from "comp/atoms/Button.svelte";
     import Field from "comp/atoms/TextField.svelte";
-    import {API_URL} from "../../config"
+    import {WEBPACK_URL} from "../../config"
 
-    let email = "";
+    let username = "";
     let password = "";
 
     async function handleOnSubmit() {
-        let data = { email, password };
-        let req = await fetch(`http://${API_URL}/api/login`, {
+        let data = { username, password };
+
+        console.log("Logging in with ", username, password)
+        let req = await fetch(`http://${WEBPACK_URL}/api/login`, {
             method: 'POST',
-            body: JSON.stringify({data})
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
         });
 
         if (req.ok) {
@@ -26,7 +32,7 @@
 <div class="grow center ">
     <form on:submit|preventDefault={handleOnSubmit} class="gap-20 col">
         <div class="center font-36">Login</div>
-        <Field bind:value={email} label="Email" />
+        <Field bind:value={username} label="Username" />
         <Field bind:value={password} label="Password" />
         <Button text="SUBMIT" />
     </form>

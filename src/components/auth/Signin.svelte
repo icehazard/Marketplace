@@ -1,17 +1,28 @@
 <script>
     import Button from "comp/atoms/Button.svelte";
     import Field from "comp/atoms/TextField.svelte";
+    import {WEBPACK_URL} from "../../config"
 
-    let email = "";
+    let username = "";
     let password = "";
+    let email = "";
 
     async function handleOnSubmit() {
-        let data = { email, password };
-        let res = await fetch("http://localhost:3000/api/signup", {
-            method: "POST",
-            body: JSON.stringify({ data }),
+        let data = { username, password, email };
+        let req = await fetch(`http://${WEBPACK_URL}/api/register`, {
+            method: 'POST',
+            body: JSON.stringify({data})
         });
+
+        if (req.ok) {
+            console.log(await req.json())
+        }
+
+        return {
+            status: req.status,
+        };
     }
+
 </script>
 
 <div class="grow align-center a ">
@@ -29,6 +40,7 @@
         </section>
         <section class="col gap-20">
             <Field bind:value={email} label="Email" />
+            <Field bind:value={username} label="Username" />
             <Field bind:value={password} label="Password" />
         </section>
         <Button text="CREATE ACCOUNT"  />
