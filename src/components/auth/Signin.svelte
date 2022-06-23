@@ -14,6 +14,8 @@
             body: JSON.stringify({data})
         });
 
+        // returns {error: "desc"} and status 400 on error
+
         if (req.ok) {
             console.log(await req.json())
         }
