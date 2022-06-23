@@ -11,7 +11,7 @@
 </script>
 
 <div class="wrapper ">
-    <button class="w100 center" type="button" on:click={connect}>{text}</button>
+    <button class="w100 center" type="submit" on:click={connect}>{text}</button>
 </div>
 
 <style>

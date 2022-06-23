@@ -16,7 +16,7 @@
     $: $isValid, console.log($isValid && $touched.name);
 </script>
 
-<form class:valid={$isValid} on:submit={handleSubmit} class="center col">
+<form class:valid={$isValid} on:submit={handleSubmit} class="center col shade3 curve py-50 px-10 pb-100">
     <div class="center  w-sm gap-40">
         <h1 class="font-36 weight-300">Name your shop</h1>
         <p class="text-center">
@@ -25,7 +25,7 @@
             naming tips
         </p>
         <div class="row w100">
-            <div class="borderStrong gap-10 curve align-center px-20 h-40 mobile-w100 shade w100">
+            <div class="borderStrong gap-10 curve align-center px-20 h-40 mobile-w100 shade2 w100">
                 <input
                     on:keyup={handleChange}
                     autocomplete="off"

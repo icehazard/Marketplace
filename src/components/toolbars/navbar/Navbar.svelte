@@ -25,9 +25,12 @@
 				{#if $mq.lg_}
 					<Circle to="profile" icon="gg:profile" />
 					<!-- <Connect /> -->
+					<Circle to="login" icon="ant-design:login-outlined" />
+					<Circle to="signup" icon="carbon:intent-request-create" />
 				{/if}
 				{#if $mq._md}
 					<Circle to="profile" icon="eva:menu-fill" />
+					
 				{/if}
 			</section>
 		</div>

@@ -7,7 +7,6 @@
     export let name = ''
 
     let handleChange = (val) => {
-        console.log(val)
         dispatch("keyup",  val);
     };
 </script>

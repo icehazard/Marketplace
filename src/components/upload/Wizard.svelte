@@ -1,16 +1,18 @@
 <script>
+	import GetPaid from './GetPaid.svelte';
+	import Address from './Address.svelte';
+	import PersonalInfo from './PersonalInfo.svelte';
 	import ShopName from './ShopName.svelte';
+
     import Icon from "@iconify/svelte";
     import Button from "comp/atoms/Button.svelte";
 
-
-
-    let active = 0;
+    let active = 1;
 
     let headings = [
         { text: "Name your shop" },
-        { text: "Billing" },
-        { text: "Listing" },
+        { text: "Personal" },
+        { text: "Address" },
         { text: "Options" },
         { text: "Confirmation" },
     ];
@@ -46,9 +48,11 @@
         {#if active == 0}
              <ShopName />
         {:else if  active == 1}
-             <!-- else if content here -->
+          <PersonalInfo />
         {:else if active == 2}
-             <!-- else content here -->
+            <Address />
+            {:else if active == 3}
+            <GetPaid />
         {/if}
     </div>
     <div class="justify-end row w100">
