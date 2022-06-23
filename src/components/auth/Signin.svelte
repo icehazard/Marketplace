@@ -11,7 +11,11 @@
         let data = { username, password, email };
         let req = await fetch(`http://${WEBPACK_URL}/api/register`, {
             method: 'POST',
-            body: JSON.stringify({data})
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
         });
 
         // returns {error: "desc"} and status 400 on error

@@ -11,12 +11,17 @@ api.post('/register', async (req, res) => {
     let reg = await db.register(username, password, email)
 
     switch (reg) {
-        case "ACCOUNT_USERNAME_UNAVAILABLE":
-            res.status(400).json({error: "Username is unavailable"})
-        case "ACCOUNT_CREATION_OK":
+        case "ACCOUNT_CREATION_OK": {
             res.status(200).send()
+            break;
+        }
+        case "ACCOUNT_USERNAME_UNAVAILABLE": {
+            res.status(400).json({error: "Username is unavailable"})
+            break;
+        }
         default:
             res.status(400).json({error: "Unhandled error. Please contact admin."})
+            break;
     }
 
 })
