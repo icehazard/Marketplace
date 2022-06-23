@@ -7,7 +7,10 @@
 
     async function handleOnSubmit() {
         let data = { email, password };
-        let res = await fetch("http://localhost:3000/api/signup", data);
+        let res = await fetch("http://localhost:3000/api/signup", {
+            method: 'POST',
+            body: JSON.stringify({data})
+        });
     }
 </script>
 
