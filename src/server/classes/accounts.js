@@ -42,35 +42,37 @@ class Account {
     }
 
     /*** ACCOUNT LOGIN ***/
-    static async login(username, password, token) {
+    static async login(unameOrEmail, password, token) {
 
         if (token)
             return "LOGIN_ALREADY_LOGGED_IN"
 
-        console.log(dbhandler)
-        let data = await dbhandler.cols.list.colAccounts.find({username: username.toLowerCase()}).limit(1).toArray()
+        let data = await dbhandler.cols.list.colAccounts.findOne({username: unameOrEmail.toLowerCase()})
 
         if (!data) {
-            console.log("Acc doesnt exists!");
-            return "LOGIN_ACCOUNT_NOT_FOUND"
+            data = await dbhandler.cols.list.colAccounts.findOne({email: unameOrEmail.toLowerCase()})
+            if (!data) {
+                console.log("Acc doesnt exist!");
+                return "LOGIN_ACCOUNT_NOT_FOUND"
+            }
         }
 
         console.log("Login: user FOUND");
         console.log(data);
 
         return await new Promise((resolve, rej) => {
-            bcrypt.compare(password, data[0].password, function (err, res) {
+            bcrypt.compare(password, data.password, function (err, res) {
                 if (res) {
                     console.log("Password matches!");
 
 
-                    if (!accs.exists(data[0]._id)) {
-                        accs.insert(new Accounts(data[0]._id, data[0].username))
+                    if (!accs.exists(data._id)) {
+                        accs.insert(new Accounts(data._id, data.username))
                     }
 
                     return resolve({
-                        token: data[0].token,
-                        username: data[0].username
+                        token: data.token,
+                        username: data.username
                     })
 
                 } else {
@@ -113,9 +115,9 @@ class Account {
 
         let nid = 0;
 
-        data = await dbhandler.cols.list.colAccounts.find().sort({
+        data = await dbhandler.cols.list.colAccounts.findOne().sort({
             _id: -1
-        }).limit(1).toArray()
+        })
 
         if (!data) {
             console.log("Got error with latest ID");
@@ -124,7 +126,7 @@ class Account {
         } else {
             console.log("Got latest ID:");
             console.log(data);
-            nid = data[0]._id + 1;
+            nid = data._id + 1;
         }
 
         return new Promise((resolve, reject) => {
