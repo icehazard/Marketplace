@@ -1,11 +1,11 @@
 let Config = require('../Config.json');
 const MongoPool = require("./MongoDB");
-let mongo = {db: null}
+let mongo = { db: null }
 let serverConfig = require('./table_names')
 const bcrypt = require('bcryptjs');
 var jwt = require('jsonwebtoken');
 
-let cols = {list: {}}
+let cols = { list: {} }
 let colAccounts
 
 MongoPool.getInstance(function (db) {
@@ -18,9 +18,9 @@ var SECRET_KEY = Config.SECRET_KEY;
 
 
 
-module.exports = {mongo, cols}
+module.exports = { mongo, cols }
 
-module.exports.register = async function(username, password, email) {
+module.exports.register = async function (username, password, email) {
 
     let data = await colAccounts.findOne({
         username: username
@@ -33,8 +33,7 @@ module.exports.register = async function(username, password, email) {
     // ACCOUNT_CREATION_ERROR
 
 
-    if  (data)
-    {
+    if (data) {
         console.log("Username is unavailable");
         return "ACCOUNT_USERNAME_UNAVAILABLE"
     }
