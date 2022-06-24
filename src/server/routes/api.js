@@ -8,7 +8,7 @@ api.post('/register', async (req, res) => {
     const { username, password, email } = req.body
 
 
-    let reg = await db.register(username, password, email)
+    let reg = await accounts.Account.register(username, password, email)
 
     let payload = typeof reg === 'object' ? reg.data : null
 
