@@ -115,9 +115,9 @@ class Account {
 
         let nid = 0;
 
-        data = await dbhandler.cols.list.colAccounts.findOne().sort({
+        data = await dbhandler.cols.list.colAccounts.find().sort({
             _id: -1
-        })
+        }).limit(1).toArray()
 
         if (!data) {
             console.log("Got error with latest ID");
@@ -126,7 +126,7 @@ class Account {
         } else {
             console.log("Got latest ID:");
             console.log(data);
-            nid = data._id + 1;
+            nid = data[0]._id + 1;
         }
 
         return new Promise((resolve, reject) => {
