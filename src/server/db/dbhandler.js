@@ -41,22 +41,28 @@ module.exports.register = async function(username, password, email) {
 
 
     let nid = 0;
-    colAccounts.find().sort({
+
+    data = await colAccounts.find().sort({
         _id: -1
-    }).limit(1).toArray((err, data) => {
-        if (err || data.length == 0) {
-            console.log("Got error with latest ID");
-            console.log(err);
-            nid = 1;
-        } else if (data) {
-            console.log("Got latest ID data");
-            console.log(data);
-            nid = data[0]._id + 1;
-        }
+    }).limit(1).toArray()
 
+    if (!data) {
+        console.log("Got error with latest ID");
+        nid = 1;
+       // return "ACCOUNT_CREATION_ERROR"
+    } else {
+        console.log("Got latest ID:");
+        console.log(data);
+        nid = data[0]._id + 1;
+    }
 
-        //hash pw async
+    return new Promise((resolve, reject) => {
+        //hashing is async
         bcrypt.hash(password, 10, function (err, hash) {
+            if (err) {
+                return resolve("ACCOUNT_CREATION_ERROR")
+            }
+
             let expy = Date.now() + 3600 * 24 * 365;
             let user = {
                 _id: nid,
@@ -80,10 +86,9 @@ module.exports.register = async function(username, password, email) {
                 token: ntoken,
             });
 
-            return "ACCOUNT_CREATION_OK"
+            return resolve({resp: "ACCOUNT_CREATION_OK", data: respy})
         });
-    });
-    return "ACCOUNT_CREATION_ERROR"
+    })
 }
 
 
