@@ -13,9 +13,12 @@
 	function toggle() {
 		showModal = !showModal;
 	}
-
 	function close() {
 		showModal = false;
+	}
+	function logoutFunc() {
+		showModal = false;
+		logout();
 	}
 </script>
 
@@ -49,7 +52,7 @@
 						</button>
 						{#if showModal}
 							<div class="absolute shade1  glass pa-5 w-200 z-2 p-right ">
-								<button on:click={logout} class="menuItem w100 center py-10 curve">
+								<button on:click={logoutFunc} class="menuItem w100 center py-10 curve">
 									Logout
 								</button>
 							</div>
