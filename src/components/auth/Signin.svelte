@@ -1,15 +1,18 @@
 <script>
     import Button from "comp/atoms/Button.svelte";
     import Field from "comp/atoms/TextField.svelte";
+    import { push } from "svelte-spa-router";
     import {WEBPACK_URL} from "../../config"
+    import { username_, token_ } from "@/store/user.js";
 
     let username = "";
     let password = "";
     let email = "";
+   
 
     async function handleOnSubmit() {
         let data = { username, password, email };
-        let req = await fetch(`http://${WEBPACK_URL}/api/register`, {
+        let res = await fetch(`http://${WEBPACK_URL}/api/register`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -17,16 +20,15 @@
             },
             body: JSON.stringify(data)
         });
+        res = await res.json()
 
-        // returns {error: "desc"} and status 400 on error
 
-        if (req.ok) {
-            console.log(await req.json())
-        }
 
-        return {
-            status: req.status,
-        };
+       if ( res.resp = "success"){
+        username_.set(res.username)
+        token_.set(res.token)
+        push('#/')
+       }
     }
 
 </script>
