@@ -56,7 +56,15 @@ function validate() {
                     </div>
                 {/if}
 
-                <Icon icon="fluent:globe-20-regular" color="black" width="50" />
+                <div class="">
+                    <lottie-player
+                        autoplay
+                        loop
+                        mode="normal"
+                        src="https://assets3.lottiefiles.com/packages/lf20_pm5qdb4j.json"
+                        style="width: 180px"
+                    />
+                </div>
                 <p class="absolute p-bottom p-left px-10 py-5 ma-5 shade3 curve">Online</p>
             </button>
             <button
@@ -75,7 +83,15 @@ function validate() {
                     </div>
                 {/if}
 
-                <Icon icon="fluent:building-shop-20-regular" color="black" width="50" />
+                <div class="">
+                    <lottie-player
+                        autoplay
+                        loop
+                        mode="normal"
+                        src="https://assets10.lottiefiles.com/packages/lf20_57TxAX.json"
+                        style="width: 180px"
+                    />
+                </div>
                 <p class="absolute p-bottom p-left px-10 py-5 ma-5 shade3 curve">Physical</p>
             </button>
             <button
@@ -87,14 +103,22 @@ function validate() {
                     <div class="absolute p-top p-right">
                         <lottie-player
                             autoplay
+                          
                             mode="normal"
                             src="https://assets9.lottiefiles.com/datafiles/8UjWgBkqvEF5jNoFcXV4sdJ6PXpS6DwF7cK4tzpi/Check Mark Success/Check Mark Success Data.json"
                             style="width: 50px"
                         />
                     </div>
                 {/if}
-                <Icon icon="fluent:globe-20-regular" color="black" width="50" />
-                <Icon icon="fluent:building-shop-20-regular" color="black" width="50" />
+                <div class="">
+                    <lottie-player
+                        autoplay
+                     
+                        mode="normal"
+                        src="https://assets10.lottiefiles.com/packages/lf20_kz2ylhyq.json"
+                        style="width: 180px"
+                    />
+                </div>
                 <p class="absolute p-bottom p-left px-10 py-5 ma-5 shade3 curve">
                     Online and Physical
                 </p>
@@ -119,7 +143,7 @@ function validate() {
     }
 
     .col2 {
-        background-color: #f7e4ba;
+        background-color: #FE83A9;
     }
 
     .item {

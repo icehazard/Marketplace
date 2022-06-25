@@ -11,7 +11,6 @@
         if ($shopName.length > 20) return true;
         return false;
     }
-
     function next() {
         $active++;
     }
