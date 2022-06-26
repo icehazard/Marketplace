@@ -32,7 +32,7 @@
 					<div class="row gap-10">
 						<Circle to="messages" icon="ant-design:message-outlined" />
 						<Circle to="cart" icon="akar-icons:cart" />
-						<Circle to="upload" icon="fluent:building-shop-16-regular" />
+						<Circle to="store/create" icon="fluent:building-shop-16-regular" />
 						<Circle to="settings" icon="clarity:settings-line" />
 					</div>
 				{/if}

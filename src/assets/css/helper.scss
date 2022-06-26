@@ -97,6 +97,14 @@
   justify-content: space-between;
 }
 
+.cover{
+  object-fit: cover;
+}
+
+.contain{
+  object-fit: contain;
+}
+
 .gap-1 {
   gap: 1px;
 }
