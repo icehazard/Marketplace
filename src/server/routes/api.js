@@ -4,6 +4,26 @@ const db = require('../db/dbhandler')
 
 let accounts = require("../classes/accounts")
 
+function auth(data) {
+    //clearTimeout(auth_timeout);
+    try {
+        const decoded = jwt.verify(data.token, options.secret, options)
+
+        if (err) {
+            console.log("Unauthorized!!!");
+            return false;
+        }
+        if (decoded) {
+            //restore temporarily disabled connection
+            //ws.sockets.connected[socket.id] = socket;
+            return true;
+        }
+    }
+    catch (e) {
+        return false;
+    }
+}
+
 api.post('/register', async (req, res) => {
     const { username, password, email } = req.body
 
