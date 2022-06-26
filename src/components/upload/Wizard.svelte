@@ -1,34 +1,26 @@
 <script>
-
-
+    import Confirm from "./Confirm.svelte";
     import GetPaid from "./GetPaid.svelte";
     import Address from "./Address.svelte";
     import ShopType from "./ShopType.svelte";
     import ShopName from "./ShopName.svelte";
     import { shopValid, active } from "@/store/store.js";
     import Icon from "@iconify/svelte";
-    import Button from "comp/atoms/Button.svelte";
-
 
     let headings = [
         { text: "Name your shop" },
         { text: "Shop Type" },
         { text: "Address" },
-        { text: "Options" },
+        { text: "Getting Paid" },
         { text: "Confirmation" },
     ];
 
     function jumpTo(val) {
-     //   if (val >= $active) return;
+        if (val >= $active) return;
         $active = val;
     }
-    function next() {
-        $active++;
-    }
-    let canNext;
-    $: canNext, canNext = $shopValid[$active]
-    
 </script>
+
 <section class="grow col gap-40">
     <div class="row shade1 space-btween pa-20 align-center gap-10">
         {#each headings as heading, index}
@@ -56,7 +48,8 @@
             <Address />
         {:else if $active == 3}
             <GetPaid />
+        {:else if $active == 4}
+            <Confirm />
         {/if}
     </div>
-   
 </section>

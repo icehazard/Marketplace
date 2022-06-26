@@ -28,8 +28,7 @@
     <div class="center col w-sm gap-40">
         <h1 class="font-36 weight-300">Address</h1>
         <p class="text-center">
-            For compliance purposes, we may verify your identity with a secure third–party service.
-            This information will never be displayed publicly on metaroad. Learn more
+            Provide the location, so cusomters can find your store. Don't forget to add opening times after you have created the shop. 
         </p>
         <div class=" row grow gap-10 w100">
             <div class="col grow gap-10">

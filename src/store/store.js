@@ -29,3 +29,16 @@ zip.subscribe(value => { localStorage.zip = JSON.stringify(value) });
 
 export const active = writable(localStorage.active ? JSON.parse(localStorage.active) : '');
 active.subscribe(value => { localStorage.active = JSON.stringify(value) });
+
+export function reset(){
+    shopValid.set([false, false, false, false, false])
+    shopName.set('')
+    shopType.set('')
+    street.set('')
+    number.set('')
+    address2.set('')
+    district.set('')
+    county.set('')
+    zip.set('')
+    active.set('')
+}
