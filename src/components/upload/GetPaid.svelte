@@ -13,7 +13,7 @@
         }),
     });
 
-    $: $isValid, console.log($isValid && $touched.name);
+    $: $isValid, ($isValid && $touched.name);
 </script>
 
 <form

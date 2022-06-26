@@ -13,7 +13,7 @@
         }),
     });
 
-    $: $isValid, console.log($isValid && $touched.name);
+    $: $isValid,($isValid && $touched.name);
 </script>
 
 <form class:valid={$isValid} on:submit={handleSubmit} class="center col shade3 curve py-50 px-10 pb-100">
