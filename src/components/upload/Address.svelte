@@ -2,13 +2,23 @@
     import Field from "comp/atoms/TextField.svelte";
     import Icon from "@iconify/svelte";
     import Button from "comp/atoms/Button.svelte";
-    import { shopName, shopValid, active, number, street , address2, district, county, zip } from "@/store/store.js";
+    import {
+        shopName,
+        shopValid,
+        active,
+        number,
+        street,
+        address2,
+        district,
+        county,
+        zip,
+    } from "@/store/store.js";
 
     $: $number, ($shopValid[2] = validate());
     $: $street, ($shopValid[2] = validate());
     $: $address2, ($shopValid[2] = validate());
     $: $district, ($shopValid[2] = validate());
-    $: $county, ($shopValid[2] = validate());  
+    $: $county, ($shopValid[2] = validate());
     $: $zip, ($shopValid[2] = validate());
 
     function validate() {
@@ -28,7 +38,8 @@
     <div class="center col w-sm gap-40">
         <h1 class="font-36 weight-300">Address</h1>
         <p class="text-center">
-            Provide the location, so cusomters can find your store. Don't forget to add opening times after you have created the shop. 
+            Provide the location, so cusomters can find your store. Don't forget to add opening
+            times after you have created the shop.
         </p>
         <div class=" row grow gap-10 w100">
             <div class="col grow gap-10">
