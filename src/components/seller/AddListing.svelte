@@ -8,7 +8,7 @@
 </script>
 
 <section class="col w100 gap-10">
-    <div>Add listing</div>
+    <div>Add Product</div>
     <div class="row gap-10 wrapper">
         <button class="box shade1 center" on:click={AddListing}>
             <lottie-player

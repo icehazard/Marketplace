@@ -4,6 +4,7 @@ const Home = () => import("@/views/Home.svelte");
 
 const Listing = () => import("@/views/Listing.svelte");
 const Settings = () => import("@/views/Settings.svelte");
+const Orders = () => import("@/views/Orders.svelte");
 const Cart = () => import("@/views/Cart.svelte");
 const Profile = () => import("@/views/Profile.svelte");
 const Messages = () => import("@/views/Messages.svelte");
@@ -21,6 +22,7 @@ export default {
     "/": wrap({ asyncComponent: Home }), 
     "/listing": wrap({ asyncComponent: Listing }),
     "/settings": wrap({ asyncComponent: Settings }),
+    "/orders": wrap({ asyncComponent: Orders }),
     "/cart": wrap({ asyncComponent: Cart }),
     "/profile": wrap({ asyncComponent: Profile }),
     "/messages": wrap({ asyncComponent: Messages }),
