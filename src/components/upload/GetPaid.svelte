@@ -8,12 +8,6 @@
     import banksLogo from 'banks-logo'
     import {afterUpdate, beforeUpdate, onMount} from 'svelte';
 
-    onMount(() => {
-
-
-    })
-
-    $shopValid[1] = false
     let showBankNrInput = false
 
     let bankNumber = ""
@@ -44,8 +38,8 @@
         return bankNumber.length && allBanks.filter(i => i.nice_name == bankSearchInput || i.official_name_thai == bankSearchInput).length
     }
 
-    let sv;
-    $: bankNumber, sv = validateBank()
+    let validate;
+    $: bankNumber, validate = validateBank()
 
     function next() {
         if (!validateBank())
@@ -57,14 +51,7 @@
         $active++;
     }
 
-    // $:  {
-    //     bankSearchInput,
-    //     searchBanks()
-    // }
-
     function searchBanks(key) {
-        $shopValid[1] = false
-
         let filter = bankSearchInput
         if (!filter || !filter.length)
             showBankSearch = false
@@ -83,7 +70,6 @@
         showBankSearch = false
         bankSearchInput = bankName
         showBankNrInput = true
-        $shopValid[1] = true
     }
 </script>@
 
@@ -157,7 +143,7 @@
     </div>
     <div class="pt-50  row w-sm  w100  z-2">
         <div class=" center w100">
-            <Button on:click={next} type="button" disable={!sv} text="CONTINUE" />
+            <Button on:click={next} type="button" disable={!validate} text="CONTINUE" />
         </div>
     </div>
 </form>
