@@ -4,49 +4,106 @@
 </script>
 
 <section class="grow col gap-20">
-<h1 class="row font-36 weight-300">
-    Orders
-</h1>
-<div class="grow col shade3 curve">
-    <div class="row  w100 pa-20 space-between  shade3">
-        <div class="row center gap-20">
-            <Icon icon="fluent:translate-16-regular" width="30" />
-            <div class="col gap-10">
-                <span> Language</span>
-                <span class="font-14 opacity-75">Change your prefered language</span>
-            </div>
+    <h1 class="row pl-20 font-36 weight-300 align-center gap-20">
+        <Icon icon="fluent:text-bullet-list-square-clock-20-regular" width="30" />
+        <span>ORDERS</span>
+    </h1>
+    <div class="grow col shade3 curve">
+        <div class="row pa-20 shade3  w100 align-center gap-10">
+            <Icon icon="fluent:search-16-regular" width="20" />
+
+            <input type="text" placeholder="Search for a order" />
         </div>
-        <div class="col">
-            <Field />
+        <hr />
+        <div class="col w100 ">
+            <button class="grid shine w100 pa-20 space-between  shade3">
+                <span class="row gap-10 justify-start align-center">
+                    <div class="imgWrapper">
+                        <Icon icon="fluent:image-32-regular" />
+                    </div>
+                    <span>Thai seed bank</span>
+                </span>
+                <span>12 Items</span>
+                <span>1,583 THB</span>
+                <span class="info--text">Processing Order</span>
+                <span>21/06/2022</span>
+                <div class="justify-end">
+                    <Icon icon="fluent:chevron-right-28-regular" width="20" />
+                </div>
+            </button>
+            <hr />
+        </div>
+        <div class="col w100 ">
+            <button class="grid shine w100 pa-20 space-between  shade3">
+                <span class="row gap-10 justify-start align-center">
+                    <div class="imgWrapper">
+                        <Icon icon="fluent:image-32-regular" />
+                    </div>
+                    <span>Oaseeds</span>
+                </span>
+                <span>2 Items</span>
+                <span>183 THB</span>
+                <span class="warning--text">In Transit</span>
+                <span>25/06/2022</span>
+                <div class="justify-end">
+                    <Icon icon="fluent:chevron-right-28-regular" width="20" />
+                </div>
+            </button>
+            <hr />
+        </div>
+        <div class="col w100 ">
+            <button class="grid shine w100 pa-20 space-between  shade3">
+                <span class="row gap-10 justify-start align-center">
+                    <div class="imgWrapper">
+                        <Icon icon="fluent:image-32-regular" />
+                    </div>
+                    <span>MetaRoadGrows</span>
+                </span>
+                <span>6 Items</span>
+                <span>1183 THB</span>
+                <span class='success--text'>Delivered</span>
+                <span>05/05/2022</span>
+                <div class="justify-end">
+                    <Icon icon="fluent:chevron-right-28-regular" width="20" />
+                </div>
+            </button>
+            <hr />
+        </div>
+        <div class="col w100 ">
+            <button class="grid shine w100 pa-20 space-between  shade3">
+                <span class="row gap-10 justify-start align-center">
+                    <div class="imgWrapper">
+                        <Icon icon="fluent:image-32-regular" />
+                    </div>
+                    <span>MetaRoadGrows</span>
+                </span>
+                <span>6 Items</span>
+                <span>1183 THB</span>
+                <span class='error--text'>Cancelled</span>
+                <span>05/05/2022</span>
+                <div class="justify-end">
+                    <Icon icon="fluent:chevron-right-28-regular" width="20" />
+                </div>
+            </button>
+            <hr />
         </div>
     </div>
-    <hr />
-    <div class="row  w100 pa-20 space-between  shade3">
-        <div class="row center gap-20">
-            <Icon icon="fluent:currency-dollar-euro-16-regular" width="30" />
-            <div class="col gap-10">
-                <span> Currency</span>
-                <span class="font-14 opacity-75">Change your prefered currency</span>
-            </div>
-        </div>
-        <div class="col">
-            <Field />
-        </div>
-    </div>
-    <hr />
-    <div class="row  w100 pa-20 space-between  shade3">
-        <div class="row center gap-20">
-            <Icon icon="fluent:dark-theme-20-filled" width="30" />
-            <div class="col gap-10">
-                <span>Theme</span>
-                <span class="font-14 opacity-75">Change between light and dark mode</span>
-            </div>
-        </div>
-        <div class="col">
-            <Field />
-        </div>
-    </div>
-    <hr />
-</div>
 </section>
 
+<style>
+    .grid {
+        display: grid;
+        grid-template-columns: 2fr 2fr 2fr 2fr 2fr 1fr;
+    }
+
+    span {
+        text-align: center;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .imgWrapper {
+        min-width: 20px;
+    }
+</style>

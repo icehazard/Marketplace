@@ -4,8 +4,9 @@
 </script>
 
 <section class="grow col gap-20">
-<h1 class="row font-36 weight-300">
-    SETTINGS
+<h1 class="row pl-20 font-36 weight-300 align-center gap-20">
+    <Icon icon="fluent:settings-16-regular" width="30" />
+    <span>SETTINGS</span>
 </h1>
 <div class="grow col shade3 curve">
     <div class="row  w100 pa-20 space-between  shade3">

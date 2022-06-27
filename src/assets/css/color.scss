@@ -63,9 +63,25 @@ $primaryActive: #ef6698;
     color: $green;
 }
 
+.error--text {
+    color: #F44336;
+}
+
 
 .primary--text {
     color: $primary;
+}
+
+.success--text{
+    color: #4CAF50;
+}
+
+.warning--text{
+    color: #FFEB3B;
+}
+
+.info--text{
+    color: #03A9F4;
 }
 
 
