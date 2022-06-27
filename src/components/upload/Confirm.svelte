@@ -36,9 +36,11 @@
                 of the price you display for each listing. An invoice will be sent every month for
                 any purchases.
             </p>
-            <div class="row w100 text-center">
-                <div class="span grow red--text">{msg}</div>
-            </div>
+            {#if msg}
+                <div class="row w100 text-center">
+                    <div class="span grow red--text">{msg}</div>
+                </div>
+            {/if}
             <div class="row gap-10 center">
                 <input type="checkbox" bind:checked={confirm} />
                 <label for="vehicle1">Accept terms and conditions</label><br />
