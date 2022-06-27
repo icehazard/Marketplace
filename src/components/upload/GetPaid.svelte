@@ -1,10 +1,33 @@
-<script>
+   <script>
     import Field from "comp/atoms/TextField.svelte";
     import Button from "comp/atoms/Button.svelte";
     import Icon from "@iconify/svelte";
     import { createForm } from "svelte-forms-lib";
     import { shopValid, active } from "@/store/store.js";
     import * as yup from "yup";
+    import banksLogo from 'banks-logo'
+    import {afterUpdate, beforeUpdate, onMount} from 'svelte';
+
+    onMount(() => {
+
+
+    })
+
+    $shopValid[1] = false
+    let showBankNrInput = false
+
+    let bankNumber = ""
+    let keys = banksLogo.listKey()
+    let allBanks = []
+    let bankSearchInput = ""
+
+    for (let k of keys) {
+        console.log('banksLogo', banksLogo.Get(k).image);
+        let b = banksLogo.Get(k)
+        allBanks.push(b)
+    }
+    let tempBanks = allBanks
+    let showBankSearch = false
 
     const { errors, isValid, touched, handleChange, handleSubmit } = createForm({
         initialValues: {
@@ -17,10 +40,52 @@
 
     $: $isValid, ($isValid && $touched.name);
 
+    function validateBank() {
+        return bankNumber.length && allBanks.filter(i => i.nice_name == bankSearchInput || i.official_name_thai == bankSearchInput).length
+    }
+
+    let sv;
+    $: bankNumber, sv = validateBank()
+
     function next() {
+        if (!validateBank())
+        {
+            console.log("Incorrect bank")
+            return
+        }
+
         $active++;
     }
-</script>
+
+    // $:  {
+    //     bankSearchInput,
+    //     searchBanks()
+    // }
+
+    function searchBanks(key) {
+        $shopValid[1] = false
+
+        let filter = bankSearchInput
+        if (!filter || !filter.length)
+            showBankSearch = false
+
+        let firstFilter = (filter && filter.length) ? allBanks.filter((item) =>
+            item.official_name.toLowerCase().includes(filter.toLowerCase()) ||
+            item.nice_name.toLowerCase().includes(filter.toLowerCase()) ||
+
+            item.official_name_thai.indexOf(filter) !== -1) : allBanks;
+
+        tempBanks = firstFilter
+        showBankSearch = true
+        return firstFilter
+    }
+    function selectBank(bankName) {
+        showBankSearch = false
+        bankSearchInput = bankName
+        showBankNrInput = true
+        $shopValid[1] = true
+    }
+</script>@
 
 <form
     class:valid={$isValid}
@@ -34,61 +99,65 @@
             the name you entered above.
         </p>
         <div class="col w100 gap-10">
-            <label for="name" class="pl-4 weight-300">Full name on account</label>
+            <label for="name" class="pl-4 weight-300">Name on Bank Account</label>
             <div class="borderStrong gap-10 curve align-center px-20 h-40 mobile-w100 shade2 w100">
                 <input
-                    on:keyup={handleChange}
+                        on:keyup={handleChange}
                     autocomplete="off"
                     name="name"
                     type="text"
                     class="w100 shade2"
-                    placeholder="Full name on account"
+                    placeholder="yours or business name of bank account"
                 />
             </div>
         </div>
+
         <div class="col w100 gap-10">
-            <label for="name" class="pl-4 weight-300">Bank name</label>
+            <label for="btype" class="pl-4 weight-300">Bank Name</label>
             <div class="borderStrong gap-10 curve align-center px-20 h-40 mobile-w100 shade2 w100">
                 <input
-                    on:keyup={handleChange}
-                    autocomplete="off"
-                    name="name"
-                    type="text"
-                    class="w100 shade2"
-                    placeholder="Bank name"
+                        bind:value={bankSearchInput}
+                        on:keyup={searchBanks}
+                        autocomplete="off"
+                        name="name"
+                        type="text"
+                        class="w100 shade2"
+                        placeholder=""
                 />
             </div>
+
+            {#if showBankSearch}
+                <div class="pl-20 pt-20 pb-20 pr-20 w30 shade4 h-150" style="overflow:auto; border-radius:5px">
+                    {#each tempBanks as b}
+                        <div class="row mb-5 bank-search-box" on:click={selectBank(b.nice_name)}>
+                            <img src={b.image} style="width: 30px; height:30px; background-color:  {b.color}; border-radius: 5px"/>
+                            <div class="center ml-10">{b.nice_name}</div>
+                        </div>
+                    {/each}
+
+                </div>
+            {/if}
         </div>
-        <div class="col w100 gap-10">
-            <label for="name" class="pl-4 weight-300">IBAN</label>
-            <div class="borderStrong gap-10 curve align-center px-20 h-40 mobile-w100 shade2 w100">
-                <input
-                    on:keyup={handleChange}
-                    autocomplete="off"
-                    name="name"
-                    type="text"
-                    class="w100 shade2"
-                    placeholder="IBAN"
-                />
+
+        {#if showBankNrInput}
+            <div class="col w100 gap-10">
+                <label for="name" class="pl-4 weight-300">Bank Account Number </label>
+                <div class="borderStrong gap-10 curve align-center px-20 h-40 mobile-w100 shade2 w100">
+                    <input
+                        bind:value={bankNumber}
+                        autocomplete="off"
+                        name="name"
+                        type="text"
+                        class="w100 shade2"
+                        placeholder=""
+                    />
+                </div>
             </div>
-        </div>
-        <div class="col w100 gap-10">
-            <label for="name" class="pl-4 weight-300">SWIFT BIC </label>
-            <div class="borderStrong gap-10 curve align-center px-20 h-40 mobile-w100 shade2 w100">
-                <input
-                    on:keyup={handleChange}
-                    autocomplete="off"
-                    name="name"
-                    type="text"
-                    class="w100 shade2"
-                    placeholder="SWIFT BIC "
-                />
-            </div>
-        </div>
+        {/if}
     </div>
     <div class="pt-50  row w-sm  w100  z-2">
         <div class=" center w100">
-            <Button on:click={next} type="button" disable={$shopValid[1]} text="CONTINUE" />
+            <Button on:click={next} type="button" disable={!sv} text="CONTINUE" />
         </div>
     </div>
 </form>
