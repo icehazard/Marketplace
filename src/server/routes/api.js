@@ -9,17 +9,12 @@ function auth(data) {
     try {
         const decoded = jwt.verify(data.token, options.secret, options)
 
-        if (err) {
-            console.log("Unauthorized!!!");
-            return false;
-        }
         if (decoded) {
-            //restore temporarily disabled connection
-            //ws.sockets.connected[socket.id] = socket;
             return true;
         }
     }
     catch (e) {
+        console.log("Unauthorized!!!");
         return false;
     }
 }
