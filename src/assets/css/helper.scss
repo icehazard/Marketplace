@@ -105,6 +105,13 @@
   object-fit: contain;
 }
 
+.shine{
+  transition: 0.3s all ease;
+}
+.shine:hover{
+   filter: contrast(0.9);
+}
+
 .gap-1 {
   gap: 1px;
 }
