@@ -1,4 +1,5 @@
 <script>
+	import AddListing from './AddListing.svelte';
     import Icon from "@iconify/svelte";
     import Item from "../listing/Item.svelte";
     import { Swiper, SwiperSlide } from "swiper/svelte";
@@ -8,6 +9,8 @@
     import "@/assets/css/swiper.css";
     import Listing from "comp/listings/Listings.svelte";
     import { products } from "@/store/products.js";
+    import "@lottiefiles/lottie-player";
+    
 </script>
 
 <section class="col grow gap-30">
@@ -41,6 +44,8 @@
             <div class="weight-600 opacity-75">Contact</div>
         </div>
     </div>
+    <AddListing />
+    
     <div class="col gap-10">
         <div>Featured items</div>
         <div class="row gap-10 ">
@@ -72,4 +77,5 @@
         width: 100%;
         height: 100%;
     }
+
 </style>

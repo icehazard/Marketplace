@@ -1,22 +1,22 @@
 <script>
     import Field from "comp/atoms/TextField.svelte";
+    import { shopName, shopValid, active } from "@/store/store.js";
     import Icon from "@iconify/svelte";
-    import { createForm } from "svelte-forms-lib";
-    import * as yup from "yup";
+    import Button from "comp/atoms/Button.svelte";
 
-    const { errors, isValid, touched, handleChange, handleSubmit } = createForm({
-        initialValues: {
-            name: "",
-        },
-        validationSchema: yup.object().shape({
-            name: yup.string().required().min(3).max(20),
-        }),
-    });
+    $: $shopName, ($shopValid[0] = validate());
 
-    $: $isValid, ($isValid && $touched.name);
+    function validate() {
+        if ($shopName.length < 3) return true;
+        if ($shopName.length > 20) return true;
+        return false;
+    }
+    function next() {
+        $active++;
+    }
 </script>
 
-<form class:valid={$isValid} on:submit={handleSubmit} class="center col shade3 curve py-50 px-10 pb-100">
+<form class:valid={$shopValid[0]} class="center col shade3 curve py-50 px-10 pb-100">
     <div class="center  w-sm gap-40">
         <h1 class="font-36 weight-300">Name your shop</h1>
         <p class="text-center">
@@ -25,26 +25,22 @@
             naming tips
         </p>
         <div class="row w100">
-            <div class="borderStrong gap-10 curve align-center px-20 h-40 mobile-w100 shade2 w100">
-                <input
-                    on:keyup={handleChange}
-                    autocomplete="off"
-                    name="name"
-                    type="text"
-                    class="w100 shade2"
-                    placeholder="Shop Title"
-                />
-            </div>
+            <Field bind:value={$shopName} label="Shop Title" />
         </div>
         <div class="col w100 font-14">
             <div class="row align-center gap-10">
-                {#if !$errors.name && $touched.name}
+                {#if !$shopValid[0]}
                     <Icon icon="fluent:checkmark-12-regular" height="24" color="green" />
                 {:else}
                     <Icon icon="fluent:dismiss-12-regular" height="24" color="red" />
                 {/if}
                 <p>Between 3-20 characters</p>
             </div>
+        </div>
+    </div>
+    <div class="pt-50  row w-sm  w100  z-2">
+        <div class=" center w100">
+            <Button on:click={next} type="button" disable={$shopValid[0]} text="CONTINUE" />
         </div>
     </div>
 </form>

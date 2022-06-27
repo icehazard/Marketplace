@@ -1,7 +1,9 @@
 <script>
     import Field from "comp/atoms/TextField.svelte";
+    import Button from "comp/atoms/Button.svelte";
     import Icon from "@iconify/svelte";
     import { createForm } from "svelte-forms-lib";
+    import { shopValid, active } from "@/store/store.js";
     import * as yup from "yup";
 
     const { errors, isValid, touched, handleChange, handleSubmit } = createForm({
@@ -14,6 +16,10 @@
     });
 
     $: $isValid, ($isValid && $touched.name);
+
+    function next() {
+        $active++;
+    }
 </script>
 
 <form
@@ -22,7 +28,7 @@
     class="center col shade3 curve py-50 px-10 pb-100"
 >
     <div class="center  w-sm gap-40">
-        <h1 class="font-36 weight-300">Getting paid</h1>
+        <h1 class="font-36 weight-300">Getting Paid</h1>
         <p class="text-center">
             Not to get all matchy-matchy, but the name on your bank account needs to be the same as
             the name you entered above.
@@ -78,6 +84,11 @@
                     placeholder="SWIFT BIC "
                 />
             </div>
+        </div>
+    </div>
+    <div class="pt-50  row w-sm  w100  z-2">
+        <div class=" center w100">
+            <Button on:click={next} type="button" disable={$shopValid[1]} text="CONTINUE" />
         </div>
     </div>
 </form>

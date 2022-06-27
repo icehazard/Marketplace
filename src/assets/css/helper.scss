@@ -29,6 +29,12 @@
 
 .grow-0 {
   flex-grow: 0;
+  flex-basis: 0;
+}
+
+.grow-2 {
+  flex-grow: 2;
+  flex-basis: 0;
 }
 
 .overlay {
@@ -89,6 +95,14 @@
 .space-between {
   display: flex;
   justify-content: space-between;
+}
+
+.cover{
+  object-fit: cover;
+}
+
+.contain{
+  object-fit: contain;
 }
 
 .gap-1 {
@@ -418,7 +432,11 @@
 }
 
 .curve {
-  border-radius: 10px;
+  border-radius: 8px;
+}
+
+.ratio{
+  aspect-ratio: 1;
 }
 
 .glass{

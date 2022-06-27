@@ -32,8 +32,8 @@
 					<div class="row gap-10">
 						<Circle to="messages" icon="ant-design:message-outlined" />
 						<Circle to="cart" icon="akar-icons:cart" />
+						<Circle to="store/create" icon="fluent:building-shop-16-regular" />
 						<Circle to="settings" icon="clarity:settings-line" />
-						<Circle to="upload" icon="mdi:plus" />
 					</div>
 				{/if}
 			</section>
@@ -46,7 +46,7 @@
 				{/if}
 				{#if $mq.lg_ && $username_}
 					<div class="relative row center" use:clickOutside={close}>
-						<button class="row center" on:click={toggle}>
+						<button class="row center gap-10" on:click={toggle}>
 							<span class="">{$username_}</span>
 							<Circle to="" icon="gg:profile" />
 						</button>

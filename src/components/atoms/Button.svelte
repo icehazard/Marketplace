@@ -5,37 +5,42 @@
     const dispatch = createEventDispatcher();
 
     export let text = "";
+    export let disable = false;
+
     let connect = () => {
-        dispatch("click")
+        dispatch("click");
     };
 </script>
 
-<div class="wrapper ">
-    <button class="w100 center" type="submit" on:click={connect}>{text}</button>
+<div class="wrapper w60" class:disable>
+    <button class="w100 center" disabled={disable} type="submit" on:click={connect}>{text}</button>
 </div>
 
 <style>
     button {
         align-items: center;
         background: rgb(28, 35, 44);
-        border-radius: 16px;
+        border-radius: 8px;
         display: flex;
-        height: 40px;
+    
         letter-spacing: 1px;
         outline: none;
-        padding: 0px 20px;
+        padding: 15px 20px;
         transition: all 150ms ease 0s;
         font-weight: 700;
     }
 
     .wrapper {
-        height: 42px;
+        
         border: none;
         padding: 1px;
-        border-radius: 16px;
-        display: flex;  
+            border-radius: 8px;
+        display: flex;
         background: #df0051;
         background: #5dc24f;
-        
+    }
+
+    .disable {
+        background: #6e6e6e;
     }
 </style>

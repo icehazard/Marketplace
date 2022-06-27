@@ -7,7 +7,8 @@ const Settings = () => import("@/views/Settings.svelte");
 const Cart = () => import("@/views/Cart.svelte");
 const Profile = () => import("@/views/Profile.svelte");
 const Messages = () => import("@/views/Messages.svelte");
-const Upload = () => import("@/views/Upload.svelte");
+const AddListing = () => import("@/views/AddListing.svelte");
+const ShopWizard = () => import("@/views/ShopWizard.svelte");
 const Seller = () => import("@/views/Seller.svelte");
 
 const Login = () => import("@/views/Login.svelte");
@@ -23,7 +24,8 @@ export default {
     "/cart": wrap({ asyncComponent: Cart }),
     "/profile": wrap({ asyncComponent: Profile }),
     "/messages": wrap({ asyncComponent: Messages }),
-    "/upload": wrap({ asyncComponent: Upload }),
+    "/store/create": wrap({ asyncComponent: ShopWizard }),
+    "/listing/create": wrap({ asyncComponent: AddListing }),
     "/seller": wrap({ asyncComponent: Seller }),
     "/login": wrap({ asyncComponent: Login }),
     "/signup": wrap({ asyncComponent: Signup }),
