@@ -1,5 +1,5 @@
 <script>
-    import Categories from "comp/toolbars/categories/Categories.svelte";
+    import Categories from "comp/toolbars/categories/Settings.svelte";
     import Settings from "comp/dashboard/SettingsComp.svelte";
   
 </script>
