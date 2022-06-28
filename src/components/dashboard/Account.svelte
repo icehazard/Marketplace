@@ -11,40 +11,66 @@
 <div class="grow col shade3 curve">
     <div class="row  w100 pa-20 space-between  shade3">
         <div class="row center gap-20">
-            <Icon icon="fluent:translate-16-regular" width="30" />
+            <Icon icon="icon-park-outline:edit-name" width="30" />
             <div class="col gap-10">
-                <span> Language</span>
-                <span class="font-14 opacity-75">Change your prefered language</span>
+                <span> Full Name</span>
+                <span class="font-14 opacity-75">Your first and last names. </span>
             </div>
         </div>
         <div class="col">
-            <Field />
+            <Field label='Full Name'/>
         </div>
     </div>
     <hr />
     <div class="row  w100 pa-20 space-between  shade3">
         <div class="row center gap-20">
-            <Icon icon="fluent:currency-dollar-euro-16-regular" width="30" />
+            <Icon icon="ic:baseline-alternate-email" width="30" />
             <div class="col gap-10">
-                <span> Currency</span>
-                <span class="font-14 opacity-75">Change your prefered currency</span>
+                <span>Email</span>
+                <span class="font-14 opacity-75">Your login email</span>
             </div>
         </div>
         <div class="col">
-            <Field />
+            <Field label='Email'/>
         </div>
     </div>
     <hr />
     <div class="row  w100 pa-20 space-between  shade3">
         <div class="row center gap-20">
-            <Icon icon="fluent:dark-theme-20-filled" width="30" />
+            <Icon icon="fluent:view-desktop-mobile-20-regular" width="30" />
             <div class="col gap-10">
-                <span>Theme</span>
-                <span class="font-14 opacity-75">Change between light and dark mode</span>
+                <span>Mobile Number</span>
+                <span class="font-14 opacity-75">How can people contact you</span>
             </div>
         </div>
         <div class="col">
-            <Field />
+            <Field label='Mobile Number'/>
+        </div>
+    </div>
+    <hr />
+    <div class="row  w100 pa-20 space-between  shade3">
+        <div class="row center gap-20">
+            <Icon icon="fluent:lock-closed-12-regular" width="30" />
+            <div class="col gap-10">
+                <span>Current Password</span>
+                <span class="font-14 opacity-75">Needed to change your password</span>
+            </div>
+        </div>
+        <div class="col">
+            <Field label='Current password'/>
+        </div>
+    </div>
+    <hr />
+    <div class="row  w100 pa-20 space-between  shade3">
+        <div class="row center gap-20">
+            <Icon icon="fluent:password-16-regular" width="30" />
+            <div class="col gap-10">
+                <span>New Password</span>
+                <span class="font-14 opacity-75">Change your login password</span>
+            </div>
+        </div>
+        <div class="col">
+            <Field label='New password'/>
         </div>
     </div>
     <hr />
