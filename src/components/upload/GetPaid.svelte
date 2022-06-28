@@ -16,7 +16,6 @@
     let bankSearchInput = ""
 
     for (let k of keys) {
-        console.log('banksLogo', banksLogo.Get(k).image);
         let b = banksLogo.Get(k)
         allBanks.push(b)
     }
@@ -71,7 +70,11 @@
         bankSearchInput = bankName
         showBankNrInput = true
     }
-</script>@
+    function openPicker(){
+       showBankSearch = !showBankSearch;
+        console.log('a')
+    }
+</script>
 
 <form
     class:valid={$isValid}
@@ -100,25 +103,30 @@
 
         <div class="col w100 gap-10">
             <label for="btype" class="pl-4 weight-300">Bank Name</label>
-            <div class="borderStrong gap-10 curve align-center px-20 h-40 mobile-w100 shade2 w100">
-                <input
-                        bind:value={bankSearchInput}
-                        on:keyup={searchBanks}
-                        autocomplete="off"
-                        name="name"
-                        type="text"
-                        class="w100 shade2"
-                        placeholder=""
-                />
-            </div>
+            <button on:click={openPicker}>
+                <div class="borderStrong curser-text gap-10 curve align-center px-20 h-40 mobile-w100 shade2 w100">
+                    <input
+                            bind:value={bankSearchInput}
+                            on:keyup={searchBanks}
+                            autocomplete="off"
+                            name="name"
+                            type="text"
+                            class="w100 shade2 curser-text"
+                            placeholder="Select a bank"
+                    />
+                    <button class="center curser-pointer">
+                        <Icon icon="fluent:chevron-up-down-20-regular" />
+                    </button>
+                </div>
+            </button>
 
             {#if showBankSearch}
-                <div class="pl-20 pt-20 pb-20 pr-20 w30 shade4 h-150" style="overflow:auto; border-radius:5px">
+                <div class=" w30 shade4 h-150" style="overflow:auto; border-radius:5px">
                     {#each tempBanks as b}
-                        <div class="row mb-5 bank-search-box" on:click={selectBank(b.nice_name)}>
-                            <img src={b.image} style="width: 30px; height:30px; background-color:  {b.color}; border-radius: 5px"/>
+                        <button class="row align-center  px-20 py-10 bank-search-box curve w100" on:click={selectBank(b.nice_name)}>
+                            <img src={b.image} style="width: 30px; height:30px; background-color: {b.color}; border-radius: 5px" alt=''/>
                             <div class="center ml-10">{b.nice_name}</div>
-                        </div>
+                        </button>
                     {/each}
 
                 </div>
@@ -147,3 +155,18 @@
         </div>
     </div>
 </form>
+
+<style>
+    .bank-search-box:focus-visible{
+        filter: contrast(1.5);
+        background-color: rgb(146, 146, 146);
+    }
+
+    .curser-text{
+        cursor: text;
+    }
+
+    .curser-pointer{
+        cursor: pointer;
+    }
+</style>
