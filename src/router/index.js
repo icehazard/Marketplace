@@ -18,7 +18,7 @@ export default {
     "/": wrap({ asyncComponent: Home }), 
     "/listing": wrap({ asyncComponent: Listing }),
     "/settings": wrap({ asyncComponent: Settings }),
-    "/orders": wrap({ asyncComponent: Orders }),
+    "/orders/overview": wrap({ asyncComponent: Orders }),
     "/orders/view/:id": wrap({ asyncComponent: ViewOrder }),
     "/cart": wrap({ asyncComponent: Cart }),
     "/profile": wrap({ asyncComponent: Profile }),
