@@ -22,7 +22,7 @@
         <div class="col w100 ">
             <button on:click={handleClick} class="grid shine w100 pa-20 space-between  shade3">
                 <span class="row gap-10 justify-start align-center">
-                    <div class="imgWrapper">
+                    <div class="imgWrapper center">
                         <Icon icon="fluent:image-32-regular" />
                     </div>
                     <span>Thai seed bank</span>
@@ -40,7 +40,7 @@
         <div class="col w100 ">
             <button on:click={handleClick} class="grid shine w100 pa-20 space-between  shade3">
                 <span class="row gap-10 justify-start align-center">
-                    <div class="imgWrapper">
+                    <div class="imgWrapper center">
                         <Icon icon="fluent:image-32-regular" />
                     </div>
                     <span>Oaseeds</span>
@@ -58,7 +58,7 @@
         <div class="col w100 ">
             <button on:click={handleClick} class="grid shine w100 pa-20 space-between  shade3">
                 <span class="row gap-10 justify-start align-center">
-                    <div class="imgWrapper">
+                    <div class="imgWrapper center">
                         <Icon icon="fluent:image-32-regular" />
                     </div>
                     <span>MetaRoadGrows</span>
@@ -76,7 +76,7 @@
         <div class="col w100 ">
             <button on:click={handleClick} class="grid shine w100 pa-20 space-between  shade3">
                 <span class="row gap-10 justify-start align-center">
-                    <div class="imgWrapper">
+                    <div class="imgWrapper center">
                         <Icon icon="fluent:image-32-regular" />
                     </div>
                     <span>MetaRoadGrows</span>

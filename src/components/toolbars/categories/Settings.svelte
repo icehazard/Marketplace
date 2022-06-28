@@ -6,7 +6,7 @@
 {#if $mq.lg_}
     <div class="w-300">
         <aside class="shade3 w-300 curve fixed">
-            <a href="#/orders" class="row px-20 align-center space-between shine w100">
+            <a href="#/profile" class="row px-20 align-center space-between shine w100">
                 <div class="row py-20 align-center gap-10">
                     <Icon icon="mdi:account-outline" width="22" />
                     <div>Account</div>
@@ -16,7 +16,7 @@
             <hr />
             <a href="#/orders" class="row px-20 py-20 align-center space-between w100 shine">
                 <div class="row align-center gap-10">
-                    <Icon icon="fluent:clipboard-bullet-list-ltr-20-regular" width="22" />
+                    <Icon icon="fluent:text-bullet-list-square-clock-20-regular" width="22" />
                     <div>Orders</div>
                 </div>
                 <Icon icon="fluent:chevron-right-16-regular" width="16" />
