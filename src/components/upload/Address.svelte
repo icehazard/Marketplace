@@ -37,7 +37,7 @@
     }
 
     let canContinue = false
-
+    let address = ""
 
     onMount(async() => {
         const loader = new Loader('AIzaSyAmlMcGgumMqP6T8YLFnsQT_tbL4j5wF0s', {libraries: ['places']});
@@ -114,8 +114,10 @@
 
                         console.log(response.results[0])
                         let c = response.results[0].address_components
-                        infowindow.setContent(`${c[0].long_name}, ${c[1].long_name}, ${c[2].long_name}`);
+                        let finalAddress = `${c[0].long_name}, ${c[1].long_name}, ${c[2].long_name}`
+                        infowindow.setContent(finalAddress)
                         infowindow.open(map, marker);
+                        address = finalAddress
                     } else {
                         window.alert("No results found");
                     }
@@ -143,7 +145,7 @@
 <!--            </div>-->
             <div class="col grow grow-2 gap-10">
                 <label class="pl-4 weight-300">Address</label>
-                <input class="borderStrong gap-10 curve align-center px-20 h-40 mobile-w100 shade2 w100" id="address" type="value" role="presentation" autocomplete="off" placeholder="enter shop address here"/>
+                <input class="borderStrong gap-10 curve align-center px-20 h-40 mobile-w100 shade2 w100" id="address" bind:value={address} type="value" role="presentation" autocomplete="off" placeholder="enter shop address here"/>
             </div>
         </div>
 <!--        <div class="row grow gap-10 w100">-->
