@@ -18,7 +18,7 @@
             </div>
         </div>
         <div class="col">
-            <Field />
+            <Field label='Language'/>
         </div>
     </div>
     <hr />
@@ -31,7 +31,7 @@
             </div>
         </div>
         <div class="col">
-            <Field />
+            <Field label='Currency'/>
         </div>
     </div>
     <hr />
@@ -44,7 +44,7 @@
             </div>
         </div>
         <div class="col">
-            <Field />
+            <Field label='Theme'/>
         </div>
     </div>
     <hr />

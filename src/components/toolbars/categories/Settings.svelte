@@ -9,7 +9,7 @@
 {#if $mq.lg_}
     <div class="w-300">
         <aside class="shade3 w-300 curve fixed">
-            <a href="#/profile" class="row px-20 align-center space-between shine w100"  use:link  use:active>
+            <a href="#/account" class="row px-20 align-center space-between shine w100"  use:link  use:active>
                 <div class="row py-20 align-center gap-10">
                     <Icon icon="mdi:account-outline" width="22" />
                     <div>Account</div>

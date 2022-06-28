@@ -21,7 +21,7 @@ export default {
     "/orders/overview": wrap({ asyncComponent: Orders }),
     "/orders/view/:id": wrap({ asyncComponent: ViewOrder }),
     "/cart": wrap({ asyncComponent: Cart }),
-    "/profile": wrap({ asyncComponent: Profile }),
+    "/account": wrap({ asyncComponent: Profile }),
     "/messages": wrap({ asyncComponent: Messages }),
     "/store/create": wrap({ asyncComponent: ShopWizard }),
     "/listing/create": wrap({ asyncComponent: AddListing }),
