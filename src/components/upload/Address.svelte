@@ -144,7 +144,7 @@
 <!--                <Field bind:value={$number} label="Number" />-->
 <!--            </div>-->
             <div class="col grow grow-2 gap-10">
-                <label class="pl-4 weight-300">Address</label>
+                <label for="address" class="pl-4 weight-300">Address</label>
                 <input class="borderStrong gap-10 curve align-center px-20 h-40 mobile-w100 shade2 w100" id="address" bind:value={address} type="value" role="presentation" autocomplete="off" placeholder="enter shop address here"/>
             </div>
         </div>

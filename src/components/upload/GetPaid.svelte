@@ -1,26 +1,26 @@
-   <script>
+<script>
     import Field from "comp/atoms/TextField.svelte";
     import Button from "comp/atoms/Button.svelte";
     import Icon from "@iconify/svelte";
     import { createForm } from "svelte-forms-lib";
     import { shopValid, active } from "@/store/store.js";
     import * as yup from "yup";
-    import banksLogo from 'banks-logo'
-    import {afterUpdate, beforeUpdate, onMount} from 'svelte';
+    import banksLogo from "banks-logo";
+    import { afterUpdate, beforeUpdate, onMount } from "svelte";
 
-    let showBankNrInput = false
+    let showBankNrInput = false;
 
-    let bankNumber = ""
-    let keys = banksLogo.listKey()
-    let allBanks = []
-    let bankSearchInput = ""
+    let bankNumber = "";
+    let keys = banksLogo.listKey();
+    let allBanks = [];
+    let bankSearchInput = "";
 
     for (let k of keys) {
-        let b = banksLogo.Get(k)
-        allBanks.push(b)
+        let b = banksLogo.Get(k);
+        allBanks.push(b);
     }
-    let tempBanks = allBanks
-    let showBankSearch = false
+    let tempBanks = allBanks;
+    let showBankSearch = false;
 
     const { errors, isValid, touched, handleChange, handleSubmit } = createForm({
         initialValues: {
@@ -31,48 +31,55 @@
         }),
     });
 
-    $: $isValid, ($isValid && $touched.name);
+    $: $isValid, $isValid && $touched.name;
 
     function validateBank() {
-        return bankNumber.length && allBanks.filter(i => i.nice_name == bankSearchInput || i.official_name_thai == bankSearchInput).length
+        return (
+            bankNumber.length &&
+            allBanks.filter(
+                (i) => i.nice_name == bankSearchInput || i.official_name_thai == bankSearchInput
+            ).length
+        );
     }
 
     let validate;
-    $: bankNumber, validate = validateBank()
+    $: bankNumber, (validate = validateBank());
 
     function next() {
-        if (!validateBank())
-        {
-            console.log("Incorrect bank")
-            return
+        if (!validateBank()) {
+            console.log("Incorrect bank");
+            return;
         }
 
         $active++;
     }
 
     function searchBanks(key) {
-        let filter = bankSearchInput
-        if (!filter || !filter.length)
-            showBankSearch = false
+        let filter = bankSearchInput;
+        if (!filter || !filter.length) showBankSearch = false;
 
-        let firstFilter = (filter && filter.length) ? allBanks.filter((item) =>
-            item.official_name.toLowerCase().includes(filter.toLowerCase()) ||
-            item.nice_name.toLowerCase().includes(filter.toLowerCase()) ||
+        let firstFilter =
+            filter && filter.length
+                ? allBanks.filter(
+                      (item) =>
+                          item.official_name.toLowerCase().includes(filter.toLowerCase()) ||
+                          item.nice_name.toLowerCase().includes(filter.toLowerCase()) ||
+                          item.official_name_thai.indexOf(filter) !== -1
+                  )
+                : allBanks;
 
-            item.official_name_thai.indexOf(filter) !== -1) : allBanks;
-
-        tempBanks = firstFilter
-        showBankSearch = true
-        return firstFilter
+        tempBanks = firstFilter;
+        showBankSearch = true;
+        return firstFilter;
     }
     function selectBank(bankName) {
-        showBankSearch = false
-        bankSearchInput = bankName
-        showBankNrInput = true
+        showBankSearch = false;
+        bankSearchInput = bankName;
+        showBankNrInput = true;
     }
-    function openPicker(){
-       showBankSearch = !showBankSearch;
-        console.log('a')
+    function openPicker() {
+        showBankSearch = !showBankSearch;
+        console.log("a");
     }
 </script>
 
@@ -91,7 +98,7 @@
             <label for="name" class="pl-4 weight-300">Name on Bank Account</label>
             <div class="borderStrong gap-10 curve align-center px-20 h-40 mobile-w100 shade2 w100">
                 <input
-                        on:keyup={handleChange}
+                    on:keyup={handleChange}
                     autocomplete="off"
                     name="name"
                     type="text"
@@ -104,15 +111,17 @@
         <div class="col w100 gap-10">
             <label for="btype" class="pl-4 weight-300">Bank Name</label>
             <button on:click={openPicker}>
-                <div class="borderStrong curser-text gap-10 curve align-center px-20 h-40 mobile-w100 shade2 w100">
+                <div
+                    class="borderStrong curser-text gap-10 curve align-center px-20 h-40 mobile-w100 shade2 w100"
+                >
                     <input
-                            bind:value={bankSearchInput}
-                            on:keyup={searchBanks}
-                            autocomplete="off"
-                            name="name"
-                            type="text"
-                            class="w100 shade2 curser-text"
-                            placeholder="Select a bank"
+                        bind:value={bankSearchInput}
+                        on:keyup={searchBanks}
+                        autocomplete="off"
+                        name="name"
+                        type="text"
+                        class="w100 shade2 curser-text"
+                        placeholder="Select a bank"
                     />
                     <button class="center curser-pointer">
                         <Icon icon="fluent:chevron-up-down-20-regular" />
@@ -123,12 +132,18 @@
             {#if showBankSearch}
                 <div class=" w30 shade4 h-150" style="overflow:auto; border-radius:5px">
                     {#each tempBanks as b}
-                        <button class="row align-center  px-20 py-10 bank-search-box curve w100" on:click={selectBank(b.nice_name)}>
-                            <img src={b.image} style="width: 30px; height:30px; background-color: {b.color}; border-radius: 5px" alt=''/>
+                        <button
+                            class="row align-center  px-20 py-10 bank-search-box curve w100"
+                            on:click={selectBank(b.nice_name)}
+                        >
+                            <img
+                                src={b.image}
+                                style="width: 30px; height:30px; background-color: {b.color}; border-radius: 5px"
+                                alt=""
+                            />
                             <div class="center ml-10">{b.nice_name}</div>
                         </button>
                     {/each}
-
                 </div>
             {/if}
         </div>
@@ -136,7 +151,9 @@
         {#if showBankNrInput}
             <div class="col w100 gap-10">
                 <label for="name" class="pl-4 weight-300">Bank Account Number </label>
-                <div class="borderStrong gap-10 curve align-center px-20 h-40 mobile-w100 shade2 w100">
+                <div
+                    class="borderStrong gap-10 curve align-center px-20 h-40 mobile-w100 shade2 w100"
+                >
                     <input
                         bind:value={bankNumber}
                         autocomplete="off"
@@ -157,16 +174,25 @@
 </form>
 
 <style>
-    .bank-search-box:focus-visible{
+    .bank-search-box:focus-visible {
         filter: contrast(1.5);
         background-color: rgb(146, 146, 146);
     }
 
-    .curser-text{
+    .curser-text {
         cursor: text;
     }
 
-    .curser-pointer{
+    .curser-pointer {
         cursor: pointer;
+    }
+
+    .bank-search-box:hover {
+        background-color: rgba(100, 100, 100, 0.4);
+        cursor: pointer;
+    }
+
+    #map * div {
+        color: #000 !important;
     }
 </style>
