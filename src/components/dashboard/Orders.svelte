@@ -1,6 +1,11 @@
 <script>
+	import { push } from 'svelte-spa-router';
     import Icon from "@iconify/svelte";
     import Field from "comp/atoms/TextField.svelte";
+
+    function handleClick(){
+        push('#/orders/view/42')
+    }
 </script>
 
 <section class="grow col gap-20">
@@ -11,14 +16,13 @@
     <div class="grow col shade3 curve">
         <div class="row pa-20 shade3  w100 align-center gap-10">
             <Icon icon="fluent:search-16-regular" width="20" />
-
             <input type="text" placeholder="Search for a order" />
         </div>
         <hr />
         <div class="col w100 ">
-            <button class="grid shine w100 pa-20 space-between  shade3">
+            <button on:click={handleClick} class="grid shine w100 pa-20 space-between  shade3">
                 <span class="row gap-10 justify-start align-center">
-                    <div class="imgWrapper">
+                    <div class="imgWrapper center">
                         <Icon icon="fluent:image-32-regular" />
                     </div>
                     <span>Thai seed bank</span>
@@ -34,9 +38,9 @@
             <hr />
         </div>
         <div class="col w100 ">
-            <button class="grid shine w100 pa-20 space-between  shade3">
+            <button on:click={handleClick} class="grid shine w100 pa-20 space-between  shade3">
                 <span class="row gap-10 justify-start align-center">
-                    <div class="imgWrapper">
+                    <div class="imgWrapper center">
                         <Icon icon="fluent:image-32-regular" />
                     </div>
                     <span>Oaseeds</span>
@@ -52,9 +56,9 @@
             <hr />
         </div>
         <div class="col w100 ">
-            <button class="grid shine w100 pa-20 space-between  shade3">
+            <button on:click={handleClick} class="grid shine w100 pa-20 space-between  shade3">
                 <span class="row gap-10 justify-start align-center">
-                    <div class="imgWrapper">
+                    <div class="imgWrapper center">
                         <Icon icon="fluent:image-32-regular" />
                     </div>
                     <span>MetaRoadGrows</span>
@@ -70,9 +74,9 @@
             <hr />
         </div>
         <div class="col w100 ">
-            <button class="grid shine w100 pa-20 space-between  shade3">
+            <button on:click={handleClick} class="grid shine w100 pa-20 space-between  shade3">
                 <span class="row gap-10 justify-start align-center">
-                    <div class="imgWrapper">
+                    <div class="imgWrapper center">
                         <Icon icon="fluent:image-32-regular" />
                     </div>
                     <span>MetaRoadGrows</span>

@@ -14,7 +14,7 @@
                 <a href="#/cart" class="font-26 grow center ">
                     <Icon icon="akar-icons:cart" class="shade5--text" />
                 </a>
-                <a href="#/profile" class="font-26 grow center ">
+                <a href="#/account" class="font-26 grow center ">
                     <Icon icon="gg:profile" class="shade5--text" />
                 </a>
                 <a href="#/settings" class="font-26 grow center ">

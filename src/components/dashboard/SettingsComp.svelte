@@ -1,6 +1,33 @@
 <script>
+	import Select from './../atoms/Select.svelte';
     import Icon from "@iconify/svelte";
     import Field from "comp/atoms/TextField.svelte";
+
+    let lang = 'ENG';
+    let currency = 'THB';
+    let theme = 'dark'
+
+    let currencies = [
+        {id: 'THB', name: 'Thai baht'},
+        {id: 'EUR', name: 'Euro'},
+        {id: 'USD', name: 'US Dollar'},
+    ]
+
+    let languages = [
+        {id: 'ENG', name: 'English'},
+        {id: 'TAI', name: 'Thai'},
+        {id: 'RUS', name: 'Russian'},
+    ]
+
+    let themes = [
+        {id: 'dark', name: 'Dark'},
+        {id: 'light', name: 'Light'},
+    ]
+
+    function selected(item){
+        console.log('Selected', item.detail)
+    }
+    
 </script>
 
 <section class="grow col gap-20">
@@ -18,7 +45,7 @@
             </div>
         </div>
         <div class="col">
-            <Field />
+            <Select init={lang} items={languages} on:select={selected}/>
         </div>
     </div>
     <hr />
@@ -31,7 +58,7 @@
             </div>
         </div>
         <div class="col">
-            <Field />
+            <Select  init={currency} items={currencies}  on:select={selected}/>
         </div>
     </div>
     <hr />
@@ -44,7 +71,7 @@
             </div>
         </div>
         <div class="col">
-            <Field />
+            <Select  init={theme} items={themes}  on:select={selected}/>
         </div>
     </div>
     <hr />

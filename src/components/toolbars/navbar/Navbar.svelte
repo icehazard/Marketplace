@@ -52,10 +52,26 @@
 						</button>
 						{#if showModal}
 							<div class="absolute shade1  glass pa-5 w-200 z-2 p-right ">
-								<button on:click={logoutFunc} class="menuItem w100 center py-10 curve">
+								<a  on:click={close} href="#/account" class="menuItem w100 center py-10 curve">
+									Account
+								</a>
+								<hr>
+								<a  on:click={close} href="#/orders/overview" class="menuItem w100 center py-10 curve">
+									Orders
+								</a>
+								<hr>
+								<a on:click={close} href="#/settings" class="menuItem w100 center py-10 curve">
+									Settings
+								</a>
+								<hr>
+								<button
+									on:click={logoutFunc}
+									class="menuItem w100 center py-10 curve"
+								>
 									Logout
 								</button>
 							</div>
+							
 						{/if}
 					</div>
 				{/if}
@@ -83,7 +99,7 @@
 	}
 
 	.absolute {
-		bottom: -60px;
+		top: 50px;
 	}
 
 	@media only screen and (max-width: 1200px) {
