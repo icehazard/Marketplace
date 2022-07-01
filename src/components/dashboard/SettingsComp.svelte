@@ -45,7 +45,7 @@
             </div>
         </div>
         <div class="col">
-            <Select label='Language' init={lang} items={languages} on:select={selected}/>
+            <Select init={lang} items={languages} on:select={selected}/>
         </div>
     </div>
     <hr />
@@ -58,7 +58,7 @@
             </div>
         </div>
         <div class="col">
-            <Select label='Currency'  init={currency} items={currencies}  on:select={selected}/>
+            <Select  init={currency} items={currencies}  on:select={selected}/>
         </div>
     </div>
     <hr />
@@ -71,7 +71,7 @@
             </div>
         </div>
         <div class="col">
-            <Select label='Themes'  init={theme} items={themes}  on:select={selected}/>
+            <Select  init={theme} items={themes}  on:select={selected}/>
         </div>
     </div>
     <hr />
