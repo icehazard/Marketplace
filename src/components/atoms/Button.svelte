@@ -12,7 +12,7 @@
     };
 </script>
 
-<div class="wrapper w60" class:disable>
+<div class="wrapper" class:disable>
     <button class="w100 center" disabled={disable} type="submit" on:click={connect}>{text}</button>
 </div>
 

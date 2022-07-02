@@ -3,4 +3,5 @@ module.exports = {
     mongoURI: process.env.MONGO_URI,
 
     COLLECTION_ACCOUNTS: 'accounts',
+    COLLECTION_SHOPS: 'shops',
 }
