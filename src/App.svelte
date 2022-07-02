@@ -12,11 +12,12 @@
 	//import Web3 from 'web3/dist/web3.min.js'
 
 	async function callListing(){
-		let data = {token: $token_, name : 'name', ownerID: 'ownerID', type: 'type', address: 'address', nameBankAccount: 'nameBankAccount', bankName: 'bankName', BankAccountNumber: 'BankAccountNumber' };
+		let data = {name : 'name', ownerID: 'ownerID', type: 'type', address: 'address', nameBankAccount: 'nameBankAccount', bankName: 'bankName', BankAccountNumber: 'BankAccountNumber' };
         let res = await fetch(`http://${WEBPACK_URL}/api/store`, {
             method: "POST",
             headers: {
                 Accept: "application/json",
+				token: $token_,
                 "Content-Type": "application/json",
             },
             body: JSON.stringify(data),

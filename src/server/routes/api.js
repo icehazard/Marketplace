@@ -2,18 +2,34 @@ const { Router } = require('express')
 const api = Router()
 const db = require('../db/dbhandler')
 const jwtDecode = require("jwt-decode");
+var jwt = require('jsonwebtoken');
 
 let accounts = require("../classes/accounts")
 let shops = require('../classes/shops')
+const Config = require("../Config.json");
 
-function auth(data) {
+const SECRET_KEY = Config.SECRET_KEY;
+
+var options = {
+    secret: SECRET_KEY,
+    timeout: 300000 // 30 seconds to send the authentication message
+};
+
+async function auth(data) {
     //clearTimeout(auth_timeout);
     try {
-        const decoded = jwt.verify(data.token, options.secret, options)
+
+        if (!data.token)
+            return false
+
+        const decoded = await jwt.verify(data.token, options.secret, options)
+        console.log('Decoded is', decoded)
 
         if (decoded) {
-            return true;
+            return decoded;
         }
+
+        return false
     }
     catch (e) {
         console.log("Unauthorized!!!");
@@ -63,10 +79,19 @@ api.post('/login', async (req, res) => {
 })
 
 api.post('/store', async (req, res) => {
-    const userID = jwtDecode(req.body.token)._id;
+    const authed = await auth(req.headers)
+
+    if (!authed) {
+        console.log("Unauthorized store access!")
+        return;
+    }
+
+    const userID = authed._id;
+
+    //console.log("Got user id", userID)
+
     const data = req.body;
     let success = await shops.Shop.postShop(userID, data)
-    
 
     res.status(200).json({ status: 'ok!' })
 })
