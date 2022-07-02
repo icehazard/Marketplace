@@ -26,7 +26,7 @@
         res = await res.json();
 		console.log("🚀 ~ file: App.svelte ~ line 20 ~ callListing ~ res", res)
 	}
-	callListing()
+	//callListing()
 </script>
 
 <main class="col vh100">

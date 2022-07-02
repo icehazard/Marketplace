@@ -2,7 +2,7 @@ let dbhandler = require("../db/dbhandler")
 const bcrypt = require('bcryptjs');
 var jwt = require('jsonwebtoken');
 const Config = require("../Config.json");
-
+const common = require("./common")
 
 let accs = new Accounts()
 
@@ -162,6 +162,28 @@ class Account {
                 return resolve({resp: "ACCOUNT_CREATION_OK", data: respy})
             });
         })
+    }
+
+    async getRoleId() {
+        let data = await dbhandler.cols.list.colRoles.findOne({
+            _id: this._id
+        })
+
+        if (!data)
+            return common.roles.ROLE_USER
+
+        return data._id;
+        // switch (data._id) {
+        //     case common.roles.ROLE_SHOP_OWNER:
+        //         return common.roles.ROLE_SHOP_OWNER
+        //     case common.roles.ROLE_SHOP_MANAGER:
+        //         return common.roles.ROLE_SHOP_MANAGER
+        //     case common.roles.ROLE_ADMIN:
+        //         return common.roles.ROLE_ADMIN
+        //     default:
+        //         return common.roles.ROLE_USER
+        // }
+
     }
 }
 

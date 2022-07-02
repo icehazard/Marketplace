@@ -8,28 +8,18 @@
         shopName,
         shopValid,
         active,
-        number,
-        street,
-        address2,
-        district,
-        county,
-        zip,
+        address,
     } from "@/store/store.js";
+
+
     import {Loader, LoaderOptions} from 'google-maps';
 
-    $: $number, ($shopValid[2] = validate());
-    $: $street, ($shopValid[2] = validate());
-    $: $address2, ($shopValid[2] = validate());
-    $: $district, ($shopValid[2] = validate());
-    $: $county, ($shopValid[2] = validate());
-    $: $zip, ($shopValid[2] = validate());
+    $: $address, ($shopValid[2] = validate());
+
+    let payload = {}
 
     function validate() {
-        if ($number.length == 0) return true;
-        if ($street.length == 0) return true;
-        if ($district.length == 0) return true;
-        if ($county.length == 0) return true;
-        if ($zip.length == 0) return true;
+        if ($address.length == 0) return true;
         return false;
     }
     function next() {
@@ -37,7 +27,6 @@
     }
 
     let canContinue = false
-    let address = ""
 
     onMount(async() => {
         const loader = new Loader('AIzaSyAmlMcGgumMqP6T8YLFnsQT_tbL4j5wF0s', {libraries: ['places']});
@@ -111,24 +100,22 @@
                         //map.setZoom(25);
 
                         marker.setPosition(latlng)
-
+                        payload.lat = latlng.lat
+                        payload.lng = latlng.lng
                         console.log(response.results[0])
                         let c = response.results[0].address_components
                         let finalAddress = `${c[0].long_name}, ${c[1].long_name}, ${c[2].long_name}`
                         infowindow.setContent(finalAddress)
                         infowindow.open(map, marker);
-                        address = finalAddress
+                        $address = finalAddress
                     } else {
                         window.alert("No results found");
                     }
                 })
-                .catch((e) => window.alert("Geocoder failed due to: " + e));
+                .catch((e) => console.log("Geocoder failed due to: " + e));
         }
     })
 
-    function searchAddress() {
-        console.log($street)
-    }
 </script>
 
 <form class="center col shade3 curve py-50 px-10 pb-100" autocomplete="false">
@@ -145,7 +132,7 @@
 <!--            </div>-->
             <div class="col grow grow-2 gap-10">
                 <label for="address" class="pl-4 weight-300">Address</label>
-                <input class="borderStrong gap-10 curve align-center px-20 h-40 mobile-w100 shade2 w100" id="address" bind:value={address} type="value" role="presentation" autocomplete="off" placeholder="enter shop address here"/>
+                <input class="borderStrong gap-10 curve align-center px-20 h-40 mobile-w100 shade2 w100" id="address" bind:value={$address} type="value" role="presentation" autocomplete="off" placeholder="enter shop address here"/>
             </div>
         </div>
 <!--        <div class="row grow gap-10 w100">-->
