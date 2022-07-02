@@ -8,18 +8,20 @@
         shopName,
         shopValid,
         active,
-        address,
+        //address,
     } from "@/store/store.js";
 
 
     import {Loader, LoaderOptions} from 'google-maps';
 
-    $: $address, ($shopValid[2] = validate());
+    export let address = ""
+    export let _lat = ""
+    export let _lng = ""
 
-    let payload = {}
+    $: address, ($shopValid[2] = validate());
 
     function validate() {
-        if ($address.length == 0) return true;
+        if (address.length == 0) return true;
         return false;
     }
     function next() {
@@ -69,7 +71,7 @@
 
         let ac = new google.maps.places.Autocomplete(input, {componentRestrictions: { country: "th" }})
 
-        // when user clicks suggestion
+        // when user clicks suggestion from search dropdown
         ac.addListener("place_changed", (event) => {
             //console.log(ac.getPlace())
             let p = ac.getPlace()
@@ -100,14 +102,15 @@
                         //map.setZoom(25);
 
                         marker.setPosition(latlng)
-                        payload.lat = latlng.lat
-                        payload.lng = latlng.lng
+                        _lat = lat
+                        _lng = lng
+                        console.log("Latlng IZ", lat, lng)
                         console.log(response.results[0])
                         let c = response.results[0].address_components
                         let finalAddress = `${c[0].long_name}, ${c[1].long_name}, ${c[2].long_name}`
                         infowindow.setContent(finalAddress)
                         infowindow.open(map, marker);
-                        $address = finalAddress
+                        address = finalAddress
                     } else {
                         window.alert("No results found");
                     }
@@ -132,13 +135,13 @@
 <!--            </div>-->
             <div class="col grow grow-2 gap-10">
                 <label for="address" class="pl-4 weight-300">Address</label>
-                <input class="borderStrong gap-10 curve align-center px-20 h-40 mobile-w100 shade2 w100" id="address" bind:value={$address} type="value" role="presentation" autocomplete="off" placeholder="enter shop address here"/>
+                <input class="borderStrong gap-10 curve align-center px-20 h-40 mobile-w100 shade2 w100" id="address" bind:value={address} type="value" role="presentation" autocomplete="off" placeholder="enter shop address here"/>
             </div>
         </div>
 <!--        <div class="row grow gap-10 w100">-->
 <!--            <div class="col w100 grow gap-10">-->
 <!--                <label class="pl-4 weight-300">Address 2</label>-->
-<!--                <Field bind:value={$address2} label="Address 2 - Apartment, Suit ect" />-->
+<!--                <Field bind:value={address2} label="Address 2 - Apartment, Suit ect" />-->
 <!--            </div>-->
 <!--            <div class="col w100  grow gap-10 ">-->
 <!--                <label for="name" class="pl-4 weight-300">Sub-District</label>-->

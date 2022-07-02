@@ -10,6 +10,7 @@
     let confirm;
     let msg = "";
     let review = false;
+    export let submit;
 
     $: confirm, ($shopValid[4] = validate());
 
@@ -18,22 +19,7 @@
         return false;
     }
 
-    async function submitShopForApproval() {
-        let msg1 = "You must confirm the terms and conditions";
-        if (!confirm) return (msg = msg1);
 
-        let res = await fetch(`http://${WEBPACK_URL}/api/shop`, {
-            method: "POST",
-            headers: {
-                Accept: "application/json",
-                token: $token_,
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({address: $address, name: $shopName, type: $shopType, bankName: $bankName,
-                bankAccName: $bankAccName, bankAccNr: $bankAccNr}),
-        });
-        review = true;
-    }
 
     onDestroy(() => {
         if (review) reset();
@@ -87,7 +73,7 @@
     {#if !review}
         <div class="pt-50  row w-sm  w100  z-2">
             <div class=" center w100">
-                <Button on:click={submitShopForApproval} type="button" disable={$shopValid[4]} text="CONTINUE" />
+                <Button on:click={submit} type="button" disable={$shopValid[4]} text="CONTINUE" />
             </div>
         </div>
     {/if}

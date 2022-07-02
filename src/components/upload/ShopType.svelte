@@ -1,21 +1,22 @@
 <script>
     import Icon from "@iconify/svelte";
     import Button from "comp/atoms/Button.svelte";
-    import { shopValid, active, shopType } from "@/store/store.js";
+    import { shopValid, active } from "@/store/store.js";
     import "@lottiefiles/lottie-player";
 
-    $: $shopType, ($shopValid[1] = validate());
+    export let shopType;
+    $: shopType, ($shopValid[1] = validate());
 
     function validate() {
-        if ($shopType == 0) return true;
+        if (shopType == 0) return true;
         return false;
     }
     function next() {
         $active++;
-        if ($shopType == 1) $active++;
+        if (shopType == 1) $active++;
     }
     function changeIndex(val) {
-        $shopType = val;
+        shopType = val;
     }
     function values(val) {
         if (val == 1) return "Online Store";
@@ -30,25 +31,25 @@
     <div class="center col w-sm gap-40">
         <h1 class="font-36 weight-300">Shop Type</h1>
         <div class="text-center">
-            {#if $shopType == 0}
+            {#if shopType == 0}
                 <p>
                     Select the option that best describes your business. Is your business online or
                     do you also have a physical location?
                 </p>
             {/if}
-            {#if $shopType == 1}
+            {#if shopType == 1}
                 <p>
                     A online store does't have a physical location that customers can shop at but
                     offerds a delivery service for your products. No address is required.
                 </p>
             {/if}
-            {#if $shopType == 2}
+            {#if shopType == 2}
                 <p>
                     A physical store has a physical location that customers can shop at but does not
                     offer a delivery service for your products
                 </p>
             {/if}
-            {#if $shopType == 3}
+            {#if shopType == 3}
                 <p>
                     Online & Physical stores offer both a physical place for customers to shop and
                     also offer a delivery serice for your products.
@@ -58,15 +59,15 @@
         </div>
 
         <div class="row font-24">
-            {values($shopType)}
+            {values(shopType)}
         </div>
         <div class="curve row gap-10 w-sm">
             <button
                 class="item col grow center  ratio relative col1"
-                class:active={$shopType === 1}
+                class:active={shopType === 1}
                 on:click={() => changeIndex(1)}
             >
-                {#if $shopType == 1}
+                {#if shopType == 1}
                     <div class="absolute p-top p-right">
                         <lottie-player
                             autoplay
@@ -90,9 +91,9 @@
             <button
                 class="curve item row grow center col ratio relative col2"
                 on:click={() => changeIndex(2)}
-                class:active={$shopType === 2}
+                class:active={shopType === 2}
             >
-                {#if $shopType == 2}
+                {#if shopType == 2}
                     <div class="absolute p-top p-right">
                         <lottie-player
                             autoplay
@@ -117,10 +118,10 @@
             </button>
             <button
                 class="curve item row grow center col ratio relative col3"
-                class:active={$shopType === 3}
+                class:active={shopType === 3}
                 on:click={() => changeIndex(3)}
             >
-                {#if $shopType == 3}
+                {#if shopType == 3}
                     <div class="absolute p-top p-right">
                         <lottie-player
                             autoplay

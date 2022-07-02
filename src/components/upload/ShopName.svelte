@@ -1,14 +1,15 @@
 <script>
     import Field from "comp/atoms/TextField.svelte";
-    import { shopName, shopValid, active } from "@/store/store.js";
+    import { shopValid, active } from "@/store/store.js";
     import Icon from "@iconify/svelte";
     import Button from "comp/atoms/Button.svelte";
 
-    $: $shopName, ($shopValid[0] = validate());
+    export let shopName;
+    $: shopName, ($shopValid[0] = validate());
 
     function validate() {
-        if ($shopName.length < 3) return true;
-        if ($shopName.length > 20) return true;
+        if (shopName.length < 3) return true;
+        if (shopName.length > 20) return true;
         return false;
     }
     function next() {
@@ -25,7 +26,7 @@
             naming tips
         </p>
         <div class="row w100">
-            <Field bind:value={$shopName} label="Shop Title" />
+            <Field bind:value={shopName} label="Shop Title" />
         </div>
         <div class="col w100 font-14">
             <div class="row align-center gap-10">

@@ -3,8 +3,7 @@
     import Button from "comp/atoms/Button.svelte";
     import Icon from "@iconify/svelte";
     import { createForm } from "svelte-forms-lib";
-    import { shopValid, active, bankName, bankAccName,
-    bankAccNr} from "@/store/store.js";
+    import { shopValid, active} from "@/store/store.js";
     import * as yup from "yup";
     import banksLogo from "banks-logo";
     import { afterUpdate, beforeUpdate, onMount } from "svelte";
@@ -23,6 +22,8 @@
     let tempBanks = allBanks;
     let showBankSearch = false;
 
+    export let bankAccName, bankAccNr, bankName;
+
     const { errors, isValid, touched, handleChange, handleSubmit } = createForm({
         initialValues: {
             name: "",
@@ -36,7 +37,7 @@
 
     function validateBank() {
         return (
-            $bankAccNr.length &&
+            bankAccNr.length &&
             allBanks.filter(
                 (i) => i.nice_name == bankSearchInput || i.official_name_thai == bankSearchInput
             ).length
@@ -44,9 +45,9 @@
     }
 
     let validate;
-    $: $bankAccNr, (validate = validateBank());
-    $: $bankAccName, (validate = validateBank());
-    $: $bankName, (validate = validateBank());
+    $: bankAccNr, (validate = validateBank());
+    $: bankAccName, (validate = validateBank());
+    $: bankName, (validate = validateBank());
 
     function next() {
         if (!validateBank()) {
@@ -78,7 +79,7 @@
     function selectBank(name) {
         showBankSearch = false;
         bankSearchInput = name;
-        $bankName = name;
+        bankName = name;
         showBankNrInput = true;
     }
     function openPicker() {
@@ -103,7 +104,7 @@
             <div class="borderStrong gap-10 curve align-center px-20 h-40 mobile-w100 shade2 w100">
                 <input
                     on:keyup={handleChange}
-                    bind:value={$bankAccName}
+                    bind:value={bankAccName}
                     autocomplete="off"
                     name="name"
                     type="text"
@@ -160,7 +161,7 @@
                     class="borderStrong gap-10 curve align-center px-20 h-40 mobile-w100 shade2 w100"
                 >
                     <input
-                        bind:value={$bankAccNr}
+                        bind:value={bankAccNr}
                         autocomplete="off"
                         name="name"
                         type="text"
