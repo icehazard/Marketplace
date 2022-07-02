@@ -45,6 +45,8 @@
 
     let validate;
     $: $bankAccNr, (validate = validateBank());
+    $: $bankAccName, (validate = validateBank());
+    $: $bankName, (validate = validateBank());
 
     function next() {
         if (!validateBank()) {
@@ -73,10 +75,10 @@
         showBankSearch = true;
         return firstFilter;
     }
-    function selectBank(bankName) {
+    function selectBank(name) {
         showBankSearch = false;
-        bankSearchInput = bankName;
-        bankName = bankName;
+        bankSearchInput = name;
+        $bankName = name;
         showBankNrInput = true;
     }
     function openPicker() {
@@ -151,7 +153,6 @@
             {/if}
         </div>
 
-        Welcome {$bankAccNr}
         {#if showBankNrInput}
             <div class="col w100 gap-10">
                 <label for="name" class="pl-4 weight-300">Bank Account Number </label>
