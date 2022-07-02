@@ -22,9 +22,9 @@
             },
             body: JSON.stringify(data),
         });
-        console.log("🚀 ~ file: App.svelte ~ line 24 ~ callListing ~ data", data)
+      //  console.log("🚀 ~ file: App.svelte ~ line 24 ~ callListing ~ data", data)
         res = await res.json();
-		console.log("🚀 ~ file: App.svelte ~ line 20 ~ callListing ~ res", res)
+		//console.log("🚀 ~ file: App.svelte ~ line 20 ~ callListing ~ res", res)
 	}
 	callListing()
 </script>
