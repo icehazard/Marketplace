@@ -1,14 +1,16 @@
 import { push } from "svelte-spa-router";
-import { set } from '@/assets/library/CommonFunctions.js'
+import { persist } from '@/assets/library/CommonFunctions.js'
 
-export const token_ = set('token_', '')
-export const username_ = set('username_', '')
+const data = {
+    username: '',
+    token: ''
+}
 
-export function logout(){
-    token_.set('')
-    username_.set('')
+const context = persist('user', data)
+
+context.logout = function () {
+    context.set(data)
     push('#/login')
 }
 
-
-
+export default context

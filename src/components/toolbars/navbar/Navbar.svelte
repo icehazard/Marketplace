@@ -6,8 +6,10 @@
 	import Circle from "comp/atoms/Circle.svelte";
 	import { mq } from "@/assets/library/MediaQuery.svelte";
 	import { clickOutside } from "@/assets/library/CommonFunctions.js";
-	import { username_, logout } from "@/store/user.js";
+	import user  from "@/store/user.js";
 
+
+	
 	let showModal = false;
 
 	function toggle() {
@@ -18,7 +20,7 @@
 	}
 	function logoutFunc() {
 		showModal = false;
-		logout();
+		user.logout();
 	}
 </script>
 
@@ -38,16 +40,16 @@
 				{/if}
 			</section>
 			<section class="row gap-20 align-center ">
-				{#if $mq.lg_ && !$username_}
+				{#if $mq.lg_ && !$user.username}
 					<!-- <Circle to="profile" icon="gg:profile" /> -->
 					<!-- <Connect /> -->
 					<a class="primary--text" href="#/login">Log In</a>
 					<a href="#/signup"><Button text="Sign Up" /></a>
 				{/if}
-				{#if $mq.lg_ && $username_}
+				{#if $mq.lg_ && $user.username}
 					<div class="relative row center" use:clickOutside={close}>
 						<button class="row center gap-10" on:click={toggle}>
-							<span class="">{$username_}</span>
+							<span class="">{$user.username}</span>
 							<Circle to="" icon="gg:profile" />
 						</button>
 						{#if showModal}
