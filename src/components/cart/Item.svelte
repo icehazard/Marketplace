@@ -1,12 +1,10 @@
 <script>
     export let data = [];
-    import { cart } from "@/store/cart.js";
-    import { product } from "@/store/products.js";
+    import  cart  from "@/store/cart.js";
 
     function remove() {
-        let index = $cart.findIndex((el) => Object.is(el, data));
-        $cart.splice(index, 1)
-        cart.set($cart)
+        let index = $cart.cart.findIndex((el) => Object.is(el, data));
+
     }
 </script>
 

@@ -2,7 +2,7 @@
     import Button from "comp/atoms/Button.svelte";
     import Field from "comp/atoms/TextField.svelte";
     import { push } from "svelte-spa-router";
-    import { username_, token_ } from "@/store/user.js";
+    import  user  from "@/store/user.js";
     import { WEBPACK_URL } from "../../config";
 
     let username = "";
@@ -23,8 +23,8 @@
         res = await res.json();
 
         if (!res.error) {
-            username_.set(res.username);
-            token_.set(res.token);
+            $user.username = res.username
+            $user.token = res.token
             push("#/");
         } else {
             message = "Account/password not found";
@@ -54,7 +54,7 @@
             <Field bind:value={username} label="Username" />
             <Field bind:value={password} label="Password" />
         </section>
-        <Button text="ENTER ACCOUNT" />
+        <Button type='submit' text="ENTER ACCOUNT" />
     </form>
 </div>
 

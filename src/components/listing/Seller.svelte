@@ -3,7 +3,7 @@
     import Item from "./Item.svelte";
     import { Swiper, SwiperSlide } from "swiper/svelte";
     import { Pagination } from "swiper";
-    import { products } from "@/store/products.js";
+    import products from "@/store/products.js";
     import "swiper/css";
     import "swiper/css/pagination";
     import "@/assets/css/swiper.css";
@@ -24,7 +24,7 @@
             modules={[Pagination]}
 
         >
-        {#each $products as product}
+        {#each $products.products as product}
         <SwiperSlide>
             <Item data={product} />
         </SwiperSlide>
