@@ -1,5 +1,5 @@
 <script>
-	import AddListing from './AddListing.svelte';
+    import AddListing from "./AddListing.svelte";
     import Icon from "@iconify/svelte";
     import Item from "../listing/Item.svelte";
     import { Swiper, SwiperSlide } from "swiper/svelte";
@@ -10,7 +10,12 @@
     import Listing from "comp/listings/Listings.svelte";
     import products from "@/store/products.js";
     import "@lottiefiles/lottie-player";
-    
+    import user from "@/store/user.js";
+    import { onMount } from "svelte";
+
+    onMount(() => {
+        user.get();
+    });
 </script>
 
 <section class="col grow gap-30">
@@ -77,5 +82,4 @@
         width: 100%;
         height: 100%;
     }
-
 </style>

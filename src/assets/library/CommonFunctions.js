@@ -1,4 +1,4 @@
-import { writable, get as getStore} from "svelte/store";
+import { writable, get as getStore } from "svelte/store";
 import { WEBPACK_URL } from "@/config";
 import user from '@/store/user.js'
 
@@ -30,6 +30,7 @@ export function persist(name, data) {
     const value = writable(local ? JSON.parse(local) : data);
     value.subscribe(val => { localStorage.setItem(name, JSON.stringify(val)) });
     value.reset = () => value.set(data)
+    value.val = (key) => getStore(value)[key]
     value.commit = (key, val) => {
         let temp = getStore(value)
         temp[key] = val;
@@ -62,7 +63,6 @@ export async function get(route) {
             token: getStore(user).token,
             "Content-Type": "application/json",
         },
-        body: JSON.stringify(data)
     })
     return await res.json()
 }

@@ -31,17 +31,17 @@
 			method: "GET",
 			headers: {
 				Accept: "application/json",
-				token: $token_,
+				token:  $user.token,
 				"Content-Type": "application/json",
 			},
 		});
 		res = await res.json();
-		console.log("Got Me(): ")
-		console.log(res)
+		// console.log("Got Me(): ")
+		// console.log(res)
 		return res
 	}
 	//callListing()
-	callMe()
+	//callMe()
 </script>
 
 <main class="col vh100">

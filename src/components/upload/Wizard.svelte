@@ -1,13 +1,15 @@
 <script>
+    import { post } from "@/assets/library/CommonFunctions.js";
     import Confirm from "./Confirm.svelte";
     import GetPaid from "./GetPaid.svelte";
     import Address from "./Address.svelte";
     import ShopType from "./ShopType.svelte";
     import ShopName from "./ShopName.svelte";
-    import {shopValid, active} from "@/store/store.js";
+    import { shopValid, active } from "@/store/store.js";
     import Icon from "@iconify/svelte";
-    import {WEBPACK_URL} from "@/config";
+    import { WEBPACK_URL } from "@/config";
     import user from "@/store/user";
+    import { onMount } from "svelte";
 
     let headings = [
         { text: "Name your shop" },
@@ -22,35 +24,27 @@
         $active = val;
     }
 
-    let shopType = ""
-    let shopName = ""
+    let shopType = "";
+    let shopName = "";
 
-    let address = ""
-    let lat = ""
-    let lng = ""
+    let address = "";
+    let lat = "";
+    let lng = "";
 
-    let bankName = ""
-    let bankAccName = ""
-    let bankAccNr = ""
+    let bankName = "";
+    let bankAccName = "";
+    let bankAccNr = "";
 
     async function submitShopForApproval() {
+        let data = { shopName, shopType, address, lat, lng, bankAccName, bankName, bankAccNr };
+        let res = await post("api/shop", data);
+        await user.get();
         let msg1 = "You must confirm the terms and conditions";
-        //if (!confirm) return (msg = msg1);
-
-        let res = await fetch(`http://${WEBPACK_URL}/api/shop`, {
-            method: "POST",
-            headers: {
-                Accept: "application/json",
-                token: $user.token,
-                "Content-Type": "application/json",
-            },
-            //name: $shopName, type: $shopType, bankName: $bankName,
-            //bankAccName: $bankAccName, bankAccNr: $bankAccNr
-            body: JSON.stringify({shopName, shopType, address, lat, lng, bankAccName, bankName, bankAccNr}),
-        });
-        //review = true;
     }
 
+  onMount(() => {
+    user.get();
+  })
 </script>
 
 <section class="grow col gap-40">
@@ -73,15 +67,15 @@
     </div>
     <div class="grow">
         {#if $active == 0}
-            <ShopName bind:shopName={shopName}/>
+            <ShopName bind:shopName />
         {:else if $active == 1}
-            <ShopType bind:shopType={shopType}/>
+            <ShopType bind:shopType />
         {:else if $active == 2}
-            <Address bind:_lat={lat} bind:_lng={lng} bind:address={address}/>
+            <Address bind:_lat={lat} bind:_lng={lng} bind:address />
         {:else if $active == 3}
-            <GetPaid bind:bankName={bankName} bind:bankAccNr={bankAccNr} bind:bankAccName={bankAccName}/>
+            <GetPaid bind:bankName bind:bankAccNr bind:bankAccName />
         {:else if $active == 4}
-            <Confirm submit={submitShopForApproval}/>
+            <Confirm submit={submitShopForApproval} />
         {/if}
     </div>
 </section>

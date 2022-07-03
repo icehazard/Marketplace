@@ -1,4 +1,5 @@
 <script>
+	import { push } from "svelte-spa-router";
 	import Connect from "./Connect.svelte";
 	import Button from "comp/atoms/Button.svelte";
 	import Search from "./Search.svelte";
@@ -6,10 +7,8 @@
 	import Circle from "comp/atoms/Circle.svelte";
 	import { mq } from "@/assets/library/MediaQuery.svelte";
 	import { clickOutside } from "@/assets/library/CommonFunctions.js";
-	import user  from "@/store/user.js";
+	import user from "@/store/user.js";
 
-
-	
 	let showModal = false;
 
 	function toggle() {
@@ -21,6 +20,9 @@
 	function logoutFunc() {
 		showModal = false;
 		user.logout();
+	}
+	function shopRoute() {
+		user.isShopActive() ? push("#/seller") : push("#/store/create");
 	}
 </script>
 
@@ -34,7 +36,9 @@
 					<div class="row gap-10">
 						<Circle to="messages" icon="ant-design:message-outlined" />
 						<Circle to="cart" icon="akar-icons:cart" />
-						<Circle to="store/create" icon="fluent:building-shop-16-regular" />
+						<button on:click={shopRoute}>
+							<Circle icon="fluent:building-shop-16-regular" />
+						</button>
 						<Circle to="settings" icon="clarity:settings-line" />
 					</div>
 				{/if}
@@ -54,18 +58,30 @@
 						</button>
 						{#if showModal}
 							<div class="absolute shade1  glass pa-5 w-200 z-2 p-right ">
-								<a  on:click={close} href="#/account" class="menuItem w100 center py-10 curve">
+								<a
+									on:click={close}
+									href="#/account"
+									class="menuItem w100 center py-10 curve"
+								>
 									Account
 								</a>
-								<hr>
-								<a  on:click={close} href="#/orders/overview" class="menuItem w100 center py-10 curve">
+								<hr />
+								<a
+									on:click={close}
+									href="#/orders/overview"
+									class="menuItem w100 center py-10 curve"
+								>
 									Orders
 								</a>
-								<hr>
-								<a on:click={close} href="#/settings" class="menuItem w100 center py-10 curve">
+								<hr />
+								<a
+									on:click={close}
+									href="#/settings"
+									class="menuItem w100 center py-10 curve"
+								>
 									Settings
 								</a>
-								<hr>
+								<hr />
 								<button
 									on:click={logoutFunc}
 									class="menuItem w100 center py-10 curve"
@@ -73,7 +89,6 @@
 									Logout
 								</button>
 							</div>
-							
 						{/if}
 					</div>
 				{/if}

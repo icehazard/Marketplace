@@ -114,7 +114,7 @@ api.get('/me', async (req, res) => {
 
     let sids = await me.getShopIds()
     console.log("Got sids", sids)
-
+    if (!sids) sids = []
     res.status(200).json(sids)
 })
 

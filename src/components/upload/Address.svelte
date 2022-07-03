@@ -8,7 +8,7 @@
     export let _lat = ""
     export let _lng = ""
 
-    $: address, ($shopValid[2] = validate());
+   $: address, ($shopValid[2] = validate());
 
     function validate() {
         if (address.length == 0) return true;
@@ -114,7 +114,7 @@
                         let finalAddress = `${c[0].long_name}, ${c[1].long_name}, ${c[2].long_name}`
                         infowindow.setContent(finalAddress)
                         infowindow.open(map, marker);
-                        $address = finalAddress;
+                        address = finalAddress;
                     } else {
                         window.alert("No results found");
                     }
@@ -137,7 +137,7 @@
                 <input
                     class="borderStrong gap-10 curve align-center px-20 h-40 mobile-w100 shade2 w100"
                     id="address"
-                    bind:value={$address}
+                    bind:value={address}
                     type="value"
                     role="presentation"
                     autocomplete="off"
