@@ -1,13 +1,16 @@
 <script>
     import { push } from "svelte-spa-router";
     import Button from "comp/atoms/Button.svelte";
-    import { shopValid, active, reset } from "@/store/store.js";
+    import { shopValid, active, address, shopName, shopType, bankName, bankAccName, bankAccNr, reset } from "@/store/store.js";
     import "@lottiefiles/lottie-player";
     import { onDestroy } from "svelte";
+    import {WEBPACK_URL} from "@/config";
+    import {token_} from "@/store/user";
 
     let confirm;
     let msg = "";
     let review = false;
+    export let submit;
 
     $: confirm, ($shopValid[4] = validate());
 
@@ -16,12 +19,7 @@
         return false;
     }
 
-    function next() {
-        let msg1 = "You must confirm the terms and conditions";
-        if (!confirm) return (msg = msg1);
 
-        review = true;
-    }
 
     onDestroy(() => {
         if (review) reset();
@@ -75,7 +73,7 @@
     {#if !review}
         <div class="pt-50  row w-sm  w100  z-2">
             <div class=" center w100">
-                <Button on:click={next} type="button" disable={$shopValid[4]} text="CONTINUE" />
+                <Button on:click={submit} type="button" disable={$shopValid[4]} text="CONTINUE" />
             </div>
         </div>
     {/if}

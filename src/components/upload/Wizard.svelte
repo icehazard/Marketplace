@@ -4,8 +4,10 @@
     import Address from "./Address.svelte";
     import ShopType from "./ShopType.svelte";
     import ShopName from "./ShopName.svelte";
-    import { shopValid, active } from "@/store/store.js";
+    import {shopValid, active} from "@/store/store.js";
     import Icon from "@iconify/svelte";
+    import {WEBPACK_URL} from "@/config";
+    import {token_} from "@/store/user";
 
     let headings = [
         { text: "Name your shop" },
@@ -19,6 +21,36 @@
         if (val >= $active) return;
         $active = val;
     }
+
+    let shopType = ""
+    let shopName = ""
+
+    let address = ""
+    let lat = ""
+    let lng = ""
+
+    let bankName = ""
+    let bankAccName = ""
+    let bankAccNr = ""
+
+    async function submitShopForApproval() {
+        let msg1 = "You must confirm the terms and conditions";
+        //if (!confirm) return (msg = msg1);
+
+        let res = await fetch(`http://${WEBPACK_URL}/api/shop`, {
+            method: "POST",
+            headers: {
+                Accept: "application/json",
+                token: $token_,
+                "Content-Type": "application/json",
+            },
+            //name: $shopName, type: $shopType, bankName: $bankName,
+            //bankAccName: $bankAccName, bankAccNr: $bankAccNr
+            body: JSON.stringify({shopName, shopType, address, lat, lng, bankAccName, bankName, bankAccNr}),
+        });
+        //review = true;
+    }
+
 </script>
 
 <section class="grow col gap-40">
@@ -41,15 +73,15 @@
     </div>
     <div class="grow">
         {#if $active == 0}
-            <ShopName />
+            <ShopName bind:shopName={shopName}/>
         {:else if $active == 1}
-            <ShopType />
+            <ShopType bind:shopType={shopType}/>
         {:else if $active == 2}
-            <Address />
+            <Address bind:_lat={lat} bind:_lng={lng} bind:address={address}/>
         {:else if $active == 3}
-            <GetPaid />
+            <GetPaid bind:bankName={bankName} bind:bankAccNr={bankAccNr} bind:bankAccName={bankAccName}/>
         {:else if $active == 4}
-            <Confirm />
+            <Confirm submit={submitShopForApproval}/>
         {/if}
     </div>
 </section>

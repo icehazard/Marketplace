@@ -78,7 +78,7 @@ api.post('/login', async (req, res) => {
         res.status(400).json({ error: success })
 })
 
-api.post('/store', async (req, res) => {
+api.post('/shop', async (req, res) => {
     const authed = await auth(req.headers)
 
     if (!authed) {
@@ -88,10 +88,11 @@ api.post('/store', async (req, res) => {
 
     const userID = authed._id;
 
-    //console.log("Got user id", userID)
 
     const data = req.body;
-    let success = await shops.Shop.postShop(userID, data)
+    console.log("Got shop data", data)
+
+    let success = await shops.Shop.postShop(userID, {ownerID: userID, ...data})
 
     res.status(200).json({ status: 'ok!' })
 })

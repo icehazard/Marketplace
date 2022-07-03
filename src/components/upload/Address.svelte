@@ -1,15 +1,17 @@
 <script>
-    import Field from "comp/atoms/TextField.svelte";
-    import Icon from "@iconify/svelte";
     import Button from "comp/atoms/Button.svelte";
     import { onMount } from "svelte";
-    import { shopValid, active, address } from "@/store/store.js";
+    import { shopValid, active } from "@/store/store.js";
     import { Loader } from "google-maps";
 
-    $: $address, ($shopValid[2] = validate());
+    export let address = ""
+    export let _lat = ""
+    export let _lng = ""
+
+    $: address, ($shopValid[2] = validate());
 
     function validate() {
-        if ($address.length == 0) return true;
+        if (address.length == 0) return true;
         return false;
     }
     function next() {
@@ -72,7 +74,7 @@
             componentRestrictions: { country: "th" },
         });
 
-        // when user clicks suggestion
+        // when user clicks suggestion from search dropdown
         ac.addListener("place_changed", (event) => {
             //console.log(ac.getPlace())
             let p = ac.getPlace();
@@ -103,19 +105,21 @@
                     if (response.results[0]) {
                         //map.setZoom(25);
 
-                        marker.setPosition(latlng);
-
-                        console.log(response.results[0]);
-                        let c = response.results[0].address_components;
-                        let finalAddress = `${c[0].long_name}, ${c[1].long_name}, ${c[2].long_name}`;
-                        infowindow.setContent(finalAddress);
+                        marker.setPosition(latlng)
+                        _lat = lat
+                        _lng = lng
+                        console.log("Latlng IZ", lat, lng)
+                        console.log(response.results[0])
+                        let c = response.results[0].address_components
+                        let finalAddress = `${c[0].long_name}, ${c[1].long_name}, ${c[2].long_name}`
+                        infowindow.setContent(finalAddress)
                         infowindow.open(map, marker);
                         $address = finalAddress;
                     } else {
                         window.alert("No results found");
                     }
                 })
-                .catch((e) => window.alert("Geocoder failed due to: " + e));
+                .catch((e) => console.log("Geocoder failed due to: " + e));
         }
     })
 </script>
@@ -128,10 +132,6 @@
             then drag the marker to the shop's exact location on the map.
         </p>
         <div class=" row grow gap-10 w100">
-            <!--            <div class="col grow gap-10">-->
-            <!--                <label for="name" class="pl-4 weight-300">Number</label>-->
-            <!--                <Field bind:value={$number} label="Number" />-->
-            <!--            </div>-->
             <div class="col grow grow-2 gap-10">
                 <label for="address" class="pl-4 weight-300">Address</label>
                 <input
@@ -145,26 +145,6 @@
                 />
             </div>
         </div>
-        <!--        <div class="row grow gap-10 w100">-->
-        <!--            <div class="col w100 grow gap-10">-->
-        <!--                <label class="pl-4 weight-300">Address 2</label>-->
-        <!--                <Field bind:value={$address2} label="Address 2 - Apartment, Suit ect" />-->
-        <!--            </div>-->
-        <!--            <div class="col w100  grow gap-10 ">-->
-        <!--                <label for="name" class="pl-4 weight-300">Sub-District</label>-->
-        <!--                <Field bind:value={$district} label="Sub-District" />-->
-        <!--            </div>-->
-        <!--        </div>-->
-        <!--        <div class="row grow gap-10 w100">-->
-        <!--            <div class="col w100 grow-2 gap-10">-->
-        <!--                <label for="name" class="pl-4 weight-300">Province / State </label>-->
-        <!--                <Field bind:value={$county} label="Province  / State" />-->
-        <!--            </div>-->
-        <!--            <div class="col w100  grow gap-10 ">-->
-        <!--                <label for="name" class="pl-4 weight-300">Postal code</label>-->
-        <!--                <Field bind:value={$zip} label="Postal code" />-->
-        <!--            </div>-->
-        <!--        </div>-->
     </div>
     <br />
     <div id="map" class="center row w90 h-400 gap-40" />

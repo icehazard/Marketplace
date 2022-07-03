@@ -4,4 +4,5 @@ module.exports = {
 
     COLLECTION_ACCOUNTS: 'accounts',
     COLLECTION_SHOPS: 'shops',
+    COLLECTION_ROLES: 'roles',
 }
