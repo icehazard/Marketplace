@@ -1,5 +1,7 @@
 <script>
+	import products from '@/store/products.js';
 	import user from '@/store/user.js';
+
 	import Footer from "./components/toolbars/Footer.svelte";
 	import Navbar from "comp/toolbars/navbar/Navbar.svelte";
 	import Mobile from "comp/toolbars/navbar/Mobile.svelte";
@@ -7,6 +9,7 @@
 	import routes from "./router/index";
 	import MediaQuery from "@/assets/library/MediaQuery.svelte";
 	import { WEBPACK_URL } from "./config";
+
 
 	async function callListing(){
 		let data = {name : 'name', ownerID: 'ownerID', type: 'type', address: 'address', nameBankAccount: 'nameBankAccount', bankName: 'bankName', BankAccountNumber: 'BankAccountNumber' };

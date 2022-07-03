@@ -1,11 +1,10 @@
 <script>
     import { push } from "svelte-spa-router";
     import Button from "comp/atoms/Button.svelte";
-    import { shopValid, active, address, shopName, shopType, bankName, bankAccName, bankAccNr, reset } from "@/store/store.js";
+    import { shopValid,  reset } from "@/store/store.js";
     import "@lottiefiles/lottie-player";
     import { onDestroy } from "svelte";
     import {WEBPACK_URL} from "@/config";
-    import {token_} from "@/store/user";
 
     let confirm;
     let msg = "";
@@ -22,7 +21,7 @@
 
 
     onDestroy(() => {
-        if (review) reset();
+        // if (review) reset();
     });
 </script>
 

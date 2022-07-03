@@ -61,7 +61,7 @@
             <Field bind:value={username} label="Username" />
             <Field bind:value={password} label="Password" />
         </section>
-        <Button text="CREATE ACCOUNT" />
+        <Button type='submit' text="CREATE ACCOUNT" />
     </form>
 </div>
 

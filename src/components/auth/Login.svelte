@@ -54,7 +54,7 @@
             <Field bind:value={username} label="Username" />
             <Field bind:value={password} label="Password" />
         </section>
-        <Button text="ENTER ACCOUNT" />
+        <Button type='submit' text="ENTER ACCOUNT" />
     </form>
 </div>
 
