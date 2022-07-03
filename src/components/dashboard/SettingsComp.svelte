@@ -25,7 +25,7 @@
     ]
 
     function selected(item){
-        console.log('Selected', item.detail)
+     
     }
     
 </script>

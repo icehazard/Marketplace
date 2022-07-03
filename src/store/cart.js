@@ -1,9 +1,7 @@
-import { get, writable } from "svelte/store";
+import { get } from "svelte/store";
+import { set } from '@/assets/library/CommonFunctions.js'
 
-
-export const cart = writable(localStorage.cart ? JSON.parse(localStorage.cart) : []);
-cart.subscribe(value => { localStorage.cart = JSON.stringify(value) });
-
+export const cart = set('cart', [])
 
 export const addToCart = (product) => {
     cart.set([...get(cart), product])

@@ -46,6 +46,6 @@
         <Field bind:value={$description} label="Description" />
     </section>
     <section>
-        <Button on:click={post} text="SUBMIT" />
+        <Button text="SUBMIT" />
     </section>
 </form>

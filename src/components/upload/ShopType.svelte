@@ -5,7 +5,7 @@
     import "@lottiefiles/lottie-player";
 
     $: $shopType, ($shopValid[1] = validate());
-
+console.log($active)
     function validate() {
         if ($shopType == 0) return true;
         return false;

@@ -79,7 +79,6 @@
     }
     function openPicker() {
         showBankSearch = !showBankSearch;
-        console.log("a");
     }
 </script>
 
