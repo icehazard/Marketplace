@@ -3,12 +3,6 @@
     import { shopName, shopValid, active } from "@/store/store.js";
     import Icon from "@iconify/svelte";
     import Button from "comp/atoms/Button.svelte";
-    import { bob } from '@/store/test.js'
-
-
-
-console.log($bob)
-$bob = 'bobby'
 
     $: $shopName, ($shopValid[0] = validate());
 
