@@ -49,8 +49,15 @@
             <div class="weight-600 opacity-75">Contact</div>
         </div>
     </div>
-    <AddListing />
-    
+
+    {#if user.isShopPending()}
+        <div class="info py-50 font-18 center curve">Account pending verification</div>
+    {:else if user.isShopActive()}
+        <AddListing />
+    {/if}
+
+
+
     <div class="col gap-10">
         <div>Featured items</div>
         <div class="row gap-10 ">
