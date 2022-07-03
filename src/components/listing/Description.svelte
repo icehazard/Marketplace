@@ -1,6 +1,6 @@
 <script>
     import Icon from "@iconify/svelte";
-    import { product } from "@/store/products.js";
+    import products from "@/store/products.js";
 </script>
 
 <div class="shade1 pa-50 curve col gap-20">
@@ -9,6 +9,6 @@
         <div>Description</div>
     </div>
     <div>
-       {$product.description}
+       {$products.product.description}
     </div>
 </div>

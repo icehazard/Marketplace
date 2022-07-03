@@ -2,11 +2,12 @@
     import { push } from "svelte-spa-router";
     import logo from "@/assets/images/logo.svg";
     import Rating from "comp/atoms/Rating.svelte";
-    import { product } from "@/store/products.js";
+    import products from "@/store/products.js";
     export let data = [];
 
     function viewListing() {
-        product.set(data);
+        products.set(data);
+        $products.product = data;
         push("#/listing");
     }
 </script>
@@ -43,7 +44,7 @@
         filter: brightness(1.1);
     }
 
-    .h-180{
+    .h-180 {
         min-height: 180px;
     }
 

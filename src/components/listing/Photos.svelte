@@ -1,10 +1,10 @@
 <script>
     import logo from "@/assets/images/logo.svg";
-    import { product } from "@/store/products.js";
+    import products from "@/store/products.js";
 </script>
 
 <section class="shade1 curve center">
-    <img src={$product.image} alt="" class="w100 h100" />
+    <img src={$products.product.image} alt="" class="w100 h100" />
 </section>
 
 <style>
