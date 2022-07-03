@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs');
 var jwt = require('jsonwebtoken');
 const Config = require("../Config.json");
 const common = require("./common")
+const shopHandler = require("./shops")
 
 let accs = new Accounts()
 
@@ -17,7 +18,7 @@ function Accounts()
 }
 
 Accounts.prototype.insert = function(obj) {
-    this.getAccounts().set(obj.id, obj);
+    this.getAccounts().set(obj._id, obj);
 };
 
 Accounts.prototype.exists = function(id) {
@@ -30,6 +31,17 @@ Accounts.prototype.exists = function(id) {
 Accounts.prototype.get = function(id) {
     return this.getAccounts().get(id);
 };
+
+Accounts.prototype.loadFromDB = async function(id) {
+    let data = await dbhandler.cols.list.colAccounts.find({}).toArray()
+
+    for (let a of data)
+        if (!this.getAccounts().has(a._id))
+            this.getAccounts().set(a._id, new Account(a._id, a.username))
+
+    console.log(`*** Loaded ${this.getAccounts().size} accounts!`)
+};
+
 
 const SECRET_KEY = Config.SECRET_KEY;
 
@@ -185,6 +197,9 @@ class Account {
         // }
 
     }
+    async getShopIds() {
+        return shopHandler.Shop.getShopsByUserId(this._id)
+    }
 }
 
-module.exports = {Account, Accounts}
+module.exports = {Account, Accounts: accs}

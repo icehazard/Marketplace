@@ -4,8 +4,8 @@ const db = require('../db/dbhandler')
 const jwtDecode = require("jwt-decode");
 var jwt = require('jsonwebtoken');
 
-let accounts = require("../classes/accounts")
-let shops = require('../classes/shops')
+let accountHandler = require("../classes/accounts")
+let shopHandler = require('../classes/shops')
 const Config = require("../Config.json");
 
 const SECRET_KEY = Config.SECRET_KEY;
@@ -41,7 +41,7 @@ api.post('/register', async (req, res) => {
     const { username, password, email } = req.body
 
 
-    let reg = await accounts.Account.register(username, password, email)
+    let reg = await accountHandler.Account.register(username, password, email)
 
     let payload = typeof reg === 'object' ? reg.data : null
 
@@ -68,7 +68,7 @@ api.post('/register', async (req, res) => {
 api.post('/login', async (req, res) => {
     const { username, password } = req.body
 
-    let success = await accounts.Account.login(username, password)
+    let success = await accountHandler.Account.login(username, password)
 
     console.log(success)
     if (typeof success === 'object') {
@@ -82,7 +82,6 @@ api.post('/shop', async (req, res) => {
     const authed = await auth(req.headers)
 
     if (!authed) {
-        console.log("Unauthorized store access!")
         return;
     }
 
@@ -92,9 +91,31 @@ api.post('/shop', async (req, res) => {
     const data = req.body;
     console.log("Got shop data", data)
 
-    let success = await shops.Shop.postShop(userID, {ownerID: userID, ...data})
+    let success = await shopHandler.Shop.postShop(userID, {ownerID: userID, ...data})
 
     res.status(200).json({ status: 'ok!' })
+})
+
+
+api.get('/me', async (req, res) => {
+    const authed = await auth(req.headers)
+
+    if (!authed) {
+        return;
+    }
+
+    const userID = authed._id;
+
+    let me = accountHandler.Accounts.get(userID)
+
+    if (!me) {
+        return res.status(200).json({status: 'Error! Couldnt get user id for /me'})
+    }
+
+    let sids = await me.getShopIds()
+    console.log("Got sids", sids)
+
+    res.status(200).json()
 })
 
 module.exports = api

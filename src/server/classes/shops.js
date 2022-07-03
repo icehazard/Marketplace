@@ -13,7 +13,7 @@ function Shops()
 }
 
 Shops.prototype.insert = function(obj) {
-    this.getItems().set(obj.id, obj);
+    this.getItems().set(obj._id, obj);
 };
 
 Shops.prototype.exists = function(id) {
@@ -41,12 +41,39 @@ class Shop {
         this.BankAccountNumber = data.BankAccountNumber;
     }
 
-    static async postShop(userID, data)
+    static async postShop(userID, payload)
     {
-        items.insert(new Shops(userID, data))
+        let nid = 0;
+
+        let data = await dbhandler.cols.list.colShops.find().sort({
+            _id: -1
+        }).limit(1).toArray()
+
+        if (!data || !data.length) {
+            console.log("Got error with getting Shop latest ID");
+            nid = 1;
+            // return "ACCOUNT_CREATION_ERROR"
+        } else {
+            console.log("Got Shop latest ID:");
+            console.log(data);
+            nid = data[0]._id + 1;
+        }
+
+        payload._id = nid;
+        items.insert(new Shops(userID, payload))
         //let result =  await dbhandler.cols.list.colShops.findOne({name : 'name'})
-        let result =  await dbhandler.cols.list.colShops.insertOne(data)
+        let result =  await dbhandler.cols.list.colShops.insertOne(payload)
         console.log("🚀 result", result)
+    }
+
+    static async getShopsByUserId(uid)
+    {
+        let data = await dbhandler.cols.list.colShops.find({ownerID: uid}).toArray()
+
+        if (!data || !data.length)
+            return
+
+        return data.map(i => i._id);
     }
 }
 

@@ -26,7 +26,22 @@
         res = await res.json();
 		console.log("🚀 ~ file: App.svelte ~ line 20 ~ callListing ~ res", res)
 	}
+	async function callMe(){
+		let res = await fetch(`http://${WEBPACK_URL}/api/me`, {
+			method: "GET",
+			headers: {
+				Accept: "application/json",
+				token: $token_,
+				"Content-Type": "application/json",
+			},
+		});
+		res = await res.json();
+		console.log("Got Me(): ")
+		console.log(res)
+		return res
+	}
 	//callListing()
+	callMe()
 </script>
 
 <main class="col vh100">
