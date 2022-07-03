@@ -8,6 +8,7 @@ const apiRoute = require('./routes/api.js')
 const path = require('path')
 const dbhandler = require("./db/dbhandler")
 const accountHandler = require("./classes/accounts.js");
+const shopHandler = require("./classes/shops");
 
 (async() => {
 
@@ -28,6 +29,7 @@ const accountHandler = require("./classes/accounts.js");
     })
 
     await accountHandler.Accounts.loadFromDB()
+    await shopHandler.Shops.loadFromDB()
 
     app.use(cors())
     app.use(bodyParser.json())

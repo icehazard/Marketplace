@@ -6,25 +6,35 @@ function Shops()
 {
     this.items = new Map();
 
-    this.getItems = function() {
+    this.getShops = function() {
         return this.items;
     }
 
 }
 
 Shops.prototype.insert = function(obj) {
-    this.getItems().set(obj._id, obj);
+    this.getShops().set(obj._id, obj);
 };
 
 Shops.prototype.exists = function(id) {
-    if (this.getItems().get(id))
+    if (this.getShops().get(id))
         return true;
 
     return false;
 };
 
 Shops.prototype.get = function(id) {
-    return this.getItems().get(id);
+    return this.getShops().get(id);
+};
+
+Shops.prototype.loadFromDB = async function(id) {
+    let data = await dbhandler.cols.list.colShops.find({}).toArray()
+
+    for (let shop of data)
+        if (!this.getShops().has(shop._id))
+            this.getShops().set(shop._id, new Shop(shop._id, shop))
+
+    console.log(`*** Loaded ${this.getShops().size} shops!`)
 };
 
 class Shop {
@@ -80,4 +90,4 @@ class Shop {
     }
 }
 
-module.exports = {Shop, Shops}
+module.exports = {Shop, Shops: items}
