@@ -41,12 +41,9 @@ class Shop {
         this.BankAccountNumber = data.BankAccountNumber;
     }
 
-    static async postShop(userID, data) {
-
-     items.insert(new Shops(userID, data))
-     
-        let result =  await dbhandler.cols.list.colShops.findOne({name : 'name'})
-        console.log("🚀 result", result)
+    static async postShop(userID, data){
+        items.insert(new Shops(userID, data))
+        await dbhandler.cols.list.colShops.insertOne(data)
     }
 }
 

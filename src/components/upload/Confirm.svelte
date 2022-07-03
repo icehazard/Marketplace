@@ -19,6 +19,7 @@
     function next() {
         let msg1 = "You must confirm the terms and conditions";
         if (!confirm) return (msg = msg1);
+
         review = true;
     }
 

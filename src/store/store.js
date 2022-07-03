@@ -15,8 +15,7 @@ export function reset(){
     shopName.set('')
     shopType.set('')
     address.set('')
+    active.set('')
     bankName.set('')
-    bankNumber.set('')
-    nameOnAccount.set('')
-    active.set(0)
 }
+

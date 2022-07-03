@@ -3,6 +3,12 @@
     import { shopName, shopValid, active } from "@/store/store.js";
     import Icon from "@iconify/svelte";
     import Button from "comp/atoms/Button.svelte";
+    import { bob } from '@/store/test.js'
+
+
+
+console.log($bob)
+$bob = 'bobby'
 
     $: $shopName, ($shopValid[0] = validate());
 
@@ -40,7 +46,9 @@
     </div>
     <div class="pt-50  row w-sm  w100  z-2">
         <div class=" center w100">
-            <Button on:click={next} type="button" disable={$shopValid[0]} text="CONTINUE" />
+            <div class="w60">
+                <Button on:click={next} type="button" disable={$shopValid[0]} text="CONTINUE" />
+            </div>
         </div>
     </div>
 </form>

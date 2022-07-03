@@ -1,4 +1,5 @@
 <script>
+	import user from '@/store/user.js';
 	import Footer from "./components/toolbars/Footer.svelte";
 	import Navbar from "comp/toolbars/navbar/Navbar.svelte";
 	import Mobile from "comp/toolbars/navbar/Mobile.svelte";
@@ -13,6 +14,7 @@
             method: "POST",
             headers: {
                 Accept: "application/json",
+				token: $user.token,
                 "Content-Type": "application/json",
             },
             body: JSON.stringify(data),
