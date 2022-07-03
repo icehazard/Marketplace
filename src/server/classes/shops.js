@@ -60,6 +60,8 @@ class Shop {
         }
 
         payload._id = nid;
+        payload.status = 0;
+
         items.insert(new Shops(userID, payload))
         //let result =  await dbhandler.cols.list.colShops.findOne({name : 'name'})
         let result =  await dbhandler.cols.list.colShops.insertOne(payload)
@@ -73,7 +75,8 @@ class Shop {
         if (!data || !data.length)
             return
 
-        return data.map(i => i._id);
+
+        return data.map(i => {return {"_id": i._id, "status": i.status || 0}});
     }
 }
 
