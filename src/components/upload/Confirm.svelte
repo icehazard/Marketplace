@@ -14,6 +14,12 @@
 
     $: confirm, ($shopValid[4] = validate());
 
+    function submitData()
+    {
+        review = true;
+        submit();
+    }
+
     function validate() {
         if (!confirm) return true;
         return false;
@@ -73,7 +79,7 @@
     {#if !review}
         <div class="pt-50  row w-sm  w100  z-2">
             <div class=" center w100">
-                <Button on:click={submit} type="button" disable={$shopValid[4]} text="CONTINUE" />
+                <Button on:click={submitData} type="button" disable={$shopValid[4]} text="CONTINUE" />
             </div>
         </div>
     {/if}
