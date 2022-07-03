@@ -109,13 +109,13 @@ api.get('/me', async (req, res) => {
     let me = accountHandler.Accounts.get(userID)
 
     if (!me) {
-        return res.status(200).json({status: 'Error! Couldnt get user id for /me'})
+        return res.status(400).json({status: 'Error! Couldnt get user id for /me'})
     }
 
     let sids = await me.getShopIds()
     console.log("Got sids", sids)
 
-    res.status(200).json()
+    res.status(200).json(sids)
 })
 
 module.exports = api
