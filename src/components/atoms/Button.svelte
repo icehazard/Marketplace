@@ -6,6 +6,7 @@
 
     export let text = "";
     export let disable = false;
+    export let type = 'button'
 
     let connect = () => {
         dispatch("click");
@@ -13,7 +14,7 @@
 </script>
 
 <div class="wrapper" class:disable>
-    <button class="w100 center" disabled={disable} type="submit" on:click={connect}>{text}</button>
+    <button class="w100 center" disabled={disable} type={type} on:click={connect}>{text}</button>
 </div>
 
 <style>

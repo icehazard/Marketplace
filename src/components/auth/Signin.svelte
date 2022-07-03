@@ -3,7 +3,7 @@
     import Field from "comp/atoms/TextField.svelte";
     import { push } from "svelte-spa-router";
     import { WEBPACK_URL } from "../../config";
-    import { username_, token_ } from "@/store/user.js";
+    import user from "@/store/user.js";
 
     let username = "";
     let password = "";
@@ -24,8 +24,8 @@
         res = await res.json();
         
         if (res.resp == "success") {
-            username_.set(res.username);
-            token_.set(res.token);
+            $user.username = res.username;
+            $user.token = res.token;
             push("#/");
         } else {
             message = "Account already Exists";
@@ -34,13 +34,13 @@
     function validate() {
         let mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
         let msg1 = "Username needs to be at least 3 characters long";
-        let msg2 = "Password needs to be at least 8 characters long"
-        let msg3 = "Email must be of correct format"
+        let msg2 = "Password needs to be at least 8 characters long";
+        let msg3 = "Email must be of correct format";
         let msg4 = "Email needs to be at least 3 characters long";
-        if (email.length < 3) return message = msg4;
-        if (!mailformat.test(email)) return message = msg3;
-        if (username.length < 3) return message = msg1;
-        if (password.length < 8) return message = msg2;
+        if (email.length < 3) return (message = msg4);
+        if (!mailformat.test(email)) return (message = msg3);
+        if (username.length < 3) return (message = msg1);
+        if (password.length < 8) return (message = msg2);
         return false;
     }
 </script>
@@ -61,7 +61,7 @@
             <Field bind:value={username} label="Username" />
             <Field bind:value={password} label="Password" />
         </section>
-        <Button text="CREATE ACCOUNT" />
+        <Button type='submit' text="CREATE ACCOUNT" />
     </form>
 </div>
 

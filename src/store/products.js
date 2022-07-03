@@ -1,21 +1,28 @@
-import { writable } from "svelte/store";
-let store;
+import { persist, post, get } from '@/assets/library/CommonFunctions.js'
 
-export const title = writable(localStorage.title || "");
-title.subscribe(value => { localStorage.setItem("title", value); });
+const data = {
+    title: '',
+    image: '',
+    price: 0,
+    description: '',
+    products: [],
+    product: {},
+}
 
-export const image = writable(localStorage.image || "");
-image.subscribe(value => { localStorage.setItem("image", value); });
+const context = persist('products', data)
 
-export const price = writable(localStorage.price || 0);
-price.subscribe(value => { localStorage.setItem("price", value); });
+context.post = async function () {
+    let items = ['items'];
+    return 'items';
+    return  post('products', items)
+}
+context.get = async function () {
+    let res = await get('products')
+    return context.commit('products', res)
+}
+context.getById = async function (id) {
+    let res = await get(`products/${id}`)
+    return context.commit('product', res)
+}
 
-export const description = writable(localStorage.description || "");
-description.subscribe(value => { localStorage.setItem("description", value); });
-
-store = localStorage.products
-export const products = writable(store ? JSON.parse(store) : []);
-products.subscribe(value => { localStorage.products = JSON.stringify(value) });
-
-export const product = writable(localStorage.product ? JSON.parse(localStorage.product) : []);
-product.subscribe(value => { localStorage.product = JSON.stringify(value) });
+export default context

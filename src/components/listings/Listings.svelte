@@ -1,10 +1,10 @@
 <script>
     import Item from "./Item.svelte";
-    import { products } from "@/store/products.js";
+    import  products  from "@/store/products.js";
 </script>
 
 <section class="grow">
-    {#each $products as product}
+    {#each $products.products as product}
         <Item data={product} />
     {/each}
 </section>

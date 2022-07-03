@@ -7,7 +7,7 @@
     import {shopValid, active} from "@/store/store.js";
     import Icon from "@iconify/svelte";
     import {WEBPACK_URL} from "@/config";
-    import {token_} from "@/store/user";
+    import user from "@/store/user";
 
     let headings = [
         { text: "Name your shop" },
@@ -41,7 +41,7 @@
             method: "POST",
             headers: {
                 Accept: "application/json",
-                token: $token_,
+                token: $user.token,
                 "Content-Type": "application/json",
             },
             //name: $shopName, type: $shopType, bankName: $bankName,

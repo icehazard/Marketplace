@@ -8,7 +8,7 @@
     import "swiper/css/pagination";
     import "@/assets/css/swiper.css";
     import Listing from "comp/listings/Listings.svelte";
-    import { products } from "@/store/products.js";
+    import products from "@/store/products.js";
     import "@lottiefiles/lottie-player";
     
 </script>
@@ -57,7 +57,7 @@
                 }}
                 modules={[Pagination]}
             >
-                {#each $products as product}
+                {#each $products.products as product}
                     <SwiperSlide>
                         <Item data={product} />
                     </SwiperSlide>
