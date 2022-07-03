@@ -24,6 +24,7 @@
         res = await res.json();
         
         if (res.resp == "success") {
+            user.get();
             $user.username = res.username;
             $user.token = res.token;
             push("#/");
