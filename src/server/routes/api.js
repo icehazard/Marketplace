@@ -99,6 +99,7 @@ api.post('/shop', async (req, res) => {
 
 
 api.post('/shop/:sid/product', async (req, res) => {
+    console.log('asdf')
     const authed = await auth(req.headers)
 
     if (!authed) {

@@ -20,7 +20,7 @@ context.post = async function () {
         price: context.val('price'),
         desc: context.val('desc'),
     }
-    return await post(`shop/${id}/product`, items)
+    return await post(`api/shop/${id}/product`, items)
 }
 context.get = async function () {
     let res = await get('products')
