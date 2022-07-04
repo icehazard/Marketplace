@@ -50,7 +50,7 @@ export async function post(route, data) {
             "Content-Type": "application/json",
         },
         body: JSON.stringify(data)
-    })
+    });
     return await res.json()
 }
 

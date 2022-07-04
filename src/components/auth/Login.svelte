@@ -2,8 +2,9 @@
     import Button from "comp/atoms/Button.svelte";
     import Field from "comp/atoms/TextField.svelte";
     import { push } from "svelte-spa-router";
-    import  user  from "@/store/user.js";
+    import user from "@/store/user.js";
     import { WEBPACK_URL } from "../../config";
+    import { post } from "@/assets/library/CommonFunctions.js";
 
     let username = "";
     let password = "";
@@ -12,20 +13,11 @@
     async function handleOnSubmit() {
         if (validate()) return;
         let data = { username, password };
-        let res = await fetch(`http://${WEBPACK_URL}/api/login`, {
-            method: "POST",
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data),
-        });
-        res = await res.json();
-
+        let res = await post('api/login', data)
         if (!res.error) {
-            user.get();
-            $user.username = res.username
-            $user.token = res.token
+            $user.username = res.username;
+            $user.token = res.token;
+            await user.get();
             push("#/");
         } else {
             message = "Account/password not found";
@@ -34,9 +26,9 @@
 
     function validate() {
         let msg1 = "Username needs to be at least 3 characters long";
-        let msg2 = "Password needs to be at least 8 characters long"
-        if (username.length < 3) return message = msg1;
-        if (password.length < 8) return message = msg2;
+        let msg2 = "Password needs to be at least 8 characters long";
+        if (username.length < 3) return (message = msg1);
+        if (password.length < 8) return (message = msg2);
         return false;
     }
 </script>
@@ -55,7 +47,7 @@
             <Field bind:value={username} label="Username" />
             <Field bind:value={password} label="Password" />
         </section>
-        <Button type='submit' text="ENTER ACCOUNT" />
+        <Button type="submit" text="ENTER ACCOUNT" />
     </form>
 </div>
 

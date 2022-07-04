@@ -1,4 +1,5 @@
 import { wrap } from "svelte-spa-router/wrap";
+import user from '@/store/user.js'
 
 const Home = () => import("@/views/Home.svelte");
 const Listing = () => import("@/views/Listing.svelte");
@@ -15,17 +16,24 @@ const Login = () => import("@/views/Login.svelte");
 const Signup = () => import("@/views/Signup.svelte");
 
 export default {
-    "/": wrap({ asyncComponent: Home }), 
+    "/": wrap({ asyncComponent: Home }),
     "/listing": wrap({ asyncComponent: Listing }),
-    "/settings": wrap({ asyncComponent: Settings }),
-    "/orders/overview": wrap({ asyncComponent: Orders }),
-    "/orders/view/:id": wrap({ asyncComponent: ViewOrder }),
+    "/settings": wrap({ asyncComponent: Settings, conditions: [auth] }),
+    "/orders/overview": wrap({ asyncComponent: Orders, conditions: [auth] }),
+    "/orders/view/:id": wrap({ asyncComponent: ViewOrder, conditions: [auth] }),
     "/cart": wrap({ asyncComponent: Cart }),
-    "/account": wrap({ asyncComponent: Profile }),
-    "/messages": wrap({ asyncComponent: Messages }),
+    "/account": wrap({ asyncComponent: Profile, conditions: [auth] }),
+    "/messages": wrap({ asyncComponent: Messages, conditions: [auth] }),
     "/store/create": wrap({ asyncComponent: ShopWizard }),
     "/listing/create": wrap({ asyncComponent: AddListing }),
     "/seller": wrap({ asyncComponent: Seller }),
     "/login": wrap({ asyncComponent: Login }),
     "/signup": wrap({ asyncComponent: Signup }),
+}
+
+function auth(detail) {
+    if (!user.val('username')) return false;
+    return true;
+    
+   
 }
