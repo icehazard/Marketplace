@@ -3,23 +3,54 @@
     import { push } from "svelte-spa-router";
     import Rating from "comp/atoms/Rating.svelte";
     import products from "@/store/products.js";
+    import { slide } from "svelte/transition";
+    import { clickOutside } from "@/assets/library/CommonFunctions.js";
     export let data = [];
+
+    let menu = false;
 
     function viewListing() {
         $products.product = data;
         push("#/listing");
     }
+    function close() {
+        menu = false;
+    }
+    function toggle() {
+        menu = !menu;
+    }
+    function del() {
+        products.del(data._id)
+        close()
+    }
+    function edit() {
+        products.spreadProduct();
+        push("#/listing/edit");
+        close()
+    }
 </script>
 
-<button class=" h-300 curve col shade1 fast" on:click={viewListing}>
-    <section class="h-180 center w100">
-        <img src={data.imageURL} alt="logo" class="h100" />
+<button class=" h-300 curve col shade1 fast main" on:click={viewListing}>
+    <section class="h-180 center w100 relative ">
+        {#if menu}
+            <div class="shade1 pa-15 absolute p-bottom w100 col gap-20 z-2" transition:slide  use:clickOutside={close}>
+                <button type="button" class="red--text align-center gap-10" on:click|stopPropagation={del}>
+                    <Icon icon="fluent:delete-12-regular" />
+                    <span>Delete</span>
+                </button>
+                <button type="button" class="align-center gap-10" on:click|stopPropagation={edit}>
+                    <Icon icon="fluent:edit-16-regular" />
+                    <span>Edit</span>
+                </button>
+            </div>
+        {/if}
+        <img src={data.imageURL} alt="logo" class="h100" class:darken={menu} />
     </section>
     <hr class="hr w100" />
     <section class="col pa-15  space-between h100 w100">
         <div class="row w100 space-between">
-            <span class="ellipsis text-start">{data.name || ''}</span>
-            <button class="pa-5 shine round center" on:click|stopPropagation={() => products.del(data._id)}>
+            <span class="ellipsis text-start">{data.name || ""}</span>
+            <button class="pa-5 shine round center" on:click|stopPropagation={() => toggle()}>
                 <Icon icon="fluent:more-vertical-16-regular" />
             </button>
         </div>
@@ -30,7 +61,7 @@
                 <span class="font-14">({(Math.random() * 1000) | 1})</span>
             </div>
             <div class=" grow justify-end ellipsis">
-                <span class="ellipsis ">{data.shopID || ''}</span>
+                <span class="ellipsis ">{data.shopID || ""}</span>
             </div>
         </div>
     </section>
@@ -42,8 +73,8 @@
         width: 100%;
         object-fit: cover;
     }
-    button:hover,
-    button:focus {
+    .main:hover,
+    .main:focus {
         transform: translateY(-1px);
         filter: brightness(1.1);
     }
@@ -54,6 +85,14 @@
 
     .shine:hover {
         background-color: rgba(255, 255, 255, 0.11);
+    }
+
+    .darken{
+        transition: all 0.3s ease;
+    }
+
+    .darken {
+        filter: brightness(0.8) blur(2px); 
     }
 
     @media only screen and (max-width: 576px) {
