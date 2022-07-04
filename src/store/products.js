@@ -1,9 +1,9 @@
-import { persist, post, get } from '@/assets/library/CommonFunctions.js'
+import { persist, post, get, del } from '@/assets/library/CommonFunctions.js'
 import user from '@/store/user.js'
 
 const data = {
-    title: '',
-    image: '',
+    name: '',
+    imageURL: '',
     price: 0,
     desc: '',
     products: [],
@@ -13,18 +13,21 @@ const data = {
 const context = persist('products', data)
 
 context.post = async function () {
-    let id = user.shopID();
+    const id = user.shopID();
     const items = {
-        title: context.val('title'),
-        image: context.val('image'),
+        name: context.val('name'),
+        imageURL: context.val('imageURL'),
         price: context.val('price'),
         desc: context.val('desc'),
     }
     return await post(`api/shop/${id}/product`, items)
 }
 context.get = async function () {
-    let res = await get('products')
+    let res = await get('api/shop/1/product')
     return context.commit('products', res)
+}
+context.del = async function () {
+    return await del('api/shop/1/product/delete')
 }
 context.getById = async function (id) {
     let res = await get(`products/${id}`)

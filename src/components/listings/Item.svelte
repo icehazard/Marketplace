@@ -1,4 +1,5 @@
 <script>
+    import Icon from "@iconify/svelte";
     import { push } from "svelte-spa-router";
     import logo from "@/assets/images/logo.svg";
     import Rating from "comp/atoms/Rating.svelte";
@@ -6,7 +7,6 @@
     export let data = [];
 
     function viewListing() {
-        products.set(data);
         $products.product = data;
         push("#/listing");
     }
@@ -14,11 +14,16 @@
 
 <button class=" h-300 curve col shade1 fast" on:click={viewListing}>
     <section class="h-180 center w100">
-        <img src={data.image} alt="logo" class="h100" />
+        <img src={data.imageURL} alt="logo" class="h100" />
     </section>
     <hr class="hr w100" />
     <section class="col pa-15  space-between h100 w100">
-        <span class="ellipsis text-start">{data.title}</span>
+        <div class="row w100 space-between">
+            <span class="ellipsis text-start">{data.name}</span>
+            <button class="pa-5 shine curve center" on:click={() => products.del()}>
+                <Icon icon="mdi:delete" />
+            </button>
+        </div>
         <span class="weight-600 text-start">$ {data.price}</span>
         <div class="row space-between gap-10 opacity-60">
             <div class="row center gap-5 nowrap grow justify-start">
@@ -46,6 +51,10 @@
 
     .h-180 {
         min-height: 180px;
+    }
+
+    .shine:hover {
+        background-color: rgba(255, 255, 255, 0.11);
     }
 
     @media only screen and (max-width: 576px) {

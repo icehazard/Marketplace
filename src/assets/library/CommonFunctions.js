@@ -41,29 +41,36 @@ export function persist(name, data) {
     return value;
 }
 
+let headers = {
+    Accept: "application/json",
+    token: getStore(user).token,
+    "Content-Type": "application/json",
+}
+
 export async function post(route, data) {
     let url = `http://${WEBPACK_URL}/${route}`;
     let res = await fetch(url, {
         method: "POST",
-        headers: {
-            Accept: "application/json",
-            token: getStore(user).token,
-            "Content-Type": "application/json",
-        },
+        headers,
         body: JSON.stringify(data)
     })
-    return {status: res.status, json: await res.json()}
+    return await res.json()
+}
+
+export async function del(route, data) {
+    let url = `http://${WEBPACK_URL}/${route}`;
+    let res = await fetch(url, {
+        method: "DELETE",
+        headers
+    })
+    return await res.json()
 }
 
 export async function get(route) {
     let url = `http://${WEBPACK_URL}/${route}`;
     let res = await fetch(url, {
         method: "GET",
-        headers: {
-            Accept: "application/json",
-            token: getStore(user).token,
-            "Content-Type": "application/json",
-        },
+        headers
     })
     return await res.json()
 }

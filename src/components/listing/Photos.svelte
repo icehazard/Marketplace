@@ -4,7 +4,7 @@
 </script>
 
 <section class="shade1 curve center">
-    <img src={$products.product.image} alt="" class="w100 h100" />
+    <img src={$products?.product?.imageURL} alt="" class="w100 h100" />
 </section>
 
 <style>

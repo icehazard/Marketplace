@@ -32,6 +32,7 @@ const productHandler = require("./classes/products");
     await accountHandler.Accounts.loadFromDB()
     await shopHandler.Shops.loadFromDB()
     await productHandler.Products.loadFromDB()
+    await shopHandler.Shops.loadProductsIntoShops()
 
     app.use(cors())
     app.use(bodyParser.json())

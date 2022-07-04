@@ -4,7 +4,7 @@ import { persist, get } from '@/assets/library/CommonFunctions.js'
 const data = {
     username: '',
     token: '',
-    me: {}
+    me: []
 }
 
 const context = persist('user', data)

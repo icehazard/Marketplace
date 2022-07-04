@@ -4,10 +4,10 @@
     import Field from "comp/atoms/TextField.svelte";
     import { push } from "svelte-spa-router";
     import products from "@/store/products.js";
-    import user from "@/store/user.js";
 
     const post = async () => {
         let res = await products.post()
+        products.reset();
         push("#/");
     };
 
@@ -19,7 +19,7 @@
             <Icon icon="fluent:app-title-20-regular" />
             <div>Product Title</div>
         </div>
-        <Field bind:value={$products.title} label="Title" />
+        <Field bind:value={$products.name} label="Title" />
     </section>
     <section class="shade1 pa-50 curve col gap-20">
         <div class="opacity-75 row align-center gap-10">

@@ -99,7 +99,6 @@ api.post('/shop', async (req, res) => {
 
 
 api.post('/shop/:sid/product', async (req, res) => {
-    console.log('asdf')
     const authed = await auth(req.headers)
 
     if (!authed) {
@@ -117,7 +116,8 @@ api.post('/shop/:sid/product', async (req, res) => {
         return res.status(400).json({status: "error", error: "You do not own this shop!"})
 
     console.log("Got shop ID", sid)
-    let add = await shopHandler.Shops.get(sid).addProduct(data)
+
+    let add = await shopHandler.Shops.get(parseInt(sid)).addProduct(data)
 
     if (add.status !== "ok")
         return res.status(400).json(add)
@@ -145,6 +145,26 @@ api.delete('/shop/:sid/product/:id', async (req, res) => {
         return res.status(400).json(add)
 
     return res.status(200).json(add)
+})
+
+api.get('/shop/:sid/product', async (req, res) => {
+    const authed = await auth(req.headers)
+
+    if (!authed) {
+        return;
+    }
+
+    const accId = authed._id;
+    const sid = req.params.sid
+
+
+    console.log("Got shop ID", sid)
+    let list = await shopHandler.Shops.get(parseInt(sid)).getProductList()
+
+    if (!list.length)
+        return res.status(400).json(list)
+
+    return res.status(200).json(list)
 })
 
 api.get('/me', async (req, res) => {

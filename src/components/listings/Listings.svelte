@@ -1,10 +1,12 @@
 <script>
     import Item from "./Item.svelte";
     import  products  from "@/store/products.js";
+
+    products.get()
 </script>
 
 <section class="grow">
-    {#if $products.product}
+    {#if $products.products}
         {#each $products.products as product}
             <Item data={product} />
         {/each}

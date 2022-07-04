@@ -34,6 +34,8 @@ Shops.prototype.get = function(id) {
 };
 
 Shops.prototype.getShopByOwnerId = function(oid) {
+    console.log(this.getShopsByOwner())
+    console.log("oid is", oid)
     return this.getShopsByOwner().get(oid);
 };
 
@@ -41,10 +43,33 @@ Shops.prototype.loadFromDB = async function(id) {
     let data = await dbhandler.cols.list.colShops.find({}).toArray()
 
     for (let shop of data)
+    {
         if (!this.getShops().has(shop._id))
-            this.getShops().set(shop._id, new Shop(shop._id, shop))
+            {
+                this.insert(new Shop(shop._id, shop))
+            }
+    }
 
     console.log(`*** Loaded ${this.getShops().size} shops!`)
+};
+
+// console.log(shopHandler.Shops)
+// let shopProducts = shopHandler.Shops.get(p.shopID).products
+
+// for (let p of data)
+//     if (!shopProducts.has(p._id))
+//         shopProducts.set(p._id, new Product(p._id, p))
+
+Shops.prototype.loadProductsIntoShops = async function(id) {
+    let data = await dbhandler.cols.list.colShops.find({}).toArray()
+
+    for (let [k,v] of productHandler.Products.products)
+    {
+        this.getShops().get(v.shopID).products.set(k, v)
+        console.log(`*** Loaded products!`)
+
+    }
+
 };
 
 class Shop {
@@ -89,6 +114,14 @@ class Shop {
         console.log("🚀 result", result)
     }
 
+    async getProductList() {
+        let res = []
+
+        for (let [k,v] of this.products)
+            res.push(v)
+
+        return res
+    }
     async addProduct(payload)
     {
         let nid = 0;
