@@ -1,8 +1,11 @@
 <script>
+	import { onMount } from 'svelte';
     import Item from "./Item.svelte";
     import  products  from "@/store/products.js";
 
-    products.get()
+    onMount(() => {
+        products.get()
+    });
 </script>
 
 <section class="grow">

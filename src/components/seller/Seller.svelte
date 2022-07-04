@@ -1,4 +1,5 @@
 <script>
+	import Reviews from './Reviews.svelte';
     import AddListing from "./AddListing.svelte";
     import Icon from "@iconify/svelte";
     import Item from "../listing/Item.svelte";
@@ -12,6 +13,7 @@
     import "@lottiefiles/lottie-player";
     import user from "@/store/user.js";
     import { onMount } from "svelte";
+    
 
     onMount(() => {
         user.get();
@@ -81,6 +83,7 @@
         <div>All Items</div>
         <Listing />
     </div>
+    <Reviews />
 </section>
 
 <style>
