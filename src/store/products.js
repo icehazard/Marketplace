@@ -37,8 +37,11 @@ context.get = async function () {
     let res = await get(`api/shop/${id}/product`)
     return context.commit('products', res)
 }
-context.del = async function () {
-    return await del('api/product/1')
+context.del = async function (id) {
+    const sid = user.shopID();
+     await del(`api/shop/${sid}/product/${id}`);
+     await context.get();
+     return
 }
 context.getById = async function (id) {
     let res = await get(`api/products/${id}`)
