@@ -74,3 +74,13 @@ export async function get(route) {
     })
     return await res.json()
 }
+
+export async function patch(route, data) {
+    let url = `http://${WEBPACK_URL}/${route}`;
+    let res = await fetch(url, {
+        method: "PATCH",
+        headers,
+        body: JSON.stringify(data)
+    })
+    return await res.json()
+}

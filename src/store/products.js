@@ -1,4 +1,4 @@
-import { persist, post, get, del } from '@/assets/library/CommonFunctions.js'
+import { persist, post, get, del, patch } from '@/assets/library/CommonFunctions.js'
 import user from '@/store/user.js'
 
 const data = {
@@ -22,6 +22,16 @@ context.post = async function () {
     }
     return await post(`api/shop/${id}/product`, items)
 }
+context.edit = async function () {
+    const id = context.val('product')._id;
+    const items = {
+        name: context.val('name'),
+        imageURL: context.val('imageURL'),
+        price: context.val('price'),
+        desc: context.val('desc'),
+    }
+    return await patch(`api/product/${id}`, items)
+}
 context.get = async function () {
     let res = await get('api/shop/1/product')
     return context.commit('products', res)
@@ -30,7 +40,7 @@ context.del = async function () {
     return await del('api/product/1')
 }
 context.getById = async function (id) {
-    let res = await get(`products/${id}`)
+    let res = await get(`api/products/${id}`)
     return context.commit('product', res)
 }
 context.spreadProduct = async function () {

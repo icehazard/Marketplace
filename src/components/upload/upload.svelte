@@ -2,15 +2,15 @@
     import Button from "comp/atoms/Button.svelte";
     import Icon from "@iconify/svelte";
     import Field from "comp/atoms/TextField.svelte";
-    import { push } from "svelte-spa-router";
+    import { push, location } from "svelte-spa-router";
     import products from "@/store/products.js";
 
     const post = async () => {
-        let res = await products.post()
+        let edit = $location.includes("edit");
+        let res = edit ? await products.edit() : await products.post();
         products.reset();
         push("#/");
     };
-
 </script>
 
 <form on:submit|preventDefault={post} class="col grow gap-20">
@@ -43,6 +43,6 @@
         <Field bind:value={$products.desc} label="Description" />
     </section>
     <section>
-        <Button type='submit' text="SUBMIT" />
+        <Button type="submit" text="SUBMIT" />
     </section>
 </form>
