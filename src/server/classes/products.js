@@ -88,6 +88,10 @@ class Product {
             pobj.imageURL = payload.imageURL
         if (payload.name)
             pobj.name = payload.name
+        if (payload.price)
+            pobj.price = payload.price
+        if (payload.qty)
+            pobj.qty = payload.qty
 
         pobj.saveToDB()
         return {status: "ok"}
