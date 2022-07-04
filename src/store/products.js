@@ -55,10 +55,8 @@ context.spreadProduct = async function () {
     context.commit('name', prod.name)
     context.commit('imageURL', prod.imageURL)
     context.commit('price', prod.price)
-    context.commit('price', prod.qty)
+    context.commit('qty', prod.qty)
     context.commit('desc', prod.desc)
-
 }
-context.default = data;
 
 export default context
