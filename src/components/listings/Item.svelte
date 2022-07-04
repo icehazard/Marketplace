@@ -1,7 +1,6 @@
 <script>
     import Icon from "@iconify/svelte";
     import { push } from "svelte-spa-router";
-    import logo from "@/assets/images/logo.svg";
     import Rating from "comp/atoms/Rating.svelte";
     import products from "@/store/products.js";
     export let data = [];
@@ -20,11 +19,11 @@
     <section class="col pa-15  space-between h100 w100">
         <div class="row w100 space-between">
             <span class="ellipsis text-start">{data.name || ''}</span>
-            <button class="pa-5 shine curve center" on:click|stopPropagation={() => products.del(data._id)}>
-                <Icon icon="mdi:delete" />
+            <button class="pa-5 shine round center" on:click|stopPropagation={() => products.del(data._id)}>
+                <Icon icon="fluent:more-vertical-16-regular" />
             </button>
         </div>
-        <span class="weight-600 text-start">$ {data.price || ""}</span>
+        <span class="weight-600 text-start">฿ {data.price || ""}</span>
         <div class="row space-between gap-10 opacity-60">
             <div class="row center gap-5 nowrap grow justify-start">
                 <Rating rating={Math.random() * 5} />

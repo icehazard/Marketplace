@@ -5,6 +5,7 @@ const data = {
     name: '',
     imageURL: '',
     price: 0,
+    qty: 0,
     desc: '',
     products: [],
     product: {},
@@ -18,6 +19,7 @@ context.post = async function () {
         name: context.val('name'),
         imageURL: context.val('imageURL'),
         price: context.val('price'),
+        qty: context.val('qty'),
         desc: context.val('desc'),
     }
     return await post(`api/shop/${id}/product`, items)
@@ -28,6 +30,7 @@ context.edit = async function () {
         name: context.val('name'),
         imageURL: context.val('imageURL'),
         price: context.val('price'),
+        qty: context.val('qty'),
         desc: context.val('desc'),
     }
     return await patch(`api/product/${id}`, items)
@@ -39,9 +42,9 @@ context.get = async function () {
 }
 context.del = async function (id) {
     const sid = user.shopID();
-     await del(`api/shop/${sid}/product/${id}`);
-     await context.get();
-     return
+    await del(`api/shop/${sid}/product/${id}`);
+    await context.get();
+    return
 }
 context.getById = async function (id) {
     let res = await get(`api/products/${id}`)
@@ -52,8 +55,10 @@ context.spreadProduct = async function () {
     context.commit('name', prod.name)
     context.commit('imageURL', prod.imageURL)
     context.commit('price', prod.price)
+    context.commit('price', prod.qty)
     context.commit('desc', prod.desc)
 
 }
+context.default = data;
 
 export default context

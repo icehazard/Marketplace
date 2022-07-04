@@ -17,7 +17,7 @@
         <div>Price</div>
     </div>
     <div class="row space-between align-center">
-        <div class="font-26">${$products?.product?.price || ''}</div>
+        <div class="font-26">฿ {$products?.product?.price || ''}</div>
         <Button on:click={handleClick} text="ADD TO CART" />
     </div>
 </div>

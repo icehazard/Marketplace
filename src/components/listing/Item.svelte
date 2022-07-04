@@ -15,7 +15,7 @@
     <hr class="hr w100" />
     <section class="col pa-15  space-between h100 w100">
         <span class="ellipsis text-start">{data.name}</span>
-        <span class="weight-600 text-start">$ {data.price || ''}</span>
+        <span class="weight-600 text-start">฿ {data.price || ''}</span>
         <div class="row space-between gap-10 opacity-60">
             <div class="row center gap-5 nowrap grow justify-start">
                 <Rating rating={Math.random() * 5} />
