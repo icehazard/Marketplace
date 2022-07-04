@@ -24,5 +24,9 @@ context.isShopPending = function () {
     if (!context.val('me')[0]) return false;
     return context.val('me')[0].status == 0;
 }
+context.shopID = function () {
+    if (!context.val('me')[0]) return 0;
+    return context.val('me')[0]._id
+}
 
 export default context

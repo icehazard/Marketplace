@@ -4,19 +4,16 @@
     import Field from "comp/atoms/TextField.svelte";
     import { push } from "svelte-spa-router";
     import products from "@/store/products.js";
+    import user from "@/store/user.js";
 
-    const post = () => {
-        // let data = { title: $title, image: $image, price: $price, description: $description };
-        // products.set([...$products, data]);
-        // title.set("");
-        // image.set("");
-        // price.set("");
-        // description.set("");
+    const post = async () => {
+        console.log('sdf')
+        await products.post()
         push("#/");
     };
 </script>
 
-<form on:submit={post} class="col grow gap-20">
+<form on:submit|preventDefault={post} class="col grow gap-20">
     <section class="shade1 pa-50 curve col gap-20">
         <div class="opacity-75 row align-center gap-10">
             <Icon icon="fluent:app-title-20-regular" />
@@ -46,6 +43,6 @@
         <Field bind:value={$products.description} label="Description" />
     </section>
     <section>
-        <Button text="SUBMIT" />
+        <Button type='submit' text="SUBMIT" />
     </section>
 </form>
