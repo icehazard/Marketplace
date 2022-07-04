@@ -33,6 +33,10 @@ Shops.prototype.get = function(id) {
     return this.getShops().get(id);
 };
 
+Shops.prototype.has = function(id) {
+    return this.getShops().has(id);
+};
+
 Shops.prototype.getShopByOwnerId = function(oid) {
     console.log(this.getShopsByOwner())
     console.log("oid is", oid)
@@ -67,7 +71,6 @@ Shops.prototype.loadProductsIntoShops = async function(id) {
     {
         this.getShops().get(v.shopID).products.set(k, v)
         console.log(`*** Loaded products!`)
-
     }
 
 };
@@ -77,8 +80,8 @@ class Shop {
     constructor(_id, data)
     {
         this._id = _id;
-        this.name = data.name;
-        this.type = data.type;
+        this.shopName = data.shopName;
+        this.shopType = data.shopType;
         this.ownerID = data.ownerID;
         this.address = data.address;
         this.nameBankAccount = data.nameBankAccount;
@@ -148,6 +151,28 @@ class Shop {
         this.products.set(nid, pobj)
         pobj.saveToDB()
         return {status: "ok"}
+    }
+
+    async editProduct(pid, payload)
+    {
+        console.log("LOgging edit", pid, payload)
+        if (this.products.has(pid)) {
+            let p = this.products.get(pid)
+            return p.editProduct(this.ownerID, pid, payload)
+        }
+        return {status: "error", error: "Shop does not contain this product!"}
+    }
+
+    async deleteProduct(pid)
+    {
+        if (this.products.has(pid))
+        {
+            //delete from db first then from shop's memory, doesnt need await
+            this.products.get(pid).deleteFromDB()
+            this.products.delete(pid)
+            return {status: "ok"}
+        }
+        return {status: "error", error: "Couldn't find product in the Shop's list"}
     }
 
     static async getShopsByUserId(uid)

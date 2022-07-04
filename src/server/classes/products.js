@@ -26,6 +26,10 @@ Products.prototype.get = function(id) {
     return this.getProducts().get(id);
 };
 
+Products.prototype.has = function(id) {
+    return this.getProducts().has(id);
+};
+
 Products.prototype.delete = function(id) {
     this.getProducts().get(id).deleteFromDB();
     this.getProducts().delete(id)
@@ -52,6 +56,8 @@ class Product {
         this.desc = data.desc;
         this.imageURL = data.imageURL;
         this.shopID = data.shopID;
+        this.price = data.price;
+        this.qty = data.qty;
     }
 
     async saveToDB() {
@@ -63,6 +69,28 @@ class Product {
     async deleteFromDB() {
         //dont need await
         dbhandler.cols.list.colProducts.deleteOne({_id: this._id})
+    }
+
+    async editProduct(ownerID, pid, payload)
+    {
+        if (!products.has(pid))
+            return {status: "error", error: `Cant find product with ID ${pid}`}
+
+        let pobj = products.get(pid)
+        //
+        // if (pobj.ownerID != ownerID)
+        //     return {status: "error", error: "You do not have permission to edit this product!"}
+
+        //check if owns that product
+        if (payload.desc)
+            pobj.desc = payload.desc
+        if (payload.imageURL)
+            pobj.imageURL = payload.imageURL
+        if (payload.name)
+            pobj.name = payload.name
+
+        pobj.saveToDB()
+        return {status: "ok"}
     }
 }
 
