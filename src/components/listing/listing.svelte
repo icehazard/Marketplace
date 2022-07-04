@@ -4,7 +4,7 @@
     import Photos from "./Photos.svelte";
     import Price from "./Price.svelte";
     import Related from "./Related.svelte";
-    import Reviews from "./Reviews.svelte";
+    import Reviews from "../seller/Reviews.svelte";
     import Seller from "./Seller.svelte";
     import Shipping from "./Shipping.svelte";
     import { mq } from "@/assets/library/MediaQuery.svelte";
@@ -13,9 +13,9 @@
 <div class="col w100 gap-30 wrap" class:row={$mq.xxl_} >
     <div class="col grow gap-30">
         <Photos />
-        {#if $mq.xxl_}
+        <!-- {#if $mq.xxl_}
         <Reviews />
-        {/if}
+        {/if} -->
     </div>
     <div class="col grow gap-30">
         <Title />
@@ -24,9 +24,9 @@
         <Shipping />
         <Related />
         <Seller />
-        {#if $mq._xl}
+        <!-- {#if $mq._xl}
         <Reviews />
-        {/if}
+        {/if} -->
     </div>
 </div>
 
