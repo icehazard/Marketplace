@@ -7,8 +7,7 @@
     import user from "@/store/user.js";
 
     const post = async () => {
-        console.log('sdf')
-        await products.post()
+        let res = await products.post()
         push("#/");
     };
 

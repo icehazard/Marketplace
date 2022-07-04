@@ -18,7 +18,7 @@ context.post = async function () {
         title: context.val('title'),
         image: context.val('image'),
         price: context.val('price'),
-        description: context.val('description'),
+        desc: context.val('desc'),
     }
     return await post(`shop/${id}/product`, items)
 }
