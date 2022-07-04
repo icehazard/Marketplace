@@ -1,19 +1,25 @@
 let dbhandler = require("../db/dbhandler")
+let productHandler = require("./products")
 
-let items = new Shops()
+let shops = new Shops()
 
 function Shops()
 {
-    this.items = new Map();
+    this.shops = new Map();
+    this.shopsByOwner = new Map();
 
     this.getShops = function() {
-        return this.items;
+        return this.shops;
     }
 
+    this.getShopsByOwner = function() {
+        return this.shopsByOwner;
+    }
 }
 
 Shops.prototype.insert = function(obj) {
-    this.getShops().set(obj._id, obj);
+    this.getShops().set(obj._id, obj)
+    this.getShopsByOwner().set(obj.ownerID, obj)
 };
 
 Shops.prototype.exists = function(id) {
@@ -25,6 +31,10 @@ Shops.prototype.exists = function(id) {
 
 Shops.prototype.get = function(id) {
     return this.getShops().get(id);
+};
+
+Shops.prototype.getShopByOwnerId = function(oid) {
+    return this.getShopsByOwner().get(oid);
 };
 
 Shops.prototype.loadFromDB = async function(id) {
@@ -49,6 +59,7 @@ class Shop {
         this.nameBankAccount = data.nameBankAccount;
         this.bankName = data.bankName;
         this.BankAccountNumber = data.BankAccountNumber;
+        this.products = new Map()
     }
 
     static async postShop(userID, payload)
@@ -72,10 +83,38 @@ class Shop {
         payload._id = nid;
         payload.status = 0;
 
-        items.insert(new Shops(userID, payload))
+        shops.insert(new Shops(userID, payload))
         //let result =  await dbhandler.cols.list.colShops.findOne({name : 'name'})
         let result =  await dbhandler.cols.list.colShops.insertOne(payload)
         console.log("🚀 result", result)
+    }
+
+    async addProduct(payload)
+    {
+        let nid = 0;
+
+        let data = await dbhandler.cols.list.colProducts.find().sort({
+            _id: -1
+        }).limit(1).toArray()
+
+        if (!data || !data.length) {
+            console.log("Got error with getting product latest ID");
+            nid = 1;
+            // return "ACCOUNT_CREATION_ERROR"
+        } else {
+            console.log("Got product latest ID:");
+            console.log(data);
+            nid = data[0]._id + 1;
+        }
+
+        payload._id = nid;
+        payload.shopID = this._id;
+
+        let pobj = new productHandler.Product(nid, payload)
+        productHandler.Products.insert(pobj)
+        this.products.set(nid, pobj)
+        pobj.saveToDB()
+        return {status: "ok"}
     }
 
     static async getShopsByUserId(uid)
@@ -90,4 +129,4 @@ class Shop {
     }
 }
 
-module.exports = {Shop, Shops: items}
+module.exports = {Shop, Shops: shops}

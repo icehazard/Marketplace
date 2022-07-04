@@ -11,6 +11,7 @@
         await products.post()
         push("#/");
     };
+
 </script>
 
 <form on:submit|preventDefault={post} class="col grow gap-20">
@@ -26,21 +27,21 @@
             <Icon icon="uil:image-upload" />
             <div>Image Upload</div>
         </div>
-        <Field bind:value={$products.image} label="Image URL" />
+        <Field bind:value={$products.imageURL} label="Image URL" />
     </section>
     <section class="shade1 pa-50 curve col gap-20">
         <div class="opacity-75 row align-center gap-10">
             <Icon icon="uil:image-upload" />
             <div>Price</div>
         </div>
-        <Field bind:value={products.price} label="Price" />
+        <Field bind:value={$products.price} label="Price" />
     </section>
     <section class="shade1 pa-50 curve col gap-20">
         <div class="opacity-75 row align-center gap-10">
             <Icon icon="fluent:text-description-20-regular" />
             <div>Description</div>
         </div>
-        <Field bind:value={$products.description} label="Description" />
+        <Field bind:value={$products.desc} label="Description" />
     </section>
     <section>
         <Button type='submit' text="SUBMIT" />

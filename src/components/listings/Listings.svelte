@@ -4,9 +4,11 @@
 </script>
 
 <section class="grow">
-    {#each $products.products as product}
-        <Item data={product} />
-    {/each}
+    {#if $products.product}
+        {#each $products.products as product}
+            <Item data={product} />
+        {/each}
+    {/if}
 </section>
 
 <style>

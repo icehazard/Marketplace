@@ -9,6 +9,7 @@ const path = require('path')
 const dbhandler = require("./db/dbhandler")
 const accountHandler = require("./classes/accounts.js");
 const shopHandler = require("./classes/shops");
+const productHandler = require("./classes/products");
 
 (async() => {
 
@@ -30,6 +31,7 @@ const shopHandler = require("./classes/shops");
 
     await accountHandler.Accounts.loadFromDB()
     await shopHandler.Shops.loadFromDB()
+    await productHandler.Products.loadFromDB()
 
     app.use(cors())
     app.use(bodyParser.json())

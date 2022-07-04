@@ -5,7 +5,7 @@ const data = {
     title: '',
     image: '',
     price: 0,
-    description: '',
+    desc: '',
     products: [],
     product: {},
 }

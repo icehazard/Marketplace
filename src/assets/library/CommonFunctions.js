@@ -51,8 +51,8 @@ export async function post(route, data) {
             "Content-Type": "application/json",
         },
         body: JSON.stringify(data)
-    });
-    return await res.json()
+    })
+    return {status: res.status, json: await res.json()}
 }
 
 export async function get(route) {
