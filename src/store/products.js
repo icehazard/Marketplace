@@ -27,11 +27,19 @@ context.get = async function () {
     return context.commit('products', res)
 }
 context.del = async function () {
-    return await del('api/shop/1/product/delete')
+    return await del('api/product/1')
 }
 context.getById = async function (id) {
     let res = await get(`products/${id}`)
     return context.commit('product', res)
+}
+context.spreadProduct = async function () {
+    let prod = context.val('product')
+    context.commit('name', prod.name)
+    context.commit('imageURL', prod.imageURL)
+    context.commit('price', prod.price)
+    context.commit('desc', prod.desc)
+
 }
 
 export default context

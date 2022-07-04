@@ -20,7 +20,7 @@
     <section class="col pa-15  space-between h100 w100">
         <div class="row w100 space-between">
             <span class="ellipsis text-start">{data.name || ''}</span>
-            <button class="pa-5 shine curve center" on:click={() => products.del()}>
+            <button class="pa-5 shine curve center" on:click={() => products.del(data._id)}>
                 <Icon icon="mdi:delete" />
             </button>
         </div>

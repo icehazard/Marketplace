@@ -18,6 +18,7 @@ const Signup = () => import("@/views/Signup.svelte");
 export default {
     "/": wrap({ asyncComponent: Home }),
     "/listing": wrap({ asyncComponent: Listing }),
+    "/listing/edit": wrap({ asyncComponent: AddListing }),
     "/settings": wrap({ asyncComponent: Settings, conditions: [auth] }),
     "/orders/overview": wrap({ asyncComponent: Orders, conditions: [auth] }),
     "/orders/view/:id": wrap({ asyncComponent: ViewOrder, conditions: [auth] }),
