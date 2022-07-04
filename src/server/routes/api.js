@@ -6,6 +6,8 @@ var jwt = require('jsonwebtoken');
 
 let accountHandler = require("../classes/accounts")
 let shopHandler = require('../classes/shops')
+let productHandler = require('../classes/products')
+
 const Config = require("../Config.json");
 
 const SECRET_KEY = Config.SECRET_KEY;
@@ -97,6 +99,25 @@ api.post('/shop', async (req, res) => {
 })
 
 
+api.get('/shop/:sid', async (req, res) => {
+
+    const sid = req.params.sid
+
+    if (!shopHandler.Shops.has(parseInt(sid)))
+        return res.status(400).json({status: "error", error: "Shop with given SID doesn't exist!"})
+
+    let getShop = shopHandler.Shops.get(parseInt(sid))
+
+
+    let payload = {}
+    payload._id = getShop._id;
+    payload.shopName = getShop.shopName;
+    payload.shopType = getShop.shopType;
+    payload.ownerID = getShop.ownerID;
+    payload.address = getShop.address;
+
+    return res.status(200).json(payload)
+})
 
 api.post('/shop/:sid/product', async (req, res) => {
     const authed = await auth(req.headers)
@@ -125,7 +146,7 @@ api.post('/shop/:sid/product', async (req, res) => {
     return res.status(200).json(add)
 })
 
-api.delete('/shop/:sid/product/:id', async (req, res) => {
+api.patch('/product/:pid', async (req, res) => {
     const authed = await auth(req.headers)
 
     if (!authed) {
@@ -133,18 +154,53 @@ api.delete('/shop/:sid/product/:id', async (req, res) => {
     }
 
     const accId = authed._id;
-    const pid = req.params.id
+    const pid = parseInt(req.params.pid)
+    const data = req.body;
+    console.log("Got edit product data", data)
+
+    //let shopId = (await accountHandler.Accounts.get(accId).getShopIds())[0]._id
 
 
-    let shopId = (await accountHandler.Accounts.get(accId).getShopIds())[0]._id
+    if (!productHandler.Products.has(pid))
+        return res.status(400).json({status: "error", error: "This product doesn't exist!"})
 
-    console.log("Got shop ID", shopId)
-    let add = await shopHandler.Shops.get(shopId).addProduct(data)
+    let p = productHandler.Products.get(pid)
+    let sid = p.shopID
 
-    if (add.status !== "ok")
-        return res.status(400).json(add)
+    if (!await accountHandler.Accounts.get(accId).ownsShopID(sid))
+        return res.status(400).json({status: "error", error: "You do not own this shop!"})
 
-    return res.status(200).json(add)
+    console.log("Got shop ID", sid)
+
+    let edit = await shopHandler.Shops.get(parseInt(sid)).editProduct(pid, data)
+
+    if (edit.status !== "ok")
+        return res.status(400).json(edit)
+
+    return res.status(200).json(edit)
+})
+
+api.delete('/shop/:sid/product/:id', async (req, res) => {
+    const authed = await auth(req.headers)
+
+    if (!authed) {
+        return res.status(403).json();
+    }
+
+    const accId = authed._id;
+    const pid = parseInt(req.params.id)
+    const sid = parseInt(req.params.sid)
+
+    if (!await accountHandler.Accounts.get(accId).ownsShopID(sid))
+        return res.status(400).json({status: "error", error: "You do not own this shop!"})
+
+    console.log("Got shop ID", sid)
+    let del = await shopHandler.Shops.get(sid).deleteProduct(pid)
+
+    if (del.status !== "ok")
+        return res.status(400).json(del)
+
+    return res.status(200).json(del)
 })
 
 api.get('/shop/:sid/product', async (req, res) => {
