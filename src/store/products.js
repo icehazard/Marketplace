@@ -33,7 +33,8 @@ context.edit = async function () {
     return await patch(`api/product/${id}`, items)
 }
 context.get = async function () {
-    let res = await get('api/shop/1/product')
+    const id = user.shopID();
+    let res = await get(`api/shop/${id}/product`)
     return context.commit('products', res)
 }
 context.del = async function () {
