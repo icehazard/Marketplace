@@ -1,49 +1,34 @@
 <script>
-	import { push } from 'svelte-spa-router';
-	import products from '@/store/products.js';
+    import Edit from "./Edit.svelte";
     import Title from "./Title.svelte";
     import Description from "./Description.svelte";
     import Photos from "./Photos.svelte";
     import Price from "./Price.svelte";
     import Related from "./Related.svelte";
-    import Reviews from "../seller/Reviews.svelte";
     import Seller from "./Seller.svelte";
     import Shipping from "./Shipping.svelte";
     import { mq } from "@/assets/library/MediaQuery.svelte";
-    
-    
-    function handleClick(){
-        products.spreadProduct()
-        push('#/listing/edit')
-    }
 </script>
 
-<div class="col w100 gap-30 wrap" class:row={$mq.xxl_} >
-    <div class="row">
-        <button on:click={handleClick}>
-            EDIT
-        </button>
-    </div>
+<div class="col w100 gap-30 wrap" class:row={$mq.xxl_}>
     <div class="col grow gap-30">
         <Photos />
-        <!-- {#if $mq.xxl_}
-        <Reviews />
-        {/if} -->
+        {#if $mq.xxl_}
+            <Edit />
+        {/if}
     </div>
     <div class="col grow gap-30">
+        {#if $mq._xl}
+            <Edit />
+        {/if}
         <Title />
         <Price />
         <Description />
         <Shipping />
         <Related />
         <Seller />
-        <!-- {#if $mq._xl}
-        <Reviews />
-        {/if} -->
     </div>
 </div>
 
 <style>
-
-
 </style>
