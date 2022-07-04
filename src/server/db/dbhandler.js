@@ -10,6 +10,7 @@ MongoPool.getInstance(function (db) {
 
     cols.list.colAccounts = mongo.db.collection(serverConfig.COLLECTION_ACCOUNTS)
     cols.list.colShops = mongo.db.collection(serverConfig.COLLECTION_SHOPS)
+    cols.list.colProducts = mongo.db.collection(serverConfig.COLLECTION_PRODUCTS)
     cols.list.colRoles = mongo.db.collection(serverConfig.COLLECTION_ROLES)
 });
 

@@ -97,6 +97,55 @@ api.post('/shop', async (req, res) => {
 })
 
 
+
+api.post('/shop/:sid/product', async (req, res) => {
+    const authed = await auth(req.headers)
+
+    if (!authed) {
+        return;
+    }
+
+    const accId = authed._id;
+    const sid = req.params.sid
+    const data = req.body;
+    console.log("Got product data", data)
+
+    //let shopId = (await accountHandler.Accounts.get(accId).getShopIds())[0]._id
+
+    if (!await accountHandler.Accounts.get(accId).ownsShopID(sid))
+        return res.status(400).json({status: "error", error: "You do not own this shop!"})
+
+    console.log("Got shop ID", sid)
+    let add = await shopHandler.Shops.get(sid).addProduct(data)
+
+    if (add.status !== "ok")
+        return res.status(400).json(add)
+
+    return res.status(200).json(add)
+})
+
+api.delete('/shop/:sid/product/:id', async (req, res) => {
+    const authed = await auth(req.headers)
+
+    if (!authed) {
+        return;
+    }
+
+    const accId = authed._id;
+    const pid = req.params.id
+
+
+    let shopId = (await accountHandler.Accounts.get(accId).getShopIds())[0]._id
+
+    console.log("Got shop ID", shopId)
+    let add = await shopHandler.Shops.get(shopId).addProduct(data)
+
+    if (add.status !== "ok")
+        return res.status(400).json(add)
+
+    return res.status(200).json(add)
+})
+
 api.get('/me', async (req, res) => {
     const authed = await auth(req.headers)
 

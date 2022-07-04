@@ -200,6 +200,15 @@ class Account {
     async getShopIds() {
         return shopHandler.Shop.getShopsByUserId(this._id)
     }
+    async hasShop() {
+        return shopHandler.Shops.getShopByOwnerId(this._id)
+    }
+    async ownsShopID(sid) {
+        let shopObjects = shopHandler.Shops.getShopByOwnerId(this._id)
+        for (let o of shopObjects)
+            if (o._id === sid)
+                return true
+    }
 }
 
 module.exports = {Account, Accounts: accs}

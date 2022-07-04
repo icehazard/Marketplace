@@ -14,7 +14,7 @@ const context = persist('products', data)
 context.post = async function () {
     let items = ['items'];
     return 'items';
-    return  post('products', items)
+    return  await post('products', items).json
 }
 context.get = async function () {
     let res = await get('products')
