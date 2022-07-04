@@ -9,6 +9,6 @@
         <div>Description</div>
     </div>
     <div>
-       {$products?.product?.description}
+       {$products?.product?.desc || "" }
     </div>
 </div>
