@@ -2,7 +2,7 @@
     import user from "@/store/user.js";
     import { currencies } from "@/assets/library/options.js";
 
-    $: symbol = currencies.filter((el) => el.id == $user.currency)[0].symbol;
+    $: symbol = currencies.filter((el) => el.id == $user?.currency)[0]?.symbol;
 </script>
 
 <footer class="grow w100 h-200 pa-50 gap-20 col font-14 container mb-40">

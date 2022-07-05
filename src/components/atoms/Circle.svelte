@@ -21,7 +21,7 @@
     data-tooltip={tooltip}
     class="font-22 border round center pa-10 shade2 fast btn"
 >
-    <Icon {icon} class="white--text" />
+    <Icon {icon} class="shade6--text" />
 </a>
 
 <style>

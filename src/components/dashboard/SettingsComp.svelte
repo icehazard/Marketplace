@@ -4,11 +4,17 @@
     import Icon from "@iconify/svelte";
     import { languages, themes, currencies } from "@/assets/library/options.js";
 
-    let lang = "ENG";
-    let theme = "dark";
-
-    function selected(item) {
+    function selectedCurrency(item) {
         $user.currency = item.detail.id;
+    }
+
+    function selectedLanguage(item) {
+        console.log("🚀 ~ selectedLanguage ~ item", item.detail);
+    }
+
+    function selectedThemes(item) {
+        $user.theme = item.detail.id;
+        document.documentElement.setAttribute("data-theme", item.detail.id);
     }
 </script>
 
@@ -27,7 +33,7 @@
                 </div>
             </div>
             <div class="col">
-                <Select init={lang} items={languages} on:select={selected} />
+                <Select init={$user.lang} items={languages} on:select={selectedLanguage} />
             </div>
         </div>
         <hr />
@@ -40,7 +46,7 @@
                 </div>
             </div>
             <div class="col">
-                <Select init={$user.currency} items={currencies} on:select={selected} />
+                <Select init={$user.currency} items={currencies} on:select={selectedCurrency} />
             </div>
         </div>
         <hr />
@@ -53,7 +59,7 @@
                 </div>
             </div>
             <div class="col">
-                <Select init={theme} items={themes} on:select={selected} />
+                <Select init={$user.theme} items={themes} on:select={selectedThemes} />
             </div>
         </div>
         <hr />

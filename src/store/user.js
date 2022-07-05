@@ -5,6 +5,8 @@ const data = {
     username: '',
     token: '',
     currency: 'THB',
+    theme: 'dark',
+    lang: "ENG",
     me: []
 }
 
