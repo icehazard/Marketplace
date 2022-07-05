@@ -3,8 +3,8 @@
     import { createEventDispatcher } from "svelte";
     const dispatch = createEventDispatcher();
 
-    export let to;
-    export let icon;
+    export let to = '';
+    export let icon = '';
 
     $: goTo = to ? true : false;
 

@@ -35,7 +35,7 @@
     <section class="h-180 center w100 relative overflow-hidden curve-top">
         {#if menu}
             <div
-                class="shade1 pa-15 absolute p-bottom w100 col gap-10 z-2 curve-top"
+                class="shade1 py-10 absolute p-bottom w100 col z-2 curve-top"
                 transition:slide
                 use:clickOutside={close}
             >

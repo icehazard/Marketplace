@@ -4,7 +4,7 @@
     const dispatch = createEventDispatcher();
     export let label = "";
     export let value = "";
-    export let name = ''
+    export let name = "";
 
     let handleChange = (val) => {
         dispatch("keyup",  val);

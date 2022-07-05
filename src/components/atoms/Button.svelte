@@ -44,4 +44,8 @@
     .disable {
         background: #6e6e6e;
     }
+
+    .disable button{
+        cursor: not-allowed;
+    }
 </style>

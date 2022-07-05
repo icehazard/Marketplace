@@ -3,6 +3,15 @@
     import Button from "./../atoms/Button.svelte";
     import Icon from "@iconify/svelte";
     import Rating from "comp/atoms/Rating.svelte";
+
+    let review = "";
+    let disableReview = true;
+    let msg1 = 'Only verified buyers can leave reviews';
+    let msg2 = "Write a review"
+
+    function post() {
+        console.log(review);
+    }
 </script>
 
 <div class="shade1 pa-50 curve col gap-20 ">
@@ -10,11 +19,10 @@
         <Icon icon="ic:baseline-reviews" />
         <div>Reviews</div>
     </div>
-    <div class="row mb-50 align-start gap-50">
-        <TextArea label="Write a review" />
-        <Button text="SUBMIT REVIEW" />
-    </div>
-
+    <form on:submit|preventDefault={post} class="row mb-50 align-start gap-50">
+        <TextArea bind:value={review} disable={disableReview} label={disableReview ? msg1 : msg2} />
+        <Button type="submit" disable={disableReview} text="SUBMIT REVIEW" />
+    </form>
     <div class="col gap-10">
         <div class="row gap-10 font-14">
             <span class="ellipsis basis font-16"> Great value. </span>
