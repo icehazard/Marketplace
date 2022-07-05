@@ -1,5 +1,5 @@
 <script>
-	import Reviews from './Reviews.svelte';
+    import Reviews from "./Reviews.svelte";
     import AddListing from "./AddListing.svelte";
     import Icon from "@iconify/svelte";
     import Item from "../listing/Item.svelte";
@@ -13,7 +13,6 @@
     import "@lottiefiles/lottie-player";
     import user from "@/store/user.js";
     import { onMount } from "svelte";
-    
 
     onMount(() => {
         user.get();
@@ -53,12 +52,10 @@
     </div>
 
     {#if user.isShopPending()}
-        <div class="info py-50 font-18 center curve">Account pending verification</div>
+        <div class="blue py-50 font-20 center curve blue--text">Account pending verification</div>
     {:else if user.isShopActive()}
         <AddListing />
     {/if}
-
-
 
     <div class="col gap-10">
         <div>Featured items</div>
