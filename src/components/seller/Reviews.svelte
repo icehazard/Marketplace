@@ -1,20 +1,18 @@
 <script>
-	import TextArea from './../atoms/TextArea.svelte';
-	import Button from './../atoms/Button.svelte';
-    import TextField from "comp/atoms/TextField.svelte";
-    
+    import TextArea from "./../atoms/TextArea.svelte";
+    import Button from "./../atoms/Button.svelte";
     import Icon from "@iconify/svelte";
     import Rating from "comp/atoms/Rating.svelte";
 </script>
 
-<div class="shade1 pa-50 curve col gap-20">
+<div class="shade1 pa-50 curve col gap-20 ">
     <div class="opacity-75 row align-center gap-10">
         <Icon icon="ic:baseline-reviews" />
         <div>Reviews</div>
     </div>
-    <div class="row mb-50 align-center gap-50">
-        <TextArea label='Write a review' />
-        <Button  text='SUBMIT'/>
+    <div class="row mb-50 align-start gap-50">
+        <TextArea label="Write a review" />
+        <Button text="SUBMIT REVIEW" />
     </div>
 
     <div class="col gap-10">

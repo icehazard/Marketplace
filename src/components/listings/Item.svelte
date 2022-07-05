@@ -35,19 +35,19 @@
     <section class="h-180 center w100 relative overflow-hidden curve-top">
         {#if menu}
             <div
-                class="shade1 pa-15 absolute p-bottom w100 col gap-20 z-2 curve-top"
+                class="shade1 pa-15 absolute p-bottom w100 col gap-10 z-2 curve-top"
                 transition:slide
                 use:clickOutside={close}
             >
                 <button
                     type="button"
-                    class="red--text align-center gap-10"
+                    class="red--text align-center gap-10 shine pa-10 curve"
                     on:click|stopPropagation={del}
                 >
                     <Icon icon="fluent:delete-12-regular" width="20" />
                     <span>Delete</span>
                 </button>
-                <button type="button" class="align-center gap-10" on:click|stopPropagation={edit}>
+                <button type="button" class="align-center gap-10 shine pa-10 curve" on:click|stopPropagation={edit}>
                     <Icon icon="fluent:edit-16-regular" width="20" />
                     <span>Edit</span>
                 </button>

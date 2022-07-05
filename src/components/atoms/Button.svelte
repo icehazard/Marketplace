@@ -14,7 +14,7 @@
 </script>
 
 <div class="wrapper" class:disable>
-    <button class="w100 center" disabled={disable} type={type} on:click={connect}>{text}</button>
+    <button class="w100 center text-center line-height-20" disabled={disable} type={type} on:click={connect}>{text}</button>
 </div>
 
 <style>
