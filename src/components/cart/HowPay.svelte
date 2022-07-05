@@ -4,6 +4,7 @@
     import { mq } from "@/assets/library/MediaQuery.svelte";
     import cart from "@/store/cart.js";
     import { formatCurrency } from "@/assets/library/CommonFunctions.js";
+    import pluralize from "pluralize";
 </script>
 
 {#if $mq.lg_}
@@ -37,7 +38,7 @@
                 <div class="row align-center gap-10 space-between">
                     <div class="row center gap-10">
                         <Icon icon="fluent:shopping-bag-16-regular" width="22" />
-                        <div>Item(s) total</div>
+                        <div>{pluralize("Item", $cart.cart.length)} total</div>
                     </div>
                     <div class="col align-center gap-10">{formatCurrency(cart.sumPrice())}</div>
                 </div>
@@ -58,7 +59,10 @@
                 <div class="row align-center gap-10 space-between">
                     <div class="row center gap-10">
                         <Icon icon="fluent:tag-32-regular" width="22" />
-                        <div>Total ({$cart.cart.length} item)</div>
+                        <div>
+                            Total ({$cart.cart.length}
+                            {pluralize("Item", $cart.cart.length)})
+                        </div>
                     </div>
                     <div class="col align-center gap-10">{formatCurrency(cart.sumPrice())}</div>
                 </div>
@@ -69,7 +73,9 @@
             </div>
             <div class="col py-20 font-12 text-center gap-10 opacity-75">
                 <p>
-                    This total contains an approximate conversion. You will be charged {formatCurrency(cart.sumPrice())}
+                    This total contains an approximate conversion. You will be charged {formatCurrency(
+                        cart.sumPrice()
+                    )}
                     by the shop MattAlfordStudio.
                 </p>
                 <p>Local taxes included (where applicable)</p>
