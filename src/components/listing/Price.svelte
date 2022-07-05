@@ -1,12 +1,12 @@
 <script>
+	import cart from '@/store/cart.js';
     import Icon from "@iconify/svelte";
     import Button from "comp/atoms/Button.svelte";
     import products from "@/store/products.js";
     import { push } from "svelte-spa-router";
 
-
-
     function handleClick() {
+        cart.addToCart($products.product)
         push("#/cart");
     }
 </script>
