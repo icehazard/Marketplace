@@ -37,7 +37,7 @@
 						<Circle to="messages" tooltip='Messages' icon="ant-design:message-outlined" />
 						<Circle  tooltip='Cart' to="cart" icon="akar-icons:cart" />
 						<button on:click={shopRoute}>
-							<Circle  tooltip='Your shop' icon="fluent:building-shop-16-regular" />
+							<Circle  tooltip='Shop Manager' icon="fluent:building-shop-16-regular" />
 						</button>
 						<Circle  tooltip='Settings' to="settings" icon="fluent:settings-16-regular" />
 					</div>
