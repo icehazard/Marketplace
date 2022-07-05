@@ -27,18 +27,22 @@
             alt=""
         />
     </div>
-    <div class="row gap-30 shade1 pa-20 curved">
-        <div class="w-100 h-100 shade3">
+    <div class="row gap-30 shade1 pa-20 curved center">
+        <div class="w-100 h-100 shade3 ">
             <img
                 src="https://images.weedmaps.com/deliveries/000/079/195/avatar/original/1634606312-logo.jpg"
                 alt=""
             />
         </div>
-        <div class="col space-between grow font-14">
+        <div class="col space-between grow font-14 gap-5">
             <h1 class="font-26">BeautyBreadWoodshop</h1>
             <div>Furniture with soul, Timeless design built for all time</div>
             <div class="weight-300 opacity-75">Washington, United States</div>
-            <div class="opacity-80">163 Sales 5 out of 5 stars</div>
+            <span>163 Sales 5 out of 5 stars</span>
+            <div class="row align-center gap-10 blue--text">
+                <Icon icon="fluent:info-20-regular" width='25' />
+                <span class="opacity-75">You may leave reviews only after you have brought from this supplier</span>
+            </div>
         </div>
         <div class="col center gap-10">
             <div class="w-70 h-70 shade3 round overflow-hidden">
