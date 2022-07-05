@@ -1,68 +1,44 @@
 <script>
     import Icon from "@iconify/svelte";
-    import  { mq } from '@/assets/library/MediaQuery.svelte'  
+    import { mq } from "@/assets/library/MediaQuery.svelte";
+    import active from 'svelte-spa-router/active'
+    import {link} from 'svelte-spa-router'
 </script>
+
 {#if $mq.lg_}
-<div class="w-300">
-    <aside class="shade3 w-300 px-20 curve fixed">
-        <div class="row py-20 align-center space-between">
-            <div class="row align-center gap-10">
-                <Icon icon="mdi:cannabis" width="22"  />
-                <div>Stores</div>
-            </div>
-            <Icon icon="mdi:chevron-down" width="22" />
-        </div>
-        <hr />
-        <div class="row py-20 align-center space-between">
-            <div class="row align-center gap-10">
-                <Icon icon="bi:credit-card-2-front-fill" width="22" />
-                <div>Products</div>
-            </div>
-            <Icon icon="mdi:chevron-down" width="22" />
-        </div>
-        <hr />
-        <div class="row py-20 align-center space-between">
-            <div class="row align-center gap-10">
-                <Icon icon="dashicons:book" width="22" />
-                <div>Books</div>
-            </div>
-            <Icon icon="mdi:chevron-down" width="22" />
-        </div>
-        <hr />
-    
-        <div class="row py-20 align-center space-between">
-            <div class="row align-center gap-10">
-                <Icon icon="dashicons:art" width="22" />
-                <div>Art</div>
-            </div>
-            <Icon icon="mdi:chevron-down" width="22" />
-        </div>
-        <hr />
-        <div class="row py-20 align-center space-between">
-            <div class="row align-center gap-10">
-                <Icon icon="bi:device-ssd-fill" width="22" />
-                <div>Electronics</div>
-            </div>
-            <Icon icon="mdi:chevron-down" width="22" />
-        </div>
-        <hr />
-        <div class="row py-20 align-center space-between">
-            <div class="row align-center gap-10">
-                <Icon icon="map:jewelry-store" width="22" />
-                <div>Jewelry</div>
-            </div>
-            <Icon icon="mdi:chevron-down" width="22" />
-        </div>
-        <hr />
-    
-        <div class="row py-20 align-center space-between">
-            <div class="row align-center gap-10">
-                <Icon icon="raphael:lab" width="22" />
-                <div>Lab Supplies</div>
-            </div>
-            <Icon icon="mdi:chevron-down" width="22" />
-        </div>
-    
-    </aside>
-</div>
+    <div class="w-300">
+        <aside class="shade3 w-300 curve fixed">
+            <a href="#/" class="row px-20 align-center space-between shine w100"  use:link  use:active>
+                <div class="row py-20 align-center gap-10">
+                    <Icon icon="fluent:home-16-regular" width="22" />
+                    <div>All products</div>
+                </div>
+                <Icon icon="fluent:chevron-right-16-regular" width="16" />
+            </a>
+            <hr />
+            <a href="#/shops" class="row px-20 py-20 align-center space-between w100 shine" use:link  use:active>
+                <div class="row align-center gap-10">
+                    <Icon icon="fluent:building-shop-16-regular" width="22" />
+                    <div>Browse shops</div>
+                </div>
+                <Icon icon="fluent:chevron-right-16-regular" width="16" />
+            </a>
+            <hr />
+            <a href="#/top" class="row px-20 py-20 align-center space-between w100 shine"  use:link  use:active>
+                <div class="row align-center gap-10">
+                    <Icon icon="lucide:award" width="22" />
+                    <div>Top selling products</div>
+                </div>
+                <Icon icon="fluent:chevron-right-16-regular" width="16" />
+            </a>
+            <hr />
+        </aside>
+    </div>
 {/if}
+
+<style>
+    .shine:hover {
+      background-color: rgba(100, 100, 100, 0.192);
+      color: white;
+    }
+</style>
