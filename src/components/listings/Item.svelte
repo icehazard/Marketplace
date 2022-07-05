@@ -20,21 +20,22 @@
         menu = !menu;
     }
     function del() {
-        products.del(data._id)
-        close()
+        products.del(data._id);
+        close();
     }
     function edit() {
+        $products.product = data
         products.spreadProduct();
         push("#/listing/edit");
-        close()
+        close();
     }
 </script>
 
 <button class=" h-300 curve col shade1 fast main" on:click={viewListing}>
-    <section class="h-180 center w100 relative ">
+    <section class="h-180 center w100 relative overflow-hidden">
         {#if menu}
-            <div class="shade1 pa-15 absolute p-bottom w100 col gap-20 z-2" transition:slide  use:clickOutside={close}>
-                <button type="button" class="red--text align-center gap-10" on:click|stopPropagation={del}>
+        <div class="shade1 pa-15 absolute p-bottom w100 col gap-20 z-2 slide" transition:slide  use:clickOutside={close}>
+            <button type="button" class="red--text align-center gap-10" on:click|stopPropagation={del}>
                     <Icon icon="fluent:delete-12-regular" />
                     <span>Delete</span>
                 </button>
@@ -87,12 +88,18 @@
         background-color: rgba(255, 255, 255, 0.11);
     }
 
-    .darken{
+    .darken {
         transition: all 0.3s ease;
     }
 
     .darken {
-        filter: brightness(0.8) blur(2px); 
+        filter: brightness(0.8) blur(8px);
+        overflow: hidden;
+    }
+
+    .slide {
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
     }
 
     @media only screen and (max-width: 576px) {

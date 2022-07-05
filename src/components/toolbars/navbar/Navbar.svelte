@@ -39,7 +39,7 @@
 						<button on:click={shopRoute}>
 							<Circle icon="fluent:building-shop-16-regular" />
 						</button>
-						<Circle to="settings" icon="clarity:settings-line" />
+						<Circle to="settings" icon="fluent:settings-16-regular" />
 					</div>
 				{/if}
 			</section>

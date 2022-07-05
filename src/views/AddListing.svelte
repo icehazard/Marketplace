@@ -1,12 +1,10 @@
 <script>
-    import Categories from "comp/toolbars/categories/Categories.svelte";
-    import Upload from "comp/upload/upload.svelte";
+    import Settings from "comp/toolbars/categories/Settings.svelte";
+    import Account from "comp/dashboard/AddListing.svelte";
+  </script>
   
-</script>
-
-
-    <section class="row container my-50 gap-50 grow">
-        <Categories />
-        <Upload />
-    </section>
-
+  <section class="row container my-50 gap-50 grow">
+    <Settings />
+    <Account />
+  </section>
+  
