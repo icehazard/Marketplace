@@ -7,16 +7,18 @@
     --shade4: #646464;
     --shade5: #9f9f9f;
     --shade6: #ffffff;
+    --navbar: rgba(19, 18, 18, 0.53);
 }
 
 html[data-theme='light'] {
     --shade0: #f0f0f0;
-    --shade1: #cfcfcf;
-    --shade2: #dadada;
-    --shade3: #bdbdbd;
+    --shade1: #e7e7e7;
+    --shade2: #FEFFFE;
+    --shade3: #F0F3F4;
     --shade4: #2c2c2c;
     --shade5: #131313;
     --shade6: #000000;
+    --navbar: rgba(235, 235, 235, 0.53);
 }
 
 $black: #000000;
