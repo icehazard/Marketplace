@@ -4,6 +4,7 @@ import { persist, get } from '@/assets/library/CommonFunctions.js'
 const data = {
     username: '',
     token: '',
+    currency: 'THB',
     me: []
 }
 

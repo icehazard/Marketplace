@@ -40,9 +40,6 @@
         if (item.length == 0) return;
         searchInput = item[0].name
     }
-    function emitChoice(){
-
-    }
 
     initValue()
 </script>
@@ -70,7 +67,7 @@
         </div>
     </div>
     {#if showSearch}
-        <div class=" w30 shade2 h-200 curve overlay absolute w100 z-3">
+        <div class=" w30 shade2 curve overlay absolute w100 z-3">
             {#each filteredItems as b}
                 <button
                     class="row align-center px-20 py-15 bank-search-box curve w100"

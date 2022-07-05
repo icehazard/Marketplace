@@ -4,6 +4,7 @@
     import Button from "comp/atoms/Button.svelte";
     import products from "@/store/products.js";
     import { push } from "svelte-spa-router";
+    import { formatCurrency } from "@/assets/library/CommonFunctions.js";
 
     function handleClick() {
         cart.addToCart($products.product)
@@ -17,7 +18,7 @@
         <div>Price</div>
     </div>
     <div class="row space-between align-center">
-        <div class="font-26">฿ {$products?.product?.price || ''}</div>
+        <div class="font-26">{formatCurrency($products?.product?.price) || ''}</div>
         <Button on:click={handleClick} text="ADD TO CART" />
     </div>
 </div>

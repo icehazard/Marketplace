@@ -1,6 +1,7 @@
 <script>
     export let data = [];
     import cart from "@/store/cart.js";
+    import { formatCurrency } from "@/assets/library/CommonFunctions.js";
 
     function remove() {
         cart.removeFromCart(data);
@@ -27,7 +28,7 @@
             <button on:click={remove} class="font-14 weight-600">Remove</button>
         </div>
         <div class="col space-between">
-            <span>THB {data.price}</span>
+            <span>{formatCurrency(data.price)}</span>
             <span class="font-14 weight-600">Save for later</span>
         </div>
     </div>

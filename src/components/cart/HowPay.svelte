@@ -3,6 +3,7 @@
     import Button from "comp/atoms/Button.svelte";
     import { mq } from "@/assets/library/MediaQuery.svelte";
     import cart from "@/store/cart.js";
+    import { formatCurrency } from "@/assets/library/CommonFunctions.js";
 </script>
 
 {#if $mq.lg_}
@@ -14,7 +15,7 @@
                     <div>How you'll pay</div>
                 </div>
                 <div class="col align-center gap-20">
-                    <label class="container"
+                    <!-- <label class="container"
                         >Visa/Mastercard
                         <input type="radio" checked="checked" name="radio" />
                         <span class="checkmark" />
@@ -22,6 +23,11 @@
                     <label class="container"
                         >Cash
                         <input type="radio" name="radio" />
+                        <span class="checkmark" />
+                    </label> -->
+                    <label class="container"
+                        >Cryptocurrency
+                        <input type="radio" checked="checked" name="radio" />
                         <span class="checkmark" />
                     </label>
                 </div>
@@ -33,7 +39,7 @@
                         <Icon icon="fluent:shopping-bag-16-regular" width="22" />
                         <div>Item(s) total</div>
                     </div>
-                    <div class="col align-center gap-10">THB 36,397.08</div>
+                    <div class="col align-center gap-10">{formatCurrency(cart.sumPrice())}</div>
                 </div>
             </div>
             <!-- <hr /> -->
@@ -43,7 +49,7 @@
                         <Icon icon="fluent:vehicle-ship-24-regular" width="22" />
                         <div>Shipping</div>
                     </div>
-                    <div class="col align-center gap-10">THB 12,648.53</div>
+                    <div class="col align-center gap-10">{formatCurrency(0)}</div>
                 </div>
             </div>
             <div class="font-14 weight-300 pb-20">To Thailand</div>
@@ -54,7 +60,7 @@
                         <Icon icon="fluent:tag-32-regular" width="22" />
                         <div>Total ({$cart.cart.length} item)</div>
                     </div>
-                    <div class="col align-center gap-10">THB 49,045.61</div>
+                    <div class="col align-center gap-10">{formatCurrency(cart.sumPrice())}</div>
                 </div>
             </div>
             <!-- <hr /> -->
@@ -63,7 +69,7 @@
             </div>
             <div class="col py-20 font-12 text-center gap-10 opacity-75">
                 <p>
-                    This total contains an approximate conversion. You will be charged USD 1,334.04
+                    This total contains an approximate conversion. You will be charged {formatCurrency(cart.sumPrice())}
                     by the shop MattAlfordStudio.
                 </p>
                 <p>Local taxes included (where applicable)</p>
