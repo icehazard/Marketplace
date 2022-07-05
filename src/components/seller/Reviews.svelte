@@ -5,7 +5,7 @@
     import Rating from "comp/atoms/Rating.svelte";
 
     let review = "";
-    let disableReview = true;
+    let disableReview = false;
     let msg1 = 'Only verified buyers can leave reviews';
     let msg2 = "Write a review"
 

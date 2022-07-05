@@ -34,12 +34,12 @@
 				<Search />
 				{#if $mq.lg_}
 					<div class="row gap-10">
-						<Circle to="messages" icon="ant-design:message-outlined" />
-						<Circle to="cart" icon="akar-icons:cart" />
+						<Circle to="messages" tooltip='Messages' icon="ant-design:message-outlined" />
+						<Circle  tooltip='Cart' to="cart" icon="akar-icons:cart" />
 						<button on:click={shopRoute}>
-							<Circle icon="fluent:building-shop-16-regular" />
+							<Circle  tooltip='Your shop' icon="fluent:building-shop-16-regular" />
 						</button>
-						<Circle to="settings" icon="fluent:settings-16-regular" />
+						<Circle  tooltip='Settings' to="settings" icon="fluent:settings-16-regular" />
 					</div>
 				{/if}
 			</section>
@@ -54,7 +54,7 @@
 					<div class="relative row center" use:clickOutside={close}>
 						<button class="row center gap-10" on:click={toggle}>
 							<span class="">{$user.username}</span>
-							<Circle to="" icon="gg:profile" />
+							<Circle  tooltip='Profile' to="" icon="gg:profile" />
 						</button>
 						{#if showModal}
 							<div class="absolute shade1  glass pa-5 w-200 z-2 p-right ">
@@ -93,7 +93,7 @@
 					</div>
 				{/if}
 				{#if $mq._md}
-					<Circle to="profile" icon="eva:menu-fill" />
+					<Circle tooltip='Profile'  to="profile" icon="eva:menu-fill" />
 				{/if}
 			</section>
 		</div>
