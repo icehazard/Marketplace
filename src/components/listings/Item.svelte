@@ -36,11 +36,11 @@
         {#if menu}
         <div class="shade1 pa-15 absolute p-bottom w100 col gap-20 z-2 slide" transition:slide  use:clickOutside={close}>
             <button type="button" class="red--text align-center gap-10" on:click|stopPropagation={del}>
-                    <Icon icon="fluent:delete-12-regular" />
+                    <Icon icon="fluent:delete-12-regular" width='20' />
                     <span>Delete</span>
                 </button>
                 <button type="button" class="align-center gap-10" on:click|stopPropagation={edit}>
-                    <Icon icon="fluent:edit-16-regular" />
+                    <Icon icon="fluent:edit-16-regular" width='20' />
                     <span>Edit</span>
                 </button>
             </div>
@@ -98,8 +98,8 @@
     }
 
     .slide {
-        border-top-left-radius: 4px;
-        border-top-right-radius: 4px;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
     }
 
     @media only screen and (max-width: 576px) {
