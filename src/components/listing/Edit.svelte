@@ -6,7 +6,7 @@
 
     function handleClick() {
         products.spreadProduct();
-        push("#/listing/edit");
+        push(`#/store/listing/edit/${$products.product._id}`);
     }
 </script>
 

@@ -4,7 +4,7 @@
     import { shopValid,  reset } from "@/store/store.js";
     import "@lottiefiles/lottie-player";
     import { onDestroy } from "svelte";
-    import {WEBPACK_URL} from "@/config";
+
 
     let confirm;
     let msg = "";
@@ -24,11 +24,6 @@
         return false;
     }
 
-
-
-    onDestroy(() => {
-        // if (review) reset();
-    });
 </script>
 
 <form class="center col shade3 curve py-50 px-10 pb-100 gap-20">

@@ -1,7 +1,7 @@
 <script>
+    import Banner from "./Banner.svelte";
     import Reviews from "./Reviews.svelte";
     import AddListing from "./AddListing.svelte";
-    import Icon from "@iconify/svelte";
     import Item from "../listing/Item.svelte";
     import { Swiper, SwiperSlide } from "swiper/svelte";
     import { Pagination } from "swiper";
@@ -12,49 +12,20 @@
     import products from "@/store/products.js";
     import "@lottiefiles/lottie-player";
     import user from "@/store/user.js";
-    import {isShopPending, isShopActive} from "@/store/user.js";
+    import { isShopPending, isShopActive } from "@/store/user.js";
     import { onMount } from "svelte";
+    import shops from "@/store/shops.js";
 
     onMount(() => {
         user.get();
     });
 </script>
 
-<section class="col grow gap-30">
+<section class="col grow gap-20">
     <div class="h-400 shade1 curve">
-        <img
-            class="curve"
-            src="https://images.fineartamerica.com/images/artworkimages/mediumlarge/3/banner-close-up-of-growing-bud-claudio-valdes.jpg"
-            alt=""
-        />
+        <img class="curve cover h100 w100" src={$shops.coverPic} alt="" />
     </div>
-    <div class="row gap-30 shade1 pa-20 curved center">
-        <div class="w-100 h-100 shade3 ">
-            <img
-                src="https://images.weedmaps.com/deliveries/000/079/195/avatar/original/1634606312-logo.jpg"
-                alt=""
-            />
-        </div>
-        <div class="col space-between grow font-14 gap-5">
-            <h1 class="font-26">BeautyBreadWoodshop</h1>
-            <div>Furniture with soul, Timeless design built for all time</div>
-            <div class="weight-300 opacity-75">Washington, United States</div>
-            <span>163 Sales 5 out of 5 stars</span>
-            <div class="row align-center gap-10 blue--text">
-                <Icon icon="fluent:info-20-regular" width='25' />
-                <span class="opacity-75">You may leave reviews only after you have brought from this supplier</span>
-            </div>
-        </div>
-        <div class="col center gap-10">
-            <div class="w-70 h-70 shade3 round overflow-hidden">
-                <img
-                    src="https://static.wixstatic.com/media/3e3819_92129268ce534f0ab9c128f3aa25115a~mv2.png"
-                    alt=""
-                />
-            </div>
-            <div class="weight-600 opacity-75">Contact</div>
-        </div>
-    </div>
+    <Banner />
 
     {#if $isShopPending}
         <div class="blue py-50 font-20 center curve blue--text">Account pending verification</div>
@@ -63,7 +34,7 @@
     {/if}
 
     <div class="col gap-10">
-        <div>{$products.products.length ? 'Featured Products' : ''}</div>
+        <div>{$products.products.length ? "Featured Products" : ""}</div>
         <div class="row gap-10 ">
             <Swiper
                 slidesPerView={"auto"}
@@ -87,11 +58,3 @@
     </div>
     <Reviews />
 </section>
-
-<style>
-    img {
-        object-fit: cover;
-        width: 100%;
-        height: 100%;
-    }
-</style>

@@ -1,6 +1,11 @@
 import { persist } from '@/assets/library/CommonFunctions.js'
 
 const data = {
+    name: "",
+    desc: "",
+    coverPic: "",
+    displayPic: "",
+    loc: "",
     shop: {
         coverPic: "",
         displayPic: "",
@@ -11,10 +16,10 @@ const data = {
         sales: "",
         sellerContact: "",
         allProducts: [],
-        featuredProducts: [] 
+        featuredProducts: []
     }
 }
 
-const context = persist('shop', data)
+const context = persist('shops', data)
 
 export default context;

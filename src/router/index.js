@@ -14,13 +14,14 @@ const Seller = () => import("@/views/Seller.svelte");
 const ViewOrder = () => import("@/views/ViewOrder.svelte");
 const Login = () => import("@/views/Login.svelte");
 const Signup = () => import("@/views/Signup.svelte");
+const Shop = () => import("@/views/Shop.svelte");
 
 export default {
     "/": wrap({ asyncComponent: Home }),
     "/shops": wrap({ asyncComponent: Home }),
     "/top": wrap({ asyncComponent: Home }),
-    "/listing": wrap({ asyncComponent: Listing }),
-    "/listing/edit": wrap({ asyncComponent: AddListing }),
+    "/listing/:id": wrap({ asyncComponent: Listing }),
+    "/store/listing/edit/:id": wrap({ asyncComponent: AddListing }),
     "/settings": wrap({ asyncComponent: Settings, conditions: [auth] }),
     "/orders/overview": wrap({ asyncComponent: Orders, conditions: [auth] }),
     "/orders/view/:id": wrap({ asyncComponent: ViewOrder, conditions: [auth] }),
@@ -28,7 +29,8 @@ export default {
     "/account": wrap({ asyncComponent: Profile, conditions: [auth] }),
     "/messages": wrap({ asyncComponent: Messages, conditions: [auth] }),
     "/store/create": wrap({ asyncComponent: ShopWizard }),
-    "/listing/create": wrap({ asyncComponent: AddListing }),
+    "/store/settings": wrap({ asyncComponent: Shop }),
+    "/store/add": wrap({ asyncComponent: AddListing }),
     "/seller": wrap({ asyncComponent: Seller }),
     "/login": wrap({ asyncComponent: Login }),
     "/signup": wrap({ asyncComponent: Signup }),

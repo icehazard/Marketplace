@@ -4,6 +4,6 @@
 </script>
 
 <section class="row container my-50 gap-50 grow">
-    <Categories />
+    <!-- <Categories /> -->
     <Cart />
 </section>

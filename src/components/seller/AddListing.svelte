@@ -3,7 +3,7 @@
     import "@lottiefiles/lottie-player";
 
     function AddListing() {
-        push("#/listing/create");
+        push("#/store/add");
     }
 </script>
 

@@ -25,7 +25,7 @@
                 <Icon icon="fluent:chevron-right-16-regular" width="16" />
             </a>
             <hr />
-            <a href="#/listing/create" class="row px-20 py-20 align-center space-between w100 shine"  use:link  use:active={  '/listing/*'}>
+            <a href="#/store/settings" class="row px-20 py-20 align-center space-between w100 shine"  use:link  use:active={  '/store/*'}>
                 <div class="row align-center gap-10">
                     <Icon icon="fluent:building-shop-16-regular" width="22" />
                     <div>Shop</div>
