@@ -3,7 +3,6 @@
     import Field from "comp/atoms/TextField.svelte";
     import { push } from "svelte-spa-router";
     import user from "@/store/user.js";
-    import { WEBPACK_URL } from "../../config";
     import { post } from "@/assets/library/CommonFunctions.js";
 
     let username = "";
@@ -17,7 +16,7 @@
         if (!res.error) {
             $user.username = res.username;
             $user.token = res.token;
-            await user.get();
+            user.get();
             push("#/");
         } else {
             message = "Account/password not found";
