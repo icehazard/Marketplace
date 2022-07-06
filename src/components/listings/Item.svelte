@@ -5,6 +5,7 @@
     import products from "@/store/products.js";
     import { slide } from "svelte/transition";
     import { clickOutside } from "@/assets/library/CommonFunctions.js";
+    import { formatCurrency } from "@/assets/library/CommonFunctions.js";
     export let data = [];
 
     let menu = false;
@@ -63,7 +64,7 @@
                 <Icon icon="fluent:more-vertical-16-regular" />
             </button>
         </div>
-        <span class="weight-600 text-start">฿ {data.price || ""}</span>
+        <span class="weight-600 text-start">{formatCurrency(data.price) || ""}</span>
         <div class="row space-between gap-10 opacity-60">
             <div class="row center gap-5 nowrap grow justify-start">
                 <Rating rating={Math.random() * 5} />

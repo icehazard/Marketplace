@@ -112,6 +112,8 @@
 
 .shine:hover {
   filter: contrast(0.9);
+  background-color: rgba(117, 117, 117, 0.2);
+  color: var(--shade6);
 }
 
 .gap-1 {

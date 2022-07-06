@@ -1,19 +1,19 @@
 <script>
     export let data = [];
-    import  cart  from "@/store/cart.js";
+    import cart from "@/store/cart.js";
+    import { formatCurrency } from "@/assets/library/CommonFunctions.js";
 
     function remove() {
-        let index = $cart.cart.findIndex((el) => Object.is(el, data));
-
+        cart.removeFromCart(data);
     }
 </script>
 
 <div class="row shade1 curve wrapper">
-    <img src={data.image} alt="" />
+    <img src={data.imageURL} alt="" />
     <div class="row pa-20 grow gap-50">
-        <div class="col grow description">
-            <div class="weight-600 font-18">{data.title}</div>
-            {data.description}
+        <div class="col grow description gap-10">
+            <div class="weight-600 font-18">{data.name}</div>
+           <div> {data.desc}</div>
         </div>
         <div class="col space-between">
             <div class="row gap-10">
@@ -28,7 +28,7 @@
             <button on:click={remove} class="font-14 weight-600">Remove</button>
         </div>
         <div class="col space-between">
-            <span>THB {data.price}</span>
+            <span>{formatCurrency(data.price)}</span>
             <span class="font-14 weight-600">Save for later</span>
         </div>
     </div>
@@ -42,11 +42,11 @@
         border-radius: 10px;
     }
 
-    .wrapper{
+    .wrapper {
         max-height: 200px;
     }
 
-    .description{
+    .description {
         overflow: hidden;
     }
 </style>

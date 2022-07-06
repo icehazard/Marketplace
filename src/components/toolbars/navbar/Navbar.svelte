@@ -61,7 +61,7 @@
 								<a
 									on:click={close}
 									href="#/account"
-									class="menuItem w100 center py-10 curve"
+									class="menuItem w100 center py-10 curve shine"
 								>
 									Account
 								</a>
@@ -69,7 +69,7 @@
 								<a
 									on:click={close}
 									href="#/orders/overview"
-									class="menuItem w100 center py-10 curve"
+									class="menuItem w100 center py-10 curve shine"
 								>
 									Orders
 								</a>
@@ -77,14 +77,14 @@
 								<a
 									on:click={close}
 									href="#/settings"
-									class="menuItem w100 center py-10 curve"
+									class="menuItem w100 center py-10 curve shine"
 								>
 									Settings
 								</a>
 								<hr />
 								<button
 									on:click={logoutFunc}
-									class="menuItem w100 center py-10 curve"
+									class="menuItem w100 center py-10 curve shine"
 								>
 									Logout
 								</button>
@@ -103,7 +103,7 @@
 <style>
 	nav {
 		backdrop-filter: blur(20px);
-		background-color: rgba(19, 18, 18, 0.53);
+		background-color: var(--navbar);
 		position: fixed;
 		width: 100%;
 		height: 60px;
@@ -111,9 +111,9 @@
 		z-index: 3;
 	}
 
-	.menuItem:hover {
+	/* .menuItem:hover {
 		background-color: rgba(102, 102, 102, 0.53);
-	}
+	} */
 
 	.absolute {
 		top: 50px;

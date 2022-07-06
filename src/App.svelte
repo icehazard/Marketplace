@@ -1,4 +1,5 @@
 <script>
+	import user from '@/store/user.js';
 	import Footer from "./components/toolbars/Footer.svelte";
 	import Navbar from "comp/toolbars/navbar/Navbar.svelte";
 	import Mobile from "comp/toolbars/navbar/Mobile.svelte";
@@ -10,6 +11,8 @@
 	function conditionsFailed(event){
 		replace('/login')
 	}
+	
+	document.documentElement.setAttribute("data-theme", $user.theme);
 </script>
 
 <main class="col vh100">

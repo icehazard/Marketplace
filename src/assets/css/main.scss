@@ -10,8 +10,8 @@ body {
     padding: 0;
     min-height: 100%;
     font-family: Roboto;
-    color: white;
-    background-color: $shade2;
+    color:  var(--shade6);
+    background-color: var(--shade2);
     overflow: overlay;
 }
 
@@ -58,7 +58,7 @@ a {
 }
 
 hr {
-    border: 1px solid $shade2;
+    border: 1px solid  var(--shade2);
 }
 
 p{
@@ -66,11 +66,11 @@ p{
 }
 
 .border {
-    border: 1px solid $shade3;
+    border: 1px solid  var(--shade3);
 }
 
 .borderStrong {
-    border: 1px solid $shade4;
+    border: 1px solid  var(--shade4);
 }
 
 .fast {
@@ -86,21 +86,21 @@ p{
 }
 
 *::-webkit-scrollbar-track {
-    background: $shade1;
+    background:  var(--shade1);
 }
 
 *::-webkit-scrollbar-thumb {
-    background-color: $shade3;
+    background-color:  var(--shade3);
     border-radius: 10px;
 }
 
 ::-webkit-scrollbar-corner {
-    background: $shade1;
+    background: var(--shade1);
 }
 
 a.active {
     background-color: rgba(100, 100, 100, 0.4);
-    color: white;
+    color: var(--shade6);
 }
 
 @media only screen and (max-width: 576px) {

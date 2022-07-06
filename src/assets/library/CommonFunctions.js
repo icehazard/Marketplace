@@ -1,6 +1,7 @@
 import { writable, get as getStore } from "svelte/store";
 import { WEBPACK_URL } from "@/config";
 import user from '@/store/user.js'
+import {currencies } from '@/assets/library/options.js'
 
 export function clickOutside(element, callbackFunction) {
     function onClick(event) {
@@ -41,9 +42,19 @@ export function persist(name, data) {
     return value;
 }
 
+export function formatCurrency(x) {
+    let active = getStore(user).currency;
+    let currency = currencies.filter((el) => el.id == active)[0]
+    x = x / currency.convert
+    x = Number(x).toFixed(currency.sign);
+    var parts = x.toString().split(".");
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return active + " " + parts.join(".");
+}
+
 let headers = {
     Accept: "application/json",
-    token: getStore(user).token,
+    token: JSON.parse(localStorage.getItem('user')).token,
     "Content-Type": "application/json",
 }
 

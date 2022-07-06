@@ -35,6 +35,7 @@
     "morgan": "^1.10.0",
     "node-fetch": "^3.2.6",
     "node-polyfill-webpack-plugin": "^1.1.4",
+    "pluralize": "^8.0.0",
     "svelte-forms-lib": "^2.0.1",
     "svelte-persistent-store": "^0.1.6",
     "svelte-select": "^4.4.7",
