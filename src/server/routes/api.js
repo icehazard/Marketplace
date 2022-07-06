@@ -133,6 +133,9 @@ api.post('/shop/:sid/product', async (req, res) => {
 
     //let shopId = (await accountHandler.Accounts.get(accId).getShopIds())[0]._id
 
+    if (!shopHandler.Shops.has(parseInt(sid)))
+        return res.status(400).json({status: "error", error: "That shop does not exist!"})
+
     if (!await accountHandler.Accounts.get(accId).ownsShopID(sid))
         return res.status(400).json({status: "error", error: "You do not own this shop!"})
 
@@ -167,6 +170,9 @@ api.patch('/product/:pid', async (req, res) => {
     let p = productHandler.Products.get(pid)
     let sid = p.shopID
 
+    if (!shopHandler.Shops.has(parseInt(sid)))
+        return res.status(400).json({status: "error", error: "That shop does not exist!"})
+
     if (!await accountHandler.Accounts.get(accId).ownsShopID(sid))
         return res.status(400).json({status: "error", error: "You do not own this shop!"})
 
@@ -191,6 +197,9 @@ api.delete('/shop/:sid/product/:id', async (req, res) => {
     const pid = parseInt(req.params.id)
     const sid = parseInt(req.params.sid)
 
+    if (!shopHandler.Shops.has(parseInt(sid)))
+        return res.status(400).json({status: "error", error: "That shop does not exist!"})
+
     if (!await accountHandler.Accounts.get(accId).ownsShopID(sid))
         return res.status(400).json({status: "error", error: "You do not own this shop!"})
 
@@ -213,6 +222,9 @@ api.get('/shop/:sid/product', async (req, res) => {
     const accId = authed._id;
     const sid = req.params.sid
 
+
+    if (!shopHandler.Shops.has(parseInt(sid)))
+        return res.status(400).json({status: "error", error: "That shop does not exist!"})
 
     console.log("Got shop ID", sid)
     let list = await shopHandler.Shops.get(parseInt(sid)).getProductList()
