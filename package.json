@@ -33,6 +33,7 @@
     "lottie-web": "^5.9.4",
     "mongodb": "^4.7.0",
     "morgan": "^1.10.0",
+    "node-fetch": "^3.2.6",
     "node-polyfill-webpack-plugin": "^1.1.4",
     "pluralize": "^8.0.0",
     "svelte-forms-lib": "^2.0.1",

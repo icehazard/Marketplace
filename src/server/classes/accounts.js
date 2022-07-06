@@ -203,6 +203,7 @@ class Account {
     async hasShop() {
         return shopHandler.Shops.getShopByOwnerId(this._id)
     }
+
     async ownsShopID(sid) {
         let shopObject = await shopHandler.Shops.getShopByOwnerId(this._id)
         console.log("🚀 ~ file: accounts.js ~ line 208 ~ Account ~ ownsShopID ~ shopObjects", this._id)
