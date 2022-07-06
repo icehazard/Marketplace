@@ -100,3 +100,9 @@ export async function patch(route, data) {
     })
     return await res.json()
 }
+
+export  function hasError(data, initVal) {
+    let error = data.status == 'error';
+    initVal = initVal ? initVal : [];
+    return error ? initVal : data;
+}

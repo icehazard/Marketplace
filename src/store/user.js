@@ -1,6 +1,6 @@
 import { push } from "svelte-spa-router";
 import { derived } from "svelte/store";
-import { persist, get } from '@/assets/library/CommonFunctions.js'
+import { persist, get, hasError } from '@/assets/library/CommonFunctions.js'
 
 const data = {
     username: '',
@@ -19,6 +19,7 @@ context.logout = function () {
 }
 context.get = async function () {
     let res = await get('api/me')
+    res = hasError(res, data.me)
     return context.commit('me', res)
 }
 context.shopID = function () {
