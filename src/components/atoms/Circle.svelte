@@ -33,6 +33,4 @@
         outline: solid 1px var(--primary);
         background-color: #222222;
     }
-
-    /*This would all go into the global.css file*/
 </style>

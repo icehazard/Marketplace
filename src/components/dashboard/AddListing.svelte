@@ -30,7 +30,7 @@
 <form on:submit|preventDefault={post} class="grow col gap-20">
     <h1 class="row pl-20 font-36 weight-300 align-center gap-20">
         <Icon icon="fluent:{btnText.toLocaleLowerCase()}-16-regular" width="30" />
-        <span>SHOP <span class="px-10">></span> {btnText} YOUR PRODUCT</span>
+        <span><a href="#/store/settings">SHOP</a> <span class="px-10">></span> {btnText} YOUR PRODUCT</span>
     </h1>
     <div class="grow col shade3 curve">
         <div class="row  w100 pa-20 space-between  shade3">
