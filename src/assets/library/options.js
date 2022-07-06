@@ -6,8 +6,8 @@ export let currencies = [
 
 export let languages = [
     { id: 'ENG', name: 'English' },
-    { id: 'TAI', name: 'Thai' },
-    { id: 'RUS', name: 'Russian' },
+    // { id: 'TAI', name: 'Thai' },
+    // { id: 'RUS', name: 'Russian' },
 ]
 
 export let themes = [

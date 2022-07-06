@@ -1,5 +1,6 @@
 :root {
     --primary: #5dc24f;
+    
     --shade0: #161616;
     --shade1: #1a1a1a;
     --shade2: #222222;
@@ -7,7 +8,7 @@
     --shade4: #646464;
     --shade5: #9f9f9f;
     --shade6: #ffffff;
-    --navbar: rgba(19, 18, 18, 0.53);
+    --navbar: #13121287;
 }
 
 html[data-theme='light'] {
@@ -18,7 +19,7 @@ html[data-theme='light'] {
     --shade4: #2c2c2c;
     --shade5: #131313;
     --shade6: #000000;
-    --navbar: rgba(235, 235, 235, 0.53);
+    --navbar: #ebebeb87;
 }
 
 $black: #000000;

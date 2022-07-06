@@ -31,5 +31,10 @@ context.shopID = function () {
     if (!context.val('me')[0]) return 0;
     return context.val('me')[0]._id
 }
+context.setTheme = function (data) {
+    let theme = data ? data : context.val('theme')
+    document.documentElement.setAttribute("data-theme", theme);
+    context.commit('theme', theme)
+}
 
 export default context

@@ -12,7 +12,7 @@
 		replace('/login')
 	}
 	
-	document.documentElement.setAttribute("data-theme", $user.theme);
+	user.setTheme()
 </script>
 
 <main class="col vh100">

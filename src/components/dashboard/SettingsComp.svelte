@@ -13,8 +13,7 @@
     }
 
     function selectedThemes(item) {
-        $user.theme = item.detail.id;
-        document.documentElement.setAttribute("data-theme", item.detail.id);
+        user.setTheme(item.detail.id)
     }
 </script>
 
