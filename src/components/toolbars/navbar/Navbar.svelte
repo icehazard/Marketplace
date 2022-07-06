@@ -1,6 +1,5 @@
 <script>
 	import { push } from "svelte-spa-router";
-	import Connect from "./Connect.svelte";
 	import Button from "comp/atoms/Button.svelte";
 	import Search from "./Search.svelte";
 	import Title from "./Title.svelte";
@@ -8,6 +7,7 @@
 	import { mq } from "@/assets/library/MediaQuery.svelte";
 	import { clickOutside } from "@/assets/library/CommonFunctions.js";
 	import user from "@/store/user.js";
+	import { isShopActive } from "@/store/user.js";
 
 	let showModal = false;
 
@@ -22,7 +22,7 @@
 		user.logout();
 	}
 	function shopRoute() {
-		user.isShopActive() ? push("#/seller") : push("#/store/create");
+		$isShopActive ? push("#/seller") : push("#/store/create");
 	}
 </script>
 
@@ -34,12 +34,20 @@
 				<Search />
 				{#if $mq.lg_}
 					<div class="row gap-10">
-						<Circle to="messages" tooltip='Messages' icon="ant-design:message-outlined" />
-						<Circle  tooltip='Cart' to="cart" icon="akar-icons:cart" />
+						<Circle
+							to="messages"
+							tooltip="Messages"
+							icon="ant-design:message-outlined"
+						/>
+						<Circle tooltip="Cart" to="cart" icon="akar-icons:cart" />
 						<button on:click={shopRoute}>
-							<Circle  tooltip='Shop Manager' icon="fluent:building-shop-16-regular" />
+							<Circle tooltip="Shop Manager" icon="fluent:building-shop-16-regular" />
 						</button>
-						<Circle  tooltip='Settings' to="settings" icon="fluent:settings-16-regular" />
+						<Circle
+							tooltip="Settings"
+							to="settings"
+							icon="fluent:settings-16-regular"
+						/>
 					</div>
 				{/if}
 			</section>
@@ -54,7 +62,7 @@
 					<div class="relative row center" use:clickOutside={close}>
 						<button class="row center gap-10" on:click={toggle}>
 							<span class="">{$user.username}</span>
-							<Circle  tooltip='Profile' to="" icon="gg:profile" />
+							<Circle tooltip="Profile" to="" icon="gg:profile" />
 						</button>
 						{#if showModal}
 							<div class="absolute shade1  glass pa-5 w-200 z-2 p-right ">
@@ -93,7 +101,7 @@
 					</div>
 				{/if}
 				{#if $mq._md}
-					<Circle tooltip='Profile'  to="profile" icon="eva:menu-fill" />
+					<Circle tooltip="Profile" to="profile" icon="eva:menu-fill" />
 				{/if}
 			</section>
 		</div>

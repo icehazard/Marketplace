@@ -86,7 +86,9 @@ export async function get(route) {
         method: "GET",
         headers
     })
-    return await res.json()
+    res = await res.json()
+    if (res.status == 'error') return []
+    return res
 }
 
 export async function patch(route, data) {

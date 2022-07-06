@@ -63,7 +63,7 @@
     {/if}
 
     <div class="col gap-10">
-        <div>Featured items</div>
+        <div>{$products.products.length ? 'Featured Products' : ''}</div>
         <div class="row gap-10 ">
             <Swiper
                 slidesPerView={"auto"}
