@@ -1,4 +1,5 @@
 import { push } from "svelte-spa-router";
+import { derived } from "svelte/store";
 import { persist, get } from '@/assets/library/CommonFunctions.js'
 
 const data = {
@@ -20,13 +21,6 @@ context.get = async function () {
     let res = await get('api/me')
     return context.commit('me', res)
 }
-context.isShopActive = function () {
-    return context.val('me').length > 0;
-}
-context.isShopPending = function () {
-    if (!context.val('me')[0]) return false;
-    return context.val('me')[0].status == 0;
-}
 context.shopID = function () {
     if (!context.val('me')[0]) return 0;
     return context.val('me')[0]._id
@@ -36,5 +30,12 @@ context.setTheme = function (data) {
     document.documentElement.setAttribute("data-theme", theme);
     context.commit('theme', theme)
 }
+export const isShopPending = derived(context, () => {
+    if (!context.val('me')[0]) return false;
+    return context.val('me')[0].status == 0;
+});
+export const isShopActive = derived(context, () => {
+    return context.val('me').length > 0;
+});
 
 export default context

@@ -12,6 +12,7 @@
     import products from "@/store/products.js";
     import "@lottiefiles/lottie-player";
     import user from "@/store/user.js";
+    import {isShopPending, isShopActive} from "@/store/user.js";
     import { onMount } from "svelte";
 
     onMount(() => {
@@ -55,9 +56,9 @@
         </div>
     </div>
 
-    {#if user.isShopPending()}
+    {#if $isShopPending}
         <div class="blue py-50 font-20 center curve blue--text">Account pending verification</div>
-    {:else if user.isShopActive()}
+    {:else if $isShopActive}
         <AddListing />
     {/if}
 
