@@ -10,6 +10,8 @@
   "REDIS_PW": "529ca8050a001807",
   "customStr": "mongodb://127.0.0.1:27017/admin",
   "WEB_SERVER_PORT": 9000,
+  "BTC_PAY_URL": "http://btcpay.cocksuckas.com",
+  "BTC_PAY_API_KEY": "11108a8497f371fe646b321498af476c9e89ca1c",
   "API_URL": "127.0.0.1:9000",
   "WEBPACK_URL": "127.0.0.1:8080",
   "SECRET_KEY": "xtRvvs2mM/wc/1fRH1qE/Po4L+UUK3HY1hlZ3vr1d4y2GNCzljf+mMzs91L4jHc5V7HfztCgQ/+qYBjOhRet51YfIei5lZRSkqQ3QSjKWlgH+ayL2GM0qKJ+Oz+68GdHpgS67GszPxeeDT7Xuams/P4k0FkdUJjjSOWWQPJZNsItcFMC8fx/S48cO5NlKRhBCs8hGh6MKm9P2N1NndHEou3ky8xgExPEKl6a0ld952nkoe/EcQ+MSO3nNEs4UNiA7Lln3vk+RfC+HNm3v+OTafY6hUaTEbUr5v83KJdfw+wEtE836axW0UEvzuAjF7Wb86xhz49my/3otOIOIh4vSg=="
