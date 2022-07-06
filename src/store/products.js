@@ -37,6 +37,7 @@ context.edit = async function () {
 }
 context.get = async function () {
     const id = user.shopID();
+    if (!id) return;
     let res = await get(`api/shop/${id}/product`)
     res = hasError(res, data.products)
     return context.commit('products', res)

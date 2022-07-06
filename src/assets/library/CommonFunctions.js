@@ -30,7 +30,8 @@ export function persist(name, data) {
     let local = localStorage.getItem(name)
     const value = writable(local ? JSON.parse(local) : data);
     value.subscribe(val => { localStorage.setItem(name, JSON.stringify(val)) });
-    value.reset = () => value.set(data)
+    value.default = data;
+    value.reset = () => value.set(value.default)
     value.val = (key) => getStore(value)[key]
     value.all = () => getStore(value)
     value.commit = (key, val) => {
