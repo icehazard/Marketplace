@@ -52,9 +52,12 @@ export function formatCurrency(x) {
     return active + " " + parts.join(".");
 }
 
+let getUser = localStorage.getItem('user');
+let token = getUser ? JSON.parse(localStorage.getItem('user')).token : ''
+
 let headers = {
     Accept: "application/json",
-    token: JSON.parse(localStorage.getItem('user')).token,
+    token: token,
     "Content-Type": "application/json",
 }
 
