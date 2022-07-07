@@ -16,7 +16,7 @@
         if (!res.error) {
             $user.username = res.username;
             $user.token = res.token;
-            user.get();
+            await user.get();
             push("#/");
         } else {
             message = "Account/password not found";

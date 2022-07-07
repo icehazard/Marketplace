@@ -1,7 +1,7 @@
 import { writable, get as getStore } from "svelte/store";
 import { WEBPACK_URL } from "@/config";
 import user from '@/store/user.js'
-import {currencies } from '@/assets/library/options.js'
+import { currencies } from '@/assets/library/options.js'
 
 export function clickOutside(element, callbackFunction) {
     function onClick(event) {
@@ -30,8 +30,7 @@ export function persist(name, data) {
     let local = localStorage.getItem(name)
     const value = writable(local ? JSON.parse(local) : data);
     value.subscribe(val => { localStorage.setItem(name, JSON.stringify(val)) });
-    value.default = data;
-    value.reset = () => value.set(value.default)
+    value.reset = () => value.set(JSON.parse(JSON.stringify(data)))
     value.val = (key) => getStore(value)[key]
     value.all = () => getStore(value)
     value.commit = (key, val) => {
@@ -102,7 +101,7 @@ export async function patch(route, data) {
     return await res.json()
 }
 
-export  function hasError(data, initVal) {
+export function hasError(data, initVal) {
     let error = data.status == 'error';
     initVal = initVal ? initVal : [];
     return error ? initVal : data;

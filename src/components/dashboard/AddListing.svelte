@@ -9,7 +9,6 @@
 
     let edit = $location.includes("edit");
     let btnText = edit ? "EDIT" : "ADD";
-    let icon = edit ? "fluent:edit-16-regular" : "fluent:add-16-regular";
 
     const post = async () => {
         let res = edit ? await products.edit() : await products.post();
@@ -18,12 +17,7 @@
     };
 
     onDestroy(() => {
-        if (!edit) return;
-        $products.name = "";
-        $products.imageURL = "";
-        $products.price = "";
-        $products.qty = "";
-        $products.desc = "";
+        if (edit) products.reset();
     });
 </script>
 

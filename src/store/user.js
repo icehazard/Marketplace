@@ -14,7 +14,7 @@ const data = {
 const context = persist('user', data)
 
 context.logout = function () {
-    context.set(data)
+    context.reset(data)
     push('#/login')
 }
 context.get = async function () {
