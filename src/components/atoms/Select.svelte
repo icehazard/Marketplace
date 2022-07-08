@@ -3,14 +3,14 @@
     import { clickOutside } from "@/assets/library/CommonFunctions.js";
     import { createEventDispatcher } from "svelte";
     const dispatch = createEventDispatcher();
-    
+
     export let items = [];
-    export let init = '';
+    export let init = "";
 
     let filteredItems = items;
     let searchInput = "";
     let showSearch = false;
-   
+
     function search(key) {
         let filter = searchInput;
         if (!filter || !filter.length) closePicker();
@@ -35,13 +35,13 @@
     function handleWindowKeyDown(event) {
         if (event.key === "Escape") closePicker();
     }
-    function initValue(){
-        let item = items.filter((el) => el.id == init)
+    function initValue() {
+        let item = items.filter((el) => el.id == init);
         if (item.length == 0) return;
-        searchInput = item[0].name
+        searchInput = item[0].name;
     }
 
-    initValue()
+    initValue();
 </script>
 
 <div
@@ -50,27 +50,25 @@
     on:click={openPicker}
     on:keyup={handleWindowKeyDown}
 >
-    <div
-        class="borderStrong cursor-text gap-10 curve align-center px-20 h-40 mobile-w100 shade2 w100"
-    >
+    <div class="">
         <input
             bind:value={searchInput}
             on:keydown={search}
             autocomplete="off"
             name="name"
             type="text"
-            class="w100 shade2 cursor-text"
+            class="borderStrong gap-10 curve align-center px-20 h-40 mobile-w100 shade2 w100 slow"
             placeholder="Select a option"
         />
-        <div class="center cursor-pointer">
+        <div class="center cursor-pointer absolute icon p-right pr-10">
             <Icon icon="fluent:chevron-up-down-20-regular" />
         </div>
     </div>
     {#if showSearch}
-        <div class=" w30 shade2 curve overlay absolute w100 z-3">
+        <div class="menu w30 shade2 curve overlay absolute w100 z-3">
             {#each filteredItems as b}
                 <button
-                    class="row align-center px-20 py-15 bank-search-box curve w100"
+                    class="row align-center px-20 py-15 bank-search-box curve w100 slow"
                     on:click={select(b)}
                     onWindowKeyDown={handleWindowKeyDown}
                 >
@@ -90,8 +88,8 @@
 </div>
 
 <style>
-    .bank-search-box {
-        transition: 0.3s all ease;
+    input:focus-visible {
+        outline: 1px solid rgba(255, 255, 255, 0.6);
     }
 
     .bank-search-box:focus-visible {
@@ -102,7 +100,11 @@
         background-color: rgba(100, 100, 100, 0.4);
     }
 
-    .absolute {
-        top: 43px;
+    .icon {
+        top: 13px;
+    }
+
+    .menu{
+        top: 50px;
     }
 </style>

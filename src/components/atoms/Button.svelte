@@ -12,7 +12,7 @@
 </script>
 
 <button
-    class="curve center shine shade4-40 py-10 px-40"
+    class="curve center shine borderStrong shade2 py-10 px-40"
     class:disable
     disabled={disable}
     {type}
@@ -20,12 +20,8 @@
 >
 
 <style>
-    button {
-        min-width: 120px;
-    }
-
     button:focus-visible {
-        background-color: rgba(117, 117, 117, 0.5);
+        outline: 1px solid rgba(255, 255, 255, 0.6);
     }
 
     .disable {

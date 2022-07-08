@@ -99,8 +99,10 @@
         <hr />
         <section class="row space-between align-center pa-20">
             <span class="font-14 opacity-75 align-center gap-10 blue--text">
-                <Icon icon="fluent:info-20-regular" width="20" />
-                <span>Every sale results in a {FEE}% maintainence fee</span>
+             {#if !edit}
+             <Icon icon="fluent:info-20-regular" width="20" />
+             <span>Every sale results in a {FEE}% maintainence fee</span>
+             {/if}
             </span>
             <Button type="submit" text={btnText + " PRODUCT"} />
         </section>

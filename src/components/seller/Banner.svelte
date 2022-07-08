@@ -13,18 +13,18 @@
     <div class="col space-between grow font-14 gap-5">
         <h1 class="font-26 row gap-20 align-center parent">
             {$shops.name}
-            <a href="#/store/settings" class="child annie">
+            <a href="#/store/settings" class="child slow">
                 <Icon icon="fluent:edit-20-regular" width="20" />
             </a>
         </h1>
         <div class="row gap-20 align-center parent">
             {$shops.desc}
-            <a href="#/store/settings" class="child annie">
+            <a href="#/store/settings" class="child slow">
                 <Icon icon="fluent:edit-20-regular" width="20" />
             </a>
         </div>
         <div class="weight-300 opacity-75 align-center gap-20 parent">{$shops.loc}
-         <a href="#/store/settings" class="child annie">
+         <a href="#/store/settings" class="child slow">
                 <Icon icon="fluent:edit-20-regular" width="20" />
             </a></div>
         <span>163 Sales 5 out of 5 stars</span>
