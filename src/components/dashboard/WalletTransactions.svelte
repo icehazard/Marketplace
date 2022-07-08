@@ -51,14 +51,14 @@
         <div class="col w100 ">
             <button on:click={handleClick} class="grid shine w100 pa-20 space-between  shade3">
                 <span class="row gap-10 justify-start align-center">
-                    <div class="imgWrapper center">
-                        <Icon icon="fluent:image-32-regular" />
+                    <div class="imgWrapper center blue--text">
+                        <Icon icon="bi:arrow-bar-up" />
                     </div>
-                    <span>Thai seed bank</span>
+                    <span>Widthdraw</span>
                 </span>
-                <span>12 Items</span>
-                <span>1,583 THB</span>
-                <span class="info--text">Processing Order</span>
+                <span>{0.001}</span>
+                <span>{formatCurrency(0.001 * rate)}</span>
+                <span>Completed</span>
                 <span>21/06/2022</span>
                 <div class="justify-end">
                     <Icon icon="fluent:chevron-right-28-regular" width="20" />
@@ -69,14 +69,14 @@
         <div class="col w100 ">
             <button on:click={handleClick} class="grid shine w100 pa-20 space-between  shade3">
                 <span class="row gap-10 justify-start align-center">
-                    <div class="imgWrapper center">
-                        <Icon icon="fluent:image-32-regular" />
+                    <div class="imgWrapper center green--text">
+                        <Icon icon="bi:arrow-bar-down" />
                     </div>
-                    <span>Oaseeds</span>
+                    <span>Deposit</span>
                 </span>
-                <span>2 Items</span>
-                <span>183 THB</span>
-                <span class="warning--text">In Transit</span>
+                <span>{0.002}</span>
+                <span>{formatCurrency(0.002 * rate)}</span>
+                <span>Completed</span>
                 <span>25/06/2022</span>
                 <div class="justify-end">
                     <Icon icon="fluent:chevron-right-28-regular" width="20" />
@@ -87,14 +87,14 @@
         <div class="col w100 ">
             <button on:click={handleClick} class="grid shine w100 pa-20 space-between  shade3">
                 <span class="row gap-10 justify-start align-center">
-                    <div class="imgWrapper center">
-                        <Icon icon="fluent:image-32-regular" />
+                    <div class="imgWrapper center blue--text">
+                        <Icon icon="bi:arrow-bar-up" />
                     </div>
-                    <span>MetaRoadGrows</span>
+                    <span>Widthdraw</span>
                 </span>
-                <span>6 Items</span>
-                <span>1183 THB</span>
-                <span class='success--text'>Delivered</span>
+                <span>{0.0005}</span>
+                <span>{formatCurrency(0.0005 * rate)}</span>
+                <span>Completed</span>
                 <span>05/05/2022</span>
                 <div class="justify-end">
                     <Icon icon="fluent:chevron-right-28-regular" width="20" />
@@ -105,14 +105,14 @@
         <div class="col w100 ">
             <button on:click={handleClick} class="grid shine w100 pa-20 space-between  shade3">
                 <span class="row gap-10 justify-start align-center">
-                    <div class="imgWrapper center">
-                        <Icon icon="fluent:image-32-regular" />
+                    <div class="imgWrapper center blue--text">
+                        <Icon icon="bi:arrow-bar-up" />
                     </div>
-                    <span>MetaRoadGrows</span>
+                    <span >Widthdraw</span>
                 </span>
-                <span>6 Items</span>
-                <span>1183 THB</span>
-                <span class='error--text'>Cancelled</span>
+                <span>{0.2}</span>
+                <span>{formatCurrency(0.2 * rate)}</span>
+                <span>Completed</span>
                 <span>05/05/2022</span>
                 <div class="justify-end">
                     <Icon icon="fluent:chevron-right-28-regular" width="20" />
