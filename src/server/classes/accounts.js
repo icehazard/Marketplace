@@ -131,7 +131,7 @@ class Account {
             _id: -1
         }).limit(1).toArray()
 
-        if (!data) {
+        if (!data || !data.length) {
             console.log("Got error with latest ID");
             nid = 1;
             // return "ACCOUNT_CREATION_ERROR"
