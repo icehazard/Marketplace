@@ -38,7 +38,7 @@
                 <Icon icon="uil:money-insert" width="30" />
                 <div class="col gap-10">
                     <span>Send</span>
-                    <span class="font-14 opacity-75">Withdraw money from your account</span>
+                    <span class="font-14 opacity-75">Withdraw bitcoin from your account</span>
                 </div>
             </div>
             <div class="center h100">
@@ -51,7 +51,7 @@
                 <Icon icon="uil:money-withdraw" width="30" />
                 <div class="col gap-10">
                     <span>Receive</span>
-                    <span class="font-14 opacity-75">Deposit money into your account</span>
+                    <span class="font-14 opacity-75">Deposit bitcoin into your account</span>
                 </div>
             </div>
             <div class="center h100">
@@ -67,7 +67,7 @@
                 <Icon icon="fluent:history-16-regular" width="30" />
                 <div class="col gap-10">
                     <span>Transactions</span>
-                    <span class="font-14 opacity-75">Transaction History</span>
+                    <span class="font-14 opacity-75">History of Transaction of your bitcoin address</span>
                 </div>
             </div>
             <div class="center h100">

@@ -11,7 +11,7 @@
     $: rate = currencies.find((el) => el.id == "BTC")?.convert;
 
     function handleClick(){
-        push('#/orders/view/42')
+        //push('#/orders/view/42')
     }
 </script>
 
@@ -21,7 +21,7 @@
         <span>
             <a href="#/wallet/overview">WALLET</a>
             <span class="px-10">></span>
-            <span>SEND</span>
+            <span>TRANSACTIONS</span>
         </span>
     </h1>
     <div class="row pa-20 gap-20">
@@ -56,7 +56,7 @@
                     </div>
                     <span>Widthdraw</span>
                 </span>
-                <span>{0.001}</span>
+                <span>BTC {0.001}</span>
                 <span>{formatCurrency(0.001 * rate)}</span>
                 <span>Completed</span>
                 <span>21/06/2022</span>
@@ -74,7 +74,7 @@
                     </div>
                     <span>Deposit</span>
                 </span>
-                <span>{0.002}</span>
+                <span>BTC {0.002}</span>
                 <span>{formatCurrency(0.002 * rate)}</span>
                 <span>Completed</span>
                 <span>25/06/2022</span>
@@ -92,7 +92,7 @@
                     </div>
                     <span>Widthdraw</span>
                 </span>
-                <span>{0.0005}</span>
+                <span>BTC {0.0005}</span>
                 <span>{formatCurrency(0.0005 * rate)}</span>
                 <span>Completed</span>
                 <span>05/05/2022</span>
@@ -110,7 +110,7 @@
                     </div>
                     <span >Widthdraw</span>
                 </span>
-                <span>{0.2}</span>
+                <span>BTC {0.2}</span>
                 <span>{formatCurrency(0.2 * rate)}</span>
                 <span>Completed</span>
                 <span>05/05/2022</span>
