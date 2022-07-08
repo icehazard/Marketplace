@@ -1,6 +1,5 @@
 <script>
 	import { push } from "svelte-spa-router";
-	import Connect from "./Connect.svelte";
 	import Button from "comp/atoms/Button.svelte";
 	import Search from "./Search.svelte";
 	import Title from "./Title.svelte";
@@ -8,6 +7,8 @@
 	import { mq } from "@/assets/library/MediaQuery.svelte";
 	import { clickOutside } from "@/assets/library/CommonFunctions.js";
 	import user from "@/store/user.js";
+	import { isShopActive } from "@/store/user.js";
+	import Icon from "@iconify/svelte";
 
 	let showModal = false;
 
@@ -22,7 +23,7 @@
 		user.logout();
 	}
 	function shopRoute() {
-		user.isShopActive() ? push("#/seller") : push("#/store/create");
+		$isShopActive ? push("#/seller") : push("#/store/create");
 	}
 </script>
 
@@ -34,66 +35,114 @@
 				<Search />
 				{#if $mq.lg_}
 					<div class="row gap-10">
-						<Circle to="messages" tooltip='Messages' icon="ant-design:message-outlined" />
-						<Circle  tooltip='Cart' to="cart" icon="akar-icons:cart" />
+						<Circle
+							to="messages"
+							tooltip="Messages"
+							icon="ant-design:message-outlined"
+						/>
+						<Circle tooltip="Cart" to="cart" icon="akar-icons:cart" />
 						<button on:click={shopRoute}>
-							<Circle  tooltip='Shop Manager' icon="fluent:building-shop-16-regular" />
+							<Circle tooltip="Shop Manager" icon="fluent:building-shop-16-regular" />
 						</button>
-						<Circle  tooltip='Settings' to="settings" icon="fluent:settings-16-regular" />
+						<Circle
+							tooltip="Settings"
+							to="settings"
+							icon="fluent:settings-16-regular"
+						/>
 					</div>
 				{/if}
 			</section>
 			<section class="row gap-20 align-center ">
-				{#if $mq.lg_ && !$user.username}
-					<!-- <Circle to="profile" icon="gg:profile" /> -->
-					<!-- <Connect /> -->
-					<a class="primary--text" href="#/login">Log In</a>
-					<a href="#/signup"><Button text="Sign Up" /></a>
-				{/if}
-				{#if $mq.lg_ && $user.username}
+				<!-- {#if $mq.lg_ && !$user.username}
+					<button class="row shine justify-end align-center gap-10 oval shadow">
+						<Icon icon="fluent:line-horizontal-3-20-regular" />
+						<Circle to="profile" icon="gg:profile" />
+					</button>
+				{/if} -->
+				{#if $mq.lg_}
 					<div class="relative row center" use:clickOutside={close}>
-						<button class="row center gap-10" on:click={toggle}>
-							<span class="">{$user.username}</span>
-							<Circle  tooltip='Profile' to="" icon="gg:profile" />
+						<button
+							class="row shine justify-end align-center gap-10 oval shadow "
+							on:click={toggle}
+						>
+							{#if $user.username}
+								{$user.username}
+							{:else}
+								<Icon icon="fluent:line-horizontal-3-20-regular" />
+							{/if}
+
+							<Circle icon="gg:profile" />
 						</button>
+						<!-- <button class="row center gap-10" on:click={toggle}>
+							<span class="">{$user.username}</span>
+							<Circle tooltip="Profile" to="" icon="gg:profile" />
+						</button> -->
 						{#if showModal}
-							<div class="absolute shade1  glass pa-5 w-200 z-2 p-right ">
-								<a
-									on:click={close}
-									href="#/account"
-									class="menuItem w100 center py-10 curve shine"
-								>
-									Account
-								</a>
-								<hr />
-								<a
-									on:click={close}
-									href="#/orders/overview"
-									class="menuItem w100 center py-10 curve shine"
-								>
-									Orders
-								</a>
-								<hr />
-								<a
-									on:click={close}
-									href="#/settings"
-									class="menuItem w100 center py-10 curve shine"
-								>
-									Settings
-								</a>
-								<hr />
-								<button
-									on:click={logoutFunc}
-									class="menuItem w100 center py-10 curve shine"
-								>
-									Logout
-								</button>
-							</div>
+							{#if $user.username}
+								<div class="absolute shade1  glass pa-5 w-200 z-2 p-right ">
+									<a
+										on:click={close}
+										href="#/account"
+										class="menuItem w100 center py-10 curve shine"
+									>
+										Account
+									</a>
+									<hr />
+									<a
+										on:click={close}
+										href="#/orders/overview"
+										class="menuItem w100 center py-10 curve shine"
+									>
+										Orders
+									</a>
+									<hr />
+									<a
+										on:click={close}
+										href="#/settings"
+										class="menuItem w100 center py-10 curve shine"
+									>
+										Settings
+									</a>
+									<hr />
+									<button
+										on:click={logoutFunc}
+										class="menuItem w100 center py-10 curve shine"
+									>
+										Logout
+									</button>
+								</div>
+							{:else}
+								<div class="absolute shade1 col   glass pa-5 w-200 z-2 p-right ">
+									<a
+										on:click={close}
+										href="#/login"
+										class="menuItem w100 center py-10 curve shine"
+									>
+										Login
+									</a>
+									<hr />
+									<a
+										on:click={close}
+										href="#/signup"
+										class="menuItem w100 center py-10 curve shine"
+									>
+										Register
+									</a>
+									<hr />
+									<a
+										on:click={close}
+										href="#/store/create"
+										class="menuItem w100 center py-10 curve shine"
+									>
+										Add a listing
+									</a>
+								</div>
+							{/if}
 						{/if}
 					</div>
 				{/if}
 				{#if $mq._md}
-					<Circle tooltip='Profile'  to="profile" icon="eva:menu-fill" />
+					<Circle tooltip="Profile" to="account" icon="eva:menu-fill" />
 				{/if}
 			</section>
 		</div>
@@ -117,6 +166,16 @@
 
 	.absolute {
 		top: 50px;
+	}
+
+	.oval {
+		padding-left: 20px;
+		border-radius: 40px;
+		border: #dddddd41 solid 1px;
+	}
+
+	.oval:hover {
+		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18);
 	}
 
 	@media only screen and (max-width: 1200px) {

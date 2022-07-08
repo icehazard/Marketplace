@@ -12,7 +12,7 @@
 
     function viewListing() {
         $products.product = data;
-        push("#/listing");
+        push(`#/listing/${data._id}`);
     }
     function close() {
         menu = false;
@@ -27,7 +27,7 @@
     function edit() {
         $products.product = data;
         products.spreadProduct();
-        push("#/listing/edit");
+        push(`#/store/listing/edit/${data._id}`);
         close();
     }
 </script>
