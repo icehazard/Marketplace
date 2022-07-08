@@ -7,6 +7,7 @@
     --shade2-60: #21212199;
     --shade3: #2C2C2E;
     --shade4: #646464;
+    --shade4-40: #63636366;
     --shade5: #9f9f9f;
     --shade6: #ffffff;
     --navbar: #13121287;
@@ -148,6 +149,10 @@ $primaryActive: #ef6698;
 
 .shade4 {
     background-color: var(--shade4);
+}
+
+.shade4-40 {
+    background-color: var(--shade4-40);
 }
 
 .shade5 {

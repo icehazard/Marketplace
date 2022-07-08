@@ -48,7 +48,7 @@
     </div>
     <div class="grow col shade3 curve">
         <div class="row w100 pa-20 space-between shade3">
-            <div class="row  gap-20 ">
+            <div class="row center gap-20 ">
                 <Icon icon="fluent:qr-code-20-regular" width="30" />
                 <div class="col gap-10">
                     <span>Your Wallet Address</span>

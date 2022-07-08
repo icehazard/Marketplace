@@ -35,7 +35,7 @@
     </div>
     <div class="grow col shade3 curve">
         <a
-           href="#/Wallet/send"
+           href="#/wallet/send"
             type="button"
             class="row shine w100 pa-20 space-between  shade3"
         >
