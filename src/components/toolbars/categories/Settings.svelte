@@ -33,6 +33,14 @@
                 <Icon icon="fluent:chevron-right-16-regular" width="16" />
             </a>
             <hr />
+            <a href="#/wallet/overview" class="row px-20 py-20 align-center space-between w100 shine"  use:link  use:active={  '/wallet/*'}>
+                <div class="row align-center gap-10">
+                    <Icon icon="fluent:wallet-16-regular" width="22" />
+                    <div>Wallet</div>
+                </div>
+                <Icon icon="fluent:chevron-right-16-regular" width="16" />
+            </a>
+            <hr />
             <a href="#/settings" class="row px-20 py-20 align-center space-between w100 shine" use:active>
                 <div class="row align-center gap-10">
                     <Icon icon="fluent:settings-16-regular" width="22" />

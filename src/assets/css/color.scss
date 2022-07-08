@@ -4,6 +4,7 @@
     --shade0: #161616;
     --shade1: #1a1a1a;
     --shade2: #222222;
+    --shade2-60: #21212199;
     --shade3: #2C2C2E;
     --shade4: #646464;
     --shade5: #9f9f9f;
@@ -15,6 +16,7 @@ html[data-theme='light'] {
     --shade0: #f0f0f0;
     --shade1: #e7e7e7;
     --shade2: #FEFFFE;
+    --shade2-60: #ffffff99;
     --shade3: #F0F3F4;
     --shade4: #2c2c2c;
     --shade5: #131313;
@@ -134,6 +136,10 @@ $primaryActive: #ef6698;
 
 .shade2 {
     background-color: var(--shade2);
+}
+
+.shade2-60 {
+    background-color: var(--shade2-60);
 }
 
 .shade3 {

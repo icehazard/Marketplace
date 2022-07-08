@@ -460,7 +460,9 @@
   border-top-right-radius: 8px;
 }
 
-
+.min-max-content{
+  min-width: max-content;
+}
 
 .ratio {
   aspect-ratio: 1;

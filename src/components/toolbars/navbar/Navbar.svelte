@@ -71,7 +71,7 @@
 								<Icon icon="fluent:line-horizontal-3-20-regular" />
 							{/if}
 
-							<Circle to="account" icon="gg:profile" />
+							<Circle icon="gg:profile" />
 						</button>
 						<!-- <button class="row center gap-10" on:click={toggle}>
 							<span class="">{$user.username}</span>
