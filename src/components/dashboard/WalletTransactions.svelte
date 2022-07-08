@@ -1,27 +1,35 @@
 <script>
-    import Field from "comp/atoms/TextField.svelte";
-    import Button from "comp/atoms/Button.svelte";
+    import { currencies } from "@/assets/library/options.js";
     import { formatCurrency } from "@/assets/library/CommonFunctions.js";
+    import { push } from 'svelte-spa-router';
     import user from "@/store/user.js";
-    import Select from "./../atoms/Select.svelte";
     import Icon from "@iconify/svelte";
 
-    $: symbol = currencies.filter((el) => el.id == $user?.currency)[0]?.symbol;
+    let btcAmount = 0.28;
 
-    import { languages, themes, currencies } from "@/assets/library/options.js";
+    $: symbol = currencies.find((el) => el.id == $user?.currency)?.symbol;
+    $: rate = currencies.find((el) => el.id == "BTC")?.convert;
+
+    function handleClick(){
+        push('#/orders/view/42')
+    }
 </script>
 
 <section class="grow col gap-20">
     <h1 class="row pl-20 font-36 weight-300 align-center gap-20">
         <Icon icon="fluent:wallet-16-regular" width="30" />
-        <span>Wallet</span>
+        <span>
+            <a href="#/wallet/overview">WALLET</a>
+            <span class="px-10">></span>
+            <span>SEND</span>
+        </span>
     </h1>
     <div class="row pa-20 gap-20">
         <div class="row center gap-20">
             <Icon icon="logos:bitcoin" width="40" />
             <div class="col gap-10">
                 <div class="weight-600">BTC wallet</div>
-                <span>0.26 BTC</span>
+                <span>{btcAmount} BTC</span>
             </div>
         </div>
         <span class="center font-22"> ≈</span>
@@ -29,47 +37,106 @@
             <span class="font-36">{symbol}</span>
             <div class="col gap-10">
                 <div class="weight-600">{$user.currency}</div>
-                <span>{formatCurrency(206297)}</span>
+                <span>{formatCurrency(btcAmount * rate)}</span>
             </div>
         </div>
     </div>
+
     <div class="grow col shade3 curve">
-        <div class="row w100 pa-20 space-between shade3">
-            <div class="row center gap-20 ">
-                <Icon icon="uil:money-insert" width="30" />
-                <div class="col gap-10">
-                    <span> Amount to send</span>
-                    <span class="font-14 opacity-75">Amount to send</span>
-                </div>
-            </div>
-            <div class="row align-center gap-20">
-                <div class="opacity-75 font-14 min-max-content ">
-                  <span> {symbol}  {formatCurrency(206297)} </span>
-                   <span class="ml-10"> ≈ </span>
-                </div>
-                <Field label="Amount to send" />
-            </div>
+        <div class="row pa-20 shade3  w100 align-center gap-10">
+            <Icon icon="fluent:search-16-regular" width="20" />
+            <input type="text" placeholder="Search for a order" />
         </div>
         <hr />
-        <div class="row w100 pa-20 space-between shade3">
-            <div class="row center gap-20 ">
-                <Icon icon="fluent:qr-code-20-regular" width="30" />
-                <div class="col gap-10">
-                    <span>Receiving address</span>
-                    <span class="font-14 opacity-75">Receiving address</span>
+        <div class="col w100 ">
+            <button on:click={handleClick} class="grid shine w100 pa-20 space-between  shade3">
+                <span class="row gap-10 justify-start align-center">
+                    <div class="imgWrapper center">
+                        <Icon icon="fluent:image-32-regular" />
+                    </div>
+                    <span>Thai seed bank</span>
+                </span>
+                <span>12 Items</span>
+                <span>1,583 THB</span>
+                <span class="info--text">Processing Order</span>
+                <span>21/06/2022</span>
+                <div class="justify-end">
+                    <Icon icon="fluent:chevron-right-28-regular" width="20" />
                 </div>
-            </div>
-            <div class="col">
-                <Field label="Receiving address" />
-            </div>
+            </button>
+            <hr />
         </div>
-        <hr />
-        <section class="row space-between align-center pa-20">
-            <span class="font-14 opacity-75 align-center gap-10 blue--text">
-                <Icon icon="fluent:info-20-regular" width="20" />
-                <span>Every sale results in a maintainence fee</span>
-            </span>
-            <Button type="submit" text={"SEND"} />
-        </section>
+        <div class="col w100 ">
+            <button on:click={handleClick} class="grid shine w100 pa-20 space-between  shade3">
+                <span class="row gap-10 justify-start align-center">
+                    <div class="imgWrapper center">
+                        <Icon icon="fluent:image-32-regular" />
+                    </div>
+                    <span>Oaseeds</span>
+                </span>
+                <span>2 Items</span>
+                <span>183 THB</span>
+                <span class="warning--text">In Transit</span>
+                <span>25/06/2022</span>
+                <div class="justify-end">
+                    <Icon icon="fluent:chevron-right-28-regular" width="20" />
+                </div>
+            </button>
+            <hr />
+        </div>
+        <div class="col w100 ">
+            <button on:click={handleClick} class="grid shine w100 pa-20 space-between  shade3">
+                <span class="row gap-10 justify-start align-center">
+                    <div class="imgWrapper center">
+                        <Icon icon="fluent:image-32-regular" />
+                    </div>
+                    <span>MetaRoadGrows</span>
+                </span>
+                <span>6 Items</span>
+                <span>1183 THB</span>
+                <span class='success--text'>Delivered</span>
+                <span>05/05/2022</span>
+                <div class="justify-end">
+                    <Icon icon="fluent:chevron-right-28-regular" width="20" />
+                </div>
+            </button>
+            <hr />
+        </div>
+        <div class="col w100 ">
+            <button on:click={handleClick} class="grid shine w100 pa-20 space-between  shade3">
+                <span class="row gap-10 justify-start align-center">
+                    <div class="imgWrapper center">
+                        <Icon icon="fluent:image-32-regular" />
+                    </div>
+                    <span>MetaRoadGrows</span>
+                </span>
+                <span>6 Items</span>
+                <span>1183 THB</span>
+                <span class='error--text'>Cancelled</span>
+                <span>05/05/2022</span>
+                <div class="justify-end">
+                    <Icon icon="fluent:chevron-right-28-regular" width="20" />
+                </div>
+            </button>
+            <hr />
+        </div>
     </div>
 </section>
+
+<style>
+    .grid {
+        display: grid;
+        grid-template-columns: 2fr 2fr 2fr 2fr 2fr 1fr;
+    }
+
+    span {
+        text-align: center;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .imgWrapper {
+        min-width: 20px;
+    }
+</style>

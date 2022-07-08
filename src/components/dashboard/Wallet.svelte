@@ -67,7 +67,7 @@
                 <Icon icon="fluent:history-16-regular" width="30" />
                 <div class="col gap-10">
                     <span>Transactions</span>
-                    <span class="font-14 opacity-75">Transactions History</span>
+                    <span class="font-14 opacity-75">Transaction History</span>
                 </div>
             </div>
             <div class="center h100">

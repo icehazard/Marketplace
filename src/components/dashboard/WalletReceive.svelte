@@ -6,25 +6,24 @@
     import QRCode from "qrcode";
     import { onMount } from "svelte";
 
-    let el;
+    let el, tooltip;
     let btcAmount = 0.28;
     let address = "bc1q5gs3rr2sgzqlhdykq5lh2ne08aa7304y6jrn9k";
-    let tooltip = "Click to copy";
 
-    $: symbol = currencies.filter((el) => el.id == $user?.currency)[0]?.symbol;
+    $: symbol = currencies.find((el) => el.id == $user?.currency)?.symbol;
     $: rate = currencies.find((el) => el.id == "BTC")?.convert;
 
     function copy() {
         navigator.clipboard.writeText(address);
         tooltip = "Copied!";
     }
-    function resetTooltip() {
-        setTimeout(() => {
-            tooltip = "Click to copy";
-        }, 250);
+
+    function enter() {
+        tooltip = "Click to copy";
     }
 
     onMount(() => {
+        enter()
         QRCode.toCanvas(el, address);
     });
 </script>
@@ -62,24 +61,27 @@
                 <div class="col gap-10">
                     <span>Your Wallet Address</span>
                     <span class="font-14 opacity-75"
-                        >Fund your account by sending bitcoin to your Wallet Address</span
+                        >Fund your account by sending bitcoin to your wallet address</span
                     >
                 </div>
             </div>
             <button
                 on:click={copy}
-                on:mouseleave={resetTooltip}
+                on:mouseenter={enter}
                 class="col gap-20 center"
                 data-tooltip={tooltip}
             >
-                <span class="shade2 curve pa-10">{address}</span>
+                <div class="shade2 curve pa-10 row gap-20 align-center">
+                    <span>{address} </span>
+                    <Icon icon="fluent:copy-16-regular" />
+                </div>
             </button>
         </div>
         <div class="center shade2-60 col pa-20 gap-20">
             <canvas bind:this={el} />
             <span class="font-14 opacity-75 align-center gap-10 blue--text">
                 <Icon icon="fluent:info-20-regular" width="20" />
-                <span>Send only Bitcoin to this deposit address.</span>
+                <span>Send only bitcoin to this deposit address.</span>
             </span>
         </div>
         <hr />
