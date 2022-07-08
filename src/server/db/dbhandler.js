@@ -12,6 +12,8 @@ MongoPool.getInstance(function (db) {
     cols.list.colShops = mongo.db.collection(serverConfig.COLLECTION_SHOPS)
     cols.list.colProducts = mongo.db.collection(serverConfig.COLLECTION_PRODUCTS)
     cols.list.colRoles = mongo.db.collection(serverConfig.COLLECTION_ROLES)
+    cols.list.colAddress = mongo.db.collection(serverConfig.COLLECTION_ADDRESS)
+
 });
 
 module.exports = { mongo, cols }

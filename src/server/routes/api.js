@@ -3,12 +3,13 @@ const api = Router()
 const db = require('../db/dbhandler')
 const jwtDecode = require("jwt-decode");
 var jwt = require('jsonwebtoken');
-
+const myCrypto = require("../classes/cryptography")
 let accountHandler = require("../classes/accounts")
 let shopHandler = require('../classes/shops')
 let productHandler = require('../classes/products')
-
+const fetch = require("node-fetch");
 const Config = require("../Config.json");
+const common = require("../classes/common.js")
 
 const SECRET_KEY = Config.SECRET_KEY;
 
@@ -16,6 +17,7 @@ var options = {
     secret: SECRET_KEY,
     timeout: 300000 // 30 seconds to send the authentication message
 };
+
 
 async function auth(data) {
     //clearTimeout(auth_timeout);
@@ -254,6 +256,42 @@ api.get('/me', async (req, res) => {
     console.log("Got sids", sids)
     if (!sids) sids = []
     res.status(200).json(sids)
+})
+
+api.get('/address/:cryptocode', async (req, res) => {
+    const authed = await auth(req.headers)
+
+    if (!authed) {
+        return;
+    }
+
+    const userID = authed._id;
+    const cryptoCode = req.params.cryptocode
+
+    if (!common.cryptoCodes.includes(cryptoCode))
+        return res.status(400).json({status: "error", error: 'Cant get new address for the given cryptoCode'})
+
+    let url = `${Config.BTC_PAY_URL}/api/v1/stores/${Config.BTC_PAY_STOREID}/payment-methods/onchain/${cryptoCode}/wallet/address?forceGenerate=true`
+    console.log("Trying", url)
+    let r = await fetch(url, {
+        method: "POST",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: `token ${Config.BTC_PAY_TOKEN}`
+        },
+    });
+
+    // console.log("Got resp", await r.text())
+    try {
+        let json = await r.json()
+
+        return res.status(200).json({address: json.address, paymentLink: json.paymentLink})
+    }
+    catch(e)
+    {
+        return res.status(400).json({status: "error", error: `Couldnt get address. Please try again ${e}`})
+    }
 })
 
 module.exports = api

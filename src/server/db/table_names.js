@@ -6,4 +6,5 @@ module.exports = {
     COLLECTION_SHOPS: 'shops',
     COLLECTION_PRODUCTS: 'products',
     COLLECTION_ROLES: 'roles',
+    COLLECTION_ADDRESS: 'address'
 }

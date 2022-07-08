@@ -11,6 +11,8 @@
   "customStr": "mongodb://127.0.0.1:27017/admin",
   "WEB_SERVER_PORT": 9000,
   "BTC_PAY_URL": "http://btcpay.cocksuckas.com",
+  "BTC_PAY_TOKEN": "11108a8497f371fe646b321498af476c9e89ca1c",
+  "BTC_PAY_STOREID": "4FcbKjsUQHwG2BYHrUhDEjnWt9EyNWx4YphmmNu8uWgg",
   "BTC_PAY_API_KEY": "11108a8497f371fe646b321498af476c9e89ca1c",
   "API_URL": "127.0.0.1:9000",
   "WEBPACK_URL": "127.0.0.1:8080",
