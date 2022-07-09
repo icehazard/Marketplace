@@ -16,7 +16,8 @@ const data = {
         sales: "",
         sellerContact: "",
         allProducts: [],
-        featuredProducts: []
+        featuredProducts: [],
+        reviews: {}
     }
 }
 
