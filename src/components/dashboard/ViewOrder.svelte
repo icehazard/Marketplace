@@ -1,4 +1,5 @@
 <script>
+    import { APP_NAME } from "@/config";
     let src = "https://cdn.homepro.co.th/ART_IMAGE/00/638/63827/160x160/10072021_63827$Imagec1.jpg";
 </script>
 
@@ -6,7 +7,7 @@
     <div class="w-sm col gap-40 h100">
         <div class="row center py-40 font-36">Confirmation</div>
         <p>
-            Dear Sebastian Whitlock Thank you for shopping with Meta Road. Your order number
+            Dear Sebastian Whitlock Thank you for shopping with { APP_NAME }. Your order number
             #3367002 has been confirmed. We are preparing your order and do our best to deliver to
             you. If you have any queries, please contact our Customer Service at 1284.
         </p>
