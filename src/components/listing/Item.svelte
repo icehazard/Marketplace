@@ -9,7 +9,7 @@
     }
 </script>
 
-<button class=" h-250 curve col shade1 fast" on:click={viewListing}>
+<button class=" h-250 w-250 curve col shade1 fast" on:click={viewListing}>
     <section class="h-150 center w100">
         <img src={data.imageURL} alt="logo" class="h100" />
     </section>

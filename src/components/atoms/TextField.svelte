@@ -3,20 +3,32 @@
     import { createEventDispatcher } from "svelte";
     const dispatch = createEventDispatcher();
     export let label = "";
+    export let type = "text";
     export let value = "";
     export let name = "";
     export let disable = false;
 
-    let handleChange = (val) => {
+    let handleKeyup = (val) => {
         dispatch("keyup", val);
     };
+    let handleBlur = (val) => {
+        dispatch("blur", val);
+    };
+    let handleChange = (val) => {
+        dispatch("change", val);
+    };
+    function typeAction(node) {
+        node.type = type;
+    }
 </script>
 
 <input
-    on:keyup={handleChange}
+    on:keyup={handleKeyup}
+    on:blur={handleBlur}
+    on:change={handleChange}
     {name}
     bind:value
-    type="text"
+    use:typeAction 
     class:disable
     disabled={disable}
     class="borderStrong gap-10 curve align-center px-20 h-40 mobile-w100 shade2 w100 slow"

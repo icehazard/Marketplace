@@ -2,7 +2,7 @@
     import Icon from "@iconify/svelte";
     import Button from "comp/atoms/Button.svelte";
     import { mq } from "@/assets/library/MediaQuery.svelte";
-    import cart from "@/store/cart.js";
+    import cart, { sumPriceTotal, sumQtyTotal } from "@/store/cart.js";
     import { formatCurrency } from "@/assets/library/CommonFunctions.js";
     import pluralize from "pluralize";
 </script>
@@ -16,16 +16,6 @@
                     <div>How you'll pay</div>
                 </div>
                 <div class="col align-center gap-20">
-                    <!-- <label class="container"
-                        >Visa/Mastercard
-                        <input type="radio" checked="checked" name="radio" />
-                        <span class="checkmark" />
-                    </label>
-                    <label class="container"
-                        >Cash
-                        <input type="radio" name="radio" />
-                        <span class="checkmark" />
-                    </label> -->
                     <label class="container"
                         >Cryptocurrency
                         <input type="radio" checked="checked" name="radio" />
@@ -38,9 +28,9 @@
                 <div class="row align-center gap-10 space-between">
                     <div class="row center gap-10">
                         <Icon icon="fluent:shopping-bag-16-regular" width="22" />
-                        <div>{pluralize("Item", $cart.cart.length)} total</div>
+                        <div>{pluralize("Item", $sumQtyTotal)} total</div>
                     </div>
-                    <div class="col align-center gap-10">{formatCurrency(cart.sumPrice())}</div>
+                    <div class="col align-center gap-10">{formatCurrency($sumPriceTotal)}</div>
                 </div>
             </div>
             <!-- <hr /> -->
@@ -60,11 +50,11 @@
                     <div class="row center gap-10">
                         <Icon icon="fluent:tag-32-regular" width="22" />
                         <div>
-                            Total ({$cart.cart.length}
-                            {pluralize("Item", $cart.cart.length)})
+                            Total ({$sumQtyTotal}
+                            {pluralize("Item", $sumQtyTotal)})
                         </div>
                     </div>
-                    <div class="col align-center gap-10">{formatCurrency(cart.sumPrice())}</div>
+                    <div class="col align-center gap-10">{formatCurrency($sumPriceTotal)}</div>
                 </div>
             </div>
             <!-- <hr /> -->
@@ -74,7 +64,7 @@
             <div class="col py-20 font-12 text-center gap-10 opacity-75">
                 <p>
                     This total contains an approximate conversion. You will be charged {formatCurrency(
-                        cart.sumPrice()
+                        $sumPriceTotal
                     )}
                     by the shop MattAlfordStudio.
                 </p>
@@ -86,7 +76,6 @@
 {/if}
 
 <style>
-    /* Customize the label (the container) */
     .container {
         display: block;
         position: relative;
