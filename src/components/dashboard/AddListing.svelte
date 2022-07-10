@@ -23,7 +23,7 @@
 
 <form on:submit|preventDefault={post} class="grow col gap-20">
     <h1 class="row pl-20 font-36 weight-300 align-center gap-20">
-        <Icon icon="fluent:{btnText.toLocaleLowerCase()}-16-regular" width="30" />
+        <Icon icon="fluent:building-shop-16-regular" width="30" />
         <span>
             <a href="#/store/settings">SHOP</a>
             <span class="px-10">></span>
@@ -99,10 +99,10 @@
         <hr />
         <section class="row space-between align-center pa-20">
             <span class="font-14 opacity-75 align-center gap-10 blue--text">
-             {#if !edit}
-             <Icon icon="fluent:info-20-regular" width="20" />
-             <span>Every sale results in a {FEE}% maintainence fee</span>
-             {/if}
+                {#if !edit}
+                    <Icon icon="fluent:info-20-regular" width="20" />
+                    <span>Every sale results in a {FEE}% maintainence fee</span>
+                {/if}
             </span>
             <Button type="submit" text={btnText + " PRODUCT"} />
         </section>

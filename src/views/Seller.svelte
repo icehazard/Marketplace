@@ -7,14 +7,14 @@
     import AllItems from "comp/seller/AllItems.svelte";
     import Pending from "comp/seller/Pending.svelte";
     import AddListing from "comp/seller/AddListing.svelte";
-    
+
     import user from "@/store/user.js";
+    import products from "@/store/products.js";
     import { isShopPending, isShopActive } from "@/store/user.js";
     import { onMount } from "svelte";
 
-    onMount(() => {
-        user.get();
-    });
+    user.get();
+    products.get();
 </script>
 
 <main class="row container my-50 gap-50 grow">
@@ -29,8 +29,8 @@
         {:else if $isShopActive}
             <AddListing />
         {/if}
-        <Featured />
-        <AllItems />
+        <!-- <Featured />
+        <AllItems /> -->
         <Reviews />
     </section>
 </main>
