@@ -1,9 +1,43 @@
 <script>
     import Categories from "comp/toolbars/categories/Categories.svelte";
-    import Listing from "comp/listing/Listing.svelte";
+    import Edit from "comp/listing/Edit.svelte";
+    import Title from "comp/listing/Title.svelte";
+    import Description from "comp/listing/Description.svelte";
+    import Photos from "comp/listing/Photos.svelte";
+    import Price from "comp/listing/Price.svelte";
+    import Related from "comp/listing/Related.svelte";
+    import Seller from "comp/listing/Seller.svelte";
+    import Shipping from "comp/listing/Shipping.svelte";
+
+    import user from "@/store/user.js";
+    import { mq } from "@/assets/library/MediaQuery.svelte";
+    import { onMount } from "svelte";
+
+    onMount(() => {
+        user.get();
+    });
 </script>
 
-<section class="row container my-50 gap-50 grow">
+<main class="row container my-50 gap-50 grow">
     <Categories />
-    <Listing />
-</section>
+    <section class="col w100 gap-30 wrap" class:row={$mq.xxl_}>
+        <div class="col grow gap-30">
+            <Photos />
+            {#if $mq.xxl_}
+                <Edit />
+                <Description />
+            {/if}
+        </div>
+        <div class="col grow gap-30">
+            {#if $mq._xl}
+                <Edit />
+                <Description />
+            {/if}
+            <Title />
+            <Price />
+            <Shipping />
+            <Related />
+            <Seller />
+        </div>
+    </section>
+</main>
