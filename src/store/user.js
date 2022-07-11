@@ -18,9 +18,14 @@ context.logout = function () {
     context.reset(data)
     push('#/login')
 }
+context.getAddress = async function () {
+     let res = await get("api/address/BTC");
+    res = hasError(res, data.address)
+    return context.commit('address', res.address)
+}
 context.get = async function () {
     let res = await get('api/me')
-    res = hasError(res, data.me.shops)
+    res = hasError(res, data.me)
     return context.commit('me', res)
 }
 context.shopID = function () {
