@@ -5,6 +5,7 @@
     export let text = "";
     export let disable = false;
     export let type = "button";
+    export let block = '';
 
     let connect = () => {
         dispatch("click");
@@ -15,6 +16,7 @@
     class="curve center shine borderStrong shade2 py-10 px-40"
     class:disable
     disabled={disable}
+    class:grow={block}
     {type}
     on:click={connect}>{text}</button
 >
