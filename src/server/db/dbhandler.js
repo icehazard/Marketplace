@@ -13,6 +13,9 @@ MongoPool.getInstance(function (db) {
     cols.list.colProducts = mongo.db.collection(serverConfig.COLLECTION_PRODUCTS)
     cols.list.colRoles = mongo.db.collection(serverConfig.COLLECTION_ROLES)
     cols.list.colAddress = mongo.db.collection(serverConfig.COLLECTION_ADDRESS)
+    cols.list.colServer = mongo.db.collection(serverConfig.COLLECTION_SERVER)
+    cols.list.colProcessedTxs = mongo.db.collection(serverConfig.COLLECTION_PROCESSED_TXS)
+    cols.list.colTrackedTxs = mongo.db.collection(serverConfig.COLLECTION_TRACKED_TXS)
 
 });
 

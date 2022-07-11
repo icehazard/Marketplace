@@ -21,23 +21,20 @@ Accounts.prototype.insert = function(obj) {
     this.getAccounts().set(obj._id, obj);
 };
 
-Accounts.prototype.exists = function(id) {
-    if (this.getAccounts().get(id))
-        return true;
-
-    return false;
-};
-
 Accounts.prototype.get = function(id) {
     return this.getAccounts().get(id);
 };
 
-Accounts.prototype.loadFromDB = async function(id) {
+Accounts.prototype.has = function(id) {
+    return this.getAccounts().has(id);
+};
+
+Accounts.prototype.loadFromDB = async function() {
     let data = await dbhandler.cols.list.colAccounts.find({}).toArray()
 
     for (let a of data)
         if (!this.getAccounts().has(a._id))
-            this.getAccounts().set(a._id, new Account(a._id, a.username))
+            this.getAccounts().set(a._id, new Account(a))
 
     console.log(`*** Loaded ${this.getAccounts().size} accounts!`)
 };
@@ -47,10 +44,12 @@ const SECRET_KEY = Config.SECRET_KEY;
 
 class Account {
 
-    constructor(_id, username)
+    constructor(a)
     {
-        this._id = _id;
-        this.username = username;
+        this._id = a._id;
+        this.username = a.username;
+        this.addresses = a.addresses || new Map([['BTC', new Map()], ['DOGE', new Map()], ['LTC', new Map()], ['ETH', new Map()]])
+        this.balances = a.balances || {BTC: 0, DOGE: 0, LTC: 0, ETH: 0}
     }
 
     /*** ACCOUNT LOGIN ***/
@@ -77,9 +76,8 @@ class Account {
                 if (res) {
                     console.log("Password matches!");
 
-
-                    if (!accs.exists(data._id)) {
-                        accs.insert(new Accounts(data._id, data.username))
+                    if (!accs.has(data._id)) {
+                        accs.insert(new Account(data))
                     }
 
                     return resolve({
@@ -163,13 +161,15 @@ class Account {
                 console.log("Sending resp");
                 console.log(respy);
 
-                dbhandler.cols.list.colAccounts.insertOne({
+                let data = {
                     _id: nid,
                     username: username,
                     email: email,
                     password: hash,
-                    token: ntoken,
-                });
+                }
+
+                dbhandler.cols.list.colAccounts.insertOne(data);
+                accs.insert(new Account(data))
 
                 return resolve({resp: "ACCOUNT_CREATION_OK", data: respy})
             });
@@ -212,6 +212,30 @@ class Account {
         if (shopObject._id == sid)
             return true
         else console.log("BOPE", shopObject.ownerID, sid)
+    }
+
+    async getDepositAddress() {
+
+    }
+
+    async createDepositAddress() {
+
+    }
+
+    insertAddress(obj) {
+        if (!this.addresses.has(obj.symbol))
+            return;
+
+        this.addresses.get(obj.symbol).set(obj.address, obj)
+    }
+
+    creditBalance(symbol, amount) {
+        this.balances[symbol] += amount;
+    }
+
+    async saveToDB() {
+        dbhandler.cols.list.colAccounts.updateOne({_id: this._id},
+            {$set: {balances: this.balances}}, {upsert: true})
     }
 }
 
