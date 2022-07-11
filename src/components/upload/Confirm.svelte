@@ -1,9 +1,8 @@
 <script>
-    import { push } from "svelte-spa-router";
+    import { APP_NAME } from "@/config";
     import Button from "comp/atoms/Button.svelte";
-    import { shopValid,  reset } from "@/store/store.js";
+    import { shopValid } from "@/store/store.js";
     import "@lottiefiles/lottie-player";
-    import { onDestroy } from "svelte";
 
 
     let confirm;
@@ -31,7 +30,7 @@
         {#if !review}
             <h1 class="font-36 weight-300">Confirmation</h1>
             <p class="text-center">
-                When you make a sale through MetaRoad, you will be charged a transaction fee of 4%
+                When you make a sale through { APP_NAME }, you will be charged a transaction fee of 4%
                 of the price you display for each listing. An invoice will be sent every month for
                 any purchases.
             </p>

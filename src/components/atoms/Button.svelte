@@ -1,51 +1,35 @@
 <script>
-    // import Web3 from 'web3'
-    import { onMount } from "svelte";
     import { createEventDispatcher } from "svelte";
     const dispatch = createEventDispatcher();
 
     export let text = "";
     export let disable = false;
-    export let type = 'button'
+    export let type = "button";
+    export let block = '';
 
     let connect = () => {
         dispatch("click");
     };
 </script>
 
-<div class="wrapper" class:disable>
-    <button class="w100 center text-center line-height-20" disabled={disable} type={type} on:click={connect}>{text}</button>
-</div>
+<button
+    class="curve center shine borderStrong shade2 py-10 px-40"
+    class:disable
+    disabled={disable}
+    class:grow={block}
+    {type}
+    on:click={connect}>{text}</button
+>
 
 <style>
-    button {
-        align-items: center;
-        background: rgb(28, 35, 44);
-        border-radius: 8px;
-        display: flex;
-    
-        letter-spacing: 1px;
-        outline: none;
-        padding: 15px 20px;
-        transition: all 150ms ease 0s;
-        font-weight: 700;
+    button{
+        outline: 1px solid rgba(255, 255, 255, 0);
     }
-
-    .wrapper {
-        
-        border: none;
-        padding: 1px;
-            border-radius: 8px;
-        display: flex;
-        background: #df0051;
-        background: #5dc24f;
+    button:focus-visible {
+        outline: 1px solid rgba(255, 255, 255, 0.6);
     }
 
     .disable {
-        background: #6e6e6e;
-    }
-
-    .disable button{
         cursor: not-allowed;
     }
 </style>

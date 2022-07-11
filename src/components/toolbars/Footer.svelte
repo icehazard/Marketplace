@@ -1,5 +1,6 @@
 <script>
     import user from "@/store/user.js";
+    import { APP_NAME } from "@/config";
     import { currencies } from "@/assets/library/options.js";
 
     $: symbol = currencies.filter((el) => el.id == $user?.currency)[0]?.symbol;
@@ -16,7 +17,7 @@
             <a href="#/settings"> {symbol} ({$user.currency}) </a>
         </div>
         <div class="row gap-20 line-height-20">
-            <button> © Metaroad</button>
+            <button> © { APP_NAME }</button>
             <span>|</span>
             <button>Terms of Use</button>
             <span>|</span>

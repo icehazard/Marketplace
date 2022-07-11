@@ -28,7 +28,7 @@ context.shopID = function () {
 }
 context.setTheme = function (data) {
     let theme = data ? data : context.val('theme')
-    document.documentElement.setAttribute("data-theme", theme);
+    document.documentElement.setAttribute("data-theme", theme)
     context.commit('theme', theme)
 }
 export const isShopPending = derived(context, () => {

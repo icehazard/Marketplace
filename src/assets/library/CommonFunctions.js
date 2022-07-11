@@ -20,6 +20,10 @@ export function clickOutside(element, callbackFunction) {
     };
 }
 
+export function copy(data) {
+    return JSON.parse(JSON.stringify(data))
+}
+
 export function set(name, type) {
     const value = writable(localStorage.getItem(name) ? JSON.parse(localStorage.getItem(name)) : type);
     value.subscribe(val => { localStorage.setItem(name, JSON.stringify(val)) });
@@ -30,7 +34,7 @@ export function persist(name, data) {
     let local = localStorage.getItem(name)
     const value = writable(local ? JSON.parse(local) : data);
     value.subscribe(val => { localStorage.setItem(name, JSON.stringify(val)) });
-    value.reset = () => value.set(JSON.parse(JSON.stringify(data)))
+    value.reset = () => value.set(copy(data))
     value.val = (key) => getStore(value)[key]
     value.all = () => getStore(value)
     value.commit = (key, val) => {

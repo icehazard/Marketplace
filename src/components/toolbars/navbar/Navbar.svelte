@@ -1,4 +1,5 @@
 <script>
+	import DropDown from "./DropDown.svelte";
 	import { push } from "svelte-spa-router";
 	import Button from "comp/atoms/Button.svelte";
 	import Search from "./Search.svelte";
@@ -17,10 +18,6 @@
 	}
 	function close() {
 		showModal = false;
-	}
-	function logoutFunc() {
-		showModal = false;
-		user.logout();
 	}
 	function shopRoute() {
 		$isShopActive ? push("#/seller") : push("#/store/create");
@@ -44,11 +41,11 @@
 						<button on:click={shopRoute}>
 							<Circle tooltip="Shop Manager" icon="fluent:building-shop-16-regular" />
 						</button>
-						<Circle
+						<!-- <Circle
 							tooltip="Settings"
 							to="settings"
 							icon="fluent:settings-16-regular"
-						/>
+						/> -->
 					</div>
 				{/if}
 			</section>
@@ -62,7 +59,7 @@
 				{#if $mq.lg_}
 					<div class="relative row center" use:clickOutside={close}>
 						<button
-							class="row shine justify-end align-center gap-10 oval shadow "
+							class="row shine justify-end align-center gap-10 oval  "
 							on:click={toggle}
 						>
 							{#if $user.username}
@@ -79,38 +76,7 @@
 						</button> -->
 						{#if showModal}
 							{#if $user.username}
-								<div class="absolute shade1  glass pa-5 w-200 z-2 p-right ">
-									<a
-										on:click={close}
-										href="#/account"
-										class="menuItem w100 center py-10 curve shine"
-									>
-										Account
-									</a>
-									<hr />
-									<a
-										on:click={close}
-										href="#/orders/overview"
-										class="menuItem w100 center py-10 curve shine"
-									>
-										Orders
-									</a>
-									<hr />
-									<a
-										on:click={close}
-										href="#/settings"
-										class="menuItem w100 center py-10 curve shine"
-									>
-										Settings
-									</a>
-									<hr />
-									<button
-										on:click={logoutFunc}
-										class="menuItem w100 center py-10 curve shine"
-									>
-										Logout
-									</button>
-								</div>
+								<DropDown on:click={close} />
 							{:else}
 								<div class="absolute shade1 col   glass pa-5 w-200 z-2 p-right ">
 									<a
@@ -163,10 +129,6 @@
 	/* .menuItem:hover {
 		background-color: rgba(102, 102, 102, 0.53);
 	} */
-
-	.absolute {
-		top: 50px;
-	}
 
 	.oval {
 		padding-left: 20px;

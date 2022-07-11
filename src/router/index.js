@@ -36,6 +36,7 @@ export default {
     "/cart": wrap({ asyncComponent: Cart }),
     "/account": wrap({ asyncComponent: Profile, conditions: [auth] }),
     "/messages": wrap({ asyncComponent: Messages, conditions: [auth] }),
+    "/shops/id/:id": wrap({ asyncComponent: Seller }),
     "/store/create": wrap({ asyncComponent: ShopWizard }),
     "/store/settings": wrap({ asyncComponent: Shop }),
     "/store/add": wrap({ asyncComponent: AddListing }),

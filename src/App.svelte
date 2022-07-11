@@ -15,11 +15,11 @@
 	user.setTheme()
 </script>
 
-<main class="col vh100">
+<section class="col vh100">
 	<Navbar />
 	<Router {routes} on:conditionsFailed={conditionsFailed}/>
 	<MediaQuery />
 	<Mobile />
 	<Footer />
-</main>
+</section>
 

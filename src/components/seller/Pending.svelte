@@ -1,0 +1,1 @@
+<div class="blue py-50 font-20 center curve blue--text">Account pending verification</div>
