@@ -6,7 +6,6 @@
     import Icon from "@iconify/svelte";
     import QRCode from "qrcode";
     import { onMount } from "svelte";
-    $user.address = ''
 
     let el, tooltip, tooltipCopy;
     let btcAmount = 0.28;
