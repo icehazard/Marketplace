@@ -41,12 +41,14 @@ const {check} = require("bitcoinjs-lib/src/bip66");
         ret()
     })
 
+    // *** PRESERVE ORDER (IMPORTANT)
     await accountHandler.Accounts.loadFromDB()
     await shopHandler.Shops.loadFromDB()
     await productHandler.Products.loadFromDB()
     await shopHandler.Shops.loadProductsIntoShops()
-    await addressHandler.Addresses.loadFromDB()
+    await addressHandler.Addresses.loadFromDB() //has to be after accounts
     await serverHandler.Server.loadFromDB()
+    await trackTxHandler.Tracktx.loadFromDB()
 
      let checkEvents = (symbol)  => {
         setTimeout(async () => {
@@ -112,7 +114,7 @@ const {check} = require("bitcoinjs-lib/src/bip66");
                 if (txJson.confirmations <= 0) {
                     //schedule for a next check with custom opts later
                     console.log("TX not confirmed yet!")
-                    trackTxHandler.Tracktx.insert(txHash)
+                    trackTxHandler.Tracktx.insert(txHash, symbol)
                     continue;
                 }
 
@@ -193,8 +195,9 @@ const {check} = require("bitcoinjs-lib/src/bip66");
         }, 5e3)
     }
 
-    checkEvents("BTC")
+    // no t for Test, just BTC cause its nbxplorer
 
+    checkEvents("BTC")
 
     app.use(cors())
     app.use(bodyParser.json())

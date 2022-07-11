@@ -39,8 +39,13 @@ class Server {
     }
 
     async processTx(hash) {
-        this.processedTxs.set(hash, {_id: hash})
 
+        if (this.processedTxs.has(hash))
+            return
+
+        let t = new Date()
+        this.processedTxs.set(hash, {_id: hash, t})
+        dbhandler.cols.list.colProcessedTxs.insertOne({_id: hash, t})
         this.saveToDB()
     }
 

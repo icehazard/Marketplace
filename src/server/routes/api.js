@@ -259,21 +259,22 @@ api.get('/me', async (req, res) => {
     const authed = await auth(req.headers)
 
     if (!authed) {
-        return;
+        return res.status(401).json()
     }
 
     const userID = authed._id;
 
-    let me = accountHandler.Accounts.get(userID)
+    let me = accountHandler.Accounts.has(userID)
 
     if (!me) {
         return res.status(400).json({status: 'Error! Couldnt get user id for /me'})
     }
+    me = accountHandler.Accounts.get(userID)
 
     let sids = await me.getShopIds()
     console.log("Got sids", sids)
     if (!sids) sids = []
-    res.status(200).json(sids)
+    res.status(200).json({shops: sids, recentAddresses: me.getRecentAddresses()})
 })
 
 api.get('/address/:symbol', async (req, res) => {

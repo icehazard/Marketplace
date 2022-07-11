@@ -1,5 +1,6 @@
 let dbhandler = require("../db/dbhandler")
 const HdAddGen = require('hdaddressgenerator')
+let accountHandler = require("./accounts")
 
 let addresses = new Addresses()
 
@@ -52,6 +53,14 @@ Addresses.prototype.loadFromDB = async function() {
             let a = new Address(p._id, p.ownerID, p.symbol, p.keyId)
             this.getAddresses().set(p._id, a)
             this.getAddressesByKeyId().set(p.keyId, a)
+            if (accountHandler.Accounts.has(p.ownerID))
+            {
+                let acc = accountHandler.Accounts.getAccounts().get(p.ownerID)
+                console.log(acc)
+                acc.addresses.get(p.symbol).set(p._id, a)
+            }
+            else
+                console.log("Acchandler doesnt have ownerID", p.ownerID)
         }
 
     console.log(`*** Loaded ${this.getAddresses().size} Addresses!`)
@@ -69,8 +78,15 @@ class Address {
 
     async saveToDB() {
         //dont need await
-        dbhandler.cols.list.colAddress.updateOne({_id: this._id},
-            {$set: {ownerID: this.ownerID, symbol: this.symbol, keyId: this.keyId}}, {upsert: true})
+        let exists = await dbhandler.cols.list.colAddress.findOne({_id: this._id})
+        if (exists)
+        {
+            dbhandler.cols.list.colAddress.insertOne({_id: this._id,
+                ownerID: this.ownerID, symbol: this.symbol, keyId: this.keyId, t: new Date()})
+        }
+        else
+            dbhandler.cols.list.colAddress.updateOne({_id: this._id},
+                {$set: {ownerID: this.ownerID, symbol: this.symbol, keyId: this.keyId}}, {upsert: true})
     }
 
     async getPrivKey() {

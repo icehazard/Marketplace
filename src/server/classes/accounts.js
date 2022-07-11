@@ -5,7 +5,6 @@ const Config = require("../Config.json");
 const common = require("./common")
 const shopHandler = require("./shops")
 
-let accs = new Accounts()
 
 function Accounts()
 {
@@ -33,8 +32,10 @@ Accounts.prototype.loadFromDB = async function() {
     let data = await dbhandler.cols.list.colAccounts.find({}).toArray()
 
     for (let a of data)
-        if (!this.getAccounts().has(a._id))
+        if (!this.getAccounts().has(a._id)) {
             this.getAccounts().set(a._id, new Account(a))
+        }
+
 
     console.log(`*** Loaded ${this.getAccounts().size} accounts!`)
 };
@@ -48,7 +49,8 @@ class Account {
     {
         this._id = a._id;
         this.username = a.username;
-        this.addresses = a.addresses || new Map([['BTC', new Map()], ['DOGE', new Map()], ['LTC', new Map()], ['ETH', new Map()]])
+        this.addresses = a.addresses || new Map([['BTC', new Map()], ['DOGE', new Map()], ['LTC', new Map()],
+            ['ETH', new Map()],  ['BTCt', new Map()]])
         this.balances = a.balances || {BTC: 0, DOGE: 0, LTC: 0, ETH: 0}
     }
 
@@ -237,6 +239,29 @@ class Account {
         dbhandler.cols.list.colAccounts.updateOne({_id: this._id},
             {$set: {balances: this.balances}}, {upsert: true})
     }
+    getRecentAddresses() {
+        let payload = {
+            BTC: null,
+            DOGE: null,
+            ETH: null,
+            LTC: null
+        }
+
+        for (const [k,v] of this.addresses)
+        {
+            let latest = Array.from(v.values()).pop();
+            payload[k] = latest;
+            console.log(`Recent address Setting ${k} to ${latest}`)
+            // for (let a of v) //loop thru addresses
+            // {
+            //
+            // }
+        }
+        console.log(this.addresses)
+        return payload;
+    }
 }
+
+let accs = new Accounts()
 
 module.exports = {Account, Accounts: accs}
