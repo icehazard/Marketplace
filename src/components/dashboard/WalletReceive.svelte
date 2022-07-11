@@ -1,30 +1,40 @@
 <script>
-    import { formatCurrency } from "@/assets/library/CommonFunctions.js";
+    import { formatCurrency, get } from "@/assets/library/CommonFunctions.js";
     import { currencies } from "@/assets/library/options.js";
+    import { Shadow } from 'svelte-loading-spinners'
     import user from "@/store/user.js";
     import Icon from "@iconify/svelte";
     import QRCode from "qrcode";
     import { onMount } from "svelte";
 
-    let el, tooltip;
+    let el, tooltip, tooltipCopy;
     let btcAmount = 0.28;
-    let address = "bc1q5gs3rr2sgzqlhdykq5lh2ne08aa7304y6jrn9k";
 
     $: symbol = currencies.find((el) => el.id == $user?.currency)?.symbol;
     $: rate = currencies.find((el) => el.id == "BTC")?.convert;
 
-    function copy() {
-        navigator.clipboard.writeText(address);
+    async function copy() {
+        await navigator.clipboard.writeText($user.address);
         tooltip = "Copied!";
     }
-
-    function enter() {
+    function tooltipDefault() {
         tooltip = "Click to copy";
+        tooltipCopy = "New address"
+    }
+    function generateQR() {
+        QRCode.toCanvas(el, $user.address);
+    }
+    async function getAddress() {
+        $user.address = '';
+        tooltipCopy = "Generating..."
+        await user.getAddress();
+        generateQR();
+        tooltipDefault();
     }
 
-    onMount(() => {
-        enter()
-        QRCode.toCanvas(el, address);
+    onMount(async () => {
+        generateQR();
+        if (!$user.address) getAddress();
     });
 </script>
 
@@ -65,20 +75,26 @@
                     >
                 </div>
             </div>
-            <button
-                on:click={copy}
-                on:mouseenter={enter}
-                class="col gap-20 center"
-                data-tooltip={tooltip}
-            >
+            <button on:click={copy} on:mouseenter={tooltipDefault} class="col gap-20 center">
                 <div class="shade2 curve pa-10 row gap-20 align-center">
-                    <span>{address} </span>
-                    <Icon icon="fluent:copy-16-regular" />
+                    <span data-tooltip={tooltip}>{$user.address} </span>
+                    <button data-tooltip={tooltip}>
+                        <Icon icon="fluent:copy-16-regular" />
+                    </button>
+                    <button on:click|stopPropagation={getAddress} data-tooltip={tooltipCopy}>
+                        <Icon icon="codicon:refresh" />
+                    </button>
                 </div>
             </button>
         </div>
         <div class="center shade2-60 col pa-20 gap-20">
-            <canvas bind:this={el} />
+            {#if !$user.address}
+            <div class="absolute">
+             <Shadow size="60" color="#3ea6ff"  unit="px" duration="1s"></Shadow>
+            </div>
+             {/if}
+            <canvas class:hidden={!$user.address} bind:this={el} />
+           
             <span class="font-14 opacity-75 align-center gap-10 blue--text">
                 <Icon icon="fluent:info-20-regular" width="20" />
                 <span>Send only bitcoin to this deposit address.</span>
@@ -87,6 +103,3 @@
         <hr />
     </div>
 </section>
-
-<style>
-</style>

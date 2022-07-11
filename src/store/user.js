@@ -8,6 +8,7 @@ const data = {
     currency: 'THB',
     theme: 'dark',
     lang: "ENG",
+    address: '',
     me: []
 }
 
@@ -16,6 +17,11 @@ const context = persist('user', data)
 context.logout = function () {
     context.reset(data)
     push('#/login')
+}
+context.getAddress = async function () {
+     let res = await get("api/address/BTC");
+    res = hasError(res, data.address)
+    return context.commit('address', res.address)
 }
 context.get = async function () {
     let res = await get('api/me')
