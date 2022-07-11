@@ -9,9 +9,6 @@
     import { fade } from "svelte/transition";
     import { Modals, closeModal, openModal } from "svelte-modals";
 
-    function handleOpen() {
-        openModal(Logo);
-    }
 </script>
 
 <div class="row gap-20 shade1 pa-20 curved center">

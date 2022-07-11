@@ -59,7 +59,9 @@
             </div>
             <!-- <hr /> -->
             <div class="py-20 center">
+              <a href="#/checkout">
                 <Button text="PROCEED TO CHECKOUT" />
+              </a>
             </div>
             <div class="col py-20 font-12 text-center gap-10 opacity-75">
                 <p>

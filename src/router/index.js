@@ -15,6 +15,8 @@ const ViewOrder = () => import("@/views/ViewOrder.svelte");
 const Login = () => import("@/views/Login.svelte");
 const Signup = () => import("@/views/Signup.svelte");
 const Shop = () => import("@/views/Shop.svelte");
+const Order = () => import("@/views/Order.svelte");
+const Checkout = () => import("@/views/Checkout.svelte");
 const Wallet = () => import("@/views/Wallet.svelte");
 const WalletReceive = () => import("@/views/WalletReceive.svelte");
 const WalletSend = () => import("@/views/WalletSend.svelte");
@@ -34,6 +36,8 @@ export default {
     "/orders/overview": wrap({ asyncComponent: Orders, conditions: [auth] }),
     "/orders/view/:id": wrap({ asyncComponent: ViewOrder, conditions: [auth] }),
     "/cart": wrap({ asyncComponent: Cart }),
+    "/checkout": wrap({ asyncComponent: Checkout }),
+    "/order": wrap({ asyncComponent: Order }),
     "/account": wrap({ asyncComponent: Profile, conditions: [auth] }),
     "/messages": wrap({ asyncComponent: Messages, conditions: [auth] }),
     "/shops/id/:id": wrap({ asyncComponent: Seller }),
