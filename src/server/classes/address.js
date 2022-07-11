@@ -48,19 +48,18 @@ Addresses.prototype.delete = function(obj) {
 Addresses.prototype.loadFromDB = async function() {
     let data = await dbhandler.cols.list.colAddress.find({}).toArray()
 
-    for (let p of data)
-        if (!this.getAddresses().has(p._id)) {
-            let a = new Address(p._id, p.ownerID, p.symbol, p.keyId)
-            this.getAddresses().set(p._id, a)
-            this.getAddressesByKeyId().set(p.keyId, a)
-            if (accountHandler.Accounts.has(p.ownerID))
+    for (let addr of data)
+        if (!this.getAddresses().has(addr._id)) {
+            let a = new Address(addr._id, addr.ownerID, addr.symbol, addr.keyId)
+            this.getAddresses().set(addr._id, a)
+            this.getAddressesByKeyId().set(addr.keyId, a)
+            if (accountHandler.Accounts.has(addr.ownerID))
             {
-                let acc = accountHandler.Accounts.getAccounts().get(p.ownerID)
-                console.log(acc)
-                acc.addresses.get(p.symbol).set(p._id, a)
+                let acc = accountHandler.Accounts.getAccounts().get(addr.ownerID)
+                acc.addresses.get(addr.symbol).set(addr._id, a)
             }
             else
-                console.log("Acchandler doesnt have ownerID", p.ownerID)
+                console.log("Acchandler doesnt have ownerID", addr.ownerID)
         }
 
     console.log(`*** Loaded ${this.getAddresses().size} Addresses!`)

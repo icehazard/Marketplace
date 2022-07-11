@@ -244,13 +244,19 @@ class Account {
             BTC: null,
             DOGE: null,
             ETH: null,
-            LTC: null
+            LTC: null,
+            BTCt: null,
         }
 
-        for (const [k,v] of this.addresses)
+        console.log(this.addresses)
+        for (const [k,v] of this.addresses.entries())
         {
-            let latest = Array.from(v.values()).pop();
-            payload[k] = latest;
+            if (!v.size)
+                continue
+
+            let latest = Array.from(v.values())[v.size - 1];
+            console.log(latest)
+            payload[k] = {_id: latest._id, symbol: latest.symbol}
             console.log(`Recent address Setting ${k} to ${latest}`)
             // for (let a of v) //loop thru addresses
             // {
