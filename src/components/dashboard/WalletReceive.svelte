@@ -1,5 +1,5 @@
 <script>
-    import { formatCurrency } from "@/assets/library/CommonFunctions.js";
+    import { formatCurrency, get } from "@/assets/library/CommonFunctions.js";
     import { currencies } from "@/assets/library/options.js";
     import user from "@/store/user.js";
     import Icon from "@iconify/svelte";
@@ -9,6 +9,7 @@
     let el, tooltip;
     let btcAmount = 0.28;
     let address = "bc1q5gs3rr2sgzqlhdykq5lh2ne08aa7304y6jrn9k";
+
 
     $: symbol = currencies.find((el) => el.id == $user?.currency)?.symbol;
     $: rate = currencies.find((el) => el.id == "BTC")?.convert;
@@ -22,9 +23,10 @@
         tooltip = "Click to copy";
     }
 
-    onMount(() => {
+    onMount(async () => {
         enter()
         QRCode.toCanvas(el, address);
+        address = await get('api/address/BTC')
     });
 </script>
 

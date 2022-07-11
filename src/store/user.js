@@ -8,6 +8,7 @@ const data = {
     currency: 'THB',
     theme: 'dark',
     lang: "ENG",
+    address: '',
     me: []
 }
 
@@ -19,7 +20,7 @@ context.logout = function () {
 }
 context.get = async function () {
     let res = await get('api/me')
-    res = hasError(res, data.me)
+    res = hasError(res, data.me.shops)
     return context.commit('me', res)
 }
 context.shopID = function () {
