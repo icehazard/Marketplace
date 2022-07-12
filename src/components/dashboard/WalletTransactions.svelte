@@ -2,10 +2,10 @@
     import { currencies } from "@/assets/library/options.js";
     import { formatCurrency } from "@/assets/library/CommonFunctions.js";
     import { push } from 'svelte-spa-router';
-    import user from "@/store/user.js";
+    import user, {totalBalance} from "@/store/user.js";
     import Icon from "@iconify/svelte";
 
-    let btcAmount = 0.28;
+    let btcAmount = $totalBalance;
 
     $: symbol = currencies.find((el) => el.id == $user?.currency)?.symbol;
     $: rate = currencies.find((el) => el.id == "BTC")?.convert;
@@ -29,7 +29,7 @@
             <Icon icon="logos:bitcoin" width="40" />
             <div class="col gap-10">
                 <div class="weight-600">BTC wallet</div>
-                <span>{btcAmount} BTC</span>
+                <div>{btcAmount} BTC</div>
             </div>
         </div>
         <span class="center font-22"> ≈</span>

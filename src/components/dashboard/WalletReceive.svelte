@@ -2,13 +2,13 @@
     import { formatCurrency, get } from "@/assets/library/CommonFunctions.js";
     import { currencies } from "@/assets/library/options.js";
     import { Shadow } from 'svelte-loading-spinners'
-    import user from "@/store/user.js";
+    import user, {totalBalance} from "@/store/user.js";
     import Icon from "@iconify/svelte";
     import QRCode from "qrcode";
     import { onMount } from "svelte";
 
     let el, tooltip, tooltipCopy;
-    let btcAmount = 0.28;
+    let btcAmount = $totalBalance;
 
     $: symbol = currencies.find((el) => el.id == $user?.currency)?.symbol;
     $: rate = currencies.find((el) => el.id == "BTC")?.convert;

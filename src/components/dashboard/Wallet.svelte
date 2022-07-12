@@ -1,10 +1,10 @@
 <script>
     import { currencies } from "@/assets/library/options.js";
     import { formatCurrency } from "@/assets/library/CommonFunctions.js";
-    import user from "@/store/user.js";
+    import user, {totalBalance} from "@/store/user.js";
     import Icon from "@iconify/svelte";
 
-    let btc = 0.28;
+    let btc = $totalBalance;
 
     $: symbol = currencies.find((el) => el.id == $user?.currency)?.symbol;
     $: rate = currencies.find((el) => el.id == "BTC")?.convert;

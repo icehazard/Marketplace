@@ -27,7 +27,7 @@ context.get = async function () {
     let res = await get('api/me')
     res = hasError(res, data.me)
     context.commit('me', res.shops)
-    context.commit('address', res.recentAddresses.BTCt._id)
+    context.commit('address', res.recentAddresses?.BTCt?._id)
 }
 context.shopID = function () {
     if (!context.val('me')[0]) return 0;
@@ -44,6 +44,9 @@ export const isShopPending = derived(context, () => {
 });
 export const isShopActive = derived(context, () => {
     return context.val('me').length > 0;
+});
+export const totalBalance = derived(context, () => {
+    return 0.35;
 });
 
 export default context
