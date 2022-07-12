@@ -28,6 +28,7 @@
         $user.address = '';
         tooltipCopy = "Generating..."
         await user.getAddress();
+        user.get()
         generateQR();
         tooltipDefault();
     }
@@ -76,7 +77,7 @@
                 </div>
             </div>
             <button on:click={copy} on:mouseenter={tooltipDefault} class="col gap-20 center">
-                <div class="shade2 curve pa-10 row gap-20 align-center">
+                <div class="shade2 curve pa-10 row gap-20 align-center shine">
                     <span data-tooltip={tooltip}>{$user.address} </span>
                     <button data-tooltip={tooltip}>
                         <Icon icon="fluent:copy-16-regular" />

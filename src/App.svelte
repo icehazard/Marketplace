@@ -11,7 +11,7 @@
 	function conditionsFailed(event){
 		replace('/login')
 	}
-	
+	user.get()
 	user.setTheme()
 </script>
 
