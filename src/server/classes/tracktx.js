@@ -6,7 +6,7 @@ const serverHandler = require("./server");
 const bitcore = require("bitcore-lib");
 const addressHandler = require("./address");
 const accountHandler = require("./accounts");
-
+const common = require("./common")
 
 class Tracktx {
     constructor() {
@@ -14,7 +14,7 @@ class Tracktx {
         this.trackedtxs = new Map([['BTC', []], ['DOGE', []], ['LTC', []],
             ['ETH', []],  ['BTCt', []]])
 
-        for (let [k,v] of this.trackedtxs)
+        for (let k of this.trackedtxs.keys())
                 this.checker(k)
     }
 
@@ -34,15 +34,15 @@ class Tracktx {
                 console.log(`Tracking ${symbol}`)
 
                 let txHash = trans._id
-                let nbSymbol = Config.USE_TESTNET ? symbol.substring(0, symbol.length-1) : symbol
-                let url = `${Config.NBXPLORER_URL}/v1/cryptos/${nbSymbol}/transactions/${txHash}`
+                let nbSymbol = common.toNbSymbol(symbol)
+                let url = `${common.nbUrl}/v1/cryptos/${nbSymbol}/transactions/${txHash}`
                 console.log("URL is", url)
                 let txReq = await fetch(url, {
                     method: "GET",
                     headers: {
                         Accept: "application/json",
                         "Content-Type": "application/json",
-                        Authorization: 'Basic ' + base64.encode("__cookie__:" + Config.NBXPLORER_PASSWORD)
+                        Authorization: 'Basic ' + base64.encode("__cookie__:" + Config.NBXPLORER_COOKIE_PW)
                     }
                 });
 
@@ -67,20 +67,20 @@ class Tracktx {
 
                 console.log(`TX ${txHash} confirmed! Crediting user now...`)
 
-                let tx = new bitcore.Transaction(Buffer.from(rawTrans, "hex"))
+                let tx = new bitcore.Transaction(Buffer.from(txJson.rawTrans, "hex"))
 
                 let out = tx.toJSON().outputs
                 //console.log("Got output", out)
 
                 for (let o of out)
                 {
-                    let url = `${Config.NBXPLORER_URL}/v1/cryptos/${nbSymbol}/derivations/${Config.BTC_DERIV_SCHEME}/scripts/${o.script}`
+                    let url = `${common.nbUrl}/v1/cryptos/${nbSymbol}/derivations/${Config.BTC_DERIV_SCHEME}/scripts/${o.script}`
 
                     let s = await fetch(url, {
                         method: "GET",
                         headers: {
                             Accept: 'application/json',
-                            Authorization: 'Basic ' + base64.encode("__cookie__:" +  Config.NBXPLORER_PASSWORD)
+                            Authorization: 'Basic ' + base64.encode("__cookie__:" +  Config.NBXPLORER_COOKIE_PW)
                         }
                     });
 
@@ -139,14 +139,14 @@ class Tracktx {
             {$set: {lastEventId: this.lastEventId}}, {upsert: true})
     }
 
-    async insert(hash, symbol) {
+    async insert(hash, symbol, rawData) {
         if (Config.USE_TESTNET)
             symbol += "t"
 
         if (!this.trackedtxs.has(symbol))
             return
 
-        let obj = {_id: hash, symbol: symbol, t: new Date()}
+        let obj = {_id: hash, symbol: symbol, rawData: rawData, t: new Date()}
         this.trackedtxs.get(symbol).push(obj)
         dbhandler.cols.list.colTrackedTxs.insertOne(obj).catch(err => {})
     }

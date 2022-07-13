@@ -4,7 +4,9 @@ var jwt = require('jsonwebtoken');
 const Config = require("../Config.json");
 const common = require("./common")
 const shopHandler = require("./shops")
-
+const fetch = require("node-fetch");
+const base64 = require("base-64");
+const bitcore = require("bitcore-lib");
 
 function Accounts()
 {
@@ -51,7 +53,7 @@ class Account {
         this.username = a.username;
         this.addresses = a.addresses || new Map([['BTC', new Map()], ['DOGE', new Map()], ['LTC', new Map()],
             ['ETH', new Map()],  ['BTCt', new Map()]])
-        this.balances = a.balances || {BTC: 0, DOGE: 0, LTC: 0, ETH: 0}
+        this.balances = a.balances || {BTC: 0, DOGE: 0, LTC: 0, ETH: 0, BTCt: 0}
     }
 
     /*** ACCOUNT LOGIN ***/
@@ -232,7 +234,20 @@ class Account {
     }
 
     creditBalance(symbol, amount) {
+        if (Config.USE_TESTNET)
+            symbol = common.symToTestNet(symbol)
+
+        console.log("Old balance", this.balances[symbol], "adding", amount)
         this.balances[symbol] += amount;
+        console.log("New balance", this.balances[symbol])
+
+    }
+
+    deduceBalance(symbol, amount) {
+        if (Config.USE_TESTNET)
+            symbol = common.symToTestNet(symbol)
+
+        this.balances[symbol] -= amount;
     }
 
     async saveToDB() {
@@ -265,6 +280,17 @@ class Account {
         }
         console.log(this.addresses)
         return payload;
+    }
+
+    getBalance(symbol) {
+        if (!this.balances[symbol])
+            return 0
+
+        return this.balances[symbol]
+    }
+
+    getAllBalances() {
+        return this.balances
     }
 }
 
