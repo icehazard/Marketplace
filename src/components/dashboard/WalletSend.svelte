@@ -3,10 +3,10 @@
     import Button from "comp/atoms/Button.svelte";
     import { languages, themes, currencies } from "@/assets/library/options.js";
     import { formatCurrency } from "@/assets/library/CommonFunctions.js";
-    import user from "@/store/user.js";
+    import user, {totalBalance} from "@/store/user.js";
     import Icon from "@iconify/svelte";
 
-    let btcAmount = 0.28;
+    let btcAmount = $totalBalance;
     let btc = '';
     let address = ''
 
@@ -55,7 +55,7 @@
             </div>
             <div class="row align-center gap-20">
                 <div class="opacity-75 font-14 min-max-content ">
-                    <span> {formatCurrency(btc * rate)}</span>
+                    <span>{formatCurrency(btc * rate)}</span>
                     <span class="ml-10"> ≈ </span>
                 </div>
                 <Field bind:value={btc} label="0.0 BTC" />

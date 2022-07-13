@@ -2,13 +2,13 @@
     import { formatCurrency, get } from "@/assets/library/CommonFunctions.js";
     import { currencies } from "@/assets/library/options.js";
     import { Shadow } from 'svelte-loading-spinners'
-    import user from "@/store/user.js";
+    import user, {totalBalance} from "@/store/user.js";
     import Icon from "@iconify/svelte";
     import QRCode from "qrcode";
     import { onMount } from "svelte";
 
     let el, tooltip, tooltipCopy;
-    let btcAmount = 0.28;
+    let btcAmount = $totalBalance;
 
     $: symbol = currencies.find((el) => el.id == $user?.currency)?.symbol;
     $: rate = currencies.find((el) => el.id == "BTC")?.convert;
@@ -28,6 +28,7 @@
         $user.address = '';
         tooltipCopy = "Generating..."
         await user.getAddress();
+        user.get()
         generateQR();
         tooltipDefault();
     }
@@ -76,7 +77,7 @@
                 </div>
             </div>
             <button on:click={copy} on:mouseenter={tooltipDefault} class="col gap-20 center">
-                <div class="shade2 curve pa-10 row gap-20 align-center">
+                <div class="shade2 curve pa-10 row gap-20 align-center shine">
                     <span data-tooltip={tooltip}>{$user.address} </span>
                     <button data-tooltip={tooltip}>
                         <Icon icon="fluent:copy-16-regular" />

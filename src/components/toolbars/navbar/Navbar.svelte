@@ -2,16 +2,21 @@
 	import DropDown from "./DropDown.svelte";
 	import { push } from "svelte-spa-router";
 	import Button from "comp/atoms/Button.svelte";
+	import { currencies } from "@/assets/library/options.js";
 	import Search from "./Search.svelte";
 	import Title from "./Title.svelte";
 	import Circle from "comp/atoms/Circle.svelte";
 	import { mq } from "@/assets/library/MediaQuery.svelte";
-	import { clickOutside } from "@/assets/library/CommonFunctions.js";
-	import user from "@/store/user.js";
+	import { clickOutside, formatCurrency } from "@/assets/library/CommonFunctions.js";
+	import user, { totalBalance } from "@/store/user.js";
 	import { isShopActive } from "@/store/user.js";
 	import Icon from "@iconify/svelte";
 
 	let showModal = false;
+	let balance = formatCurrency($totalBalance * rate);
+
+	$: rate = currencies.find((el) => el.id == "BTC")?.convert;
+	$: $user.currency, (balance = formatCurrency($totalBalance * rate));
 
 	function toggle() {
 		showModal = !showModal;
@@ -63,7 +68,7 @@
 							on:click={toggle}
 						>
 							{#if $user.username}
-								{$user.username}
+								{balance}
 							{:else}
 								<Icon icon="fluent:line-horizontal-3-20-regular" />
 							{/if}
