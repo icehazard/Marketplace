@@ -53,7 +53,11 @@ export function formatCurrency(x) {
     x = Number(x).toFixed(currency.sign);
     var parts = x.toString().split(".");
     parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    return active + " " + parts.join(".");
+    return currency.id + " " + parts.join(".");
+}
+
+export function satoshiToBtcString(x) {
+    return (x / 100000000) + ' ฿'
 }
 
 let getUser = localStorage.getItem('user');

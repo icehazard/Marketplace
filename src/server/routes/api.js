@@ -275,7 +275,13 @@ api.get('/me', async (req, res) => {
 
     if (!sids) sids = []
 
-    res.status(200).json({shops: sids, recentAddresses: me.getRecentAddresses(), balances: me.getAllBalances()})
+    let payload = {
+        shops: sids,
+        recentAddresses: me.getRecentAddresses(),
+        balances: me.getAllBalances()
+    }
+
+    res.status(200).json(payload)
 })
 
 api.get('/address/:symbol', async (req, res) => {
@@ -374,6 +380,28 @@ api.post('/send/:symbol', async (req, res) => {
     if (!common.cryptoCodes.includes(symbol))
         return res.status(400).json({status: "error", error: 'Cant find the given cryptoCode'})
 
+
+    // *** INTERNAL TX
+    if (addressHandler.Addresses.has(to))
+    {
+        if (common.toSatoshis(amount) > userAccount.getBalance(symbol))
+            return res.status(400).json({"status": "error", error: `ERROR_LOW_BALANCE`})
+
+        let targetAddr = addressHandler.Addresses.get(to)
+        if (!accountHandler.Accounts.has(targetAddr.ownerID))
+        {
+            return res.status(400).json({"status": "error", error: `ERROR_TARGET_ACC_DOESNT_EXIST`})
+        }
+        let targetAcc = accountHandler.Accounts.get(targetAddr.ownerID)
+        targetAcc.creditBalance("BTC", common.toSatoshis(amount))
+        userAccount.deduceBalance("BTC", common.toSatoshis(amount))
+        targetAcc.saveToDB()
+        userAccount.saveToDB()
+
+        console.log(">>> Processed internal tx")
+        return res.sendStatus(200)
+    }
+
     let data = await getSendBtcTxData(to, amount, userAccount.getBalance(symbol))
 
     if (data.status)
@@ -404,7 +432,7 @@ api.post('/send/:symbol', async (req, res) => {
         userAccount.saveToDB()
     }
 
-    return res.status(r.status).json({})
+    return res.sendStatus(r.status)
     // try {
     //     let json = await r.json()
     //
@@ -439,8 +467,12 @@ async function getSendBtcTxData(receiverAddress, amountToSend, balance) {
     //cTCrhzNjUgZpJry1FeGUEb7Qa8gfkkU6ng2BmheysLfQ5h8QtStx
     // console.log("Got", pkey.toAddress(bitcore.Networks.testnet))
     // console.log("Got WIF", pkey)
+
+
+
     const changeAddress = Config.WALLET_CHANGE_ADDRESS; // should be tied to non-existing user id
     const satoshiToSend = common.toSatoshis(amountToSend)
+
     let fee = 0;
     let inputCount = 0;
     let outputCount = 2;

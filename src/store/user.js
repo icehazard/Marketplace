@@ -9,6 +9,7 @@ const data = {
     theme: 'dark',
     lang: "ENG",
     address: '',
+    balances: {},
     me: []
 }
 
@@ -28,6 +29,7 @@ context.get = async function () {
     res = hasError(res, data.me)
     context.commit('me', res.shops)
     context.commit('address', res.recentAddresses?.BTCt?._id)
+    context.commit('balances', res.balances)
 }
 context.shopID = function () {
     if (!context.val('me')[0]) return 0;
@@ -46,7 +48,7 @@ export const isShopActive = derived(context, () => {
     return context.val('me').length > 0;
 });
 export const totalBalance = derived(context, () => {
-    return 0.35;
+    return context.val('balances').BTCt;
 });
 
 export default context

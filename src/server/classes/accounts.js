@@ -237,10 +237,12 @@ class Account {
         if (Config.USE_TESTNET)
             symbol = common.symToTestNet(symbol)
 
+        if (!this.balances[symbol])
+            this.balances[symbol] = 0;
+
         console.log("Old balance", this.balances[symbol], "adding", amount)
         this.balances[symbol] += amount;
         console.log("New balance", this.balances[symbol])
-
     }
 
     deduceBalance(symbol, amount) {
