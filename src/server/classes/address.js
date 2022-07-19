@@ -1,14 +1,14 @@
 let dbhandler = require("../db/dbhandler")
 const HdAddGen = require('hdaddressgenerator')
 let accountHandler = require("./accounts")
-
+const Config = require("../Config.json")
 let addresses = new Addresses()
 
 function Addresses()
 {
     this.addresses = new Map();
     this.addressesByKeyId = new Map();
-    this.mnemonic = "unique fresh zero movie pet zebra cluster second minor liquid baby scrap"
+    this.mnemonic = Config.WALLET_MNEMONIC;
 
     this.getAddresses = function() {
         return this.addresses;
@@ -26,6 +26,11 @@ Addresses.prototype.set = function(obj) {
 Addresses.prototype.get = function(id) {
     return this.getAddresses().get(id);
 };
+
+Addresses.prototype.hasByKeyId = function(id) {
+    return this.getAddressesByKeyId().has(id);
+};
+
 
 Addresses.prototype.getByKeyId = function(id) {
     return this.getAddressesByKeyId().get(id);
@@ -89,11 +94,11 @@ class Address {
     }
 
     async getPrivKey() {
-        console.log("Checking for symbol", this.symbol)
+        // console.log("Checking for symbol", this.symbol)
         let bip84 = HdAddGen.withMnemonic(addresses.mnemonic,false, this.symbol, false, 84)
         let addressesx = await bip84.generate(1, this.keyId)
 
-        console.log(addressesx)
+        // console.log(addressesx)
 
         if (!addressesx.length)
             return false

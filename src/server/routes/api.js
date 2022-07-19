@@ -275,7 +275,13 @@ api.get('/me', async (req, res) => {
 
     if (!sids) sids = []
 
-    res.status(200).json({shops: sids, recentAddresses: me.getRecentAddresses()})
+    let payload = {
+        shops: sids,
+        recentAddresses: me.getRecentAddresses(),
+        balances: me.getAllBalances()
+    }
+
+    res.status(200).json(payload)
 })
 
 api.get('/address/:symbol', async (req, res) => {
@@ -296,7 +302,7 @@ api.get('/address/:symbol', async (req, res) => {
     if (!common.cryptoCodes.includes(symbol))
         return res.status(400).json({status: "error", error: 'Cant get new address for the given cryptoCode'})
 
-    let url = `${Config.NBXPLORER_URL}/v1/cryptos/${symbol}/derivations/${Config.BTC_DERIV_SCHEME}/addresses/unused?reserve=true`
+    let url = `${Config.NBXPLORER_URL_TESTNET}/v1/cryptos/${symbol}/derivations/${Config.BTC_DERIV_SCHEME}/addresses/unused?reserve=true`
     //let url = `${Config.BTC_PAY_URL}/api/v1/stores/${Config.BTC_PAY_STOREID}/payment-methods/onchain/${symbol}/wallet/address?forceGenerate=true`
 
     console.log("Trying", url)
@@ -314,7 +320,7 @@ api.get('/address/:symbol', async (req, res) => {
         headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
-            Authorization: 'Basic ' + base64.encode("__cookie__:" +  Config.NBXPLORER_PASSWORD)
+            Authorization: 'Basic ' + base64.encode("__cookie__:" +  Config.NBXPLORER_COOKIE_PW)
         },
     });
 
@@ -327,7 +333,7 @@ api.get('/address/:symbol', async (req, res) => {
             return res.status(400).json({status: "error", error: `Unknown error while getting address data. Contact admin.`})
 
 
-        let keyId = json.keyPath.split("/")[1]
+        let keyId = parseInt(json.keyPath.split("/")[1])
         let a = new addressHandler.Address(json.address, userID, Config.USE_TESTNET ? symbol + "t" : symbol, keyId)
         userAccount.insertAddress(a)
         addressHandler.Addresses.set(a)
@@ -342,104 +348,6 @@ api.get('/address/:symbol', async (req, res) => {
     }
 })
 
-
-const sendBitcoin = async (receiverAddress, amountToSend) => {
-    // console.log("Got priv key", mnemonic.createPrivateKey(mn)
-    //     .derived._buffers.privateKey.toString("hex"))
-
-    // const cli = new NBXClient.NBXClient({
-    //     uri: 'https://btcpay.cocksuckas.com:23002',
-    //     cryptoCode: 'btc',
-    //     cookieFilePath: './.cookie', // Only if noauth is not active
-    // });
-    //
-    // const healthCheckResponse = await cli.healthCheck();
-    // console.log("HC", healthCheckResponse)
-    const sochain_network = "BTCTEST";
-    //L16uEoXwk71DxqpuhCXJw2y8Bc1Z9DnrTis7VKuqHqoThdwdzaQv
-    //cTCrhzNjUgZpJry1FeGUEb7Qa8gfkkU6ng2BmheysLfQ5h8QtStx
-    // console.log("Got", pkey.toAddress(bitcore.Networks.testnet))
-    // console.log("Got WIF", pkey)
-    const sourceAddress = "tb1qaxukg3rwr0jzs2a6atfhz2deartn2f8nvfnl98";
-    const satoshiToSend = amountToSend * 100000000;
-    let fee = 0;
-    let inputCount = 0;
-    let outputCount = 2;
-    let url = `${Config.NBXPLORER_URL}/v1/cryptos/BTC/derivations/${Config.BTC_DERIV_SCHEME}/utxos`
-    console.log("Got url", url)
-    let utxos = await fetch(url, { headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-            Authorization: 'Basic ' + base64.encode("__cookie__:" +  Config.NBXPLORER_PASSWORD)
-        }});
-    utxos = await utxos.json()
-
-    const transaction = new bitcore.Transaction();
-    let totalAmountAvailable = 0;
-
-    let inputs = [];
-    let pkeys = []
-
-    for (let element of utxos.confirmed.utxOs) {
-        let utxo = {};
-        utxo.satoshis = element.value;
-        utxo.script = element.scriptPubKey;
-
-        let keyId = element.keyPath.split("/")[1]
-        let address = addressHandler.Addresses.getByKeyId(parseInt(keyId))
-
-        utxo.address = address._id;
-        utxo.txId = element.transactionHash;
-        utxo.outputIndex = element.index;
-        totalAmountAvailable += utxo.satoshis;
-        inputCount += 1;
-        inputs.push(utxo);
-        let pkey = await address.getPrivKey()
-        pkeys.push(pkey)
-        //console.log('Got', utxo)
-        console.log("Got pkey", pkey)
-    }
-
-    // let utxo = {};
-    // utxo.satoshis = 20.26216 * 100000000;
-    // utxo.address = "tb1qstfmn6j5r7x8dfj8z3gjdr2xw6lkkfzadz6yj2"
-    // utxo.txId = element.txid;
-    // utxo.outputIndex = element.output_no;
-    // inputs.push({
-    //
-    // })
-
-    console.log(inputs)
-    transactionSize = inputCount * 146 + outputCount * 34 + 10 - inputCount;
-    // Check if we have enough funds to cover the transaction and the fees assuming we want to pay 20 satoshis per byte
-
-    fee = transactionSize * 20
-    if (totalAmountAvailable - satoshiToSend - fee  < 0) {
-        return {"status": "error", error: "ERROR_LOW_BALANCE"}
-    }
-
-    //Set transaction input
-    transaction.from(inputs);
-
-    // set the recieving address and the amount to send
-    transaction.to(receiverAddress, satoshiToSend);
-
-    // Set change address - Address to receive the left over funds after transfer
-    transaction.change(sourceAddress);
-
-    //manually set transaction fees: 20 satoshis per byte
-    transaction.fee(fee * 2);
-
-    // Sign transaction with your private key
-    transaction.sign(pkeys);
-
-    // serialize Transactions
-    const serializedTransaction = transaction.serialize();
-    // Send transaction
-    //return result.data.data;
-    return serializedTransaction
-};
-
 api.post('/send/:symbol', async (req, res) => {
     const authed = await auth(req.headers)
 
@@ -448,6 +356,8 @@ api.post('/send/:symbol', async (req, res) => {
     }
 
     const userID = authed._id;
+    const {to, amount} = req.body
+
 
     // var keyPair = ECPair.fromWIF('cUDA2gkxCPP6mrrSbsCf9XceBBFmjcjfND4ySh3i4x3wb7mr6qvq', bitcoin.networks.testnet);
     // var tx = new bitcoin.Psbt({network: bitcoin.networks.testnet});
@@ -460,8 +370,6 @@ api.post('/send/:symbol', async (req, res) => {
     //
     // let data = tx.build().toHex()
 
-    let data = await sendBitcoin("msWccFYm5PPCn6TNPbNEnprA4hydPGadBN", 0.0001)
-    console.log("Got data", data)
 
     if (!accountHandler.Accounts.has(userID))
         return res.status(400).json({status: "error", error: `Account doesnt exist!`})
@@ -470,16 +378,46 @@ api.post('/send/:symbol', async (req, res) => {
     const symbol = req.params.symbol
 
     if (!common.cryptoCodes.includes(symbol))
-        return res.status(400).json({status: "error", error: 'Cant get new address for the given cryptoCode'})
+        return res.status(400).json({status: "error", error: 'Cant find the given cryptoCode'})
 
-    let url = `${Config.NBXPLORER_URL}/v1/cryptos/${symbol}/transactions`
+
+    // *** INTERNAL TX
+    if (addressHandler.Addresses.has(to))
+    {
+        if (common.toSatoshis(amount) > userAccount.getBalance(symbol))
+            return res.status(400).json({"status": "error", error: `ERROR_LOW_BALANCE`})
+
+        let targetAddr = addressHandler.Addresses.get(to)
+        if (!accountHandler.Accounts.has(targetAddr.ownerID))
+        {
+            return res.status(400).json({"status": "error", error: `ERROR_TARGET_ACC_DOESNT_EXIST`})
+        }
+        let targetAcc = accountHandler.Accounts.get(targetAddr.ownerID)
+        targetAcc.creditBalance("BTC", common.toSatoshis(amount))
+        userAccount.deduceBalance("BTC", common.toSatoshis(amount))
+        targetAcc.saveToDB()
+        userAccount.saveToDB()
+
+        console.log(">>> Processed internal tx")
+        return res.sendStatus(200)
+    }
+
+    let data = await getSendBtcTxData(to, amount, userAccount.getBalance(symbol))
+
+    if (data.status)
+        return res.status(400).json(data)
+
+    console.log("Got data", data)
+
+    let nbSymbol = common.toNbSymbol(symbol)
+    let url = `${Config.NBXPLORER_URL_TESTNET}/v1/cryptos/${nbSymbol}/transactions`
     //let url = `${Config.BTC_PAY_URL}/api/v1/stores/${Config.BTC_PAY_STOREID}/payment-methods/onchain/${symbol}/wallet/address?forceGenerate=true`
 
     let r = await fetch(url, {
         method: "POST",
         headers: {
             "Content-Type": "text/plain",
-            Authorization: 'Basic ' + base64.encode("__cookie__:" +  Config.NBXPLORER_PASSWORD)
+            Authorization: 'Basic ' + base64.encode("__cookie__:" +  Config.NBXPLORER_COOKIE_PW)
         },
         body: Buffer.from(data, "hex")
     });
@@ -488,7 +426,13 @@ api.post('/send/:symbol', async (req, res) => {
 
     let t = await r.text()
     console.log("Got status", r.status, t)
-    return res.status(200).json({t})
+
+    if (r.status === 200) {
+        userAccount.deduceBalance(symbol, common.toSatoshis(amount))
+        userAccount.saveToDB()
+    }
+
+    return res.sendStatus(r.status)
     // try {
     //     let json = await r.json()
     //
@@ -504,5 +448,121 @@ api.post('/send/:symbol', async (req, res) => {
     //     return res.status(400).json({status: "error", error: `Couldnt get address. Please try again ${e}`})
     // }
 })
+
+async function getSendBtcTxData(receiverAddress, amountToSend, balance) {
+    // console.log("Got priv key", mnemonic.createPrivateKey(mn)
+    //     .derived._buffers.privateKey.toString("hex"))
+
+    // const cli = new NBXClient.NBXClient({
+    //     uri: 'https://btcpay.cocksuckas.com:23002',
+    //     cryptoCode: 'btc',
+    //     cookieFilePath: './.cookie', // Only if noauth is not active
+    // });
+    //
+    // const healthCheckResponse = await cli.healthCheck();
+    console.log("Got wallet balance", balance)
+    // console.log("HC", healthCheckResponse)
+    const sochain_network = "BTCTEST";
+    //L16uEoXwk71DxqpuhCXJw2y8Bc1Z9DnrTis7VKuqHqoThdwdzaQv
+    //cTCrhzNjUgZpJry1FeGUEb7Qa8gfkkU6ng2BmheysLfQ5h8QtStx
+    // console.log("Got", pkey.toAddress(bitcore.Networks.testnet))
+    // console.log("Got WIF", pkey)
+
+
+
+    const changeAddress = Config.WALLET_CHANGE_ADDRESS; // should be tied to non-existing user id
+    const satoshiToSend = common.toSatoshis(amountToSend)
+
+    let fee = 0;
+    let inputCount = 0;
+    let outputCount = 2;
+    let url = `${common.nbUrl}/v1/cryptos/BTC/derivations/${Config.BTC_DERIV_SCHEME}/utxos`
+    console.log("Got url", url)
+    let utxos = await fetch(url, { headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: 'Basic ' + base64.encode("__cookie__:" +  Config.NBXPLORER_COOKIE_PW)
+        }});
+    utxos = await utxos.json()
+
+    const transaction = new bitcore.Transaction();
+    let totalAmountAvailable = 0;
+
+    let inputs = [];
+    let pkeys = []
+
+    for (let element of utxos.confirmed.utxOs) {
+        let utxo = {};
+        utxo.satoshis = element.value;
+        utxo.script = element.scriptPubKey;
+
+        let keyId = parseInt(element.keyPath.split("/")[1])
+        console.log("Got keyid", keyId)
+
+        // will never use master/change address (?)
+        if (!addressHandler.Addresses.hasByKeyId(keyId) && keyId !== 0) {
+            console.log("ADR HANDLER DONT HAVE")
+            continue //address was not added through our API
+        }
+
+        let address = addressHandler.Addresses.getByKeyId(keyId)
+
+        utxo.address = address._id;
+        utxo.txId = element.transactionHash;
+        utxo.outputIndex = element.index;
+        totalAmountAvailable += element.value;
+        inputCount += 1;
+        inputs.push(utxo);
+        let pkey = await address.getPrivKey()
+        pkeys.push(pkey)
+        //console.log('Got', utxo)
+        //console.log("Got pkey", pkey)
+    }
+
+    // let utxo = {};
+    // utxo.satoshis = 20.26216 * 100000000;
+    // utxo.address = "tb1qstfmn6j5r7x8dfj8z3gjdr2xw6lkkfzadz6yj2"
+    // utxo.txId = element.txid;
+    // utxo.outputIndex = element.output_no;
+    // inputs.push({
+    //
+    // })
+
+    console.log(inputs)
+    let transactionSize = inputCount * 146 + outputCount * 34 + 10 - inputCount;
+    // Check if we have enough funds to cover the transaction and the fees assuming we want to pay 20 satoshis per byte
+
+    fee = transactionSize * 20
+    if (totalAmountAvailable - satoshiToSend - fee  < 0) {
+        return {"status": "error", error: `ERROR_LOW_BALANCE - b: ${balance} sat ${satoshiToSend} fee ${fee} taa ${totalAmountAvailable}`}
+    }
+
+    if (balance - satoshiToSend - fee < 0) {
+        return {"status": "error", error: `ERROR_LOW_BALANCE2 - fee ${fee} taa ${totalAmountAvailable}`}
+    }
+
+
+    //Set transaction input
+    transaction.from(inputs);
+
+    // set the recieving address and the amount to send
+    transaction.to(receiverAddress, satoshiToSend);
+
+    // Set change address - Address to receive the left over funds after transfer
+    transaction.change(changeAddress);
+
+    //manually set transaction fees: 20 satoshis per byte
+    transaction.fee(fee * 2);
+
+    // Sign transaction with your private key
+    transaction.sign(pkeys);
+
+    // serialize Transactions
+    const serializedTransaction = transaction.serialize();
+    // Send transaction
+    //return result.data.data;
+    return serializedTransaction
+};
+
 
 module.exports = api
