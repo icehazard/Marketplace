@@ -4,8 +4,8 @@
 </script>
 
 <section class="grow col center">
-  <div class="w100 col h100 pa-20 gap-20 grow">
-    <div class="col gap-10 w100 grow relative">
+  <div class="w100 col h100  grow">
+    <div class="col  w100 grow relative">
       <Floating />
       <Map />
     </div>
