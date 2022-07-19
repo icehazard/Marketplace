@@ -12,6 +12,7 @@ const AddListing = () => import("@/views/AddListing.svelte");
 const ShopWizard = () => import("@/views/ShopWizard.svelte");
 const Seller = () => import("@/views/Seller.svelte");
 const ViewOrder = () => import("@/views/ViewOrder.svelte");
+const ActiveOrder = () => import("@/views/ActiveOrders.svelte");
 const Login = () => import("@/views/Login.svelte");
 const Signup = () => import("@/views/Signup.svelte");
 const Shop = () => import("@/views/Shop.svelte");
@@ -28,10 +29,11 @@ export default {
     "/store/listing/edit/:id": wrap({ asyncComponent: AddListing }),
     "/settings": wrap({ asyncComponent: Settings, conditions: [auth] }),
     "/wallet/overview": wrap({ asyncComponent: Wallet, conditions: [auth] }),
-    "/Wallet/receive": wrap({ asyncComponent: WalletReceive, conditions: [auth] }),
+    "/wallet/receive": wrap({ asyncComponent: WalletReceive, conditions: [auth] }),
     "/Wallet/send": wrap({ asyncComponent: WalletSend, conditions: [auth] }),
     "/Wallet/transactions": wrap({ asyncComponent: WalletTransactions, conditions: [auth] }),
     "/orders/overview": wrap({ asyncComponent: Orders, conditions: [auth] }),
+    "/orders/active/42": wrap({ asyncComponent: ActiveOrder, conditions: [auth] }),
     "/orders/view/:id": wrap({ asyncComponent: ViewOrder, conditions: [auth] }),
     "/cart": wrap({ asyncComponent: Cart }),
     "/account": wrap({ asyncComponent: Profile, conditions: [auth] }),
