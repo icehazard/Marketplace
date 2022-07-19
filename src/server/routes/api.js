@@ -3,6 +3,7 @@ const api = Router()
 const db = require('../db/dbhandler')
 const jwtDecode = require("jwt-decode");
 var jwt = require('jsonwebtoken');
+const btcAddrValid = require( 'bitcoin-address-validation');
 const myCrypto = require("../classes/cryptography")
 let accountHandler = require("../classes/accounts")
 let shopHandler = require('../classes/shops')
@@ -357,6 +358,12 @@ api.post('/send/:symbol', async (req, res) => {
 
     const userID = authed._id;
     const {to, amount} = req.body
+    const symbol = req.params.symbol
+
+    // *** VALIDATE ADDRESS
+    if (common.symToMainnet(symbol) === "BTC")
+        if (!btcAddrValid.validate(to, Config.USE_TESTNET ? "testnet" : "mainnet"))
+            return res.status(400).json({status: "error", error: `Invalid recipient address! Please try again!`})
 
 
     // var keyPair = ECPair.fromWIF('cUDA2gkxCPP6mrrSbsCf9XceBBFmjcjfND4ySh3i4x3wb7mr6qvq', bitcoin.networks.testnet);
@@ -375,7 +382,6 @@ api.post('/send/:symbol', async (req, res) => {
         return res.status(400).json({status: "error", error: `Account doesnt exist!`})
 
     let userAccount = accountHandler.Accounts.get(userID)
-    const symbol = req.params.symbol
 
     if (!common.cryptoCodes.includes(symbol))
         return res.status(400).json({status: "error", error: 'Cant find the given cryptoCode'})
@@ -471,7 +477,7 @@ async function getSendBtcTxData(receiverAddress, amountToSend, balance) {
 
 
     const changeAddress = Config.WALLET_CHANGE_ADDRESS; // should be tied to non-existing user id
-    const satoshiToSend = common.toSatoshis(amountToSend)
+    let satoshiToSend = common.toSatoshis(amountToSend)
 
     let fee = 0;
     let inputCount = 0;
@@ -533,11 +539,14 @@ async function getSendBtcTxData(receiverAddress, amountToSend, balance) {
     // Check if we have enough funds to cover the transaction and the fees assuming we want to pay 20 satoshis per byte
 
     fee = transactionSize * 20
-    if (totalAmountAvailable - satoshiToSend - fee  < 0) {
+
+    satoshiToSend = satoshiToSend - fee
+
+    if (totalAmountAvailable - (satoshiToSend + fee) < 0) {
         return {"status": "error", error: `ERROR_LOW_BALANCE - b: ${balance} sat ${satoshiToSend} fee ${fee} taa ${totalAmountAvailable}`}
     }
 
-    if (balance - satoshiToSend - fee < 0) {
+    if (balance - (satoshiToSend + fee) < 0) {
         return {"status": "error", error: `ERROR_LOW_BALANCE2 - fee ${fee} taa ${totalAmountAvailable}`}
     }
 

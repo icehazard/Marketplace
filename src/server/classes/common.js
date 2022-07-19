@@ -19,6 +19,12 @@ module.exports = {
 
         return symbol + "t"
     },
+    symToMainnet: function(symbol) {
+        if (symbol[symbol.length-1] !== 't')
+            return symbol;
+
+        return symbol.substr(0, symbol.length - 1)
+    },
     toSatoshis: function(val) {
         return val * 100000000
     }

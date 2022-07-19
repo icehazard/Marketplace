@@ -28,6 +28,7 @@
     "base-64": "^1.0.0",
     "bcryptjs": "^2.4.3",
     "bip32": "^3.0.1",
+    "bitcoin-address-validation": "^2.2.1",
     "bitcoinjs-lib": "^6.0.1",
     "bitcore-lib": "^8.25.30",
     "bodymovin": "^4.13.0",

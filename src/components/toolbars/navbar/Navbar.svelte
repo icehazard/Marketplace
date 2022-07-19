@@ -7,16 +7,17 @@
 	import Title from "./Title.svelte";
 	import Circle from "comp/atoms/Circle.svelte";
 	import { mq } from "@/assets/library/MediaQuery.svelte";
-	import { clickOutside, formatCurrency } from "@/assets/library/CommonFunctions.js";
+	import {clickOutside, formatCurrency, satoshiToBtcString} from "@/assets/library/CommonFunctions.js";
 	import user, { totalBalance } from "@/store/user.js";
 	import { isShopActive } from "@/store/user.js";
 	import Icon from "@iconify/svelte";
 
 	let showModal = false;
 	let balance = formatCurrency($totalBalance * rate);
+	let balanceBtc = satoshiToBtcString($totalBalance);
 
 	$: rate = currencies.find((el) => el.id == "BTC")?.convert;
-	$: $user.currency, (balance = formatCurrency($totalBalance * rate));
+	$: $user.currency, (balance = formatCurrency($totalBalance/100000000 * rate)), (balanceBtc = satoshiToBtcString($totalBalance));
 
 	function toggle() {
 		showModal = !showModal;
@@ -68,7 +69,7 @@
 							on:click={toggle}
 						>
 							{#if $user.username}
-								{balance}
+								{balanceBtc} <br> ≈ {balance}
 							{:else}
 								<Icon icon="fluent:line-horizontal-3-20-regular" />
 							{/if}
