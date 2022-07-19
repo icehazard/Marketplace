@@ -1,32 +1,55 @@
 <script>
-	import Map from './../atoms/Map.svelte';
-	import Button from 'comp/atoms/Button.svelte';
+  import Map from "./../atoms/Map.svelte";
+  import Button from "comp/atoms/Button.svelte";
 </script>
-<section  class="grow col center">
-    <div class="w100 col h100 pa-20 gap-20 ">
-      <div class="col center gap-20">
-        <span class="opacity-75">Order Summery </span>
-        <h1 class='font-28 weight-300'>Waiting confirmation</h1>
-        <span class="font-14 opacity-75">Order # 232303</span>
-      </div>
-      <div class="col gap-10">
-        <span class="font-14">Est. Delivery time</span>
-        <h1 class='font-20 weight-300'>2 - 4 Days</h1>
-      </div>
-      <div class="col gap-10">
-        <span class="font-14">Time placed</span>
-        <h1 class='font-20 weight-300'>	9 Jul 2022 at 4:36 PM</h1>
-      </div>
-      <div class="col gap-10 w100 grow">
-        <span class="font-14">Delivering to:</span>
-        <span class="border py-10">
-            <span class="px-10">Soi king pattana 3, phuket</span>
-        </span>
 
-        <Map />
+<section class="grow col center">
+  <div class="w100 col h100 pa-20 gap-20 grow">
+    <div class="col gap-10 w100 grow relative">
+      <div class="shade1 pa-20 absolute p-bottom col curve z-3 ma-20">
+        <div class="row space-between pb-20 gap-20" >
+          <button class="border curve pa-10 grow center">
+            Order Details
+          </button>
+          <button class="border curve pa-10 grow center">
+            Payment
+          </button>
+          <button class="border curve pa-10 grow center">
+            Chat
+          </button>
+        </div>
+        <hr>
+        <div class="row space-between align-center h100" >
+          <div class="col gap-20">
+            <span>Order ID</span>
+            <span>#233238723</span>
+          </div>
+          <div class="col gap-20">
+            <span>Product</span>
+            <span>PWhite Widow</span>
+          </div>
+          <div class="col gap-20">
+            <span>Price</span>
+            <span>EUR 289</span>
+          </div>
+          <div class="col gap-20">
+            <span>Address</span>
+            <span>Soi king pattana 4</span>
+          </div>
+        </div>
       </div>
-      <div class="row center">
-        <Button text='Cancel'></Button>
-      </div>
+      <Map />
     </div>
+    <!-- <div class="row center">
+        <Button text='Cancel'></Button>
+      </div> -->
+  </div>
 </section>
+
+<style>
+  .absolute{
+    bottom: 50px;
+    width: calc(100% - 40px);
+    height: 250px;
+  }
+</style>
