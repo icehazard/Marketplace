@@ -3,8 +3,9 @@
     import Icon from "@iconify/svelte";
     import Field from "comp/atoms/TextField.svelte";
 
-    function handleClick(){
-        push('#/orders/view/42')
+    function handleClick(active){
+        let page = active  === 'active' ? 'active' : 'view'
+        push(`#/orders/${page}/42`)
     }
 </script>
 
@@ -20,7 +21,7 @@
         </div>
         <hr />
         <div class="col w100 ">
-            <button on:click={handleClick} class="grid shine w100 pa-20 space-between  shade3">
+            <button on:click={() => handleClick('active')} class="grid shine w100 pa-20 space-between  shade3">
                 <span class="row gap-10 justify-start align-center">
                     <div class="imgWrapper center">
                         <Icon icon="fluent:image-32-regular" />

@@ -1,5 +1,4 @@
 <script>
-
     import Contacts from "comp/messages/Contacts.svelte";
     import Chat from "comp/messages/Chat.svelte";
   
