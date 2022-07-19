@@ -104,7 +104,13 @@
     });
 </script>
 
-<input id="address" bind:value={address}  class="hidden"/>
+<input id="address" bind:value={address} class="none" />
 <div class="curve overflow-hidden w100">
     <div id="map" class="curved w100 h-400 w100" />
 </div>
+
+<style>
+    #map {
+        height: calc(100vh - 150px);
+    }
+</style>
