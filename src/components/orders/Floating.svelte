@@ -1,23 +1,26 @@
 <script>
 	import Chat from './../messages/Chat.svelte';
     
-    let expand = false;
+    let expand = true;
 
-    function expandBox(){
-        expand = !expand
+    function close(){
+        expand = false
+    }
+    function open(){
+        expand = true
     }
 </script>
 
-<div class="shade1 pa-20 absolute p-bottom col curve z-3 ma-20 slow" class:expanded={expand}>
-    <div class="row space-between pb-20 gap-20">
-        <button class="border curve pa-10 grow center"> Order Details </button>
-        <button class="border curve pa-10 grow center"> Payment </button>
-        <button on:click={expandBox} class="border curve pa-10 grow center"> Chat </button>
+<div class="shade1 absolute p-bottom col curve z-3  slow" class:expanded={expand}>
+    <div class="row space-between pa-20 gap-20">
+        <button  on:click={close} class="border curve pa-10 grow center"> Order Details </button>
+        <button  on:click={open} class="border curve pa-10 grow center"> Payment </button>
+        <button on:click={open} class="border curve pa-10 grow center"> Chat </button>
     </div>
     <hr />
    {#if !expand}
-   <div class="row space-between align-center h100">
-    <div class="col gap-20">
+   <div class="row space-between align-center h100 pa-20">
+    <div class="col gap-20 ">
         <span  class="opacity-75">Order ID</span>
         <span>#233238723</span>
     </div>
@@ -41,12 +44,12 @@
 
 <style>
     .absolute {
-        bottom: 50px;
-        width: calc(100% - 40px);
+        bottom: 90px;
+        width: 100% ;
         height: 250px;
     }
 
     .expanded{
-        height: calc(100% - 90px);
+        height: calc(100% - 50px);
     }
 </style>
