@@ -21,6 +21,6 @@
 
 <style>
     section {
-        height: calc(100vh - 60px);
+        /* height: calc(100vh - 60px); */
     }
 </style>
