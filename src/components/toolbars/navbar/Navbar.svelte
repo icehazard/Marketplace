@@ -11,8 +11,10 @@
 	import user, { totalBalance } from "@/store/user.js";
 	import { isShopActive } from "@/store/user.js";
 	import Icon from "@iconify/svelte";
+	import Notifications from "./Notifications.svelte";
 
 	let showModal = false;
+	let showNotifications = false;
 	let balance = formatCurrency($totalBalance * rate);
 	let balanceBtc = satoshiToBtcString($totalBalance);
 
@@ -24,6 +26,12 @@
 	}
 	function close() {
 		showModal = false;
+	}
+	function toggleNotifications() {
+		showNotifications = !showNotifications;
+	}
+	function closeNotifications() {
+		showNotifications = false;
 	}
 	function shopRoute() {
 		$isShopActive ? push("#/seller") : push("#/store/create");
@@ -47,7 +55,14 @@
 						<button on:click={shopRoute}>
 							<Circle tooltip="Shop Manager" icon="fluent:building-shop-16-regular" />
 						</button>
-						<Circle tooltip="Notifications" to="notifications" icon="fluent:alert-16-regular" />
+						<div class="relative" use:clickOutside={closeNotifications}>
+							<button 	on:click={toggleNotifications}>
+								<Circle tooltip="Notifications" icon="fluent:alert-16-regular" />
+							</button>
+							{#if showNotifications}
+							<Notifications />
+							{/if}
+						</div>
 					</div>
 				{/if}
 			</section>
