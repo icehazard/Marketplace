@@ -111,6 +111,6 @@
 
 <style>
     #map {
-        height: calc(100vh - 470px);
+        height: calc(100vh - 100px);
     }
 </style>

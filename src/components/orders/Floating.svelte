@@ -11,10 +11,11 @@
     }
 </script>
 
-<div class="shade1 absolute p-bottom col curve z-2  slow" class:expanded={expand}>
+<div class="shade1 absolute p-bottom col  z-2  slow" class:expanded={expand}>
     <div class="row space-between pa-20 gap-20">
         <button on:click={open} class="border curve pa-10 grow center">Chat </button>
         <button on:click={close} class="border curve pa-10 grow center"> Map </button>
+        <button on:click={close} class="border curve pa-10 grow center"> Cancel </button>
     </div>
     <hr />
     <div class="row space-between align-center  pa-20">
@@ -24,7 +25,7 @@
         </div>
         <div class="col gap-20">
             <span class="opacity-75">Product</span>
-            <span>PWhite Widow</span>
+            <span>White Widow</span>
         </div>
         <div class="col gap-20">
             <span class="opacity-75">Price</span>
@@ -40,13 +41,16 @@
 
 <style>
     .absolute {
-        bottom: 90px;
+        bottom: 0px;
         width: 100%;
         height: 180px;
         overflow: hidden;
+        border-top-left-radius: 6px;
+        border-top-right-radius: 6px;
     }
 
     .expanded {
-        height: calc(100% - 89px);
+        height: 100%;
+       
     }
 </style>
