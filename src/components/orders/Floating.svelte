@@ -1,5 +1,5 @@
 <script>
-    import Chat from "./../messages/Chat.svelte";
+    import Chat from "./Chat.svelte";
 
     let expand = true;
 
@@ -15,10 +15,10 @@
     <div class="row space-between pa-20 gap-20">
         <button on:click={open} class="border curve pa-10 grow center">Chat </button>
         <button on:click={close} class="border curve pa-10 grow center"> Map </button>
-        <button on:click={close} class="border curve pa-10 grow center"> Cancel </button>
+        <button on:click={close} class="border curve pa-10 grow center"> Cancel Order</button>
     </div>
     <hr />
-    <div class="row space-between align-center  pa-20">
+    <div class="row space-between align-center gap-20 pa-20">
         <div class="col gap-20 ">
             <span class="opacity-75">Order ID</span>
             <span>#233238723</span>
@@ -36,6 +36,7 @@
             <span>Soi king pattana 4</span>
         </div>
     </div>
+    <hr>
     <Chat />
 </div>
 

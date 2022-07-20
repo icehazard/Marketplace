@@ -9,6 +9,7 @@ const Cart = () => import("@/views/Cart.svelte");
 const Profile = () => import("@/views/Profile.svelte");
 const Messages = () => import("@/views/Messages.svelte");
 const AddListing = () => import("@/views/AddListing.svelte");
+const Notifications = () => import("@/views/Notifications.svelte");
 const ShopWizard = () => import("@/views/ShopWizard.svelte");
 const Seller = () => import("@/views/Seller.svelte");
 const ViewOrder = () => import("@/views/ViewOrder.svelte");
@@ -36,6 +37,7 @@ export default {
     "/orders/active/42": wrap({ asyncComponent: ActiveOrder, conditions: [auth] }),
     "/orders/view/:id": wrap({ asyncComponent: ViewOrder, conditions: [auth] }),
     "/cart": wrap({ asyncComponent: Cart }),
+    "/notifications": wrap({ asyncComponent: Notifications }),
     "/account": wrap({ asyncComponent: Profile, conditions: [auth] }),
     "/messages": wrap({ asyncComponent: Messages, conditions: [auth] }),
     "/shops/id/:id": wrap({ asyncComponent: Seller }),
