@@ -30,9 +30,6 @@
 </div>
 
 <style>
-  .frame{
-    height: calc(100vh - 190px);
-    overflow: overlay;
-  }
+
   
 </style>
