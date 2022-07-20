@@ -39,29 +39,19 @@
 				{#if $mq.lg_}
 					<div class="row gap-10">
 						<Circle
-							to="messages"
+							to="orders/active/42"
 							tooltip="Messages"
-							icon="ant-design:message-outlined"
+							icon="fluent:text-bullet-list-square-clock-20-regular"
 						/>
 						<Circle tooltip="Cart" to="cart" icon="akar-icons:cart" />
 						<button on:click={shopRoute}>
 							<Circle tooltip="Shop Manager" icon="fluent:building-shop-16-regular" />
 						</button>
-						<!-- <Circle
-							tooltip="Settings"
-							to="settings"
-							icon="fluent:settings-16-regular"
-						/> -->
+						<Circle tooltip="Notifications" to="notifications" icon="fluent:alert-16-regular" />
 					</div>
 				{/if}
 			</section>
 			<section class="row gap-20 align-center ">
-				<!-- {#if $mq.lg_ && !$user.username}
-					<button class="row shine justify-end align-center gap-10 oval shadow">
-						<Icon icon="fluent:line-horizontal-3-20-regular" />
-						<Circle to="profile" icon="gg:profile" />
-					</button>
-				{/if} -->
 				{#if $mq.lg_}
 					<div class="relative row center" use:clickOutside={close}>
 						<button
@@ -76,10 +66,6 @@
 
 							<Circle icon="gg:profile" />
 						</button>
-						<!-- <button class="row center gap-10" on:click={toggle}>
-							<span class="">{$user.username}</span>
-							<Circle tooltip="Profile" to="" icon="gg:profile" />
-						</button> -->
 						{#if showModal}
 							{#if $user.username}
 								<DropDown on:click={close} />

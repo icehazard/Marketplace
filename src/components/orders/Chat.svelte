@@ -14,11 +14,7 @@
   ];
 </script>
 
-<div class="w-400 col">
-  <div class="row shade0 align-center gap-20 px-20 h-70">
-    <div class="round primary pa-25" />
-    <div>icebongo</div>
-  </div>
+<div class="grow col">
   <div class="col grow frame">
     {#each data as item}
       <Bubble item={item} />
@@ -30,6 +26,9 @@
 </div>
 
 <style>
-
+  .frame{
+    height: calc(100vh - 190px);
+    overflow: overlay;
+  }
   
 </style>

@@ -11,9 +11,8 @@
             <input type="text" class="w100 shade2" placeholder="Search Orders" />
         </div>
     </div>
-    <div class="row pa-20 ">Orders</div>
     <div class="gap-20 col pa-20">
-        {#each Array(3) as _, i}
+        {#each Array(6) as _, i}
             <Contact  />
         {/each}
     </div>
@@ -21,6 +20,7 @@
 
 <style>
     section {
-        /* height: calc(100vh - 60px); */
+        height: calc(100vh - 200px);
+        overflow: overlay;
     }
 </style>
