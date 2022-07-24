@@ -22,9 +22,19 @@ const bitcoin = require('bitcoinjs-lib');
 const Config = require("./Config.json");
 const fetch = require("node-fetch");
 const base64 = require("base-64");
-const {check} = require("bitcoinjs-lib/src/bip66");
+const { check } = require("bitcoinjs-lib/src/bip66");
 
-(async() => {
+let WebSocketServer = require('ws').Server
+let wss = new WebSocketServer({ port: 8085 });
+
+wss.on('connection', function(ws) {
+    ws.on('temperature', function(message) {
+        console.log('received: %s', message);
+    });
+    ws.send('something');
+});
+
+(async () => {
 
     await new Promise((res, rej) => {
         let ret = () => {
@@ -51,12 +61,12 @@ const {check} = require("bitcoinjs-lib/src/bip66");
     await serverHandler.Server.loadFromDB()
     //await trackTxHandler.Tracktx.loadFromDB()
 
-     let checkEvents = (symbol)  => {
+    let checkEvents = (symbol) => {
         setTimeout(async () => {
             let lastEventId = serverHandler.Server.lastEventId;
             //console.log("Starting checking events from ID", lastEventId)
             let url = `${common.nbUrl}/v1/cryptos/${symbol}/events?lastEventId=${lastEventId}`
-           //console.log("Got url", url)
+            //console.log("Got url", url)
             //let url = `${Config.BTC_PAY_URL}/api/v1/stores/${Config.BTC_PAY_STOREID}/payment-methods/onchain/${symbol}/wallet/address?forceGenerate=true`
             try {
                 let r = await fetch(url, {
