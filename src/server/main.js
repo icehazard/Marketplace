@@ -28,7 +28,7 @@ let WebSocketServer = require('ws').Server
 let wss = new WebSocketServer({ port: 8085 });
 
 wss.on('connection', function(ws) {
-    ws.on('temperature', function(message) {
+    ws.on('message', function(message) {
         console.log('received: %s', message);
     });
     ws.send('something');
