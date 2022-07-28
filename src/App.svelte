@@ -10,12 +10,12 @@
 	const socket = new WebSocket("ws://www.localhost:8085");
 
 	socket.onopen = (e) => {
-		console.log("opened");
-		socket.send("There is, a house, in south phuket. they callllllllll it the grow house");
+		// console.log("opened");
+		// socket.send("There is, a house, in south phuket. they callllllllll it the grow house");
 	};
 
 	socket.onmessage = function (event) {
-		console.log("got message", event);
+		// console.log("got message", event);
 	};
 
 	function conditionsFailed(event) {

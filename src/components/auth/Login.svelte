@@ -32,7 +32,7 @@
     }
 </script>
 
-<div class="grow align-center z-2">
+<div class="grow z-2 center">
     <form on:submit|preventDefault={handleOnSubmit} class="gap-40 col w-sm pa-60 curve glass">
         <section class="gap-20 col ">
             <div class="font-36">Enter your account</div>
