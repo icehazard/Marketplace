@@ -1,8 +1,7 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const NodePolyfillPlugin = require("node-polyfill-webpack-plugin")
-
+const preprocess = require("svelte-preprocess")
 const path = require('path');
-
 const mode = process.env.NODE_ENV || 'development';
 const prod = mode === 'production';
 const {API_URL} = require('./src/server/Config.json')
@@ -46,7 +45,8 @@ module.exports = {
 							dev: !prod
 						},
 						emitCss: prod,
-						hotReload: !prod
+						hotReload: !prod,
+						preprocess: preprocess() 
 					}
 				}
 			},
