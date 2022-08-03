@@ -7,7 +7,6 @@
     function handleOpen() {
         openModal(Cover);
     }
-    console.log(`http://localhost:9000/api/image/${$shops.coverPic}`)
 </script>
 
 <div class="h-400 shade1 curve relative parent">

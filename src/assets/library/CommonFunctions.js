@@ -73,6 +73,7 @@ export async function postImage(route, data) {
     let url = `http://${WEBPACK_URL}/${route}`;
     let res = await fetch(url, {
         method: "POST",
+        token: token,
         body: data,
     })
     return await res.json()
