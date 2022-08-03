@@ -593,9 +593,29 @@ api.post('/multishop', async (req, res) => {
                 error: `One of the shop ids is invalid! Check provided list!`
             })
 
-        payload.shopId = shopHandler.Shops.get(shopId).getProductList();
+        payload[shopId] = shopHandler.Shops.get(shopId).getProductList();
     }
 
+    return res.status(200).json(payload);
+})
+
+api.get('/shops', async (req, res) => {
+    let {limit, order} = req.params;
+
+    let shops = shopHandler.Shops.shops;
+    let shopsRev = Array.from(shops.keys()).reverse();
+    let payload = [];
+
+    if (!limit)
+        limit = 20;
+
+    console.log(shopsRev)
+    for (let i = 0; i < limit; i++) {
+        let tr = shopsRev[shopsRev.length - 1 - i];
+        if (!tr)
+            continue;
+        payload.push(tr)
+    }
     return res.status(200).json(payload);
 })
 

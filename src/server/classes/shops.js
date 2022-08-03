@@ -117,12 +117,13 @@ class Shop {
         console.log("🚀 result", result)
     }
 
-    async getProductList() {
+    getProductList() {
         let res = []
 
         for (let [k,v] of this.products)
             res.push(v)
 
+        console.log(res)
         return res
     }
     async addProduct(payload)
