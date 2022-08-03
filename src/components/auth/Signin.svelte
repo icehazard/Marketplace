@@ -22,7 +22,7 @@
             body: JSON.stringify(data),
         });
         res = await res.json();
-        
+
         if (res.resp == "success") {
             user.get();
             $user.username = res.username;
@@ -46,9 +46,9 @@
     }
 </script>
 
-<div class="grow align-center z-2">
+<div class="grow center z-2">
     <form on:submit|preventDefault={handleOnSubmit} class="gap-40 col w-sm pa-60 curve glass">
-        <section class="gap-20 col  ">
+        <section class="gap-20 col">
             <div class="weight-600 font-14">START FOR FREE</div>
             <div class="font-36">Create new account</div>
             <div class="row gap-10">
@@ -62,7 +62,7 @@
             <Field bind:value={username} label="Username" />
             <Field bind:value={password} label="Password" />
         </section>
-        <Button type='submit' text="CREATE ACCOUNT" />
+        <Button type="submit" text="CREATE ACCOUNT" />
     </form>
 </div>
 

@@ -45,6 +45,7 @@
     "mongodb": "^4.7.0",
     "morgan": "^1.10.0",
     "nbxplorer-client": "^2.1.0",
+    "net": "^1.0.2",
     "node-fetch": "^2.6.7",
     "node-polyfill-webpack-plugin": "^1.1.4",
     "pluralize": "^8.0.0",
@@ -53,11 +54,14 @@
     "svelte-loading-spinners": "^0.1.7",
     "svelte-modals": "^1.1.0",
     "svelte-persistent-store": "^0.1.6",
+    "svelte-preprocess": "^4.10.7",
     "svelte-select": "^4.4.7",
     "svelte-spa-router": "^3.2.0",
     "swiper": "^8.1.3",
     "tiny-secp256k1": "^2.2.1",
+    "tls": "^0.0.1",
     "web3": "^1.7.3",
+    "ws": "^8.8.1",
     "yup": "^0.32.11"
   }
 }
