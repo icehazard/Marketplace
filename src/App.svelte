@@ -5,18 +5,11 @@
 	import Mobile from "comp/toolbars/navbar/Mobile.svelte";
 	import Router from "svelte-spa-router";
 	import routes from "./router/index";
+	import { fade } from "svelte/transition";
+	import { Modals, closeModal } from "svelte-modals";
 	import MediaQuery from "@/assets/library/MediaQuery.svelte";
 	import { replace } from "svelte-spa-router";
 	const socket = new WebSocket("ws://www.localhost:8085");
-
-	socket.onopen = (e) => {
-		// console.log("opened");
-		// socket.send("There is, a house, in south phuket. they callllllllll it the grow house");
-	};
-
-	socket.onmessage = function (event) {
-		// console.log("got message", event);
-	};
 
 	function conditionsFailed(event) {
 		replace("/login");
@@ -31,6 +24,19 @@
 	<MediaQuery />
 	<Mobile />
 	<Footer />
+	<Modals>
+		<div
+			transition:fade={{ duration: 100 }}
+			on:click={() => closeModal()}
+			slot="backdrop"
+			class="backdrop fixed p-center z-4"
+		/>
+	</Modals>
 </section>
 
-
+<style>
+	.backdrop {
+		background: rgba(0, 0, 0, 0.25);
+		backdrop-filter: blur(5px);
+	}
+</style>
