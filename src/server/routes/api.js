@@ -135,11 +135,8 @@ api.post('/shop', async (req, res) => {
 //    // res.status(200).json({ status: 'ok!' })
 // })
 
-api.post('/shop/self',  function (req, res, next) {
-    Avatar.upload(req, res)
-    // req.file is the `avatar` file
-    // req.body will hold the text fields, if there were any
-  })
+api.post('/shop/self',   Avatar.upload)
+api.get('/image/:image',   Avatar.getImage)
 
 
 

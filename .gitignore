@@ -1,5 +1,6 @@
 .DS_Store
 node_modules
 public/build/bundle.*
+src/server/images
 Config.json
 config.js

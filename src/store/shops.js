@@ -36,10 +36,8 @@ context.get = async function (id) {
     context.commit('name', res.shopName)
 }
 context.post = async function (data) {
-    
-
     let res = await postImage('api/shop/self', data)
-    console.log("🚀 ~ response", res)
+    context.commit('coverPic', res.avatar)
 }
 
 export default context;
