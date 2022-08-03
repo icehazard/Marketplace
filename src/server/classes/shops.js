@@ -69,6 +69,12 @@ Shops.prototype.loadProductsIntoShops = async function(id) {
 
     for (let [k,v] of productHandler.Products.products)
     {
+        if (!this.getShops().has(v.shopID))
+        {
+            console.log(`Shop with ID ${v.shopID} not found while trying to load products into!`);
+            continue;
+        }
+
         this.getShops().get(v.shopID).products.set(k, v)
         console.log(`*** Loaded products!`)
     }

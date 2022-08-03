@@ -138,10 +138,6 @@ api.post('/shop', async (req, res) => {
 api.post('/shop/self',   Avatar.upload)
 api.get('/image/:image',   Avatar.getImage)
 
-
-
-
-
 api.get('/shop/:sid', async (req, res) => {
 
     const sid = req.params.sid

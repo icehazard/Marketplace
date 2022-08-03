@@ -224,7 +224,7 @@ wss.on('connection', function(ws) {
     app.use(cors())
     app.use(bodyParser.json())
     app.use(morgan('tiny'))
-
+    // app.use(express.limit('4M'));
     app.use('/api', apiRoute)
 
     function auth(data) {
