@@ -147,6 +147,10 @@
 		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18);
 	}
 
+	.absolute {
+        top: 50px;
+    }
+
 	@media only screen and (max-width: 1200px) {
 		.mobile-w100 {
 			flex-grow: 1;

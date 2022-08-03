@@ -12,7 +12,7 @@
     }
 </script>
 
-<div class="absolute shade1  glass pa-5 w-200 z-2 p-right ">
+<div class="absolute shade1 glass pa-5 w-200 z-2 p-right ">
     <a on:click={close} href="#/account" class="menuItem w100 center py-10 curve shine">
         Account
     </a>
