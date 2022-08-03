@@ -576,8 +576,7 @@ async function getSendBtcTxData(receiverAddress, amountToSend, balance) {
 
 
 api.post('/multishop', async (req, res) => {
-
-    const {shops} = req.body;
+    const shops = req.body;
 
     if (!Array.isArray(shops))
     {
