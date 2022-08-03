@@ -69,6 +69,17 @@ let headers = {
     "Content-Type": "application/json",
 }
 
+export async function postImage(route, data) {
+    let url = `http://${WEBPACK_URL}/${route}`;
+    let res = await fetch(url, {
+        method: "POST",
+        body: data,
+        
+
+    })
+    return await res.json()
+}
+
 export async function post(route, data) {
     let url = `http://${WEBPACK_URL}/${route}`;
     let res = await fetch(url, {

@@ -31,8 +31,8 @@
         <div class="shade3 curve  gap-20 col w-400 overflow-hidden autopointer">
             <div class="body pa-25 pt-30 gap-20 col">
                 <span class="font-24">Edit cover Image</span>
-                <form bind:this={el} class="">
-                    <input type="file" on:change={upload} name="image"  />
+                <form bind:this={el} class="" enctype="multipart/form-data">
+                    <input type="file" on:change={upload} name="avatar"  />
                 </form>
             </div>
             <div class="actions row shade2 pa-25 gap-10">

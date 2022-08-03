@@ -18,6 +18,10 @@ const axios = require('axios')
 const NBXClient = require("nbxplorer-client")
 let mnemonic = require('mnemonic-to-private-key/lib/index')
 const HdAddGen = require('hdaddressgenerator')
+const Avatar = require('../classes/upload');
+
+const multer  = require('multer')
+const upload = multer({ dest: 'images/' })
 
 //
 // var bitcoin = require('bitcoinjs-lib');
@@ -118,6 +122,26 @@ api.post('/shop', async (req, res) => {
 
     res.status(200).json({ status: 'ok!' })
 })
+
+// api.post('/shop/self', async (req, res) => {
+//     console.log( req.file, 'file')
+//     // const authed = await auth(req.headers)
+//     // if (!authed) {
+//     //     return;
+//     // }
+  
+//     
+
+//    // res.status(200).json({ status: 'ok!' })
+// })
+
+api.post('/shop/self', upload.single('avatar'),  function (req, res, next) {
+    Avatar.upload(req, res)
+    // req.file is the `avatar` file
+    // req.body will hold the text fields, if there were any
+  })
+
+
 
 
 
