@@ -120,6 +120,7 @@ api.post('/shop', async (req, res) => {
 })
 
 
+
 api.get('/shop/:sid', async (req, res) => {
 
     const sid = req.params.sid
@@ -573,5 +574,29 @@ async function getSendBtcTxData(receiverAddress, amountToSend, balance) {
     return serializedTransaction
 };
 
+
+api.post('/multishop', async (req, res) => {
+
+    const {shops} = req.body;
+
+    if (!Array.isArray(shops))
+    {
+        return res.status(400).json({status: "error", error: `Shops field should be an array!`})
+    }
+
+    let payload = {};
+
+    for (let shopId of shops) {
+        if (!shopHandler.Shops.has(shopId))
+            return res.status(400).json({
+                status: "error",
+                error: `One of the shop ids is invalid! Check provided list!`
+            })
+
+        payload.shopId = shopHandler.Shops.get(shopId).getProductList();
+    }
+
+    return res.status(200).json(payload);
+})
 
 module.exports = api
