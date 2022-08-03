@@ -34,5 +34,8 @@ context.get = async function (id) {
     context.commit('shopType', res.shopType)
     context.commit('name', res.shopName)
 }
+context.post = async function (data) {
+    return await post(`api/shop`, data);
+}
 
 export default context;

@@ -123,7 +123,7 @@ class Shop {
         for (let [k,v] of this.products)
             res.push(v)
 
-        console.log(res)
+        //console.log(res)
         return res
     }
     async addProduct(payload)
