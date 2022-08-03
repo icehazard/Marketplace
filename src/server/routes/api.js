@@ -141,10 +141,6 @@ api.post('/shop/self',  function (req, res, next) {
     // req.body will hold the text fields, if there were any
   })
 
-
-
-
-
 api.get('/shop/:sid', async (req, res) => {
 
     const sid = req.params.sid

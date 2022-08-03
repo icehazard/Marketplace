@@ -17,6 +17,10 @@ package.storage = multer.diskStorage({
 
 package.imageFilter = (req, file, cb) => {
     // Accept images only
+    const fileSize = parseInt(req.headers["content-length"])
+    if (fileSize > 2048000)
+        return cb(new Error('Max image size is 2MB! Try again with smaller photo.'), false);
+
     if (!file.originalname.match(/\.(jpg|JPG|jpeg|JPEG|png|PNG|gif|GIF)$/)) {
         req.fileValidationError = 'Only image files are allowed!';
         return cb(new Error('Only image files are allowed!'), false);
