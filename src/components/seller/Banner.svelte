@@ -1,12 +1,13 @@
 <script>
     import Icon from "@iconify/svelte";
-    import shops, {isOwnShop} from "@/store/shops.js";
+    import shops, { isOwnShop } from "@/store/shops.js";
     import Logo from "comp/modals/seller/Logo.svelte";
     import Name from "comp/modals/seller/Name.svelte";
     import Description from "comp/modals/seller/Description.svelte";
     import Location from "comp/modals/seller/Location.svelte";
     import OpeningTimes from "comp/modals/seller/OpeningTimes.svelte";
     import { openModal } from "svelte-modals";
+    console.log(shops.all())
 </script>
 
 <div class="row gap-20 shade1 pa-20 curved center">
@@ -31,7 +32,11 @@
         <h1 class=" row gap-20 align-center space-between parent">
             <div class="row gap-20 ">
                 <div class="font-26">
-                    {$shops.name}
+                    {#if $shops.name}
+                        <span> {$shops.name}</span>
+                    {:else}
+                        <span class="font-14 opacity-75">No Name</span>
+                    {/if}
                 </div>
                 {#if $isOwnShop}
                     <button on:click={() => openModal(Name)} class="child slow">
@@ -50,7 +55,11 @@
             {/if} -->
         </h1>
         <div class="row gap-20 align-center parent">
-            {$shops.desc}
+            {#if $shops.desc}
+                <span> {$shops.desc}</span>
+            {:else}
+                <span class="font-14 opacity-75">No Description</span>
+            {/if}
             {#if $isOwnShop}
                 <button on:click={() => openModal(Description)} class="child slow">
                     <Icon icon="fluent:edit-20-regular" width="20" />
@@ -58,7 +67,12 @@
             {/if}
         </div>
         <div class="weight-300 opacity-75 align-center gap-20 parent">
-            {$shops.loc}
+            {#if $shops.address}
+                <span> {$shops.address}</span>
+            {:else}
+                <span class="font-1">No Location</span>
+            {/if}
+
             {#if $isOwnShop}
                 <button on:click={() => openModal(Location)} class="child slow">
                     <Icon icon="fluent:edit-20-regular" width="20" />

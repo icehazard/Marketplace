@@ -10,15 +10,18 @@
     import user from "@/store/user.js";
     import products from "@/store/products.js";
     import { isShopPending, isShopActive } from "@/store/user.js";
+    import { onDestroy } from "svelte";
 
     export let params = {};
-    shops.get(params.id);
+
     user.get();
     products.get();
 
     $: if (params.id) {
         shops.get(params.id);
     }
+
+    onDestroy(() => shops.reset());
 </script>
 
 <main class="row container my-50 gap-50 grow">

@@ -6,10 +6,10 @@
     import { scale } from "svelte/transition";
 
     export let isOpen;
-    let field = $shops.loc;
+    let field = $shops.address;
 
     function save() {
-        $shops.loc = field;
+        $shops.address = field;
         shops.patch({address: field})
         closeModal();
     }

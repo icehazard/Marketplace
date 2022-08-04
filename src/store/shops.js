@@ -1,14 +1,15 @@
 import { persist, post, get, hasError, postImage, patch } from '@/assets/library/CommonFunctions.js'
 import { derived } from "svelte/store";
+import { push } from "svelte-spa-router";
 import user from '@/store/user'
 
 const data = {
     id: 0,
     name: "",
     desc: "",
+    address: "",
     coverPic: "",
     displayPic: "",
-    loc: "",
 }
 
 const context = persist('shops', data)
@@ -16,18 +17,21 @@ const context = persist('shops', data)
 context.get = async function (id) {
     if (!id) return;
     let res = await get(`api/shop/${id}`)
-    console.log("🚀 ~ res", res)
     res = hasError(res, data.products)
     context.commit('id', res._id)
-    context.commit('name', res.shopName)
+    context.commit('name', res.shopName) 
     context.commit('address', res.address)
     context.commit('shopType', res.shopType)
     context.commit('name', res.shopName)
     context.commit('displayPic', res.profile)
     context.commit('coverPic', res.cover)
+    context.commit('desc', res.description)
+    if (res.length == 0) push('#/')
+    return res
 }
 
 context.postCover = async function (data) {
+    console.log("POSTING COVER")
     let url = `api/shop/${context.val('id')}/album?type=cover`
     let res = await postImage(url, data)
     context.commit('coverPic', res.avatar)
@@ -35,6 +39,7 @@ context.postCover = async function (data) {
 }
 
 context.postProfile = async function (data) {
+    console.log("POSTING  PROFILE")
     let url = `api/shop/${context.val('id')}/album?type=profile`
     let res = await postImage(url, data)
     context.commit('displayPic', res.avatar)
