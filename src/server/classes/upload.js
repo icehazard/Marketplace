@@ -1,7 +1,9 @@
 const path = require('path');
-const { unlink } = require('fs/promises');
+const {unlink} = require('fs/promises');
 const multer = require('multer');
-const { v4: uuid } = require("uuid");
+const {v4: uuid} = require("uuid");
+let dbhandler = require("../db/dbhandler")
+let productHandler = require("./products")
 
 const package = {};
 package.storage = multer.diskStorage({
@@ -94,22 +96,22 @@ package.upload = async (req, res) => {
             size: 14058414
         }
      */
-   
-       
+
+
     upload(req, res, async (err) => {
         console.log("🚀 ~ filename", req.file)
         if (!req.file) {
             console.log('error1')
-            return res.json({ status: "error", error: 'Please select an image to upload' });
+            return res.json({status: "error", error: 'Please select an image to upload'});
         }
         // } else if (err instanceof multer.MulterError || err) {
         //     console.log('error2', err)
         //     return res.json({ status: "error", error: err });
         // }
-     
+
         // TODO: add to database
         const filename = path.parse(req.file.filename).name;
-       
+
         const extension = path.parse(req.file.filename).ext;
 
         // if ( await package.hasAvatar(userId) ) {
@@ -124,7 +126,7 @@ package.upload = async (req, res) => {
         // });
 
         // Display uploaded image for user validation
-        res.json({ avatar: filename });
+        res.json({avatar: filename});
     });
 };
 

@@ -135,7 +135,26 @@ api.post('/shop', async (req, res) => {
 //    // res.status(200).json({ status: 'ok!' })
 // })
 
-api.post('/shop/self',  function (req, res, next) {
+api.post('/shop/:sid/album',  async function (req, res, next) {
+    const authed = await auth(req.headers)
+
+    if (!authed) {
+        return;
+    }
+
+    let {sid} = req.params
+    let {type} = req.query
+    const accId = authed._id;
+
+    if (type !== "cover" && type !== "profile" && type !== "profile")
+        return res.status(400).json({status: "error", error: "Type must be either cover or profile!"})
+
+    if (!shopHandler.Shops.has(parseInt(sid)))
+        return res.status(400).json({status: "error", error: "Shop with given SID doesn't exist!"})
+
+    if (!await accountHandler.Accounts.get(accId).ownsShopID(sid))
+        return res.status(400).json({status: "error", error: "You do not own this shop!"})
+
     Avatar.upload(req, res)
     // req.file is the `avatar` file
     // req.body will hold the text fields, if there were any
@@ -159,6 +178,36 @@ api.get('/shop/:sid', async (req, res) => {
     payload.address = getShop.address;
 
     return res.status(200).json(payload)
+})
+
+api.patch('/shop/:sid', async (req, res) => {
+    const authed = await auth(req.headers)
+
+    if (!authed) {
+        return;
+    }
+
+    const accId = authed._id;
+    const sid = req.params.sid
+    const data = req.body;
+    console.log("Got product data", data)
+
+    //let shopId = (await accountHandler.Accounts.get(accId).getShopIds())[0]._id
+
+    if (!shopHandler.Shops.has(parseInt(sid)))
+        return res.status(400).json({status: "error", error: "That shop does not exist!"})
+
+    if (!await accountHandler.Accounts.get(accId).ownsShopID(sid))
+        return res.status(400).json({status: "error", error: "You do not own this shop!"})
+
+    console.log("Got shop ID", sid)
+
+    let add = await shopHandler.Shops.get(parseInt(sid)).addProduct(data)
+
+    if (add.status !== "ok")
+        return res.status(400).json(add)
+
+    return res.status(200).json(add)
 })
 
 api.post('/shop/:sid/product', async (req, res) => {
