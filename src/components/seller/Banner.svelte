@@ -67,10 +67,10 @@
             </span>
         </div>
     </div>
-    <div class="col center gap-10">
-        <div class="w-70 h-70 shade3 round overflow-hidden">
+    <div class="col justify-end gap-10 h100">
+        <!-- <div class="w-70 h-70 shade3 round overflow-hidden">
             <img src={$shops.displayPic} alt="" class="round cover h100 w100" />
-        </div>
+        </div> -->
         <a href="#/messages" class="weight-600 opacity-75">Contact</a>
     </div>
 </div>

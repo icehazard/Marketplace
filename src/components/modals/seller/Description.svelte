@@ -10,6 +10,7 @@
 
     function save() {
         $shops.desc = field;
+        shops.patch({description: field})
         closeModal();
     }
 </script>
