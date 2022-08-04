@@ -12,12 +12,15 @@
     async function handleOnSubmit() {
         if (validate()) return;
         let data = { username, password };
-        let res = await post('api/login', data)
+        let res = await post("api/login", data);
+        console.log("🚀 ~ res", res);
         if (!res.error) {
             $user.username = res.username;
             $user.token = res.token;
-            await user.get();
-            push("#/");
+            setTimeout(async () => {
+                await user.get();
+                push("#/");
+            }, 0);
         } else {
             message = "Account/password not found";
         }

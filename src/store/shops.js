@@ -28,6 +28,7 @@ const context = persist('shops', data)
 context.get = async function (id) {
     if (!id) return;
     let res = await get(`api/shop/${id}`)
+    console.log("🚀 ~ res", res)
     res = hasError(res, data.products)
     context.commit('id', res._id)
     context.commit('name', res.shopName)

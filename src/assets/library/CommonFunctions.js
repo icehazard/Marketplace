@@ -60,12 +60,16 @@ export function satoshiToBtcString(x) {
     return (x / 100000000) + ' ฿'
 }
 
-let getUser = localStorage.getItem('user');
-let token = getUser ? JSON.parse(localStorage.getItem('user')).token : ''
+
+
+function getToken() {
+    let getUser = localStorage.getItem('user');
+    return getUser ? JSON.parse(localStorage.getItem('user')).token : ''
+}
 
 let headers = {
     Accept: "application/json",
-    token: token,
+    token: getToken(),
     "Content-Type": "application/json",
 }
 
@@ -75,18 +79,23 @@ export async function postImage(route, data) {
         method: "POST",
         body: data,
         headers: {
-            token: token,
+            token: getToken(),
         }
     })
     return await res.json()
 }
 
+
 export async function post(route, data) {
     let url = `http://${WEBPACK_URL}/${route}`;
     let res = await fetch(url, {
         method: "POST",
-        headers,
-        body: JSON.stringify(data)
+        body: JSON.stringify(data),
+        headers: {
+            Accept: "application/json",
+            token: getToken(),
+            "Content-Type": "application/json",
+        }
     })
     return await res.json()
 }
@@ -95,16 +104,25 @@ export async function del(route, data) {
     let url = `http://${WEBPACK_URL}/${route}`;
     let res = await fetch(url, {
         method: "DELETE",
-        headers
+        headers: {
+            Accept: "application/json",
+            token: getToken(),
+            "Content-Type": "application/json",
+        }
     })
     return await res.json()
 }
 
 export async function get(route) {
     let url = `http://${WEBPACK_URL}/${route}`;
+    console.log(getToken(), 'TOKEN')
     let res = await fetch(url, {
         method: "GET",
-        headers
+        headers: {
+            Accept: "application/json",
+            token: getToken(),
+            "Content-Type": "application/json",
+        }
     })
     res = await res.json()
     if (res.status == 'error') return []
@@ -115,7 +133,11 @@ export async function patch(route, data) {
     let url = `http://${WEBPACK_URL}/${route}`;
     let res = await fetch(url, {
         method: "PATCH",
-        headers,
+        headers: {
+            Accept: "application/json",
+            token: getToken(),
+            "Content-Type": "application/json",
+        },
         body: JSON.stringify(data)
     })
     return await res.json()

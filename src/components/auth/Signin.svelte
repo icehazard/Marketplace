@@ -22,6 +22,7 @@
             body: JSON.stringify(data),
         });
         res = await res.json();
+        console.log("🚀 ~ res", res)
 
         if (res.resp == "success") {
             user.get();
