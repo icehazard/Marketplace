@@ -435,5 +435,6 @@ api.get('/shops', async (req, res) => {
     return res.status(200).json(payload);
 })
 
+api.get('/image/:image',   Avatar.getImage)
 
 module.exports = api
