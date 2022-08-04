@@ -1,4 +1,5 @@
 import { persist, post, get, hasError, postImage, patch } from '@/assets/library/CommonFunctions.js'
+import { derived } from "svelte/store";
 import user from '@/store/user'
 
 const data = {
@@ -44,16 +45,12 @@ context.patch = async function (data) {
     return await patch(`api/shop/${context.val('id')}`, data)
 }
 
-// context.post = async function (data) {
-//     let coverImage = await context.postImage(data)
-// }
-
-context.isOwnShop = function () {
+export const isOwnShop = derived(context, () => {
     let ownShops = (user.val('me'));
     let id = context.val('id');
     let shopID = ownShops.find((el) => Number(el._id) === id);
     if (!shopID) return false
     return shopID._id >= 0 ? true : false;
-}
+});
 
 export default context;

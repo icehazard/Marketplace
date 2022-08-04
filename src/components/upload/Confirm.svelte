@@ -1,20 +1,20 @@
 <script>
     import { APP_NAME } from "@/config";
     import Button from "comp/atoms/Button.svelte";
-    import { shopValid } from "@/store/store.js";
+    import { shopValid, active } from "@/store/store.js";
+    import { isShopPending } from "@/store/user.js";
     import "@lottiefiles/lottie-player";
-
 
     let confirm;
     let msg = "";
-    let review = false;
+    let review = $isShopPending;
     export let submit;
 
     $: confirm, ($shopValid[4] = validate());
 
-    function submitData()
-    {
+    function submitData() {
         review = true;
+        $active = 0;
         submit();
     }
 
@@ -23,6 +23,7 @@
         return false;
     }
 
+   // if ($isShopPending) review = true;
 </script>
 
 <form class="center col shade3 curve py-50 px-10 pb-100 gap-20">
@@ -30,7 +31,7 @@
         {#if !review}
             <h1 class="font-36 weight-300">Confirmation</h1>
             <p class="text-center">
-                When you make a sale through { APP_NAME }, you will be charged a transaction fee of 4%
+                When you make a sale through {APP_NAME}, you will be charged a transaction fee of 4%
                 of the price you display for each listing. An invoice will be sent every month for
                 any purchases.
             </p>
@@ -72,7 +73,12 @@
     {#if !review}
         <div class="pt-50  row w-sm  w100  z-2">
             <div class=" center w100">
-                <Button on:click={submitData} type="button" disable={$shopValid[4]} text="CONTINUE" />
+                <Button
+                    on:click={submitData}
+                    type="button"
+                    disable={$shopValid[4]}
+                    text="CONTINUE"
+                />
             </div>
         </div>
     {/if}

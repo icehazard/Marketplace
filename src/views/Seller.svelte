@@ -6,16 +6,19 @@
     import Pending from "comp/seller/Pending.svelte";
     import AddListing from "comp/seller/AddListing.svelte";
 
-    import shops from '@/store/shops.js';
+    import shops from "@/store/shops.js";
     import user from "@/store/user.js";
     import products from "@/store/products.js";
     import { isShopPending, isShopActive } from "@/store/user.js";
-    
-    export let params = {}
-    shops.get(params.id)
+
+    export let params = {};
+    shops.get(params.id);
     user.get();
     products.get();
 
+    $: if (params.id) {
+        shops.get(params.id);
+    }
 </script>
 
 <main class="row container my-50 gap-50 grow">

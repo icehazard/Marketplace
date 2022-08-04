@@ -1,6 +1,6 @@
 <script>
     import Icon from "@iconify/svelte";
-    import shops from "@/store/shops.js";
+    import shops, {isOwnShop} from "@/store/shops.js";
     import Logo from "comp/modals/seller/Logo.svelte";
     import Name from "comp/modals/seller/Name.svelte";
     import Description from "comp/modals/seller/Description.svelte";
@@ -18,7 +18,7 @@
                 class="curve cover h100 w100"
             />
         {/if}
-        {#if shops.isOwnShop()}
+        {#if $isOwnShop}
             <button
                 on:click={() => openModal(Logo)}
                 class="absolute p-top p-right pa-20 shine curve child"
@@ -33,13 +33,13 @@
                 <div class="font-26">
                     {$shops.name}
                 </div>
-                {#if shops.isOwnShop()}
+                {#if $isOwnShop}
                     <button on:click={() => openModal(Name)} class="child slow">
                         <Icon icon="fluent:edit-20-regular" width="20" />
                     </button>
                 {/if}
             </div>
-            <!-- {#if shops.isOwnShop()}
+            <!-- {#if $isOwnShop}
                 <button
                     on:click={() => openModal(OpeningTimes)}
                     class="row weight-300 font-14 center gap-5 shine pa-5 curve"
@@ -51,7 +51,7 @@
         </h1>
         <div class="row gap-20 align-center parent">
             {$shops.desc}
-            {#if shops.isOwnShop()}
+            {#if $isOwnShop}
                 <button on:click={() => openModal(Description)} class="child slow">
                     <Icon icon="fluent:edit-20-regular" width="20" />
                 </button>
@@ -59,7 +59,7 @@
         </div>
         <div class="weight-300 opacity-75 align-center gap-20 parent">
             {$shops.loc}
-            {#if shops.isOwnShop()}
+            {#if $isOwnShop}
                 <button on:click={() => openModal(Location)} class="child slow">
                     <Icon icon="fluent:edit-20-regular" width="20" />
                 </button>

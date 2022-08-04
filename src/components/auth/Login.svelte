@@ -26,8 +26,8 @@
     function validate() {
         let msg1 = "Username needs to be at least 3 characters long";
         let msg2 = "Password needs to be at least 8 characters long";
-        if (username.length < 3) return (message = msg1);
-        if (password.length < 8) return (message = msg2);
+        // if (username.length < 3) return (message = msg1);
+        // if (password.length < 8) return (message = msg2);
         return false;
     }
 </script>

@@ -35,7 +35,7 @@
 		showNotifications = false;
 	}
 	function shopRoute() {
-		let url = `#/shops/id/${$shops.id}`
+		let url = `#/shops/id/${user.shopID()}`
 		$isShopActive ? push(url) : push("#/store/create");
 	}
 </script>
