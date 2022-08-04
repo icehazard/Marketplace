@@ -160,7 +160,7 @@ class Shop {
         return {status: "ok"}
     }
 
-    async editShop(data)
+    editShop(data)
     {
         //validate
         if (data.shopName && data.shopName.length >= 40)
@@ -171,12 +171,27 @@ class Shop {
         this.nameBankAccount = data.nameBankAccount;
         this.bankName = data.bankName;
         this.BankAccountNumber = data.BankAccountNumber;
-        return {status: "error", error: "Shop does not contain this product!"}
+        this.saveToDB();
+        return true;
+    }
+
+    editAlbum(type, file)
+    {
+        if (type === 1)
+            this.cover = file;
+        else if (type === 2)
+            this.profile = file;
+        else
+            return false;
+
+        this.saveToDB();
+        return true;
     }
 
     async saveToDB() {
         dbhandler.cols.list.colShops.updateOne({_id: this._id}, {$set: {shopName: this.shopName, address: this.address,
-                nameBankAccount: this.nameBankAccount, bankName: this.bankName, BankAccountNumber: this.BankAccountNumber}})
+                nameBankAccount: this.nameBankAccount, bankName: this.bankName, BankAccountNumber: this.BankAccountNumber,
+                cover: this.cover, profile: this.profile}})
     }
 
     async editProduct(pid, payload)

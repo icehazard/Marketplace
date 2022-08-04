@@ -4,6 +4,7 @@ const multer = require('multer');
 const {v4: uuid} = require("uuid");
 let dbhandler = require("../db/dbhandler")
 let productHandler = require("./products")
+let shopHandler = require('../classes/shops')
 
 const package = {};
 package.storage = multer.diskStorage({
@@ -19,9 +20,9 @@ package.storage = multer.diskStorage({
 
 package.imageFilter = (req, file, cb) => {
     // Accept images only
-    const fileSize = parseInt(req.headers["content-length"])
-    if (fileSize > 2048000)
-        return cb(new Error('Max image size is 2MB! Try again with smaller photo.'), false);
+    // const fileSize = parseInt(req.headers["content-length"])
+    // if (fileSize > 2048000)
+    //     return cb(new Error('Max image size is 2MB! Try again with smaller photo.'), false);
 
     if (!file.originalname.match(/\.(jpg|JPG|jpeg|JPEG|png|PNG|gif|GIF)$/)) {
         req.fileValidationError = 'Only image files are allowed!';
@@ -97,19 +98,36 @@ package.upload = async (req, res) => {
         const filename = path.parse(req.file.filename).name;
         const extension = path.parse(req.file.filename).ext;
 
-        // if ( await package.hasAvatar(userId) ) {
-        //     await package.delete(userId);
-        // }
-
-        // await UsersAvatars.create({
-        //     user: userId,
-        //     avatar: filename,
-        //     extension: extension,
-        //     mimeType: req.file.mimetype
-        // });
         res.json({ avatar: filename + extension });
     });
 };
+
+package.uploadnew = async (req, res, sid, type) => {
+
+    console.log(req.file)
+    const upload = multer({
+        storage: package.storage,
+        fileFilter: package.imageFilter,
+        limits: { fileSize: 1048576 }
+    }).single('avatar');
+
+    upload(req, res, async (err) => {
+        if (!req.file) {
+            return res.json({ status: "error", error: 'Please select an image to upload' });
+        }
+        else if (err instanceof multer.MulterError || err) {
+            console.log('error2', err)
+            return res.json({ status: "error", error: err });
+        }
+        const filename = path.parse(req.file.filename).name;
+        const extension = path.parse(req.file.filename).ext;
+
+        let shop = shopHandler.Shops.get(sid);
+        shop.editAlbum(type, filename + extension);
+        res.json({ avatar: filename + extension });
+    });
+};
+
 
 package.delete = async (userId) => {
     if (userId) {
