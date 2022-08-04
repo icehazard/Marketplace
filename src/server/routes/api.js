@@ -32,7 +32,7 @@ const upload = multer({ dest: 'images/' })
 // const bip32 = BIP32Factory(ecc);
 
 const bitcore = require("bitcore-lib");
-
+const {auth} = require("./auth")
 
 const SECRET_KEY = Config.SECRET_KEY;
 
@@ -602,6 +602,246 @@ async function getSendBtcTxData(receiverAddress, amountToSend, balance) {
     return serializedTransaction
 };
 
+api.post('/register', async (req, res) => {
+    const { username, password, email } = req.body
+
+
+    let reg = await accountHandler.Account.register(username, password, email)
+
+    let payload = typeof reg === 'object' ? reg.data : null
+
+    if (payload) {
+        res.status(200).send(payload)
+        return //success
+    }
+
+    switch (reg) {
+        case "ACCOUNT_CREATION_OK": {
+            // handled above
+        }
+        case "ACCOUNT_USERNAME_UNAVAILABLE": {
+            res.status(400).json(reg)
+            break;
+        }
+        default:
+            res.status(400).json(reg)
+            break;
+    }
+
+})
+
+api.post('/login', async (req, res) => {
+    const { username, password } = req.body
+
+    let success = await accountHandler.Account.login(username, password)
+
+    console.log(success)
+    if (typeof success === 'object') {
+        console.log(success)
+        res.status(200).send(success)
+    } else
+        res.status(400).json({ error: success })
+})
+
+api.get('/me', async (req, res) => {
+    const authed = await auth(req.headers)
+
+     if (!authed) {
+        return res.status(401).end();
+    }
+     
+    const userID = authed._id;
+
+    let me = accountHandler.Accounts.has(userID)
+
+    if (!me) {
+        return res.status(400).json({status: 'Error! Couldnt get user id for /me'})
+    }
+    me = accountHandler.Accounts.get(userID)
+
+    let sids = await me.getShopIds()
+
+    if (!sids) sids = []
+
+    let payload = {
+        shops: sids,
+        recentAddresses: me.getRecentAddresses(),
+        balances: me.getAllBalances()
+    }
+
+    res.status(200).json(payload)
+})
+
+api.get('/address/:symbol', async (req, res) => {
+    const authed = await auth(req.headers)
+
+    if (!authed) {
+        return res.status(401).end();
+    }
+
+    const userID = authed._id;
+
+    if (!accountHandler.Accounts.has(userID))
+        return res.status(400).json({status: "error", error: `Account doesnt exist!`})
+
+    let userAccount = accountHandler.Accounts.get(userID)
+    const symbol = req.params.symbol
+
+    if (!common.cryptoCodes.includes(symbol))
+        return res.status(400).json({status: "error", error: 'Cant get new address for the given cryptoCode'})
+
+    let url = `${Config.NBXPLORER_URL_TESTNET}/v1/cryptos/${symbol}/derivations/${Config.BTC_DERIV_SCHEME}/addresses/unused?reserve=true`
+    //let url = `${Config.BTC_PAY_URL}/api/v1/stores/${Config.BTC_PAY_STOREID}/payment-methods/onchain/${symbol}/wallet/address?forceGenerate=true`
+
+    console.log("Trying", url)
+    // let r = await fetch(url, {
+    //     method: "POST",
+    //     headers: {
+    //         Accept: "application/json",
+    //         "Content-Type": "application/json",
+    //         Authorization: `token ${Config.BTC_PAY_TOKEN}`
+    //     },
+    // });
+
+    let r = await fetch(url, {
+        method: "GET",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: 'Basic ' + base64.encode("__cookie__:" +  Config.NBXPLORER_COOKIE_PW)
+        },
+    });
+
+    console.log("Got symbol", symbol)
+    // console.log("Got resp", await r.text())
+    try {
+        let json = await r.json()
+
+        if (!json.address)
+            return res.status(400).json({status: "error", error: `Unknown error while getting address data. Contact admin.`})
+
+
+        let keyId = parseInt(json.keyPath.split("/")[1])
+        let a = new addressHandler.Address(json.address, userID, Config.USE_TESTNET ? symbol + "t" : symbol, keyId)
+        userAccount.insertAddress(a)
+        addressHandler.Addresses.set(a)
+
+        a.saveToDB()
+
+        return res.status(200).json({address: json.address})
+    }
+    catch(e)
+    {
+        return res.status(400).json({status: "error", error: `Couldnt get address. Please try again ${e}`})
+    }
+})
+
+api.post('/send/:symbol', async (req, res) => {
+    const authed = await auth(req.headers)
+
+    if (!authed) {
+        return res.status(401).end();
+    }
+
+
+    const userID = authed._id;
+    const {to, amount} = req.body
+    const symbol = req.params.symbol
+
+    // *** VALIDATE ADDRESS
+    if (common.symToMainnet(symbol) === "BTC")
+        if (!btcAddrValid.validate(to, Config.USE_TESTNET ? "testnet" : "mainnet"))
+            return res.status(400).json({status: "error", error: `Invalid recipient address! Please try again!`})
+
+
+    // var keyPair = ECPair.fromWIF('cUDA2gkxCPP6mrrSbsCf9XceBBFmjcjfND4ySh3i4x3wb7mr6qvq', bitcoin.networks.testnet);
+    // var tx = new bitcoin.Psbt({network: bitcoin.networks.testnet});
+    //
+    // tx.addInput({hash: 'tb1qstfmn6j5r7x8dfj8z3gjdr2xw6lkkfzadz6yj2', index: 0, value: 10000});
+    // tx.addOutput({address: 'msWccFYm5PPCn6TNPbNEnprA4hydPGadBN', value: 5000});
+    // tx.addOutput({address: 'tb1qstfmn6j5r7x8dfj8z3gjdr2xw6lkkfzadz6yj2', value: 4800});
+    //
+    // tx.sign(0, keyPair);
+    //
+    // let data = tx.build().toHex()
+
+
+    if (!accountHandler.Accounts.has(userID))
+        return res.status(400).json({status: "error", error: `Account doesnt exist!`})
+
+    let userAccount = accountHandler.Accounts.get(userID)
+
+    if (!common.cryptoCodes.includes(symbol))
+        return res.status(400).json({status: "error", error: 'Cant find the given cryptoCode'})
+
+
+    // *** INTERNAL TX
+    if (addressHandler.Addresses.has(to))
+    {
+        if (common.toSatoshis(amount) > userAccount.getBalance(symbol))
+            return res.status(400).json({"status": "error", error: `ERROR_LOW_BALANCE`})
+
+        let targetAddr = addressHandler.Addresses.get(to)
+        if (!accountHandler.Accounts.has(targetAddr.ownerID))
+        {
+            return res.status(400).json({"status": "error", error: `ERROR_TARGET_ACC_DOESNT_EXIST`})
+        }
+        let targetAcc = accountHandler.Accounts.get(targetAddr.ownerID)
+        targetAcc.creditBalance("BTC", common.toSatoshis(amount))
+        userAccount.deduceBalance("BTC", common.toSatoshis(amount))
+        targetAcc.saveToDB()
+        userAccount.saveToDB()
+
+        console.log(">>> Processed internal tx")
+        return res.sendStatus(200)
+    }
+
+    let data = await getSendBtcTxData(to, amount, userAccount.getBalance(symbol))
+
+    if (data.status)
+        return res.status(400).json(data)
+
+    console.log("Got data", data)
+
+    let nbSymbol = common.toNbSymbol(symbol)
+    let url = `${Config.NBXPLORER_URL_TESTNET}/v1/cryptos/${nbSymbol}/transactions`
+    //let url = `${Config.BTC_PAY_URL}/api/v1/stores/${Config.BTC_PAY_STOREID}/payment-methods/onchain/${symbol}/wallet/address?forceGenerate=true`
+
+    let r = await fetch(url, {
+        method: "POST",
+        headers: {
+            "Content-Type": "text/plain",
+            Authorization: 'Basic ' + base64.encode("__cookie__:" +  Config.NBXPLORER_COOKIE_PW)
+        },
+        body: Buffer.from(data, "hex")
+    });
+
+    console.log("Got symbol", symbol)
+
+    let t = await r.text()
+    console.log("Got status", r.status, t)
+
+    if (r.status === 200) {
+        userAccount.deduceBalance(symbol, common.toSatoshis(amount))
+        userAccount.saveToDB()
+    }
+
+    return res.sendStatus(r.status)
+    // try {
+    //     let json = await r.json()
+    //
+    //     if (!json.address)
+    //         return res.status(400).json({status: "error", error: `Unknown error while getting address data. Contact admin.`})
+    //
+    //
+    //
+    //     return res.status(200).json({address: json.address})
+    // }
+    // catch(e)
+    // {
+    //     return res.status(400).json({status: "error", error: `Couldnt get address. Please try again ${e}`})
+    // }
+})
 
 api.post('/multishop', async (req, res) => {
     const shops = req.body;
@@ -645,5 +885,6 @@ api.get('/shops', async (req, res) => {
     }
     return res.status(200).json(payload);
 })
+
 
 module.exports = api

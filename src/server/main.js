@@ -5,6 +5,9 @@ const bodyParser = require('body-parser')
 const morgan = require('morgan')
 const { WEB_SERVER_PORT } = require('./Config.json')
 const apiRoute = require('./routes/api.js')
+const productRoute = require('./routes/product')
+const shopRoute = require('./routes/shop.js')
+
 const path = require('path')
 const dbhandler = require("./db/dbhandler")
 const common = require("./classes/common")
@@ -226,6 +229,8 @@ wss.on('connection', function(ws) {
     app.use(morgan('tiny'))
     // app.use(express.limit('4M'));
     app.use('/api', apiRoute)
+    app.use('/api/product', productRoute)
+    app.use('/api/shop', shopRoute)
 
     function auth(data) {
         //clearTimeout(auth_timeout);
