@@ -17,7 +17,7 @@
     async function upload(data) {
         let formData = new FormData(el);
         this.load = true;
-        await shops.post(formData)
+        shops.post(formData); //await
         this.load = false;
         closeModal();
     }
@@ -33,7 +33,7 @@
             <div class="body pa-25 pt-30 gap-20 col">
                 <span class="font-24">Edit cover Image</span>
                 <form bind:this={el} class="" enctype="multipart/form-data">
-                    <input type="file" on:change={upload} name="avatar"  />
+                    <input type="file" on:change={upload} name="avatar" />
                 </form>
             </div>
             <div class="actions row shade2 pa-25 gap-10">
