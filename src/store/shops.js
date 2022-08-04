@@ -1,4 +1,4 @@
-import { persist, post, get, hasError, postImage } from '@/assets/library/CommonFunctions.js'
+import { persist, post, get, hasError, postImage, patch } from '@/assets/library/CommonFunctions.js'
 import user from '@/store/user'
 
 const data = {
@@ -50,9 +50,14 @@ context.postProfile = async function (data) {
     return res.avatar
 }
 
-context.post = async function (data) {
-    let coverImage = await context.postImage(data)
+context.patch = async function (data) {
+    let res = await patch(`api/shop/${context.val('id')}`, data)
+    return res.avatar
 }
+
+// context.post = async function (data) {
+//     let coverImage = await context.postImage(data)
+// }
 
 context.isOwnShop = function () {
     let ownShops = (user.val('me'));

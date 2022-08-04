@@ -69,6 +69,7 @@
 				{/if}
 			</section>
 			<section class="row gap-20 align-center ">
+				<span class="weight-600 opacity-75">{$user.username}</span>
 				{#if $mq.lg_}
 					<div class="relative row center" use:clickOutside={close}>
 						<button
@@ -76,7 +77,7 @@
 							on:click={toggle}
 						>
 							{#if $user.username}
-								{balanceBtc} <br> ≈ {balance}
+								 {balance}
 							{:else}
 								<Icon icon="fluent:line-horizontal-3-20-regular" />
 							{/if}
