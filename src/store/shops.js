@@ -27,7 +27,6 @@ const context = persist('shops', data)
 
 context.get = async function (id) {
     if (!id) return;
-   
     let res = await get(`api/shop/${id}`)
     res = hasError(res, data.products)
     context.commit('id', res._id)
@@ -37,26 +36,29 @@ context.get = async function (id) {
     context.commit('name', res.shopName)
 }
 
-context.postImage = async function (data) {
-    console.log('will show')
-    let res = await postImage(`api/shop/${context.val('id')}/album?type=cover`, data)
-    console.log("🚀 ~ res", res)
-    context.commit('coverPic', res)
+context.postCover = async function (data) {
+    let url = `api/shop/${context.val('id')}/album?type=cover`
+    let res = await postImage(url, data)
+    context.commit('coverPic', res.avatar)
+    return res.avatar
+}
+
+context.postProfile = async function (data) {
+    let url = `api/shop/${context.val('id')}/album?type=profile`
+    let res = await postImage(url, data)
+    context.commit('displayPic', res.avatar)
     return res.avatar
 }
 
 context.post = async function (data) {
-    console.log('hell')
     let coverImage = await context.postImage(data)
-    // return await post('api/shops', { coverImage });
-
 }
 
 context.isOwnShop = function () {
     let ownShops = (user.val('me'));
     let id = context.val('id');
     let shopID = ownShops.find((el) => Number(el._id) === id);
-    console.log("🚀 ~ shopID", shopID)
+    if (!shopID) return false
     return shopID._id >= 0 ? true : false;
 }
 

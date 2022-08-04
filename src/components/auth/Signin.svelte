@@ -38,10 +38,10 @@
         let msg2 = "Password needs to be at least 8 characters long";
         let msg3 = "Email must be of correct format";
         let msg4 = "Email needs to be at least 3 characters long";
-        if (email.length < 3) return (message = msg4);
-        if (!mailformat.test(email)) return (message = msg3);
-        if (username.length < 3) return (message = msg1);
-        if (password.length < 8) return (message = msg2);
+        // if (email.length < 3) return (message = msg4);
+        // if (!mailformat.test(email)) return (message = msg3);
+        // if (username.length < 3) return (message = msg1);
+        // if (password.length < 8) return (message = msg2);
         return false;
     }
 </script>
