@@ -177,9 +177,9 @@ class Shop {
 
     editAlbum(type, file)
     {
-        if (type === 1)
+        if (type === "cover")
             this.cover = file;
-        else if (type === 2)
+        else if (type === "profile")
             this.profile = file;
         else
             return false;
