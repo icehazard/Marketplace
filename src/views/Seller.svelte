@@ -12,7 +12,6 @@
     import { isShopPending, isShopActive } from "@/store/user.js";
     
     export let params = {}
-
     shops.get(params.id)
     user.get();
     products.get();
