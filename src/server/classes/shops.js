@@ -166,7 +166,11 @@ class Shop {
         if (data.shopName && data.shopName.length >= 40)
             return {status: "error", error: "Shop name is too long, please try again!"}
 
+        if (data.description && data.description.length >= 100)
+            return {status: "error", error: "Shop name is too long, please try again!"}
+
         this.shopName = data.shopName;
+        this.description = data.description;
         this.address = data.address;
         this.nameBankAccount = data.nameBankAccount;
         this.bankName = data.bankName;
@@ -191,7 +195,7 @@ class Shop {
     async saveToDB() {
         dbhandler.cols.list.colShops.updateOne({_id: this._id}, {$set: {shopName: this.shopName, address: this.address,
                 nameBankAccount: this.nameBankAccount, bankName: this.bankName, BankAccountNumber: this.BankAccountNumber,
-                cover: this.cover, profile: this.profile}})
+                cover: this.cover, profile: this.profile, description: this.description}})
     }
 
     async editProduct(pid, payload)
