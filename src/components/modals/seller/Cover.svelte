@@ -17,8 +17,9 @@
     async function upload(data) {
         let formData = new FormData(el);
         this.load = true;
-        shops.post(formData)
+        await shops.post(formData)
         this.load = false;
+        closeModal();
     }
 </script>
 

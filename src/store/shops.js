@@ -1,4 +1,4 @@
-import { persist, post, get, hasError , postImage} from '@/assets/library/CommonFunctions.js'
+import { persist, post, get, hasError, postImage } from '@/assets/library/CommonFunctions.js'
 import { WEBPACK_URL } from "@/config";
 
 const data = {
@@ -35,11 +35,16 @@ context.get = async function (id) {
     context.commit('shopType', res.shopType)
     context.commit('name', res.shopName)
 }
-context.post = async function (data) {
-    
-
+context.postImage = async function (data) {
     let res = await postImage('api/shop/self', data)
-    console.log("🚀 ~ response", res)
+    context.commit('coverPic', res.avatar)
+    return res.avatar
+}
+
+context.post = async function (data) {
+    let coverImage = await context.postImage(data)
+    return await post('api/shops', { coverImage });
+
 }
 
 export default context;

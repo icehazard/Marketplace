@@ -180,36 +180,6 @@ api.get('/shop/:sid', async (req, res) => {
     return res.status(200).json(payload)
 })
 
-api.patch('/shop/:sid', async (req, res) => {
-    const authed = await auth(req.headers)
-
-    if (!authed) {
-        return;
-    }
-
-    const accId = authed._id;
-    const sid = req.params.sid
-    const data = req.body;
-    console.log("Got product data", data)
-
-    //let shopId = (await accountHandler.Accounts.get(accId).getShopIds())[0]._id
-
-    if (!shopHandler.Shops.has(parseInt(sid)))
-        return res.status(400).json({status: "error", error: "That shop does not exist!"})
-
-    if (!await accountHandler.Accounts.get(accId).ownsShopID(sid))
-        return res.status(400).json({status: "error", error: "You do not own this shop!"})
-
-    console.log("Got shop ID", sid)
-
-    let add = await shopHandler.Shops.get(parseInt(sid)).addProduct(data)
-
-    if (add.status !== "ok")
-        return res.status(400).json(add)
-
-    return res.status(200).json(add)
-})
-
 api.post('/shop/:sid/product', async (req, res) => {
     const authed = await auth(req.headers)
 

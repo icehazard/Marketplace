@@ -1,5 +1,5 @@
 const path = require('path');
-const {unlink} = require('fs/promises');
+const { unlink } = require('fs/promises');
 const multer = require('multer');
 const {v4: uuid} = require("uuid");
 let dbhandler = require("../db/dbhandler")
@@ -8,7 +8,7 @@ let productHandler = require("./products")
 const package = {};
 package.storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, path.join(__dirname, 'images/'));
+        cb(null, path.join(__dirname, '../images/'));
     },
 
     // By default, multer removes file extensions so let's add them back
@@ -48,15 +48,16 @@ package.url = async (userId) => {
 }
 
 package.getImage = async (req, res, next) => {
-    if (req.params.avatar) {
+    if (req.params.image) {
+
         //const avatar = await UsersAvatars.findOne({ where: { avatar: req.params.avatar }});
 
-        if (avatar) {
-            const file = avatar.avatar + avatar.extension;
+        if (true) { //avatar
+            const file = req.params.image
 
             if (true) { //await fileExists( path.join(__dirname, '../avatars', file) )
                 const options = {
-                    root: path.join(__dirname, '../images'),
+                    root: path.join(__dirname, '../images/'),
                     dotfiles: 'deny',
                     headers: {
                         'x-timestamp': Date.now(),
@@ -81,37 +82,19 @@ package.upload = async (req, res) => {
     console.log(req.file)
     const upload = multer({
         storage: package.storage,
-        fileFilter: package.imageFilter
+        fileFilter: package.imageFilter,
+        limits: { fileSize: 1048576 }
     }).single('avatar');
 
-    /*
-        {
-            fieldname: 'songUpload',
-            originalname: '04. Stairway To Heaven - Led Zeppelin.mp3',
-            encoding: '7bit',
-            mimetype: 'audio/mp3',
-            destination: './uploads',
-            filename: 'songUpload-1476677312011',
-            path: 'uploads/songUpload-1476677312011',
-            size: 14058414
-        }
-     */
-
-
     upload(req, res, async (err) => {
-        console.log("🚀 ~ filename", req.file)
         if (!req.file) {
-            console.log('error1')
-            return res.json({status: "error", error: 'Please select an image to upload'});
+            return res.json({ status: "error", error: 'Please select an image to upload' });
         }
-        // } else if (err instanceof multer.MulterError || err) {
-        //     console.log('error2', err)
-        //     return res.json({ status: "error", error: err });
-        // }
-
-        // TODO: add to database
+        else if (err instanceof multer.MulterError || err) {
+            console.log('error2', err)
+            return res.json({ status: "error", error: err });
+        }
         const filename = path.parse(req.file.filename).name;
-
         const extension = path.parse(req.file.filename).ext;
 
         // if ( await package.hasAvatar(userId) ) {
@@ -124,9 +107,7 @@ package.upload = async (req, res) => {
         //     extension: extension,
         //     mimeType: req.file.mimetype
         // });
-
-        // Display uploaded image for user validation
-        res.json({avatar: filename});
+        res.json({ avatar: filename + extension });
     });
 };
 
