@@ -160,6 +160,25 @@ class Shop {
         return {status: "ok"}
     }
 
+    async editShop(data)
+    {
+        //validate
+        if (data.shopName && data.shopName.length >= 40)
+            return {status: "error", error: "Shop name is too long, please try again!"}
+
+        this.shopName = data.shopName;
+        this.address = data.address;
+        this.nameBankAccount = data.nameBankAccount;
+        this.bankName = data.bankName;
+        this.BankAccountNumber = data.BankAccountNumber;
+        return {status: "error", error: "Shop does not contain this product!"}
+    }
+
+    async saveToDB() {
+        dbhandler.cols.list.colShops.updateOne({_id: this._id}, {$set: {shopName: this.shopName, address: this.address,
+                nameBankAccount: this.nameBankAccount, bankName: this.bankName, BankAccountNumber: this.BankAccountNumber}})
+    }
+
     async editProduct(pid, payload)
     {
         console.log("LOgging edit", pid, payload)

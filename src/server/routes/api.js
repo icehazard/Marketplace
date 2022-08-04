@@ -135,8 +135,30 @@ api.post('/shop', async (req, res) => {
 //    // res.status(200).json({ status: 'ok!' })
 // })
 
-api.post('/shop/self',   Avatar.upload)
-api.get('/image/:image',   Avatar.getImage)
+api.post('/shop/:sid/album',  async function (req, res, next) {
+    const authed = await auth(req.headers)
+
+    if (!authed) {
+        return;
+    }
+
+    let {sid} = req.params
+    let {type} = req.query
+    const accId = authed._id;
+
+    if (type !== "cover" && type !== "profile" && type !== "profile")
+        return res.status(400).json({status: "error", error: "Type must be either cover or profile!"})
+
+    if (!shopHandler.Shops.has(parseInt(sid)))
+        return res.status(400).json({status: "error", error: "Shop with given SID doesn't exist!"})
+
+    if (!await accountHandler.Accounts.get(accId).ownsShopID(sid))
+        return res.status(400).json({status: "error", error: "You do not own this shop!"})
+
+    Avatar.upload(req, res)
+    // req.file is the `avatar` file
+    // req.body will hold the text fields, if there were any
+  })
 
 api.get('/shop/:sid', async (req, res) => {
 

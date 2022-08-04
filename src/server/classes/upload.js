@@ -1,7 +1,9 @@
 const path = require('path');
 const { unlink } = require('fs/promises');
 const multer = require('multer');
-const { v4: uuid } = require("uuid");
+const {v4: uuid} = require("uuid");
+let dbhandler = require("../db/dbhandler")
+let productHandler = require("./products")
 
 const package = {};
 package.storage = multer.diskStorage({
