@@ -11,7 +11,13 @@
 
 <div class="row gap-20 shade1 pa-20 curved center">
     <div class="w-140 h-140 shade3 parent relative">
-        <img  src={`http://localhost:9000/api/image/${$shops.displayPic}`} alt="" class="curve cover h100 w100" />
+        {#if $shops.displayPic}
+            <img
+                src={`http://localhost:9000/api/image/${$shops.displayPic}`}
+                alt=""
+                class="curve cover h100 w100"
+            />
+        {/if}
         {#if shops.isOwnShop()}
             <button
                 on:click={() => openModal(Logo)}

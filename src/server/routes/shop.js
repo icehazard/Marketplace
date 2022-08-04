@@ -82,6 +82,7 @@ api.get('/:sid', async (req, res) => {
 
     let payload = {}
     payload._id = getShop._id;
+    payload.description = getShop.description;
     payload.shopName = getShop.shopName;
     payload.shopType = getShop.shopType;
     payload.ownerID = getShop.ownerID;

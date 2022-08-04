@@ -13,7 +13,9 @@
 </script>
 
 <div class="h-400 shade1 curve relative parent">
+    {#if $shops.coverPic}
     <img class="curve cover h100 w100" src={`http://localhost:9000/api/image/${$shops.coverPic}`} alt="" />
+    {/if}
     {#if shops.isOwnShop()}
         <button on:click={handleOpen} class="absolute p-top p-right pa-20 shine curve child">
             <Icon icon="fluent:image-edit-16-regular" width="20" />

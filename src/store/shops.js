@@ -28,6 +28,7 @@ const context = persist('shops', data)
 context.get = async function (id) {
     if (!id) return;
     let res = await get(`api/shop/${id}`)
+    console.log("🚀 ~ res", res)
     res = hasError(res, data.products)
     context.commit('id', res._id)
     context.commit('name', res.shopName)
@@ -51,8 +52,8 @@ context.postProfile = async function (data) {
 }
 
 context.patch = async function (data) {
-    let res = await patch(`api/shop/${context.val('id')}`, data)
-    return res.avatar
+    console.log('patching', context.val('id'))
+    return await patch(`api/shop/${context.val('id')}`, data)
 }
 
 // context.post = async function (data) {
