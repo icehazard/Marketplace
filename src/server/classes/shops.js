@@ -170,12 +170,19 @@ class Shop {
         if (data.description && data.description.length >= 100)
             return {status: "error", error: "Shop name is too long, please try again!"}
 
-        this.shopName = data.shopName;
-        this.description = data.description;
-        this.address = data.address;
-        this.nameBankAccount = data.nameBankAccount;
-        this.bankName = data.bankName;
-        this.BankAccountNumber = data.BankAccountNumber;
+        if (data.shopName)
+            this.shopName = data.shopName;
+        if (data.description)
+            this.description = data.description;
+        if (data.address)
+            this.address = data.address;
+        if (data.nameBankAccount)
+            this.nameBankAccount = data.nameBankAccount;
+        if (data.bankName)
+            this.bankName = data.bankName;
+        if (data.BankAccountNumber)
+            this.BankAccountNumber = data.BankAccountNumber;
+
         this.saveToDB();
         return true;
     }
