@@ -197,7 +197,7 @@ api.get('/me', async (req, res) => {
     const authed = await auth(req.headers)
 
     if (!authed) {
-        return res.status(401).json()
+        return res.status(401).end()
     }
 
     const userID = authed._id;

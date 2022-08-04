@@ -170,6 +170,7 @@ class Account {
                     username: username,
                     email: email,
                     password: hash,
+                    token: ntoken
                 }
 
                 dbhandler.cols.list.colAccounts.insertOne(data);

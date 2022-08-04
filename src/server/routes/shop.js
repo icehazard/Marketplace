@@ -189,7 +189,7 @@ api.get('/:sid/product', async (req, res) => {
     let list = await shopHandler.Shops.get(parseInt(sid)).getProductList()
 
     if (!list.length)
-        return res.status(400).json(list)
+        return res.status(200).json(list)
 
     return res.status(200).json(list)
 })
