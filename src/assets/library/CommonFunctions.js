@@ -115,7 +115,6 @@ export async function del(route, data) {
 
 export async function get(route) {
     let url = `http://${WEBPACK_URL}/${route}`;
-    console.log(getToken(), 'TOKEN')
     let res = await fetch(url, {
         method: "GET",
         headers: {

@@ -22,12 +22,11 @@
             body: JSON.stringify(data),
         });
         res = await res.json();
-        console.log("🚀 ~ res", res)
 
         if (res.resp == "success") {
-            user.get();
             $user.username = res.username;
             $user.token = res.token;
+            user.get();
             push("#/");
         } else {
             message = "Account already Exists";

@@ -13,14 +13,11 @@
         if (validate()) return;
         let data = { username, password };
         let res = await post("api/login", data);
-        console.log("🚀 ~ res", res);
         if (!res.error) {
             $user.username = res.username;
             $user.token = res.token;
-            setTimeout(async () => {
-                await user.get();
-                push("#/");
-            }, 0);
+            await user.get();
+            push("#/");
         } else {
             message = "Account/password not found";
         }
