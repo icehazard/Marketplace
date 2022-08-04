@@ -51,6 +51,8 @@ api.post('/:sid/album',  async function (req, res, next) {
 
 
     let {sid} = req.params
+    sid = parseInt(sid)
+
     let {type} = req.query
     const accId = authed._id;
 
