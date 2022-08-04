@@ -139,7 +139,7 @@ export async function patch(route, data) {
         },
         body: JSON.stringify(data)
     })
-    return await res.json()
+    return;
 }
 
 export function hasError(data, initVal) {

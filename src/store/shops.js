@@ -8,19 +8,6 @@ const data = {
     coverPic: "",
     displayPic: "",
     loc: "",
-    // shop: {
-    //     coverPic: "",
-    //     displayPic: "",
-    //     sellerPic: "",
-    //     name: "",
-    //     desc: "",
-    //     loc: "",
-    //     sales: "",
-    //     sellerContact: "",
-    //     allProducts: [],
-    //     featuredProducts: [],
-    //     reviews: {}
-    // }
 }
 
 const context = persist('shops', data)
@@ -35,6 +22,8 @@ context.get = async function (id) {
     context.commit('address', res.address)
     context.commit('shopType', res.shopType)
     context.commit('name', res.shopName)
+    context.commit('displayPic', res.profile)
+    context.commit('coverPic', res.cover)
 }
 
 context.postCover = async function (data) {
@@ -52,7 +41,6 @@ context.postProfile = async function (data) {
 }
 
 context.patch = async function (data) {
-    console.log('patching', context.val('id'))
     return await patch(`api/shop/${context.val('id')}`, data)
 }
 

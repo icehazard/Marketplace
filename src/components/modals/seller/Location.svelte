@@ -10,6 +10,7 @@
 
     function save() {
         $shops.loc = field;
+        shops.patch({address: field})
         closeModal();
     }
 </script>
