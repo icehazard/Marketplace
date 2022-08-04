@@ -1,5 +1,6 @@
 <script>
     import Field from "comp/atoms/TextField.svelte";
+    import Icon from "@iconify/svelte";
     import Button from "comp/atoms/Button.svelte";
     import shops from "@/store/shops.js";
     import { closeModal } from "svelte-modals";
@@ -7,7 +8,7 @@
 
     export let isOpen;
     let load = false;
-    let el;
+    let el, picker;
     let field = $shops.coverPic;
 
     function save() {
@@ -21,6 +22,9 @@
         this.load = false;
         closeModal();
     }
+    function openPicker() {
+     picker.click();
+    }
 </script>
 
 {#if isOpen}
@@ -32,9 +36,18 @@
         <div class="shade3 curve  gap-20 col w-400 overflow-hidden autopointer">
             <div class="body pa-25 pt-30 gap-20 col">
                 <span class="font-24">Edit cover Image</span>
-                <form bind:this={el} class="" enctype="multipart/form-data">
-                    <input type="file" on:change={upload} name="avatar" />
+                <form bind:this={el} class="none" enctype="multipart/form-data">
+                    <input type="file" on:change={upload} name="avatar" bind:this={picker} />
                 </form>
+                <input
+                on:click={openPicker}
+                    button="button"
+                    class="borderStrong gap-10 curve align-center px-20 h-40 mobile-w100 shade2 w100 slow"
+                    placeholder="Select an Image"
+                />
+                <div class="center cursor-pointer absolute icon p-right pr-10">
+                    <Icon icon="fluent:chevron-up-down-20-regular" />
+                </div>
             </div>
             <div class="actions row shade2 pa-25 gap-10">
                 <Button block text="SAVE" on:click={save} />

@@ -17,6 +17,11 @@
                 </div>
                 <div class="col align-center gap-20">
                     <label class="container"
+                    >Bank Transfer
+                    <input type="radio" checked="checked" name="radio" />
+                    <span class="checkmark" />
+                </label>
+                    <label class="container"
                         >Cryptocurrency
                         <input type="radio" checked="checked" name="radio" />
                         <span class="checkmark" />

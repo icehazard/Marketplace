@@ -37,14 +37,14 @@ context.get = async function (id) {
 }
 
 context.postImage = async function (data) {
-    let res = await postImage('api/shop/self', data)
+    let res = await postImage(`/shop/${context.val('id')}/album?type=1`, data)
     context.commit('coverPic', res.avatar)
     return res.avatar
 }
 
 context.post = async function (data) {
     let coverImage = await context.postImage(data)
-   // return await post('api/shops', { coverImage });
+    // return await post('api/shops', { coverImage });
 
 }
 

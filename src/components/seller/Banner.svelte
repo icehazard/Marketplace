@@ -33,7 +33,7 @@
                     </button>
                 {/if}
             </div>
-            {#if shops.isOwnShop()}
+            <!-- {#if shops.isOwnShop()}
                 <button
                     on:click={() => openModal(OpeningTimes)}
                     class="row weight-300 font-14 center gap-5 shine pa-5 curve"
@@ -41,7 +41,7 @@
                     <Icon icon="fluent:info-20-regular" width="18" />
                     <span> Opening times</span>
                 </button>
-            {/if}
+            {/if} -->
         </h1>
         <div class="row gap-20 align-center parent">
             {$shops.desc}

@@ -123,17 +123,6 @@ api.post('/shop', async (req, res) => {
     res.status(200).json({ status: 'ok!' })
 })
 
-// api.post('/shop/self', async (req, res) => {
-//     console.log( req.file, 'file')
-//     // const authed = await auth(req.headers)
-//     // if (!authed) {
-//     //     return;
-//     // }
-  
-//     
-
-//    // res.status(200).json({ status: 'ok!' })
-// })
 
 api.post('/shop/:sid/album',  async function (req, res, next) {
     const authed = await auth(req.headers)
