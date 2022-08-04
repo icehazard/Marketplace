@@ -86,6 +86,9 @@ api.get('/:sid', async (req, res) => {
     payload.shopType = getShop.shopType;
     payload.ownerID = getShop.ownerID;
     payload.address = getShop.address;
+    payload.cover = getShop.cover;
+    payload.profile = getShop.profile;
+
 
     return res.status(200).json(payload)
 })

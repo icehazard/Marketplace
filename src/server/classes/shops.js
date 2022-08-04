@@ -93,7 +93,8 @@ class Shop {
         this.nameBankAccount = data.nameBankAccount;
         this.bankName = data.bankName;
         this.BankAccountNumber = data.BankAccountNumber;
-        this.products = new Map()
+        this.products = new Map();
+        this.description = null;
     }
 
     static async postShop(userID, payload)
