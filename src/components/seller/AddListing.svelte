@@ -1,5 +1,6 @@
 <script>
     import { push } from "svelte-spa-router";
+    import shops from "@/store/shops";
     import products from "@/store/products.js";
     import "@lottiefiles/lottie-player";
     import Item from "comp/listings/Item.svelte";
@@ -16,11 +17,15 @@
 </script>
 
 <section class="col w100 gap-20">
-    <div>Your Products</div>
-    <div class="row gap-10 wrapper overflow-hidden slow " class:h-300={!show} class:h-620={show} >
-        <button class="w100 shade1 center relative shine h-300" on:click={AddListing}>
-            <lottie-player autoplay mode="normal" src={json} style="width: 70px" />
-        </button>
+    {#if shops.isOwnShop()}
+        <div>Your Products</div>
+    {/if}
+    <div class="row gap-10 wrapper overflow-hidden slow " class:h-300={!show} class:h-620={show}>
+        {#if shops.isOwnShop()}
+            <button class="w100 shade1 center relative shine h-300" on:click={AddListing}>
+                <lottie-player autoplay mode="normal" src={json} style="width: 70px" />
+            </button>
+        {/if}
         {#each Array(4) as _, i}
             {#if $products.products[i]}
                 <Item data={$products.products[i]} />
@@ -46,7 +51,7 @@
         overflow: hidden;
     }
 
-    .h-620{
+    .h-620 {
         height: 620px;
     }
 </style>
