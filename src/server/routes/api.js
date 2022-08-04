@@ -41,29 +41,6 @@ var options = {
     timeout: 300000 // 30 seconds to send the authentication message
 };
 
-
-async function auth(data) {
-    //clearTimeout(auth_timeout);
-    try {
-
-        if (!data.token)
-            return false
-
-        const decoded = await jwt.verify(data.token, options.secret, options)
-        console.log('Decoded is', decoded)
-
-        if (decoded) {
-            return decoded;
-        }
-
-        return false
-    }
-    catch (e) {
-        console.log("Unauthorized!!!");
-        return false;
-    }
-}
-
 api.post('/register', async (req, res) => {
     const { username, password, email } = req.body
 
