@@ -12,6 +12,7 @@
 	import { isShopActive } from "@/store/user.js";
 	import Icon from "@iconify/svelte";
 	import Notifications from "./Notifications.svelte";
+	import shops from '@/store/shops'
 
 	let showModal = false;
 	let showNotifications = false;
@@ -34,7 +35,8 @@
 		showNotifications = false;
 	}
 	function shopRoute() {
-		$isShopActive ? push("#/seller") : push("#/store/create");
+		let url = `#/shops/id/${$shops.id}`
+		$isShopActive ? push(url) : push("#/store/create");
 	}
 </script>
 

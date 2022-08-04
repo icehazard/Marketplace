@@ -14,10 +14,14 @@
 	function conditionsFailed(event) {
 		replace("/login");
 	}
-	if ($user.email) {
-		user.get();
-		user.setTheme();
-	}
+	// if ($user.token) {
+	// 	console.log;
+	// 	user.get();
+	// 	user.setTheme();
+	// }
+
+	user.get();
+	user.setTheme();
 </script>
 
 <section class="col vh100">

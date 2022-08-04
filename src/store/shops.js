@@ -27,8 +27,8 @@ const context = persist('shops', data)
 
 context.get = async function (id) {
     if (!id) return;
+   
     let res = await get(`api/shop/${id}`)
-    console.log("🚀 ~ res", res)
     res = hasError(res, data.products)
     context.commit('id', res._id)
     context.commit('name', res.shopName)
@@ -53,10 +53,11 @@ context.post = async function (data) {
 }
 
 context.isOwnShop = function () {
-    let ownShops = Object.keys(user.val('me'));
+    let ownShops = (user.val('me'));
     let id = context.val('id');
-    let shopID = ownShops.find((el) => Number(el) === id);
-    return shopID >= 0 ? true : false;
+    let shopID = ownShops.find((el) => Number(el._id) === id);
+    console.log("🚀 ~ shopID", shopID)
+    return shopID._id >= 0 ? true : false;
 }
 
 export default context;

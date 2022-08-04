@@ -26,6 +26,7 @@ context.getAddress = async function () {
 }
 context.get = async function () {
     let res = await get('api/me')
+   
     res = hasError(res, data.me)
     context.commit('me', res.shops)
     context.commit('address', res.recentAddresses?.BTCt?._id)
