@@ -94,7 +94,9 @@ class Shop {
         this.bankName = data.bankName;
         this.BankAccountNumber = data.BankAccountNumber;
         this.products = new Map();
-        this.description = null;
+        this.description = data.description || null;
+        this.cover = data.cover || null;
+        this.profile = data.profile || null;
     }
 
     static async postShop(userID, payload)
