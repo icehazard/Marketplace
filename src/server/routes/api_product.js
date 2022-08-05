@@ -9,6 +9,7 @@ let accountHandler = require("../classes/accounts")
 let shopHandler = require('../classes/shops')
 let productHandler = require('../classes/products')
 let addressHandler = require('../classes/address')
+const {auth} = require("./auth")
 
 const fetch = require("node-fetch");
 const Config = require("../Config.json");
@@ -31,7 +32,7 @@ const upload = multer({ dest: 'images/' })
 // const ECPair = ECPairFactory(ecc);
 // const bip32 = BIP32Factory(ecc);
 
-api.patch('/:pid/album', async (req, res) => {
+api.post('/:pid/album', async (req, res) => {
     const authed = await auth(req.headers)
 
     if (!authed) {
