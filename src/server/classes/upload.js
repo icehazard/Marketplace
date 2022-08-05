@@ -102,7 +102,7 @@ package.upload = async (req, res) => {
     });
 };
 
-package.uploadnew = async (req, res, sid, type) => {
+package.uploadShopImg = async (req, res, sid, type) => {
 
     console.log(req.file)
     const upload = multer({
@@ -125,6 +125,36 @@ package.uploadnew = async (req, res, sid, type) => {
         let shop = shopHandler.Shops.get(sid);
         shop.editAlbum(type, filename + extension);
         res.json({ avatar: filename + extension });
+    });
+};
+
+package.uploadProdImg = async (req, res, pid, index) => {
+
+    console.log(req.file)
+    const upload = multer({
+        storage: package.storage,
+        fileFilter: package.imageFilter,
+        limits: { fileSize: 1048576 }
+    }).single('avatar');
+
+    upload(req, res, async (err) => {
+        if (!req.file) {
+            return res.json({ status: "error", error: 'Please select an image to upload' });
+        }
+        else if (err instanceof multer.MulterError || err) {
+            console.log('error2', err)
+            return res.json({ status: "error", error: err });
+        }
+        const filename = path.parse(req.file.filename).name;
+        const extension = path.parse(req.file.filename).ext;
+
+        if (!productHandler.Products.has(pid))
+            return res.status(400).json({status: "error", error: "This product doesn't exist!"})
+
+        let p = productHandler.Products.get(pid)
+
+        p.editAlbum(index, filename + extension);
+        res.json({ photo: filename + extension });
     });
 };
 

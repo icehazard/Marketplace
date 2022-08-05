@@ -31,6 +31,38 @@ const upload = multer({ dest: 'images/' })
 // const ECPair = ECPairFactory(ecc);
 // const bip32 = BIP32Factory(ecc);
 
+api.patch('/:pid/album', async (req, res) => {
+    const authed = await auth(req.headers)
+
+    if (!authed) {
+        return res.status(401).end();
+    }
+
+    const accId = authed._id;
+    const {index} = req.query;
+    const pid = parseInt(req.params.pid)
+    const data = req.body;
+    console.log("Got edit product data", data)
+
+    //let shopId = (await accountHandler.Accounts.get(accId).getShopIds())[0]._id
+
+
+    if (!productHandler.Products.has(pid))
+        return res.status(400).json({status: "error", error: "This product doesn't exist!"})
+
+    let p = productHandler.Products.get(pid)
+    let sid = p.shopID
+
+    if (!shopHandler.Shops.has(parseInt(sid)))
+        return res.status(400).json({status: "error", error: "That shop does not exist!"})
+
+    if (!await accountHandler.Accounts.get(accId).ownsShopID(sid))
+        return res.status(400).json({status: "error", error: "You do not own this shop!"})
+
+    console.log("Got shop ID", sid)
+
+    Avatar.uploadProdImg(req, res, pid, index)
+})
 
 api.patch('/:pid', async (req, res) => {
     const authed = await auth(req.headers)

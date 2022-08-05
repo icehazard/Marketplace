@@ -58,17 +58,26 @@ class Product {
         this.shopID = data.shopID;
         this.price = data.price;
         this.qty = data.qty;
+        this.photos = data.photos || {};
     }
 
     async saveToDB() {
         //dont need await
         dbhandler.cols.list.colProducts.updateOne({_id: this._id}, {$set: {name: this.name, desc: this.desc,
-                imageURL: this.imageURL, shopID: this.shopID, price: this.price, qty: this.qty}}, {upsert: true})
+                imageURL: this.imageURL, shopID: this.shopID, price: this.price, qty: this.qty, photos: data.photos}}, {upsert: true})
     }
 
     async deleteFromDB() {
         //dont need await
         dbhandler.cols.list.colProducts.deleteOne({_id: this._id})
+    }
+
+    editAlbum(index, file)
+    {
+        this.photos[index] = file;
+
+        this.saveToDB();
+        return true;
     }
 
     async editProduct(ownerID, pid, payload)

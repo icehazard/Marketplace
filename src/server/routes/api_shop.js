@@ -65,7 +65,7 @@ api.post('/:sid/album',  async function (req, res, next) {
     if (!await accountHandler.Accounts.get(accId).ownsShopID(sid))
         return res.status(400).json({status: "error", error: "You do not own this shop!"})
 
-    Avatar.uploadnew(req, res, sid, type)
+    Avatar.uploadShopImg(req, res, sid, type)
     // req.file is the `avatar` file
     // req.body will hold the text fields, if there were any
   })
