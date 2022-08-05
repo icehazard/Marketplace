@@ -50,6 +50,9 @@ api.patch('/:pid/album', async (req, res) => {
     if (!productHandler.Products.has(pid))
         return res.status(400).json({status: "error", error: "This product doesn't exist!"})
 
+    if (!index)
+        return res.status(400).json({status: "error", error: "Image index must be provided!"})
+
     let p = productHandler.Products.get(pid)
     let sid = p.shopID
 
