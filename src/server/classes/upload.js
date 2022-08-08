@@ -159,20 +159,18 @@ package.uploadProdImg = async (req, res, pid, index) => {
 };
 
 
-package.delete = async (userId) => {
-    if (userId) {
-        // const filesToDelete = await UsersAvatars.findAll({where: {user: userId}});
-        // await UsersAvatars.destroy({where: {user: userId}});
-        filesToDelete.forEach((avatar) => {
-            try {
-                unlink(path.join(__dirname, '../images', avatar.avatar + avatar.extension));
-            } catch (e) {
-                console.error(e);
-            }
-        });
-        return true;
-    }
-    return false;
+package.delete = async (string) => {
+    const filesToDelete = [string]
+    // await UsersAvatars.destroy({where: {user: userId}});
+    filesToDelete.forEach((str) => {
+        try {
+            unlink(path.join(__dirname, '../images', str));
+        } catch (e) {
+            console.log(e);
+            return false;
+        }
+    });
+    return true;
 };
 
 
