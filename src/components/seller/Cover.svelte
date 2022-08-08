@@ -5,6 +5,7 @@
     import { openModal } from "svelte-modals";
     import { WEBPACK_URL } from "@/config";
 
+
     //$: url = `http://${WEBPACK_URL}/api/image/${$shops.coverPic}`;
 
     function handleOpen() {
