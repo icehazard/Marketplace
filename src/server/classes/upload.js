@@ -153,7 +153,7 @@ package.uploadProdImg = async (req, res, pid, index) => {
 
         let p = productHandler.Products.get(pid)
 
-        p.editAlbum(index, filename + extension);
+        p.addOrEditPhoto(index, filename + extension);
         res.json({ photo: filename + extension });
     });
 };

@@ -110,7 +110,7 @@ api.delete('/:pid/album', async (req, res) => {
 
     console.log("Got shop ID", sid)
 
-    let str = shop.photos[index]
+    let str = p.deletePhoto(index)
 
     if (str)
         Avatar.delete(str)

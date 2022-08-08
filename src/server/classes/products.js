@@ -72,12 +72,22 @@ class Product {
         dbhandler.cols.list.colProducts.deleteOne({_id: this._id})
     }
 
-    editAlbum(index, file)
+    addOrEditPhoto(index, file)
     {
         this.photos[index] = file;
 
         this.saveToDB();
         return true;
+    }
+
+    deletePhoto(index)
+    {
+        let fstr = this.photos[index]
+        if (this.photos[index])
+            delete this.photos[index];
+
+        this.saveToDB();
+        return fstr;
     }
 
     async editProduct(ownerID, pid, payload)

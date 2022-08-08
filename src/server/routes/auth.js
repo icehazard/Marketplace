@@ -8,6 +8,7 @@ var options = {
     timeout: 300000 // 30 seconds to send the authentication message
 };
 
+// NEED TO CHECK IF ACC ID EXISTS
 async function auth(data) {
     //clearTimeout(auth_timeout);
     try {
