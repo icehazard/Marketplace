@@ -56,13 +56,11 @@ context.get = async function () {
 context.getAllProducts = async function () {
     let shops = await get(`api/shops`)
     let res = await post(`api/multishop`, shops)
-
     res = Object.values(res).flat();
-    console.log("🚀 ~ res", res)
     return context.commit('products', res)
 }
 context.del = async function (id) {
-    const sid = user.shopID();
+    const sid = context.val('product')._id;
     await del(`api/shop/${sid}/product/${id}`);
     await context.get();
     return

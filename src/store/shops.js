@@ -36,10 +36,12 @@ context.postCover = async function (data) {
     context.commit('coverPic', res.avatar)
     return res.avatar
 }
-console.log(products.val('product')._id)
+
 context.postProductImage = async function (data, index) {
     let url = `api/product/${products.val('product')._id}/album?index=` + index;
+    console.log("🚀 ~ url", url)
     let res = await postImage(url, data)
+    console.log("🚀 ~ res", res)
     return res.avatar
 }
 
