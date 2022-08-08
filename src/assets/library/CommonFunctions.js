@@ -85,6 +85,18 @@ export async function postImage(route, data) {
     return await res.json()
 }
 
+export async function deleteImage(route, data) {
+    let url = `http://${WEBPACK_URL}/${route}`;
+    let res = await fetch(url, {
+        method: "DELETE",
+        body: data,
+        headers: {
+            token: getToken(),
+        }
+    })
+    return res.status
+}
+
 
 export async function post(route, data) {
     let url = `http://${WEBPACK_URL}/${route}`;

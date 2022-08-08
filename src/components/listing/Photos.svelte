@@ -6,14 +6,21 @@
     import shops from "@/store/shops";
     import { isOwnProduct } from "@/store/products.js";
 
-   
+    import { Swiper, SwiperSlide } from "swiper/svelte";
+    import { Pagination } from "swiper";
+
+    import "swiper/css";
+    import "swiper/css/pagination";
+    import "@/assets/css/swiper.css";
 
     let el, picker, image;
     let index = 0;
     let maxPics = 5;
+    let newval = false
 
     $: currentImg = Object.values($products?.product?.photos).slice(0, maxPics);
-    function openPicker(idx) {
+    function openPicker(idx, val) {
+        newval = val
         if (!$isOwnProduct) return;
         index = idx;
         picker.click();
@@ -22,19 +29,36 @@
     function switching(idx) {
         index = idx;
     }
+
     async function upload(e) {
         image.src = URL.createObjectURL(e.target.files.item(0));
         let formData = new FormData(el);
         this.load = true;
         setTimeout(async () => {
-            console.log(image);
-            await shops.postProductImage(formData, index);
-            await products.get();
             let id = $products.products.findIndex((el) => el._id == $products.product._id);
+            let highest = 0;
+            for (let x of Object.keys($products.products[id].photos)) {
+                if (x > highest) highest = x;
+            }
+           // console.log(Number(Object.keys($products.products[id].photos)[index]))
+            highest = Number(highest) + 1
+            let idx = newval ? highest : index
+            console.log("🚀 ~ idx", idx, newval)
+            await shops.postProductImage(formData, idx);   
+            await products.get();
             $products.product = $products.products[id];
             this.load = false;
             picker.files = new DataTransfer().files;
         }, 0);
+    }
+    async function del() {
+        let formData = new FormData(el);
+        let id = $products.products.findIndex((el) => el._id == $products.product._id);
+       // console.log("🚀 ~ id", $products.products[id])
+        let keys = Object.keys($products.products[id].photos)
+        await shops.deleteProductImage(formData, Number(keys[index]));
+        await products.get();
+        $products.product = $products.products[id];
     }
 </script>
 
@@ -50,31 +74,53 @@
         alt=""
         bind:this={image}
         class="main h-300 w-300"
-        on:click={() => openPicker(index)}
+        on:click={() => openPicker(index, false)}
     />
+    {#if $isOwnProduct}
+        <button class="absolute p-top p-right pa-10 red--text " on:click={del}>
+            <Icon icon="fluent:delete-12-regular" width="30" />
+        </button>
+    {/if}
+
     <div class:none={currentImg[index] ? true : false} class="300 shade1 h-400 pa-20" />
     <div class="edit "><Edit /></div>
 </button>
-<div class="row gap-20 wrap">
-    {#each currentImg as _, idx}
-        <button on:click={() => switching(idx)}>
-            <img
-                src={`http://localhost:8080/api/image/` + currentImg[idx]}
-                alt=""
-                class="w-150 h-150 cover"
-            />
-        </button>
-    {/each}
-    {#each Array(maxPics - currentImg.length) as _, idx}
-        {#if $isOwnProduct}
-            <button
-                class="pa-50 curve shade3"
-                on:click={() => openPicker(currentImg.length + idx + 1)}
-            >
-                <Icon icon="fluent:add-circle-16-regular" height="50" color="grey" />
-            </button>
-        {/if}
-    {/each}
+<div class="curve col gap-20 ">
+    <div class="row gap-10 ">
+        <Swiper
+            slidesPerView={"auto"}
+            spaceBetween={10}
+            pagination={{
+                clickable: true,
+            }}
+            modules={[Pagination]}
+        >
+            {#each currentImg as _, idx}
+                <SwiperSlide>
+                    <button on:click={() => switching(idx)}>
+                        <img
+                            src={`http://localhost:8080/api/image/` + currentImg[idx]}
+                            alt=""
+                            class="w-150 h-150 cover"
+                        />
+                    </button>
+                </SwiperSlide>
+            {/each}
+
+            {#each Array(maxPics - currentImg.length) as _, idx}
+                {#if $isOwnProduct}
+                    <SwiperSlide>
+                        <button
+                            class="pa-50 curve shade3 "
+                            on:click={() => openPicker(currentImg.length + idx, true)}
+                        >
+                            <Icon icon="fluent:add-circle-16-regular" height="50" color="grey" />
+                        </button>
+                    </SwiperSlide>
+                {/if}
+            {/each}
+        </Swiper>
+    </div>
 </div>
 
 <style>

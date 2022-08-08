@@ -1,4 +1,4 @@
-import { persist, post, get, hasError, postImage, patch } from '@/assets/library/CommonFunctions.js'
+import { persist, post, get, hasError, postImage, patch, deleteImage } from '@/assets/library/CommonFunctions.js'
 import { derived } from "svelte/store";
 import { push } from "svelte-spa-router";
 import user from '@/store/user'
@@ -39,10 +39,14 @@ context.postCover = async function (data) {
 
 context.postProductImage = async function (data, index) {
     let url = `api/product/${products.val('product')._id}/album?index=` + index;
-    console.log("🚀 ~ url", url)
     let res = await postImage(url, data)
-    console.log("🚀 ~ res", res)
     return res.avatar
+}
+
+context.deleteProductImage = async function (data, index) {
+    let url = `api/product/${products.val('product')._id}/album?index=` + index;
+    let res = await deleteImage(url, data)
+    return 
 }
 
 context.postProfile = async function (data) {
