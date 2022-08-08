@@ -15,7 +15,6 @@ const data = {
 const context = persist('shops', data)
 
 context.get = async function (id) {
-    if (!id) return;
     let res = await get(`api/shop/${id}`)
     res = hasError(res, data.products)
     context.commit('id', res._id)
@@ -31,15 +30,21 @@ context.get = async function (id) {
 }
 
 context.postCover = async function (data) {
-    console.log("POSTING COVER")
     let url = `api/shop/${context.val('id')}/album?type=cover`
     let res = await postImage(url, data)
     context.commit('coverPic', res.avatar)
     return res.avatar
 }
 
+context.postProductImage = async function (data) {
+    let url = `api/product/${user.shopID()}/album?index=1`
+    let res = await postImage(url, data)
+    console.log("🚀 ~ res", res)
+    //context.commit('coverPic', res.avatar)
+    return res.avatar
+}
+
 context.postProfile = async function (data) {
-    console.log("POSTING  PROFILE")
     let url = `api/shop/${context.val('id')}/album?type=profile`
     let res = await postImage(url, data)
     context.commit('displayPic', res.avatar)

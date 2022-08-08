@@ -7,7 +7,6 @@
     import Location from "comp/modals/seller/Location.svelte";
     import OpeningTimes from "comp/modals/seller/OpeningTimes.svelte";
     import { openModal } from "svelte-modals";
-    console.log(shops.all())
 </script>
 
 <div class="row gap-20 shade1 pa-20 curved center">

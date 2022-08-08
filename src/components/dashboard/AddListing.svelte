@@ -6,15 +6,26 @@
     import { push, location } from "svelte-spa-router";
     import products from "@/store/products.js";
     import { FEE } from "@/config";
+    import shops from '@/store/shops'
 
     let edit = $location.includes("edit");
     let btnText = edit ? "EDIT" : "ADD";
+    let el, picker; 
 
     const post = async () => {
         let res = edit ? await products.edit() : await products.post();
         products.reset();
         push("#/");
     };
+    async function upload(data) {
+        let formData = new FormData(el);
+        this.load = true;
+        await shops.postProductImage(formData);
+        this.load = false;
+    }
+    function openPicker() {
+     picker.click();
+    }
 
     onDestroy(() => {
         if (edit) products.reset();
@@ -54,7 +65,15 @@
                 </div>
             </div>
             <div class="col">
-                <Field bind:value={$products.imageURL} label="Image URL" />
+                <form bind:this={el} class="none" enctype="multipart/form-data">
+                    <input type="file" on:change={upload} name="avatar" bind:this={picker} />
+                </form>
+                <input
+                on:click={openPicker}
+                    button="button"
+                    class="borderStrong gap-10 curve align-center px-20 h-40 mobile-w100 shade2 w100 slow"
+                    placeholder="Select an Image"
+                />
             </div>
         </div>
         <hr />
