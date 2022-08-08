@@ -6,6 +6,8 @@
     import shops from "@/store/shops";
     import { isOwnProduct } from "@/store/products.js";
 
+   
+
     let el, picker, image;
     let index = 0;
     let maxPics = 5;
@@ -53,7 +55,7 @@
     <div class:none={currentImg[index] ? true : false} class="300 shade1 h-400 pa-20" />
     <div class="edit "><Edit /></div>
 </button>
-<div class="row gap-20">
+<div class="row gap-20 wrap">
     {#each currentImg as _, idx}
         <button on:click={() => switching(idx)}>
             <img
@@ -64,11 +66,14 @@
         </button>
     {/each}
     {#each Array(maxPics - currentImg.length) as _, idx}
-       {#if $isOwnProduct}
-       <button class="pa-50 curve shade3" on:click={() => openPicker(currentImg.length + idx + 1)}>
-        <Icon icon="fluent:add-circle-16-regular" height="50" color="grey" />
-    </button>
-       {/if}
+        {#if $isOwnProduct}
+            <button
+                class="pa-50 curve shade3"
+                on:click={() => openPicker(currentImg.length + idx + 1)}
+            >
+                <Icon icon="fluent:add-circle-16-regular" height="50" color="grey" />
+            </button>
+        {/if}
     {/each}
 </div>
 
@@ -81,8 +86,7 @@
         transition: all 0.3s ease;
     }
 
-
-    .own:hover{
+    .own:hover {
         backdrop-filter: brightness(0.5);
         filter: brightness(0.5);
     }
