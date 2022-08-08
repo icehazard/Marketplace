@@ -22,7 +22,7 @@ const Avatar = require('../classes/upload');
 
 const multer  = require('multer')
 const upload = multer({ dest: 'images/' })
-
+const {auth} = require("./auth")
 //
 // var bitcoin = require('bitcoinjs-lib');
 // const ecc = require("tiny-secp256k1")
