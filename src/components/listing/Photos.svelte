@@ -52,7 +52,7 @@
 <div class="row gap-20">
     {#each currentImg as _, idx}
         <button on:click={() => switching(idx)}>
-            <img src={`http://localhost:8080/api/image/` + currentImg[idx]} alt="" class="w-150 cover h100" />
+            <img src={`http://localhost:8080/api/image/` + currentImg[idx]} alt="" class="w-150 h-150 cover" />
         </button>
     {/each}
     {#each Array(maxPics - currentImg.length) as _, idx}
