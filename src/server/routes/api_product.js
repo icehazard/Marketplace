@@ -41,6 +41,13 @@ api.post('/:pid/album', async (req, res) => {
 
     const accId = authed._id;
     const {index} = req.query;
+
+    if (!index)
+        return res.status(400).json({status: "error", error: "Image index must be provided!"})
+
+    if (index < 0 || index > 4)
+        return res.status(400).json({status: "error", error: "Image index must be between 0 and 4"})
+
     const pid = parseInt(req.params.pid)
     const data = req.body;
     console.log("Got edit product data", data)
@@ -50,9 +57,6 @@ api.post('/:pid/album', async (req, res) => {
 
     if (!productHandler.Products.has(pid))
         return res.status(400).json({status: "error", error: "This product doesn't exist!"})
-
-    if (!index)
-        return res.status(400).json({status: "error", error: "Image index must be provided!"})
 
     let p = productHandler.Products.get(pid)
     let sid = p.shopID
