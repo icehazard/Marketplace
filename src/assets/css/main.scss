@@ -43,8 +43,12 @@ a {
     text-decoration: none;
     font: inherit;
     cursor: pointer;
-    resize: vertical;
+
     
+}
+
+textarea{
+    resize: vertical;
 }
 
 .container {

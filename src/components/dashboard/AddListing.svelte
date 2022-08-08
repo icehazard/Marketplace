@@ -20,7 +20,7 @@
     async function upload(data) {
         let formData = new FormData(el);
         this.load = true;
-        await shops.postProductImage(formData);
+        await shops.postProductImage(formData, 0);
         this.load = false;
     }
     function openPicker() {

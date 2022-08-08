@@ -2,6 +2,7 @@ import { persist, post, get, hasError, postImage, patch } from '@/assets/library
 import { derived } from "svelte/store";
 import { push } from "svelte-spa-router";
 import user from '@/store/user'
+import products from '@/store/products'
 
 const data = {
     id: 0,
@@ -35,12 +36,10 @@ context.postCover = async function (data) {
     context.commit('coverPic', res.avatar)
     return res.avatar
 }
-
-context.postProductImage = async function (data) {
-    let url = `api/product/${user.shopID()}/album?index=1`
+console.log(products.val('product')._id)
+context.postProductImage = async function (data, index) {
+    let url = `api/product/${products.val('product')._id}/album?index=` + index;
     let res = await postImage(url, data)
-    console.log("🚀 ~ res", res)
-    //context.commit('coverPic', res.avatar)
     return res.avatar
 }
 
