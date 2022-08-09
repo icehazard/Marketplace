@@ -42,7 +42,7 @@
             }
            // console.log(Number(Object.keys($products.products[id].photos)[index]))
             highest = Number(highest) + 1
-            let idx = newval ? highest : index
+            let idx = newval ? highest : Object.keys($products.products[id].photos[idx])
             console.log("🚀 ~ idx", idx, newval)
             await shops.postProductImage(formData, idx);   
             await products.get();
@@ -127,6 +127,7 @@
     .main {
         height: 100%;
         max-height: 400px;
+        min-height: 400px;
         width: 100%;
         object-fit: cover;
         transition: all 0.3s ease;
