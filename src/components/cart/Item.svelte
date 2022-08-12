@@ -25,7 +25,7 @@
         <div class="col space-between">
             <span class="">{formatCurrency(data.price)}</span>
             <button class="justify-end gap-10" on:click={cart.removeFromCart(data)}>
-                <div class="shine opacity-80" data-tooltip="Delete">
+                <div class="" data-tooltip="Delete">
                     <Icon icon="fluent:delete-12-regular" />
                 </div>
             </button>

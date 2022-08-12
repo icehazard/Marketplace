@@ -17,6 +17,14 @@
                 <Icon icon="fluent:chevron-right-16-regular" width="16" />
             </a>
             <hr />
+            <a href="#/addresses" class="row px-20 py-20 align-center space-between w100 shine"  use:link  use:active>
+                <div class="row align-center gap-10">
+                    <Icon icon="fluent:location-12-regular" width="22" />
+                    <div>Addresses</div>
+                </div>
+                <Icon icon="fluent:chevron-right-16-regular" width="16" />
+            </a>
+            <hr />
             <a href="#/orders/overview" class="row px-20 py-20 align-center space-between w100 shine"  use:link  use:active={  '/orders/*'}>
                 <div class="row align-center gap-10">
                     <Icon icon="fluent:text-bullet-list-square-clock-20-regular" width="22" />
