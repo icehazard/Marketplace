@@ -73,10 +73,9 @@
                     This total contains an approximate conversion. You will be charged {formatCurrency(
                         $sumPriceTotal
                     )}
-                    by the shop MattAlfordStudio.
+                    by the shop.
                 </p>
                 <p>Local taxes included (where applicable)</p>
-                <p>* Additional duties and taxes may apply</p>
             </div>
         </aside>
     </div>

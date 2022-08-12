@@ -1,12 +1,15 @@
 <script>
     import Icon from "@iconify/svelte";
+
     import shops, { isOwnShop } from "@/store/shops.js";
     import Logo from "comp/modals/seller/Logo.svelte";
     import Name from "comp/modals/seller/Name.svelte";
     import Description from "comp/modals/seller/Description.svelte";
     import Location from "comp/modals/seller/Location.svelte";
-    import OpeningTimes from "comp/modals/seller/OpeningTimes.svelte";
+    import Shipping from "comp/modals/seller/Shipping.svelte";
     import { openModal } from "svelte-modals";
+    import { formatCurrency } from "@/assets/library/CommonFunctions.js";
+
 </script>
 
 <div class="row gap-20 shade1 pa-20 curved center">
@@ -43,15 +46,16 @@
                     </button>
                 {/if}
             </div>
-            <!-- {#if $isOwnShop}
+            {#if $isOwnShop}
                 <button
-                    on:click={() => openModal(OpeningTimes)}
-                    class="row weight-300 font-14 center gap-5 shine pa-5 curve"
+                    on:click={() => openModal(Shipping)}
+                    class="row weight-300 font-14 center gap-10 shine pa-5 curve"
                 >
-                    <Icon icon="fluent:info-20-regular" width="18" />
-                    <span> Opening times</span>
+                    <Icon icon="carbon:delivery-truck" width="18" />
+                    <span> Shipping fee:</span>
+                    <span class="weight-600"> {formatCurrency($shops.shipping?.regular)}</span>
                 </button>
-            {/if} -->
+            {/if}
         </h1>
         <div class="row gap-20 align-center parent">
             {#if $shops.desc}
@@ -69,7 +73,7 @@
             {#if $shops.address}
                 <span> {$shops.address}</span>
             {:else}
-                <span class="font-1">No Location</span>
+                <span class="">No Location</span>
             {/if}
 
             {#if $isOwnShop}
@@ -86,12 +90,12 @@
             </span>
         </div>
     </div>
-    <div class="col justify-end gap-10 h100">
-        <!-- <div class="w-70 h-70 shade3 round overflow-hidden">
+    <!-- <div class="col justify-end gap-10 h100">
+        <div class="w-70 h-70 shade3 round overflow-hidden">
             <img src={$shops.displayPic} alt="" class="round cover h100 w100" />
-        </div> -->
+        </div>
         <a href="#/messages" class="weight-600 opacity-75">Contact</a>
-    </div>
+    </div> -->
 </div>
 
 <style>
