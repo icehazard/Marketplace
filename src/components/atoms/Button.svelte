@@ -13,7 +13,7 @@
 </script>
 
 <button
-    class="curve center shine borderStrong shade2 py-10 px-40 text-center"
+    class="curve center shine borderStrong shade2 py-10 px-40 text-center nowrap"
     class:disable
     disabled={disable}
     class:grow={block}

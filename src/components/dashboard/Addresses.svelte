@@ -1,32 +1,55 @@
 <script>
     import Icon from "@iconify/svelte";
     import Button from "../atoms/Button.svelte";
+    import { push } from "svelte-spa-router";
+    import user from '@/store/user'
+
+    function addNew() {
+        push("#/addresses/add");
+    }
+
+    function edit(index) {
+        push(`#/addresses/edit/${index}`);
+    }
+
+    function del(index) {
+        user.delHomeAddress(index)
+    }
 </script>
 
 <section class="grow col gap-20">
     <div class="row space-between">
         <h1 class="row pl-20 font-36 weight-300 align-center gap-20">
             <Icon icon="fluent:location-16-regular" width="30" />
-            <span>Addresses</span>
+            <span>Address</span>
         </h1>
-        <Button text="Add New Address" />
+        <Button text="Add New Address" on:click={addNew} />
     </div>
     <div class="grow col shade3 curve">
-        <div class="row  w100 pa-20 space-between  shade3">
-            <div class="row center gap-20">
-                <Icon icon="fluent:location-16-regular" width="30" />
-                <div class="col gap-10">
-                    <span>34/79 Soi king Pattana 4</span>
-                    <span class="font-14 opacity-75">Soi king Pattana 4 </span>
+        {#if $user.addresses.length == 0}
+           <div class="row center pa-20 weight-300">
+            <a href="#/addresses/add">No address saved. Click to add an address</a>
+           </div>
+        {/if}
+        {#each $user.addresses as item, idx}
+            <div class="row w100 pa-20 space-between  shade3">
+                <div class="row center gap-20">
+                    <Icon icon={item.icon} width="30" />
+                    <div class="col gap-10">
+                        <span>{item.name}</span>
+                        <span class="font-14 opacity-75">{item.address}</span>
+                    </div>
+                </div>
+                <div class="row gap-30 center">
+                    <button class="row gap-30" on:click={() => edit(idx)}>
+                        <Icon icon="fluent:edit-16-regular" width="25" />
+                    </button>
+                    <button class="row gap-30" on:click={() => del(idx)}>
+                        <Icon icon="fluent:delete-16-regular" width="25" />
+                    </button>
                 </div>
             </div>
-            <div class="col center">
-                <button class="row gap-30">
-                    <Icon icon="fluent:edit-16-regular" width="25" />
-                    <Icon icon="fluent:delete-16-regular" width="25" />
-                </button>
-            </div>
-        </div>
-        <hr />
+            <hr />
+        {/each}
     </div>
 </section>

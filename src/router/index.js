@@ -8,7 +8,7 @@ const Orders = () => import("@/views/Orders.svelte");
 const Cart = () => import("@/views/Cart.svelte");
 const Profile = () => import("@/views/Profile.svelte");
 const Addresses = () => import("@/views/Addresses.svelte");
-// const AddressesView = () => import("@/views/AddressesView.svelte");
+const AddressesAdd = () => import("@/views/AddressesAdd.svelte");
 const Messages = () => import("@/views/Messages.svelte");
 const AddListing = () => import("@/views/AddListing.svelte");
 const Notifications = () => import("@/views/Notifications.svelte");
@@ -31,8 +31,9 @@ export default {
     "/listing/:id": wrap({ asyncComponent: Listing }),
     "/store/listing/edit/:id": wrap({ asyncComponent: AddListing }),
     "/settings": wrap({ asyncComponent: Settings, conditions: [auth] }),
-    "/addresses": wrap({ asyncComponent: Addresses, conditions: [auth] }),
-    "/addresses/1": wrap({ asyncComponent: Addresses, conditions: [auth] }),
+    "/addresses/overview": wrap({ asyncComponent: Addresses, conditions: [auth] }),
+    "/addresses/add": wrap({ asyncComponent: AddressesAdd, conditions: [auth] }),
+    "/addresses/edit/:id": wrap({ asyncComponent: AddressesAdd, conditions: [auth] }),
     "/wallet/overview": wrap({ asyncComponent: Wallet, conditions: [auth] }),
     "/wallet/receive": wrap({ asyncComponent: WalletReceive, conditions: [auth] }),
     "/Wallet/send": wrap({ asyncComponent: WalletSend, conditions: [auth] }),
