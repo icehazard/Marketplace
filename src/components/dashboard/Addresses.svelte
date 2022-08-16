@@ -15,6 +15,11 @@
     function del(index) {
         user.delHomeAddress(index);
     }
+
+    function selectDefault(idex){
+        
+        //push(`#/cart`);
+    }
 </script>
 
 <section class="grow col gap-20">
@@ -32,7 +37,7 @@
             </div>
         {/if}
         {#each $user.addresses as item, idx}
-            <label class="row pl-20 cursor-pointer">
+            <label class="row pl-20 cursor-pointer" on:click={() => selectDefault(idx)} >
                 <input type="radio" checked="checked" name="radio" />
                 <div class="row w100 pa-20 space-between  shade3">
                     <div class="row center gap-20">

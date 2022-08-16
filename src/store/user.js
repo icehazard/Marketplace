@@ -1,6 +1,6 @@
 import { push } from "svelte-spa-router";
 import { derived } from "svelte/store";
-import { persist, get, post, hasError } from '@/assets/library/CommonFunctions.js'
+import { persist, get, post, hasError, del } from '@/assets/library/CommonFunctions.js'
 
 const data = {
     username: '',
@@ -28,30 +28,32 @@ context.getAddress = async function () {
 context.postHomeAddress = async function (data) {
     let addresses = context.val('addresses')
     context.commit('addresses', [...addresses, data])
-     let res = await post("api/me", {addresses : data});
+     let res = await post("api/me", {address : data});
     return res
 }
 context.delHomeAddress = async function (data) {
     let addresses = context.val('addresses')
     addresses.splice(data, 1)
     context.commit('addresses', addresses)
-    let res = await del("api/me", {addresses : data});
+    let res = await del("api/me", {address : data});
     return res
 }
 context.editHomeAddress = async function (idx, data) {
     let addresses = context.val('addresses')
     addresses[idx] = data
     context.commit('addresses', addresses)
-    let res = await patch("api/me", {addresses : data});
+    let res = await post("api/me", {address : data});
     return res
 }
 context.get = async function () {
     let res = await get('api/me')
+    console.log("🚀 ~ res", res)
 
     res = hasError(res, data.me)
     context.commit('me', res.shops)
     context.commit('address', res.recentAddresses?.BTCt?._id)
     context.commit('balances', res.balances)
+    context.commit('addresses', res.deliveryAddresses)
 }
 context.shopID = function () {
     if (!context.val('me')[0]) return 0;
