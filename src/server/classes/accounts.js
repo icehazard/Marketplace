@@ -313,7 +313,7 @@ class Account {
     deleteDeliveryAddress(adr) {
         let f = this.deliveryAddresses.findIndex(i => i.address === adr.address);
         if (f !== -1) {
-            this.deliveryAddresses = this.deliveryAddresses.filter(i => i.address !== i.address)
+            this.deliveryAddresses = this.deliveryAddresses.filter(i => i.address !== adr.address)
             //delete this.deliveryAddresses[f];
         }
     }
