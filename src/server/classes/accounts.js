@@ -302,7 +302,7 @@ class Account {
     }
     newDeliveryAddress(adr) {
         if (adr.default) {
-            this.deliveryAddresses = this.deliveryAddresses.map(i => {
+            this.deliveryAddresses = this.deliveryAddresses.filter(i => {
                 if (i.default)
                     delete i["default"];
 
@@ -321,9 +321,8 @@ class Account {
     }
 
     deleteDeliveryAddress(adr) {
-        this.deliveryAddresses = this.deliveryAddresses.filter(i => {
-                return i.address !== adr.address
-            }
+        console.log(this.deliveryAddresses)
+        this.deliveryAddresses = this.deliveryAddresses.filter(i => i.address !== adr.address
         )
     }
 
