@@ -255,6 +255,7 @@ class Account {
     }
 
     async saveToDB() {
+        console.log(this.deliveryAddresses)
         dbhandler.cols.list.colAccounts.updateOne({_id: this._id},
             {$set: {balances: this.balances, deliveryAddresses: this.deliveryAddresses}}, {upsert: true})
     }
