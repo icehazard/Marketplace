@@ -310,7 +310,7 @@ class Account {
             })
         } //unsert all defaults
 
-        let f = this.deliveryAddresses.findIndex(i => i.address === adr.address);
+        let f = this.deliveryAddresses.findIndex(i => i.address === adr.oldAddress || adr.address);
         if (f !== -1) {
 
             this.deliveryAddresses[f] = adr;
