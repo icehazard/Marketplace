@@ -2,9 +2,12 @@
     import Icon from "@iconify/svelte";
     import Button from "comp/atoms/Button.svelte";
     import { mq } from "@/assets/library/MediaQuery.svelte";
+    import user from '@/store/user'
     import cart, { sumPriceTotal, sumQtyTotal } from "@/store/cart.js";
     import { formatCurrency } from "@/assets/library/CommonFunctions.js";
     import pluralize from "pluralize";
+
+    $: defaultAddress = $user.addresses.find(el => el.default == true)?.address
 </script>
 
 {#if $mq.lg_}
@@ -49,7 +52,7 @@
                 </div>
             </div>
             <div class="row space-between align-center pb-20 pt-10">
-                <div class="font-14 weight-300">34/79 Soi king Pattana 4</div>
+                <div class="font-14 weight-300">{defaultAddress}</div>
                 <a href="#/addresses/overview">
                     <Icon icon="fluent:edit-16-regular" width="22" color="var(--primary)" />
                 </a>

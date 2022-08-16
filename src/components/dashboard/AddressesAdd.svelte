@@ -16,6 +16,7 @@
             name: "Address",
             address,
             icon: "fluent:location-16-regular",
+            default : false
         };
         user.postHomeAddress(data);
         push("#/addresses/overview");

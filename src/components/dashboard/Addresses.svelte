@@ -16,8 +16,10 @@
         user.delHomeAddress(index, item);
     }
 
-    function selectDefault(idex){
-        
+    function selectDefault(idx, item) {
+        $user.addresses.map((el) => (el.default = false));
+        item.default = true;
+        user.editHomeAddress(idx, item);
         //push(`#/cart`);
     }
 </script>
@@ -37,9 +39,12 @@
             </div>
         {/if}
         {#each $user.addresses as item, idx}
-            <label class="row pl-20 cursor-pointer" on:click={() => selectDefault(idx)} >
-                <input type="radio" checked="checked" name="radio" />
-                <div class="row w100 pa-20 space-between  shade3">
+            <label class="row pl-20 cursor-pointer">
+                <input type="radio" checked={item.default} name="radio" />
+                <div
+                    class="row w100 pa-20 space-between  shade3"
+                    on:click={() => selectDefault(idx, item)}
+                >
                     <div class="row center gap-20">
                         <Icon icon={item.icon} width="30" />
                         <div class="col gap-10">

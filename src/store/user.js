@@ -46,13 +46,10 @@ context.editHomeAddress = async function (idx, data) {
     data.oldAddress = oldAddress;
     context.commit('addresses', addresses)
     let res = await post("api/me", {address : data});
-    console.log("🚀 ~ data", data)
     return res
 }
 context.get = async function () {
     let res = await get('api/me')
-    console.log("🚀 ~ res", res)
-
     res = hasError(res, data.me)
     context.commit('me', res.shops)
     context.commit('address', res.recentAddresses?.BTCt?._id)
