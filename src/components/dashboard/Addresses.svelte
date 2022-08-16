@@ -12,8 +12,8 @@
         push(`#/addresses/edit/${index}`);
     }
 
-    function del(index) {
-        user.delHomeAddress(index);
+    function del(index, item) {
+        user.delHomeAddress(index, item);
     }
 
     function selectDefault(idex){
@@ -51,7 +51,7 @@
                         <button class="row gap-30" on:click={() => edit(idx)}>
                             <Icon icon="fluent:edit-16-regular" width="25" />
                         </button>
-                        <button class="row gap-30" on:click={() => del(idx)}>
+                        <button class="row gap-30" on:click={() => del(idx, item)}>
                             <Icon icon="fluent:delete-16-regular" width="25" />
                         </button>
                     </div>

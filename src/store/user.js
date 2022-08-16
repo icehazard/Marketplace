@@ -29,20 +29,24 @@ context.postHomeAddress = async function (data) {
     let addresses = context.val('addresses')
     context.commit('addresses', [...addresses, data])
      let res = await post("api/me", {address : data});
+     console.log("🚀 ~ res", res)
     return res
 }
-context.delHomeAddress = async function (data) {
+context.delHomeAddress = async function (idx, item) {
     let addresses = context.val('addresses')
-    addresses.splice(data, 1)
+    addresses.splice(idx, 1)
     context.commit('addresses', addresses)
-    let res = await del("api/me", {address : data});
+    let res = await del("api/me", {address : item});
     return res
 }
 context.editHomeAddress = async function (idx, data) {
     let addresses = context.val('addresses')
+    let oldAddress = addresses[idx].address
     addresses[idx] = data
+    data.oldAddress = oldAddress;
     context.commit('addresses', addresses)
     let res = await post("api/me", {address : data});
+    console.log("🚀 ~ data", data)
     return res
 }
 context.get = async function () {

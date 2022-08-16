@@ -82,7 +82,11 @@ export async function postImage(route, data) {
             token: getToken(),
         }
     })
-    return await res.json()
+    try {
+        return await res.json()
+    } catch (error) {
+        return await res.status
+    }
 }
 
 export async function deleteImage(route, data) {
@@ -109,20 +113,29 @@ export async function post(route, data) {
             "Content-Type": "application/json",
         }
     })
-    return await res.json()
+    try {
+        return await res.json()
+    } catch (error) {
+        return await res.status
+    }
 }
 
 export async function del(route, data) {
     let url = `http://${WEBPACK_URL}/${route}`;
     let res = await fetch(url, {
         method: "DELETE",
+        body: JSON.stringify(data),
         headers: {
             Accept: "application/json",
             token: getToken(),
             "Content-Type": "application/json",
         }
     })
-    return await res.json()
+    try {
+        return await res.json()
+    } catch (error) {
+        return await res.status
+    }
 }
 
 export async function get(route) {
@@ -151,7 +164,11 @@ export async function patch(route, data) {
         },
         body: JSON.stringify(data)
     })
-    return;
+    try {
+        return await res.json()
+    } catch (error) {
+        return await res.status
+    }
 }
 
 export function hasError(data, initVal) {
