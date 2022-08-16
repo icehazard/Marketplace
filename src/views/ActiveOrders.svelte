@@ -7,7 +7,7 @@
 </script>
 
 <section class="row h100 container gap-50 pt-50">
-    <Categories />
+    <!-- <Categories /> -->
     <div class="col grow gap-20">
         <Details />
         <div class="row grow gap-20">
