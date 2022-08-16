@@ -69,7 +69,7 @@
             </div>
             <!-- <hr /> -->
             <div class="py-20 center">
-                <a href="#/checkout">
+                <a href="#/orders/active/1">
                     <Button text="PROCEED TO CHECKOUT" />
                 </a>
             </div>

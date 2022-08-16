@@ -31,34 +31,27 @@
                 <a href="#/addresses/add">No address saved. Click to add an address</a>
             </div>
         {/if}
-        <label class="container"
-            >Bank Transfer
-            <input type="radio" checked="checked" name="radio" />
-            <span class="checkmark" />
-        </label>
-        <label class="container"
-            >Cryptocurrency
-            <input type="radio" checked="checked" name="radio" />
-            <span class="checkmark" />
-        </label>
         {#each $user.addresses as item, idx}
-            <div class="row w100 pa-20 space-between  shade3">
-                <div class="row center gap-20">
-                    <Icon icon={item.icon} width="30" />
-                    <div class="col gap-10">
-                        <span>{item.name}</span>
-                        <span class="font-14 opacity-75">{item.address}</span>
+            <label class="row pl-20 cursor-pointer">
+                <input type="radio" checked="checked" name="radio" />
+                <div class="row w100 pa-20 space-between  shade3">
+                    <div class="row center gap-20">
+                        <Icon icon={item.icon} width="30" />
+                        <div class="col gap-10">
+                            <span>{item.name}</span>
+                            <span class="font-14 opacity-75">{item.address}</span>
+                        </div>
+                    </div>
+                    <div class="row gap-30 center">
+                        <button class="row gap-30" on:click={() => edit(idx)}>
+                            <Icon icon="fluent:edit-16-regular" width="25" />
+                        </button>
+                        <button class="row gap-30" on:click={() => del(idx)}>
+                            <Icon icon="fluent:delete-16-regular" width="25" />
+                        </button>
                     </div>
                 </div>
-                <div class="row gap-30 center">
-                    <button class="row gap-30" on:click={() => edit(idx)}>
-                        <Icon icon="fluent:edit-16-regular" width="25" />
-                    </button>
-                    <button class="row gap-30" on:click={() => del(idx)}>
-                        <Icon icon="fluent:delete-16-regular" width="25" />
-                    </button>
-                </div>
-            </div>
+            </label>
             <hr />
         {/each}
     </div>

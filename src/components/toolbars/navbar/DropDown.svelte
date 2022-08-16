@@ -17,6 +17,10 @@
         Account
     </a>
     <hr />
+    <a on:click={close} href="#/addresses/overview" class="menuItem w100 center py-10 curve shine">
+        Address
+    </a>
+    <hr />
     <a on:click={close} href="#/orders/overview" class="menuItem w100 center py-10 curve shine">
         Orders
     </a>
