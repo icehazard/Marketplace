@@ -2,7 +2,7 @@
     import Icon from "@iconify/svelte";
     import Button from "../atoms/Button.svelte";
     import { push } from "svelte-spa-router";
-    import user from '@/store/user'
+    import user from "@/store/user";
 
     function addNew() {
         push("#/addresses/add");
@@ -13,7 +13,7 @@
     }
 
     function del(index) {
-        user.delHomeAddress(index)
+        user.delHomeAddress(index);
     }
 </script>
 
@@ -27,10 +27,20 @@
     </div>
     <div class="grow col shade3 curve">
         {#if $user.addresses.length == 0}
-           <div class="row center pa-20 weight-300">
-            <a href="#/addresses/add">No address saved. Click to add an address</a>
-           </div>
+            <div class="row center pa-20 weight-300">
+                <a href="#/addresses/add">No address saved. Click to add an address</a>
+            </div>
         {/if}
+        <label class="container"
+            >Bank Transfer
+            <input type="radio" checked="checked" name="radio" />
+            <span class="checkmark" />
+        </label>
+        <label class="container"
+            >Cryptocurrency
+            <input type="radio" checked="checked" name="radio" />
+            <span class="checkmark" />
+        </label>
         {#each $user.addresses as item, idx}
             <div class="row w100 pa-20 space-between  shade3">
                 <div class="row center gap-20">

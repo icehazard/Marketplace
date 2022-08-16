@@ -17,10 +17,10 @@
                 </div>
                 <div class="col align-center gap-20">
                     <label class="container"
-                    >Bank Transfer
-                    <input type="radio" checked="checked" name="radio" />
-                    <span class="checkmark" />
-                </label>
+                        >Bank Transfer
+                        <input type="radio" checked="checked" name="radio" />
+                        <span class="checkmark" />
+                    </label>
                     <label class="container"
                         >Cryptocurrency
                         <input type="radio" checked="checked" name="radio" />
@@ -42,13 +42,18 @@
             <div class="col py-20 justify-center space-between gap-20">
                 <div class="row align-center gap-10 space-between">
                     <div class="row center gap-10">
-                        <Icon icon="fluent:vehicle-ship-24-regular" width="22" />
+                        <Icon icon="carbon:delivery-truck" width="22" />
                         <div>Shipping</div>
                     </div>
                     <div class="col align-center gap-10">{formatCurrency(0)}</div>
                 </div>
             </div>
-            <div class="font-14 weight-300 pb-20">To Thailand</div>
+            <div class="row space-between align-center pb-20 pt-10">
+                <div class="font-14 weight-300">34/79 Soi king Pattana 4</div>
+                <a href="#/addresses/overview">
+                    <Icon icon="fluent:edit-16-regular" width="22" color="var(--primary)" />
+                </a>
+            </div>
             <!-- <hr /> -->
             <div class="col py-20 justify-center space-between gap-20">
                 <div class="row align-center gap-10 space-between">
@@ -64,9 +69,9 @@
             </div>
             <!-- <hr /> -->
             <div class="py-20 center">
-              <a href="#/checkout">
-                <Button text="PROCEED TO CHECKOUT" />
-            </a>
+                <a href="#/checkout">
+                    <Button text="PROCEED TO CHECKOUT" />
+                </a>
             </div>
             <div class="col py-20 font-12 text-center gap-10 opacity-75">
                 <p>
