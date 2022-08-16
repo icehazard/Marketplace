@@ -301,14 +301,18 @@ class Account {
         return this.deliveryAddresses;
     }
     newDeliveryAddress(adr) {
-        let f = this.deliveryAddresses.findIndex(i => i.address === adr.address);
-        if (f !== -1) {
+        if (adr.default) {
             this.deliveryAddresses = this.deliveryAddresses.map(i => {
                 if (i.default)
                     delete i["default"];
 
                 return true
             })
+        } //unsert all defaults
+
+        let f = this.deliveryAddresses.findIndex(i => i.address === adr.address);
+        if (f !== -1) {
+
             this.deliveryAddresses[f] = adr;
             return;
         }
