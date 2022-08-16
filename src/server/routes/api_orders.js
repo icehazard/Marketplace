@@ -35,7 +35,10 @@ api.post('/', async (req, res) => {
     let {trade} = req.body;
 
 
+    let add = orderHandler.Orders.insert(trade)
 
+    if (add.status === "error")
+        return res.status(400).json(res);
 
 })
 

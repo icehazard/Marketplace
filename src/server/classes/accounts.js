@@ -321,7 +321,9 @@ class Account {
     }
 
     deleteDeliveryAddress(adr) {
-        this.deliveryAddresses = this.deliveryAddresses.filter(i => i.address !== adr.address)
+        this.deliveryAddresses = this.deliveryAddresses.map(i => {
+            i.address !== adr.address
+        })
     }
 
 }
