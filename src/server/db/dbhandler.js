@@ -16,6 +16,7 @@ MongoPool.getInstance(function (db) {
     cols.list.colServer = mongo.db.collection(serverConfig.COLLECTION_SERVER)
     cols.list.colProcessedTxs = mongo.db.collection(serverConfig.COLLECTION_PROCESSED_TXS)
     cols.list.colTrackedTxs = mongo.db.collection(serverConfig.COLLECTION_TRACKED_TXS)
+    cols.list.colOrders = mongo.db.collection(serverConfig.COLLECTION_ORDERS)
 
 });
 
