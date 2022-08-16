@@ -54,6 +54,7 @@ class Account {
         this.addresses = a.addresses || new Map([['BTC', new Map()], ['DOGE', new Map()], ['LTC', new Map()],
             ['ETH', new Map()],  ['BTCt', new Map()]])
         this.balances = a.balances || {BTC: 0, DOGE: 0, LTC: 0, ETH: 0, BTCt: 0}
+        this.deliveryAddresses = a.deliveryAddresses || [];
     }
 
     /*** ACCOUNT LOGIN ***/
@@ -255,7 +256,7 @@ class Account {
 
     async saveToDB() {
         dbhandler.cols.list.colAccounts.updateOne({_id: this._id},
-            {$set: {balances: this.balances}}, {upsert: true})
+            {$set: {balances: this.balances, deliveryAddresses: this.deliveryAddresses}}, {upsert: true})
     }
     getRecentAddresses() {
         let payload = {
@@ -295,6 +296,26 @@ class Account {
     getAllBalances() {
         return this.balances
     }
+    getDeliveryAddresses() {
+        return this.deliveryAddresses;
+    }
+    newDeliveryAddress(adr) {
+        let f = this.deliveryAddresses.findIndex(i => i.address === adr.address);
+        if (f !== -1) {
+            this.deliveryAddresses[f] = adr;
+            return;
+        }
+
+        this.deliveryAddresses.push(adr);
+    }
+
+    deleteDeliveryAddress(adr) {
+        let f = this.deliveryAddresses.findIndex(i => i.address === adr.address);
+        if (f !== -1) {
+            delete this.deliveryAddresses[f];
+        }
+    }
+
 }
 
 let accs = new Accounts()

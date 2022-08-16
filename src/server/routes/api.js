@@ -216,10 +216,63 @@ api.get('/me', async (req, res) => {
     let payload = {
         shops: sids,
         recentAddresses: me.getRecentAddresses(),
-        balances: me.getAllBalances()
+        balances: me.getAllBalances(),
+        deliveryAddresses: me.getDeliveryAddresses(),
     }
 
     res.status(200).json(payload)
+})
+
+api.post('/me', async (req, res) => {
+    const authed = await auth(req.headers)
+
+    if (!authed) {
+        return res.status(401).end()
+    }
+
+    const userID = authed._id; //TO-DO check for exist in DB
+
+    let me = accountHandler.Accounts.has(userID)
+
+    if (!me) {
+        return res.status(400).json({status: 'Error! Couldnt get user id for /me'})
+    }
+    me = accountHandler.Accounts.get(userID)
+
+    const {address} = req.body;
+
+    if (address)
+        me.newDeliveryAddress(address);
+
+    me.saveToDB();
+
+    res.status(200).end()
+})
+
+api.delete('/me', async (req, res) => {
+    const authed = await auth(req.headers)
+
+    if (!authed) {
+        return res.status(401).end()
+    }
+
+    const userID = authed._id; //TO-DO check for exist in DB
+
+    let me = accountHandler.Accounts.has(userID)
+
+    if (!me) {
+        return res.status(400).json({status: 'Error! Couldnt get user id for /me'})
+    }
+    me = accountHandler.Accounts.get(userID)
+
+    const {address} = req.body;
+
+    if (address)
+        me.deleteDeliveryAddress(address);
+
+    me.saveToDB();
+
+    res.status(200).end()
 })
 
 api.get('/address/:symbol', async (req, res) => {
