@@ -303,6 +303,7 @@ class Account {
     newDeliveryAddress(adr) {
         let f = this.deliveryAddresses.findIndex(i => i.address === adr.address);
         if (f !== -1) {
+            this.deliveryAddresses = this.deliveryAddresses.map(i => { delete i["default"]; return true})
             this.deliveryAddresses[f] = adr;
             return;
         }
