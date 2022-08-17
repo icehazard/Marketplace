@@ -32,6 +32,7 @@ export default {
     "/store/listing/edit/:id": wrap({ asyncComponent: AddListing }),
     "/settings": wrap({ asyncComponent: Settings, conditions: [auth] }),
     "/addresses/overview": wrap({ asyncComponent: Addresses, conditions: [auth] }),
+    "/addresses/choose": wrap({ asyncComponent: Addresses, conditions: [auth] }),
     "/addresses/add": wrap({ asyncComponent: AddressesAdd, conditions: [auth] }),
     "/addresses/edit/:id": wrap({ asyncComponent: AddressesAdd, conditions: [auth] }),
     "/wallet/overview": wrap({ asyncComponent: Wallet, conditions: [auth] }),

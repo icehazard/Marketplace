@@ -29,7 +29,6 @@ context.postHomeAddress = async function (data) {
     let addresses = context.val('addresses')
     context.commit('addresses', [...addresses, data])
      let res = await post("api/me", {address : data});
-     console.log("🚀 ~ res", res)
     return res
 }
 context.delHomeAddress = async function (idx, item) {

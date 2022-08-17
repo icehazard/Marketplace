@@ -52,8 +52,8 @@
                 </div>
             </div>
             <div class="row space-between align-center pb-20 pt-10">
-                <div class="font-14 weight-300">{defaultAddress}</div>
-                <a href="#/addresses/overview">
+                <div class="font-14 weight-300">{defaultAddress || 'No address selected'}</div>
+                <a href="#/addresses/choose">
                     <Icon icon="fluent:edit-16-regular" width="22" color="var(--primary)" />
                 </a>
             </div>

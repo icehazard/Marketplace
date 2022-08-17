@@ -104,10 +104,10 @@
     });
 </script>
 
-<div class="col w100">
+<div class="col w100 grow h100">
     <input id="address" bind:value={address} class="none" />
-<div class="curve overflow-hidden w100">
-    <div id="map" class="curved w100 h-400 w100" />
+<div class="curve overflow-hidden w100 grow">
+    <div id="map" class="curved w100 h-400 w100 grow" />
 </div>
 </div>
 

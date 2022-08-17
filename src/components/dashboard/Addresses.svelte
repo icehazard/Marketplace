@@ -1,8 +1,11 @@
 <script>
     import Icon from "@iconify/svelte";
     import Button from "../atoms/Button.svelte";
-    import { push } from "svelte-spa-router";
+    import { push, location } from "svelte-spa-router";
     import user from "@/store/user";
+
+
+    $: choose = $location.includes("choose");
 
     function addNew() {
         push("#/addresses/add");
@@ -20,7 +23,7 @@
         $user.addresses.map((el) => (el.default = false));
         item.default = true;
         user.editHomeAddress(idx, item);
-        //push(`#/cart`);
+        if (choose) push(`#/cart`);
     }
 </script>
 
@@ -43,7 +46,7 @@
                 <input type="radio" checked={item.default} name="radio" />
                 <div
                     class="row w100 pa-20 space-between  shade3"
-                    on:click={() => selectDefault(idx, item)}
+                    on:click|stopPropagation={() => selectDefault(idx, item)}
                 >
                     <div class="row center gap-20">
                         <Icon icon={item.icon} width="30" />
@@ -53,10 +56,10 @@
                         </div>
                     </div>
                     <div class="row gap-30 center">
-                        <button class="row gap-30" on:click={() => edit(idx)}>
+                        <button class="row gap-30" on:click|stopPropagation={() => edit(idx)}>
                             <Icon icon="fluent:edit-16-regular" width="25" />
                         </button>
-                        <button class="row gap-30" on:click={() => del(idx, item)}>
+                        <button class="row gap-30" on:click|stopPropagation={() => del(idx, item)}>
                             <Icon icon="fluent:delete-16-regular" width="25" />
                         </button>
                     </div>
