@@ -1,10 +1,13 @@
 <script>
     import { onMount } from "svelte";
     import { Loader } from "google-maps";
+    import { createEventDispatcher } from "svelte";
+    const dispatch = createEventDispatcher();
 
     export let address = "";
     export let _lat = "";
     export let _lng = "";
+    export let textfield = "";
 
     onMount(async () => {
         const loader = new Loader("AIzaSyAmlMcGgumMqP6T8YLFnsQT_tbL4j5wF0s", {
@@ -16,18 +19,28 @@
         const geocoder = new google.maps.Geocoder();
         const infowindow = new google.maps.InfoWindow();
 
+        let longlat = await codeAddress();
+
         const map = new google.maps.Map(document.getElementById("map"), {
-            center: { lat: -34.397, lng: 150.644 },
-            zoom: 8,
+            center: { lat: longlat.lat, lng: longlat.lng },
+            zoom: longlat.zoom,
         });
-        map.panTo({ lat: 13.7, lng: 100.5 });
+        map.panTo({ lat: longlat.lat, lng: longlat.lng });
 
         let marker = new google.maps.Marker({
-            position: { lat: 13.7, lng: 100.5 },
+            position: { lat: longlat.lat, lng: longlat.lng },
             map,
             title: "Drag me to the exact position",
             draggable: true,
         });
+
+        geocodeLatLng(
+                geocoder,
+                map,
+                infowindow,
+                longlat.lat,
+                longlat.lng
+            );
 
         map.addListener("click", (event) => {
             console.log("Clicked", event.latLng.lat(), event.latLng.lng());
@@ -53,7 +66,7 @@
             );
         });
 
-        let input = document.getElementById("address");
+        let input = textfield;
 
         let ac = new google.maps.places.Autocomplete(input, {
             componentRestrictions: { country: "th" },
@@ -73,6 +86,45 @@
                 p.geometry.location.lng()
             );
         });
+
+        async function getCoords() {
+            const pos = await new Promise((resolve, reject) => {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => resolve(position),
+                    (error) => reject(error)
+                );
+            });
+            return {
+                lng: pos.coords.longitude,
+                lat: pos.coords.latitude,
+            };
+        }
+
+        async function codeAddress() {
+            let coords;
+            try {
+                
+                 coords = await getCoords();
+            } catch (error) {
+                 coords = { lat: 13.7563, lng: 100.5018};
+            }
+
+            if (!address) return { lat: coords.lat, lng: coords.lng, zoom: 8 };
+            
+            let results ;
+            try {
+                 results = await geocoder.geocode({ address: address });
+            } catch (error) {
+                return { lat: 13.7563, lng: 100.5018, zoom: 8 }
+            }
+            
+            return {
+                lat: results.results[0].geometry.location.lat(),
+                lng: results.results[0].geometry.location.lng(),
+                zoom: 18,
+            };
+        }
+
 
         function geocodeLatLng(geocoder, map, infowindow, lat, lng) {
             console.log("GEOCODING", lat, lng);
@@ -95,6 +147,7 @@
                         infowindow.setContent(finalAddress);
                         infowindow.open(map, marker);
                         address = finalAddress;
+                        dispatch("updateAddres", address);
                     } else {
                         window.alert("No results found");
                     }
@@ -105,10 +158,10 @@
 </script>
 
 <div class="col w100 grow h100">
-    <input id="address" bind:value={address} class="none" />
-<div class="curve overflow-hidden w100 grow">
-    <div id="map" class="curved w100 h-400 w100 grow" />
-</div>
+    <!-- <input  bind:value={address}  /> -->
+    <div class="curve overflow-hidden w100 grow">
+        <div id="map" class="curved w100 h-400 w100 grow" />
+    </div>
 </div>
 
 <style>

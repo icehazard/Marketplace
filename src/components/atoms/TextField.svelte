@@ -3,6 +3,7 @@
     import { createEventDispatcher } from "svelte";
     const dispatch = createEventDispatcher();
     export let label = "";
+    export let ref = ""
     export let type = "text";
     export let value = "";
     export let name = "";
@@ -28,6 +29,7 @@
     on:change={handleChange}
     {name}
     bind:value
+    bind:this={ref}
     use:typeAction 
     class:disable
     disabled={disable}

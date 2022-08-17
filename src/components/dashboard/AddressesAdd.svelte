@@ -6,20 +6,21 @@
     import { push, location, pop } from "svelte-spa-router";
     import user from "@/store/user";
     import { onMount } from "svelte";
+    import { mq } from "@/assets/library/MediaQuery.svelte";
 
     let address = "";
+    let el;
     let id = $location.split("/")[3];
     $: type = $location.includes("edit");
-    
 
     function add() {
-        //let isZero = $user.addresses.length === 0 ? true : false;
         let data = {
             name: "Address",
             address,
             icon: "fluent:location-16-regular",
-            default : true
+            default: true,
         };
+
         user.postHomeAddress(data);
         push("#/addresses/overview");
     }
@@ -29,10 +30,15 @@
             name: $user.addresses[id].name,
             address,
             icon: $user.addresses[id].icon,
-            default : $user.addresses[id].default
+            default: $user.addresses[id].default,
         };
+
         user.editHomeAddress(id, data);
         push("#/addresses/overview");
+    }
+
+    function updateAddres(addr) {
+        address = addr.detail;
     }
 
     onMount(() => {
@@ -52,10 +58,24 @@
         </button>
     </div>
     <div class="row pa-20 gap-20 shade3 curve space-between">
-        <Field label="Type an address" bind:value={address} />
-        <Button text="{type ? 'Save' : 'Add'} Address" on:click={() => type ? edit() : add()} />
+        <Field label="Type an address" bind:ref={el} bind:value={address} />
+        {#if $mq.sm_}
+        <Button text="{type ? 'Save' : 'Add'} Address" on:click={() => (type ? edit() : add())} />
+        {/if}
     </div>
     <div class="row grow">
-        <Map {address} />
+        <Map {address} textfield={el} on:updateAddres={updateAddres} />
     </div>
 </div>
+{#if !$mq.sm_}
+<div class="fixed w100">
+    <Button block='true' text="{type ? 'Save' : 'Add'} Address" on:click={() => (type ? edit() : add())} />
+</div>
+{/if}
+
+<style>
+    .fixed {
+        bottom: 55px;
+    }
+</style>
+

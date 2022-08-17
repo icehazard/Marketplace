@@ -4,7 +4,7 @@
 </script>
 
 {#if $mq._md}
-    <div class="pt-50">
+ 
         <nav class="h-50 shade1 w100 fixed p-bottom col">
             <hr />
             <div class="row h100">
@@ -22,7 +22,8 @@
                 </a>
             </div>
         </nav>
-    </div>
+   
+    
 {/if}
 
 <style>
