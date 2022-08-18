@@ -1,11 +1,13 @@
 <script>
     import { createEventDispatcher } from "svelte";
+    import { Shadow } from "svelte-loading-spinners";
     const dispatch = createEventDispatcher();
 
     export let text = "";
     export let disable = false;
     export let type = "button";
     export let block = false;
+    export let pending = false;
 
     let connect = () => {
         dispatch("click");
@@ -18,11 +20,18 @@
     disabled={disable}
     class:hack={block}
     {type}
-    on:click={connect}>{text}</button
+    on:click={connect}
 >
+    <span class:opacity-0={pending}>{text}</span>
+    {#if pending}
+        <div class="absolute">
+            <Shadow size="16" color="white" unit="px" duration="1s" />
+        </div>
+    {/if}
+</button>
 
 <style>
-    button{
+    button {
         outline: 1px solid rgba(255, 255, 255, 0);
     }
     button:focus-visible {
@@ -33,7 +42,9 @@
         cursor: not-allowed;
     }
 
-    .hack{
+    .hack {
         width: calc(100% - 20px);
     }
+
+    
 </style>

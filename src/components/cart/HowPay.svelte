@@ -10,10 +10,16 @@
 
     $: defaultAddress = $user.addresses.find((el) => el.default == true)?.address;
 
-    let bank = "BANK";
+    let bank = "CRYPTO";
+    let pending = false
 
     function next() {
+        if (pending) return;
         cart.submitCart(defaultAddress, bank);
+        pending = true;
+        setTimeout(() => {
+            pending = false;
+        }, 2000);
         // push('#/orders/active/2')
     }
 </script>
@@ -29,12 +35,12 @@
                 <div class="col align-center gap-20">
                     <label class="check"
                         >Bank Transfer
-                        <input type="radio"  bind:group={bank} name="radio" value={"BANK"} />
+                        <input type="radio"  bind:group={bank}  value={"BANK"} />
                         <span class="checkmark" />
                     </label>
                     <label class="check"
                         >Cryptocurrency
-                        <input type="radio"   bind:group={bank} name="radio" value={"CRYPTO"} />
+                        <input type="radio"   bind:group={bank} value={"CRYPTO"} />
                         <span class="checkmark" />
                     </label>
                 </div>
@@ -80,7 +86,7 @@
             </div>
             <!-- <hr /> -->
             <div class="py-20 center">
-                <Button on:click={next} text="PROCEED TO CHECKOUT" />
+                <Button pending={pending} on:click={next} text="PROCEED TO CHECKOUT" />
             </div>
             <div class="col py-20 font-12 text-center gap-10 opacity-75">
                 <p>
