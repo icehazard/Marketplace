@@ -72,7 +72,7 @@ export const isShopActive = derived(context, () => {
     return context.val('me').length > 0;
 });
 export const totalBalance = derived(context, () => {
-    return context.val('balances').BTCt;
+    return context.val('balances')?.BTCt;
 });
 
 export default context

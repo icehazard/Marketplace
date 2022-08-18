@@ -1,5 +1,6 @@
-import { persist } from '@/assets/library/CommonFunctions.js'
+import user from '@/store/user'
 import { derived } from "svelte/store";
+import { persist, get, post, hasError, del } from '@/assets/library/CommonFunctions.js'
 
 const data = {
     cart: [],
@@ -8,6 +9,7 @@ const data = {
 const context = persist('cart', data)
 
 context.addToCart = async function (item) {
+    console.log("🚀 ~ item", item)
     let cartVal = context.val('cart')
     let el = cartVal.findIndex((el) => el._id == item._id)
     if (el >= 0) {
@@ -24,9 +26,22 @@ context.removeFromCart = async function (item) {
     context.commit('cart', context.val('cart'))
 }
 context.updateItem = function (item) {
+    item.qty = Number(item.qty)
     let cartVal = context.val('cart')
     if (Math.sign(item.qty) < 1) context.removeFromCart(item)
     context.commit('cart', [...cartVal])
+}
+
+context.submitCart = async function (address, payment) {
+    let data = [];
+    let item = []
+    let cartVal = context.val('cart')
+    cartVal.forEach(el => item.push({ _id: el._id, shopID: el.shopID, qty: el.qty }))
+    data.items = item;
+    data.address = address;
+    data.payment = payment;
+    console.log("🚀 ~ data", data)
+    let res = await get("api/payment", data);
 }
 
 export const sumPriceTotal = derived(context, () => {

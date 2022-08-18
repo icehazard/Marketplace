@@ -2,12 +2,20 @@
     import Icon from "@iconify/svelte";
     import Button from "comp/atoms/Button.svelte";
     import { mq } from "@/assets/library/MediaQuery.svelte";
-    import user from '@/store/user'
+    import user from "@/store/user";
     import cart, { sumPriceTotal, sumQtyTotal } from "@/store/cart.js";
     import { formatCurrency } from "@/assets/library/CommonFunctions.js";
     import pluralize from "pluralize";
+    import { push } from "svelte-spa-router";
 
-    $: defaultAddress = $user.addresses.find(el => el.default == true)?.address
+    $: defaultAddress = $user.addresses.find((el) => el.default == true)?.address;
+
+    let bank = "BANK";
+
+    function next() {
+        cart.submitCart(defaultAddress, bank);
+        // push('#/orders/active/2')
+    }
 </script>
 
 {#if $mq.lg_}
@@ -21,12 +29,12 @@
                 <div class="col align-center gap-20">
                     <label class="check"
                         >Bank Transfer
-                        <input type="radio" checked="checked" name="radio" />
+                        <input type="radio"  bind:group={bank} name="radio" value={"BANK"} />
                         <span class="checkmark" />
                     </label>
                     <label class="check"
                         >Cryptocurrency
-                        <input type="radio" checked="checked" name="radio" />
+                        <input type="radio"   bind:group={bank} name="radio" value={"CRYPTO"} />
                         <span class="checkmark" />
                     </label>
                 </div>
@@ -52,7 +60,7 @@
                 </div>
             </div>
             <div class="row space-between align-center pb-20 pt-10">
-                <div class="font-14 weight-300">{defaultAddress || 'No address selected'}</div>
+                <div class="font-14 weight-300">{defaultAddress || "No address selected"}</div>
                 <a href="#/addresses/choose">
                     <Icon icon="fluent:edit-16-regular" width="22" color="var(--primary)" />
                 </a>
@@ -72,9 +80,7 @@
             </div>
             <!-- <hr /> -->
             <div class="py-20 center">
-                <a href="#/orders/active/1">
-                    <Button text="PROCEED TO CHECKOUT" />
-                </a>
+                <Button on:click={next} text="PROCEED TO CHECKOUT" />
             </div>
             <div class="col py-20 font-12 text-center gap-10 opacity-75">
                 <p>
