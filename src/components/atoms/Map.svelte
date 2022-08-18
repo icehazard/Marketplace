@@ -160,7 +160,7 @@
 <div class="col w100 grow h100">
     <!-- <input  bind:value={address}  /> -->
     <div class="curve overflow-hidden w100 grow">
-        <div id="map" class="curved w100 h-400 w100 grow" />
+        <div id="map" class="curved w100 h-400 w100 grow black--text" />
     </div>
 </div>
 

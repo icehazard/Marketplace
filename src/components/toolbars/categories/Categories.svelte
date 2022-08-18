@@ -6,8 +6,8 @@
 </script>
 
 {#if $mq.lg_}
-    <div class="w-300">
-        <aside class="shade3 w-300 curve fixed">
+    <div class="w-300 w100">
+        <aside class="shade3 w-300 w100 curve fixed">
             <a href="#/" class="row px-20 align-center space-between shine w100"  use:link  use:active>
                 <div class="row py-20 align-center gap-10">
                     <Icon icon="fluent:home-16-regular" width="22" />

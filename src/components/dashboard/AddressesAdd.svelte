@@ -58,7 +58,9 @@
         </button>
     </div>
     <div class="row pa-20 gap-20 shade3 curve space-between">
+       <div class="w-500 w100">
         <Field label="Type an address" bind:ref={el} bind:value={address} />
+       </div>
         {#if $mq.sm_}
         <Button text="{type ? 'Save' : 'Add'} Address" on:click={() => (type ? edit() : add())} />
         {/if}

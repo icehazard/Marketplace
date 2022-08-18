@@ -44,10 +44,17 @@
             </div>
         {/if}
         {#each $user.addresses as item, idx}
-            <label class="row pl-20 cursor-pointer shine">
-                <input type="radio" checked={item.default} name="radio" />
+            <!-- <label class="check">
+                <div>Cryptocurrency</div>
+                <input type="radio" checked="checked" name="radio" />
+                <span class="checkmark" />
+            </label> -->
+
+            <label class="row cursor-pointer shine check">
+                <input type="radio" checked={item.default} name="radio" class="none" />
+                <span class="checkmark" />
                 <div
-                    class="row w100 pa-20 space-between shade3 nowrap gap-20"
+                    class="row w100 pa-20 space-between shade3 nowrap gap-20 pl-60"
                     on:click|stopPropagation={() => selectDefault(idx, item)}
                 >
                     <div class="row center gap-20 nowrap">
@@ -58,7 +65,7 @@
                             >
                         </div>
                     </div>
-                    <div class="row gap-30 center nowrap">
+                    <div class="row gap-30 center nowrap primary--text">
                         <button class="row gap-30" on:click|stopPropagation={() => edit(idx)}>
                             <Icon icon="fluent:edit-16-regular" width="25" />
                         </button>
@@ -80,12 +87,76 @@
 
 {#if !$mq.sm_}
     <div class="fixed w100">
-        <Button text="Add New Address" block='true' on:click={addNew} />
+        <Button text="Add New Address" block="true" on:click={addNew} />
     </div>
 {/if}
 
 <style>
     .fixed {
         bottom: 55px;
+    }
+
+    .check {
+        display: block;
+        position: relative;
+        
+        width: 100%;
+        cursor: pointer;
+        font-size: 16px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    /* Hide the browser's default radio button */
+    .check input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+    }
+
+    /* Create a custom radio button */
+    .checkmark {
+        position: absolute;
+        transform: translate(100%, -50%);
+        top: 50%;
+        left: 0;
+        height: 20px;
+        width: 20px;
+        background-color: #eee;
+        border-radius: 50%;
+    }
+
+    /* On mouse-over, add a grey background color */
+    .check:hover input ~ .checkmark {
+        background-color: #ccc;
+    }
+
+    /* When the radio button is checked, add a blue background */
+    .check input:checked ~ .checkmark {
+        background-color: var(--primary);
+    }
+
+    /* Create the indicator (the dot/circle - hidden when not checked) */
+    .checkmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+    }
+
+    /* Show the indicator (dot/circle) when checked */
+    .check input:checked ~ .checkmark:after {
+        display: block;
+    }
+
+    /* Style the indicator (dot/circle) */
+    .check .checkmark:after {
+        top: 6px;
+        left: 6px;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #1a1a1a;
     }
 </style>

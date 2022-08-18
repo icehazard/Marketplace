@@ -73,7 +73,7 @@
         class:own={$isOwnProduct}
         alt=""
         bind:this={image}
-        class="main h-300 w-300"
+        class="main h-300 w-300 w100"
         on:click={() => openPicker(index, false)}
     />
     {#if $isOwnProduct}

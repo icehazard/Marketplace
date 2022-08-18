@@ -3,7 +3,7 @@
     import Contact from "./Contact";
 </script>
 
-<section class="w-500  h100 col ">
+<section class="w-500 w100 h100 col ">
     <div class="px-20" />
     <div class="row px-20 py-15">
         <div class="border gap-10 w100 curve align-center px-20 h-40 shade2">

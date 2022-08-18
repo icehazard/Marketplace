@@ -88,11 +88,11 @@
 							{#if $user.username}
 								<DropDown on:click={close} />
 							{:else}
-								<div class="absolute shade1 col   glass pa-5 w-200 z-2 p-right ">
+								<div class="absolute shade1 col w100 glass pa-5 w-200 z-2 p-right ">
 									<a
 										on:click={close}
 										href="#/login"
-										class="menuItem w100 center py-10 curve shine"
+										class="menuItem w-200 w100 center py-10 curve shine"
 									>
 										Login
 									</a>

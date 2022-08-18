@@ -19,12 +19,12 @@
                     <div>How you'll pay</div>
                 </div>
                 <div class="col align-center gap-20">
-                    <label class="container"
+                    <label class="check"
                         >Bank Transfer
                         <input type="radio" checked="checked" name="radio" />
                         <span class="checkmark" />
                     </label>
-                    <label class="container"
+                    <label class="check"
                         >Cryptocurrency
                         <input type="radio" checked="checked" name="radio" />
                         <span class="checkmark" />
@@ -90,11 +90,11 @@
 {/if}
 
 <style>
-    .container {
+    .check {
         display: block;
         position: relative;
         padding-left: 35px;
-
+        width: 100%;
         cursor: pointer;
         font-size: 16px;
         -webkit-user-select: none;
@@ -104,7 +104,7 @@
     }
 
     /* Hide the browser's default radio button */
-    .container input {
+    .check input {
         position: absolute;
         opacity: 0;
         cursor: pointer;
@@ -122,12 +122,12 @@
     }
 
     /* On mouse-over, add a grey background color */
-    .container:hover input ~ .checkmark {
+    .check:hover input ~ .checkmark {
         background-color: #ccc;
     }
 
     /* When the radio button is checked, add a blue background */
-    .container input:checked ~ .checkmark {
+    .check input:checked ~ .checkmark {
         background-color: var(--primary);
     }
 
@@ -139,12 +139,12 @@
     }
 
     /* Show the indicator (dot/circle) when checked */
-    .container input:checked ~ .checkmark:after {
+    .check input:checked ~ .checkmark:after {
         display: block;
     }
 
     /* Style the indicator (dot/circle) */
-    .container .checkmark:after {
+    .check .checkmark:after {
         top: 6px;
         left: 6px;
         width: 8px;
