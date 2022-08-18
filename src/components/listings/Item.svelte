@@ -48,13 +48,22 @@
                     <Icon icon="fluent:delete-12-regular" width="20" />
                     <span>Delete</span>
                 </button>
-                <button type="button" class="align-center gap-10 shine pa-10 curve" on:click|stopPropagation={edit}>
+                <button
+                    type="button"
+                    class="align-center gap-10 shine pa-10 curve"
+                    on:click|stopPropagation={edit}
+                >
                     <Icon icon="fluent:edit-16-regular" width="20" />
                     <span>Edit</span>
                 </button>
             </div>
         {/if}
-        <img src={data.imageURL} alt="logo" class="h100" class:darken={menu} />
+        <img
+            src={`http://localhost:8080/api/image/` + Object.values(data.photos).slice(0, 1)}
+            alt="logo"
+            class="h100"
+            class:darken={menu}
+        />
     </section>
     <hr class="hr w100" />
     <section class="col pa-15  space-between h100 w100">

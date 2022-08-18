@@ -3,14 +3,6 @@ import user from '@/store/user.js'
 import { derived } from "svelte/store";
 
 const data = {
-    // _id: 0,
-    // shopID: 0,
-    // name: '',
-    // imageURL: '', //DelETE ME 
-    // photos: [],
-    // price: 0,
-    // qty: 0,
-    // desc: '',
     products: [],
     product: {},
 }
@@ -21,7 +13,6 @@ context.post = async function () {
     const id = user.shopID();
     const items = {
         name: context.val('name'),
-        imageURL: context.val('imageURL'), //delete me
         price: context.val('price'),
         qty: context.val('qty'),
         desc: context.val('desc'),
@@ -36,7 +27,6 @@ context.edit = async function () {
     const id = context.val('product')._id;
     const items = {
         name: context.val('name'),
-        imageURL: context.val('imageURL'), //delete me
         price: context.val('price'),
         qty: context.val('qty'),
         desc: context.val('desc'),
@@ -68,7 +58,6 @@ context.del = async function (id) {
 context.spreadProduct = async function () {
     let prod = context.val('product')
     context.commit('name', prod.name)
-    context.commit('imageURL', prod.imageURL), //delete me
     context.commit('price', prod.price)
     context.commit('qty', prod.qty)
     context.commit('desc', prod.desc)

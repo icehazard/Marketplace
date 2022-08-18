@@ -8,7 +8,7 @@
 </script>
 
 <div class="row shade1 curve wrapper">
-    <img src={data.imageURL} alt="" />
+    <img src={`http://localhost:8080/api/image/` + Object.values(data.photos).slice(0, 1)} alt="" />
     <div class="row pa-20 grow gap-50">
         <div class="col  grow overflow-hidden gap-10">
             <div class="weight-600 font-18">{data.name}</div>

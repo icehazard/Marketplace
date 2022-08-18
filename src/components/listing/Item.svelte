@@ -11,7 +11,7 @@
 
 <button class=" h-250 w-250 curve col shade1 fast" on:click={viewListing}>
     <section class="h-150 center w100">
-        <img src={data.imageURL} alt="logo" class="h100" />
+        <img src={`http://localhost:8080/api/image/` + Object.values(data.photos).slice(0, 1)} alt="logo" class="h100" />
     </section>
     <hr class="hr w100" />
     <section class="col pa-15  space-between h100 w100">
