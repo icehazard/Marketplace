@@ -3,7 +3,7 @@
     import { createEventDispatcher } from "svelte";
     const dispatch = createEventDispatcher();
     export let label = "";
-    export let ref = ""
+    export let ref = "";
     export let type = "text";
     export let value = "";
     export let name = "";
@@ -30,7 +30,7 @@
     {name}
     bind:value
     bind:this={ref}
-    use:typeAction 
+    use:typeAction
     class:disable
     disabled={disable}
     class="borderStrong gap-10 curve align-center px-20 h-40 mobile-w100 shade2 w100 slow"
@@ -40,6 +40,7 @@
 <style>
     input {
         outline: 1px solid rgba(255, 255, 255, 0);
+        cursor: text;
     }
 
     input:focus-visible {
