@@ -23,7 +23,7 @@
                 <span class="font-14">({(Math.random() * 1000) | 1})</span>
             </div>
             <div class=" grow justify-end ellipsis">
-                <span class="ellipsis ">{data.shopID || ''}</span>
+                <span class="ellipsis ">{data.shopName || ''}</span>
             </div>
         </div>
     </section>

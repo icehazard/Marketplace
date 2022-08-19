@@ -463,7 +463,7 @@ api.post('/multishop', async (req, res) => {
             })
 
         let shop = shopHandler.Shops.get(shopId);
-        payload[shopId] = {shopName: shop.shopName, products: shop.getProductList()}
+        payload[shopId] = shopHandler.Shops.get(shopId).getProductList();
     }
 
     return res.status(200).json(payload);
