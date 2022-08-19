@@ -26,7 +26,7 @@
     }
     function edit() {
         $products.product = data;
-        products.spreadProduct();
+        // products.spreadProduct();
         push(`#/store/listing/edit/${data._id}`);
         close();
     }

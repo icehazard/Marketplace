@@ -4,6 +4,7 @@
     import { Swiper, SwiperSlide } from "swiper/svelte";
     import { Pagination } from "swiper";
     import products from "@/store/products.js";
+    import shops from "@/store/shops.js";
     import "swiper/css";
     import "swiper/css/pagination";
     import "@/assets/css/swiper.css";

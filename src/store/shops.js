@@ -11,6 +11,7 @@ const data = {
     address: "",
     coverPic: "",
     displayPic: "",
+    products: [],
     shipping: {
         regular: 35,
         minFree: 1000,
@@ -22,12 +23,14 @@ const context = persist('shops', data)
 
 context.get = async function (id) {
     let res = await get(`api/shop/${id}`)
+    console.log("🚀 ~ res", res)
     res = hasError(res, data.products)
     context.commit('id', res._id)
     context.commit('name', res.shopName) 
     context.commit('address', res.address)
     context.commit('shopType', res.shopType)
     context.commit('name', res.shopName)
+    context.commit('products', res.products)
     context.commit('displayPic', res.profile)
     context.commit('coverPic', res.cover)
     context.commit('desc', res.description)

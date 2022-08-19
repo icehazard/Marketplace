@@ -1,6 +1,7 @@
 <script>
     import Categories from "comp/toolbars/categories/Categories.svelte";
     import Edit from "comp/listing/Edit.svelte";
+    import products from '@/store/products'
     import Title from "comp/listing/Title.svelte";
     import Description from "comp/listing/Description.svelte";
     import Photos from "comp/listing/Photos.svelte";
@@ -8,13 +9,15 @@
     import Related from "comp/listing/Related.svelte";
     import Seller from "comp/listing/Seller.svelte";
     import Shipping from "comp/listing/Shipping.svelte";
-
+    import shops from "@/store/shops.js";
     import user from "@/store/user.js";
     import { mq } from "@/assets/library/MediaQuery.svelte";
     import { onMount } from "svelte";
 
-    onMount(() => {
+    onMount(async () => {
         user.get();
+        //await products.get();
+        await shops.get($products.product.shopID);
     });
 </script>
 
@@ -24,16 +27,14 @@
         <div class="col grow gap-30">
             <Photos />
             {#if $mq.xxl_}
-                <Edit />
                 <Description />
             {/if}
         </div>
         <div class="col grow gap-30">
+            <Title />
             {#if $mq._xl}
-                <Edit />
                 <Description />
             {/if}
-            <Title />
             <Price />
             <Shipping />
             <Related />

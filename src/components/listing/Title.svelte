@@ -1,13 +1,13 @@
 <script>
     import products from "@/store/products.js";
 
-    let id = $products.product.shopID;
+    let shop = $products.product
 </script>
 
 <div class="shade1 pa-50 curve col gap-50">
-    <h1>{$products?.product?.name || ""}</h1>
+    <h1>{shop?.name || "No Title"}</h1>
     <div class="row space-between">
-        <a href={`#/shops/id/${id}`} class="gradient--text font-18">{id || ""}</a>
+        <a href={`#/shops/id/${shop?.shopID}`} class="opacity-75 font-18">{shop?.shopName || ""}</a>
         <a href="#/messages" class="primary--text link">Contact seller</a>
     </div>
 </div>

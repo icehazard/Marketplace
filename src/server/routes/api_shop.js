@@ -78,7 +78,7 @@ api.get('/:sid', async (req, res) => {
         return res.status(400).json({status: "error", error: "Shop with given SID doesn't exist!"})
 
     let getShop = shopHandler.Shops.get(parseInt(sid))
-
+    let products = shopHandler.Shops.get(getShop._id).getProductList();
 
     let payload = {}
     payload._id = getShop._id;
@@ -89,7 +89,7 @@ api.get('/:sid', async (req, res) => {
     payload.address = getShop.address;
     payload.cover = getShop.cover;
     payload.profile = getShop.profile;
-
+    payload.products = products;
 
     return res.status(200).json(payload)
 })

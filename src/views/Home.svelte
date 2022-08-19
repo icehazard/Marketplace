@@ -11,7 +11,7 @@
     <Categories />
     <section class="grow">
         {#if $products.products}
-            {#each $products.products as product}
+            {#each $products.productsAll as product}
                 <Item data={product} />
             {/each}
         {/if}

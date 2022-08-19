@@ -4,6 +4,7 @@ import { derived } from "svelte/store";
 
 const data = {
     products: [],
+    productsAll: [],
     product: {},
 }
 
@@ -11,30 +12,13 @@ const context = persist('products', data)
 
 context.post = async function () {
     const id = user.shopID();
-    const items = {
-        name: context.val('name'),
-        price: context.val('price'),
-        qty: context.val('qty'),
-        desc: context.val('desc'),
-        _id: context.val('_id'),
-        shopID: context.val('shopID'),
-        photos: context.val('photos'),
-
-    }
-    return await post(`api/shop/${id}/product`, items)
+    const prod = context.val('product');
+    return await post(`api/shop/${id}/product`, prod)
 }
 context.edit = async function () {
     const id = context.val('product')._id;
-    const items = {
-        name: context.val('name'),
-        price: context.val('price'),
-        qty: context.val('qty'),
-        desc: context.val('desc'),
-        _id: context.val('_id'),
-        shopID: context.val('shopID'),
-        photos: context.val('photos'),
-    }
-    return await patch(`api/product/${id}`, items)
+    const prod = context.val('product');
+    return await patch(`api/product/${id}`, prod)
 }
 context.get = async function () {
     const id = user.shopID();
@@ -47,7 +31,7 @@ context.getAllProducts = async function () {
     let shops = await get(`api/shops`)
     let res = await post(`api/multishop`, shops)
     res = Object.values(res).flat();
-    return context.commit('products', res)
+    return context.commit('productsAll', res)
 }
 context.del = async function (id) {
     const sid = context.val('product')._id;
@@ -58,6 +42,7 @@ context.del = async function (id) {
 context.spreadProduct = async function () {
     let prod = context.val('product')
     context.commit('name', prod.name)
+    context.commit('imageURL', prod.imageURL), //delete me
     context.commit('price', prod.price)
     context.commit('qty', prod.qty)
     context.commit('desc', prod.desc)

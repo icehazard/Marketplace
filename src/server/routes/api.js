@@ -461,8 +461,6 @@ api.post('/multishop', async (req, res) => {
                 status: "error",
                 error: `One of the shop ids is invalid! Check provided list!`
             })
-
-        let shop = shopHandler.Shops.get(shopId);
         payload[shopId] = shopHandler.Shops.get(shopId).getProductList();
     }
 
