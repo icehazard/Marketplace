@@ -34,3 +34,9 @@
         </div>
     </button>
 </div>
+
+<style>
+    .w-400{
+        min-width: 400px;
+    }
+</style>

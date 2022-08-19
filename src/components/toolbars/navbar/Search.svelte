@@ -8,7 +8,10 @@
 </div>
 
 <style>
-
+  .w-500{
+        width: 500px;
+    }
+    
 	@media only screen and (max-width: 1200px) {
     .mobile-w100 {
 		width: 100%;

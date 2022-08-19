@@ -25,8 +25,8 @@
 </script>
 
 {#if $mq.lg_}
-    <div class="w-400">
-        <aside class="shade1 w-400 px-20 curve ">
+    <div class="w-400 w100">
+        <aside class="shade1 w-400 w100 px-20 curve ">
             <div class="col py-20 justify-center space-between gap-20">
                 <div class="row align-center gap-10">
                     <Icon icon="fluent:payment-16-regular" width="22" />

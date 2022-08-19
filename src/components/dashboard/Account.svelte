@@ -1,6 +1,7 @@
 <script>
     import Icon from "@iconify/svelte";
     import Field from "comp/atoms/TextField.svelte";
+    import { mq } from "@/assets/library/MediaQuery.svelte";
 </script>
 
 <section class="grow col gap-20">
@@ -9,8 +10,8 @@
     <span>ACCOUNT</span>
 </h1>
 <div class="grow col shade3 curve">
-    <div class="row  w100 pa-20 space-between  shade3">
-        <div class="row center gap-20">
+    <div class="w100 pa-20 gap-20 space-between shade3 col" class:row={$mq.sm_}>
+        <div class="row align-center gap-20">
             <Icon icon="icon-park-outline:edit-name" width="30" />
             <div class="col gap-10">
                 <span> Full Name</span>
@@ -22,8 +23,8 @@
         </div>
     </div>
     <hr />
-    <div class="row  w100 pa-20 space-between  shade3">
-        <div class="row center gap-20">
+    <div class="w100 pa-20 gap-20 space-between shade3 col" class:row={$mq.sm_}>
+        <div class="row align-center gap-20">
             <Icon icon="ic:baseline-alternate-email" width="30" />
             <div class="col gap-10">
                 <span>Email</span>
@@ -35,8 +36,8 @@
         </div>
     </div>
     <hr />
-    <div class="row  w100 pa-20 space-between  shade3">
-        <div class="row center gap-20">
+    <div class="gap-20 col w100 pa-20 space-between shade3" class:row={$mq.sm_}>
+        <div class="row align-center gap-20">
             <Icon icon="fluent:view-desktop-mobile-20-regular" width="30" />
             <div class="col gap-10">
                 <span>Mobile Number</span>
@@ -48,8 +49,8 @@
         </div>
     </div>
     <hr />
-    <div class="row  w100 pa-20 space-between  shade3">
-        <div class="row center gap-20">
+    <div class="gap-20 col w100 pa-20 space-between shade3" class:row={$mq.sm_}>
+        <div class="row align-center gap-20">
             <Icon icon="fluent:lock-closed-12-regular" width="30" />
             <div class="col gap-10">
                 <span>Current Password</span>
@@ -61,8 +62,8 @@
         </div>
     </div>
     <hr />
-    <div class="row  w100 pa-20 space-between  shade3">
-        <div class="row center gap-20">
+    <div class="gap-20 col w100 pa-20 space-between shade3" class:row={$mq.sm_}>
+        <div class="row align-center gap-20">
             <Icon icon="fluent:password-16-regular" width="30" />
             <div class="col gap-10">
                 <span>New Password</span>

@@ -44,4 +44,8 @@
     .absolute {
         top: 50px;
     }
+
+    .w-200{
+        min-width: 200px;
+    }
 </style>

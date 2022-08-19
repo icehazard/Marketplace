@@ -159,6 +159,10 @@
         top: 50px;
     }
 
+	.w-200{
+        min-width: 200px;
+    }
+
 	@media only screen and (max-width: 1200px) {
 		.mobile-w100 {
 			flex-grow: 1;
