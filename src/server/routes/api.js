@@ -453,7 +453,7 @@ api.post('/multishop', async (req, res) => {
         return res.status(400).json({status: "error", error: `Shops field should be an array!`})
     }
 
-    let payload = {};
+    let payload = [];
 
     for (let shopId of shops) {
         if (!shopHandler.Shops.has(shopId))
@@ -462,7 +462,8 @@ api.post('/multishop', async (req, res) => {
                 error: `One of the shop ids is invalid! Check provided list!`
             })
 
-        payload[shopId] = shopHandler.Shops.get(shopId).getProductList();
+        let shop = shopHandler.Shops.get(shopId);
+        payload.push({shopId, shopName: shop.shopName, products: shop.getProductList()})
     }
 
     return res.status(200).json(payload);
