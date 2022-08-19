@@ -4,10 +4,11 @@
     const dispatch = createEventDispatcher();
 
     export let text = "";
-    export let disable = false;
-    export let type = "button";
     export let block = false;
+    export let type = "button";
+    export let disable = false;
     export let pending = false;
+    export let primary = false;
 
     let connect = () => {
         dispatch("click");
@@ -15,7 +16,8 @@
 </script>
 
 <button
-    class="curve center shine borderStrong  py-10 px-40 text-center nowrap primary"
+    class="curve center shine borderStrong  py-10 px-40 text-center nowrap"
+    class:primary
     class:disable
     disabled={disable}
     class:hack={block}
@@ -46,5 +48,8 @@
         width: calc(100% - 20px);
     }
 
-    
+    .primary:hover {
+        background-color: var(--primary);
+        filter: brightness(1.15);
+    }
 </style>

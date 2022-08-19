@@ -27,7 +27,7 @@
                 <Field bind:value={field} label="Enter URL" />
             </div>
             <div class="actions row shade2 pa-25 gap-10">
-                <Button block text="SAVE" on:click={save}></Button>
+                <Button primary block text="SAVE" on:click={save}></Button>
                 <Button block text="CLOSE" on:click={closeModal}></Button>
             </div>
         </div>

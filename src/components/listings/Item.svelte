@@ -6,6 +6,8 @@
     import { slide } from "svelte/transition";
     import { clickOutside } from "@/assets/library/CommonFunctions.js";
     import { formatCurrency } from "@/assets/library/CommonFunctions.js";
+    import { isOwnShop } from "@/store/shops.js";
+    import user from "@/store/user";
     export let data = [];
 
     let menu = false;
@@ -26,7 +28,6 @@
     }
     function edit() {
         $products.product = data;
-        // products.spreadProduct();
         push(`#/store/listing/edit/${data._id}`);
         close();
     }
@@ -69,9 +70,11 @@
     <section class="col pa-15  space-between h100 w100">
         <div class="row w100 space-between">
             <span class="ellipsis text-start">{data.name || ""}</span>
+            {#if data.shopID == user.shopID()}
             <button class="pa-5 shine round center" on:click|stopPropagation={() => toggle()}>
                 <Icon icon="fluent:more-vertical-16-regular" />
             </button>
+            {/if}
         </div>
         <span class="weight-600 text-start">{formatCurrency(data.price) || ""}</span>
         <div class="row space-between gap-10 opacity-60">

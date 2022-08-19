@@ -39,17 +39,6 @@ context.del = async function (id) {
     await context.get();
     return
 }
-context.spreadProduct = async function () {
-    let prod = context.val('product')
-    context.commit('name', prod.name)
-    context.commit('imageURL', prod.imageURL), //delete me
-    context.commit('price', prod.price)
-    context.commit('qty', prod.qty)
-    context.commit('desc', prod.desc)
-    context.commit('_id', prod._id)
-    context.commit('shopID', prod.shopID)
-    context.commit('photos', prod.photos)
-}
 
 export const isOwnProduct = derived(context, () => {
     let ownShops = (user.val('me'));

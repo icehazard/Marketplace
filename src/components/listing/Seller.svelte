@@ -25,7 +25,7 @@
             modules={[Pagination]}
 
         >
-        {#each $products.products as product}
+        {#each $products.productsAll as product}
         <SwiperSlide>
             <Item data={product} />
         </SwiperSlide>

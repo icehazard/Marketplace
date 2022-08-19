@@ -50,7 +50,7 @@
                 </div>
             </div>
             <div class="actions row shade2 pa-25 gap-10">
-                <Button block text="SAVE" on:click={save} />
+                <Button primary block text="SAVE" on:click={save} />
                 <Button block text="CLOSE" on:click={closeModal} />
             </div>
         </div>
