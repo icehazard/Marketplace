@@ -38,6 +38,9 @@
 		let url = `#/shops/id/${user.shopID()}`
 		$isShopActive ? push(url) : push("#/store/create");
 	}
+	function toggleDrawer(){
+		$user.drawer = !$user.drawer
+	}
 </script>
 
 <div class="pb-60">
@@ -118,7 +121,9 @@
 					</div>
 				{/if}
 				{#if $mq._md}
-					<Circle tooltip="Profile" to="account" icon="eva:menu-fill" />
+					<button on:click={toggleDrawer}>
+						<Circle tooltip="menu"  icon="eva:menu-fill" />
+					</button>
 				{/if}
 			</section>
 		</div>

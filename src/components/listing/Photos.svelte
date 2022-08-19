@@ -78,7 +78,7 @@
     />
     {#if $isOwnProduct}
         <button class="absolute p-top p-right pa-10 red--text " on:click={del}>
-            <Icon icon="fluent:delete-12-regular" width="30" />
+            <Icon icon="fluent:delete-12-regular" width="20" />
         </button>
     {/if}
 

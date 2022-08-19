@@ -3,6 +3,7 @@
 	import Footer from "./components/toolbars/Footer.svelte";
 	import Navbar from "comp/toolbars/navbar/Navbar.svelte";
 	import Mobile from "comp/toolbars/Mobile.svelte";
+	import Drawer from 'comp/toolbars/drawer/Drawer.svelte'
 	import Router from "svelte-spa-router";
 	import routes from "./router/index";
 	import { fade } from "svelte/transition";
@@ -30,6 +31,7 @@
 	<MediaQuery />
 	<Mobile />
 	<Footer />
+	<Drawer />
 	<Modals>
 		<div
 			transition:fade={{ duration: 100 }}

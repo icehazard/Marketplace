@@ -11,7 +11,8 @@ const data = {
     address: '',
     addresses: [],
     balances: {},
-    me: []
+    me: [],
+    drawer: false
 }
 
 const context = persist('user', data)
