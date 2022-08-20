@@ -15,7 +15,7 @@
     }
 </script>
 
-<div class="shade1 pa-50 curve col gap-20">
+<div class="shade1 pa-30 curve col gap-20">
  
     {#if $isOwnShop}
     <button
