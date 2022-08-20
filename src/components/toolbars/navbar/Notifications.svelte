@@ -4,7 +4,7 @@
 
 <div class="col absolute shade1 w-400 shadow border curve" transition:fade={{ duration: 100 }}>
     <div class="row pa-20 center shade3">Notifications</div>
-    <button class="row pa-20 gap-20 align-center">
+    <button class="row pa-20 gap-20 align-center shine">
         <div class="round shade4 w-50 h-50" />
         <div class="col gap-10 grow ">
             <span>Trade alert</span>
@@ -15,7 +15,7 @@
         </div>
     </button>
     <hr />
-    <button class="row pa-20 gap-20 align-center">
+    <button class="row pa-20 gap-20 align-center shine">
         <div class="round shade4 w-50 h-50" />
         <div class="col gap-10 grow">
             <span>Trade alert</span>
@@ -26,7 +26,7 @@
         </div>
     </button>
     <hr />
-    <button class="row pa-20 gap-20 align-center">
+    <button class="row pa-20 gap-20 align-center shine">
         <div class="round shade4 w-50 h-50" />
         <div class="col gap-10 grow">
             <span>Trade alert</span>
@@ -36,7 +36,7 @@
 </div>
 
 <style>
-    .w-400{
+    .w-400 {
         min-width: 400px;
     }
 </style>

@@ -34,9 +34,10 @@ context.getAllProducts = async function () {
     return context.commit('productsAll', res)
 }
 context.del = async function (id) {
-    const sid = context.val('product')._id;
-    await del(`api/shop/${sid}/product/${id}`);
+    const sid = user.shopID();
+    let res = await del(`api/shop/${sid}/product/${id}`);
     await context.get();
+    await context.getAllProducts()
     return
 }
 
