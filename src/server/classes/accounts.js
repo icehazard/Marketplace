@@ -326,6 +326,10 @@ class Account {
         )
     }
 
+    hasDeliveryAddress(adr) {
+        return this.deliveryAddresses.findIndex(i => i.address === adr) !== -1;
+    }
+
 }
 
 let accs = new Accounts()

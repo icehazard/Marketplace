@@ -23,6 +23,7 @@ const Avatar = require('../classes/upload');
 const multer  = require('multer')
 const upload = multer({ dest: 'images/' })
 const {auth} = require("./auth")
+const orderHandler = require("../classes/orders");
 
 api.post('/', async (req, res) => {
     const authed = await auth(req.headers)
@@ -198,6 +199,45 @@ api.get('/:sid/product', async (req, res) => {
         return res.status(200).json(list)
 
     return res.status(200).json(list)
+})
+
+api.post('/:sid/order', async (req, res) => {
+    const authed = await auth(req.headers)
+
+    if (!authed) {
+        return res.status(401).end();
+    }
+    const accId = authed._id;
+    let acc =  accountHandler.Accounts.get(accId)
+    const sid = req.params.sid
+
+    if (!shopHandler.Shops.has(parseInt(sid)))
+        return res.status(400).json({status: "error", error: "That shop does not exist!"})
+
+    if (await acc.ownsShopID(sid))
+        return res.status(400).json({status: "error", error: "You cannot make order to yourself."});
+
+
+    let {items, address, payment} = req.body;
+
+    if (!items.length)
+    {
+        return res.status(400).json({status: "error", error: "You must provide items! Currently empty."});
+    }
+
+    if (!acc.hasDeliveryAddress(address))
+        return res.status(400).json({status: "error", error: "You did not create this delivery address! Try again."});
+
+    if (payment !== "BANK" && payment !== "CRYPTO")
+        return res.status(400).json({status: "error", error: "Invalid payment type! Must be either CRYPTO or BANK"});
+
+
+
+    let add = orderHandler.Orders.insert(trade)
+
+    if (add.status === "error")
+        return res.status(400).json(res);
+
 })
 
 module.exports = api

@@ -54,6 +54,7 @@ context.get = async function () {
     context.commit('me', res.shops)
     context.commit('address', res.recentAddresses?.BTCt?._id)
     context.commit('balances', res.balances)
+    context.commit('shipping', res.shipping)
     context.commit('addresses', res.deliveryAddresses)
 }
 context.shopID = function () {

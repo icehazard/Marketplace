@@ -176,6 +176,8 @@ class Shop {
             this.bankName = data.bankName;
         if (data.BankAccountNumber)
             this.BankAccountNumber = data.BankAccountNumber;
+        if (data.shipping)
+            this.shipping = data.shipping;
 
         this.saveToDB();
         return true;
@@ -198,7 +200,7 @@ class Shop {
             $set: {
                 shopName: this.shopName, address: this.address,
                 nameBankAccount: this.nameBankAccount, bankName: this.bankName, BankAccountNumber: this.BankAccountNumber,
-                cover: this.cover, profile: this.profile, description: this.description
+                cover: this.cover, profile: this.profile, description: this.description, shipping: this.shipping
             }
         })
     }
