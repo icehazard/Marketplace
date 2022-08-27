@@ -26,7 +26,9 @@
         if (op2)  $shops.shipping.minFree = null
         if (op3)  $shops.shipping.minSpend = null
         closeModal();
+        console.log({ shipping: $shops.shipping })
         shops.patch({ shipping: $shops.shipping });
+        user.patch({ shipping: $shops.shipping });
     }
 </script>
 
