@@ -50,7 +50,7 @@
             <Icon icon="fluent:chevron-right-16-regular" width="16" />
         </a>
         <hr />
-        <a
+        <!-- <a
             href="#/store/settings"
             class="row px-20 py-20 align-center space-between w100 shine"
             on:click={closeDrawer}
@@ -61,7 +61,7 @@
             </div>
             <Icon icon="fluent:chevron-right-16-regular" width="16" />
         </a>
-        <hr />
+        <hr /> -->
         <a
             href="#/wallet/overview"
             class="row px-20 py-20 align-center space-between w100 shine"

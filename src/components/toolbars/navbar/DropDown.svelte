@@ -25,10 +25,10 @@
         Orders
     </a>
     <hr />
-    <a on:click={close} href="#/store/settings" class="menuItem w100 center py-10 curve shine">
+    <!-- <a on:click={close} href="#/store/settings" class="menuItem w100 center py-10 curve shine">
         Shop
     </a>
-    <hr />
+    <hr /> -->
     <a on:click={close} href="#/wallet/overview" class="menuItem w100 center py-10 curve shine">
         Wallet
     </a>
