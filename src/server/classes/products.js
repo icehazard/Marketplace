@@ -59,12 +59,14 @@ class Product {
         this.price = data.price;
         this.qty = data.qty;
         this.photos = data.photos || {};
+        this.status = 0;
     }
 
     async saveToDB() {
         //dont need await
         dbhandler.cols.list.colProducts.updateOne({_id: this._id}, {$set: {name: this.name, desc: this.desc,
-                imageURL: this.imageURL, shopID: this.shopID, price: this.price, qty: this.qty, photos: this.photos}}, {upsert: true})
+                imageURL: this.imageURL, shopID: this.shopID, price: this.price, qty: this.qty, photos: this.photos,
+                status: this.status}}, {upsert: true})
     }
 
     async deleteFromDB() {
@@ -111,6 +113,8 @@ class Product {
             pobj.price = payload.price
         if (payload.qty)
             pobj.qty = payload.qty
+        if (payload.status)
+            pobj.status = payload.status
 
         pobj.saveToDB()
         return {status: "ok"}
