@@ -153,7 +153,7 @@ class Shop {
         productHandler.Products.insert(pobj)
         this.products.set(nid, pobj)
         pobj.saveToDB()
-        return { status: "ok" }
+        return { status: "ok", nid }
     }
 
     editShop(data) {
