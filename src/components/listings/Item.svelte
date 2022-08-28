@@ -78,7 +78,7 @@
             </button>
             {/if}
         </div>
-        <span class="weight-600 text-start">{formatCurrency(data.price) || ""}</span>
+        <span class="weight-600 text-start">{data.price ? formatCurrency(data.price) : formatCurrency(0.00)}</span>
         <div class="row space-between gap-10 opacity-60">
             <div class="row center gap-5 nowrap grow justify-start">
                 <Rating rating={Math.random() * 5} />
