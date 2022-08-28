@@ -31,12 +31,14 @@
         <div class="col grow gap-30">
             <Photos />
             {#if $mq.xxl_}
+                <Edit />
                 <Description />
             {/if}
         </div>
         <div class="col grow gap-30">
             <Title />
             {#if $mq._xl}
+                <Edit />
                 <Description />
             {/if}
             <Price />

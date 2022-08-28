@@ -1,21 +1,18 @@
 <script>
-    import { push } from "svelte-spa-router";
     import products from "@/store/products.js";
-    import Icon from "@iconify/svelte";
-    import { isShopPending, isShopActive } from "@/store/user.js";
     import { isOwnShop } from "@/store/shops.js";
+    import Toggle from "comp/atoms/Toggle.svelte";
+
+    let toggler = $products?.product?.status;
 
     function handleClick() {
-        // products.spreadProduct();
-        push(`#/store/listing/edit/${$products.product._id}`);
+        products.edit({ status: toggler });
     }
 </script>
 
 {#if $isOwnShop}
-    <button on:click={handleClick} class="shade1 pa-30 curve col gap-50 center shine font-20 z-2">
-        <div class="center gap-10">
-            <Icon icon="fluent:edit-24-regular" />
-           <span> Edit listing</span>
-        </div>
-    </button>
+    <div class="shade1 pa-30 curve row gap-50 space-between align-center z-2">
+        <Toggle bind:toggle={toggler} on:toggle={handleClick} />
+        <span>Product is {toggler ? "active" : "inactive"}</span>
+    </div>
 {/if}
