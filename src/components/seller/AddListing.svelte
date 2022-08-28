@@ -1,6 +1,6 @@
 <script>
     import { push } from "svelte-spa-router";
-    import shops, {isOwnShop} from "@/store/shops";
+    import shops, { isOwnShop } from "@/store/shops";
     import products from "@/store/products.js";
     import "@lottiefiles/lottie-player";
     import Item from "comp/listings/Item.svelte";
@@ -9,9 +9,17 @@
     let show = false;
 
     async function AddListing() {
-        products.reset();
-        await products.post()
-        let res = await products.getAllProducts()
+
+        $products.product = {
+            desc: "",
+            name: "",
+            photos: {},
+            price: "",
+            qty: "",
+            shopName: "",
+        };
+        await products.post();
+        let res = await products.getAllProducts();
         push(`#/listing/${res.nid}`);
     }
     function toggleShow() {
