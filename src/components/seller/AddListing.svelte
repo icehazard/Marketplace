@@ -8,8 +8,11 @@
     let json = "https://assets6.lottiefiles.com/packages/lf20_wpfsuumq.json";
     let show = false;
 
-    function AddListing() {
-        push("#/store/add");
+    async function AddListing() {
+        products.reset();
+        await products.post()
+        let res = await products.getAllProducts()
+        push(`#/listing/${res.nid}`);
     }
     function toggleShow() {
         show = !show;

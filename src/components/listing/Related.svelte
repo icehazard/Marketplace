@@ -24,11 +24,13 @@
             }}
             modules={[Pagination]}
         >
-            {#each $shops.products as product}
-                <SwiperSlide>
-                    <Item data={product} />
-                </SwiperSlide>
-            {/each}
+            {#if $shops.products > 0}
+                {#each $shops.products as product}
+                    <SwiperSlide>
+                        <Item data={product} />
+                    </SwiperSlide>
+                {/each}
+            {/if}
         </Swiper>
     </div>
 </div>

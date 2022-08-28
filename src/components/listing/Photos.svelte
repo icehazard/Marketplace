@@ -18,7 +18,16 @@
     let maxPics = 5;
     let newval = false;
 
-    $: currentImg = Object.values($products?.product?.photos).slice(0, maxPics);
+    $: currentImg = current();
+
+    function current() {
+        try {
+            return Object.values($products?.product?.photos).slice(0, maxPics);
+        } catch {
+            return [];
+        }
+    }
+
     function openPicker(idx, val) {
         newval = val;
         if (!$isOwnProduct) return;
@@ -42,9 +51,9 @@
             }
             highest = Number(highest) + 1;
             let idx = newval ? highest : Object.keys($products.productsAll[id].photos)[index];
-            console.log("🚀 ~ idx", idx)
+            console.log("🚀 ~ idx", idx);
             await shops.postProductImage(formData, idx);
-             await products.getAllProducts();
+            await products.getAllProducts();
             $products.product = $products.productsAll[id];
             this.load = false;
             picker.files = new DataTransfer().files;
@@ -75,7 +84,9 @@
         class="main h-300 w-300 w100"
         on:click={() => openPicker(index, false)}
     />
-    <span class="absolute shade2 shadow curve font-14 w-50 h-30 ma-10 center w100 p-top p-left nopointer nowrap">
+    <span
+        class="absolute shade2 shadow curve font-14 w-50 h-30 ma-10 center w100 p-top p-left nopointer nowrap"
+    >
         {index + 1} / {currentImg.length}
     </span>
     {#if $isOwnProduct}
@@ -153,7 +164,7 @@
         overflow: hidden;
     }
 
-    .w-150{
+    .w-150 {
         min-width: 150px;
     }
 </style>

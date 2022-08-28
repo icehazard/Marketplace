@@ -1,7 +1,7 @@
 <script>
     import Categories from "comp/toolbars/categories/Categories.svelte";
     import Edit from "comp/listing/Edit.svelte";
-    import products from '@/store/products'
+    import products from "@/store/products";
     import Title from "comp/listing/Title.svelte";
     import Description from "comp/listing/Description.svelte";
     import Photos from "comp/listing/Photos.svelte";
@@ -13,15 +13,15 @@
     import user from "@/store/user.js";
     import { mq } from "@/assets/library/MediaQuery.svelte";
     import { onMount } from "svelte";
-    import {  location } from "svelte-spa-router";
+    import { location } from "svelte-spa-router";
 
-    let loc = $location.split('/')
-    loc = loc[loc.length - 1]
+    let loc = $location.split("/");
+    loc = loc[loc.length - 1];
 
     onMount(async () => {
         user.get();
-        await products.getProduct(loc);
-        await shops.get($products.product.shopID);
+        products.getProduct(loc);
+        shops.get($products.product.shopID);
     });
 </script>
 

@@ -38,7 +38,8 @@ context.getAllProducts = async function () {
     let shops = await get(`api/shops`)
     let res = await post(`api/multishop`, shops)
     res = Object.values(res).flat();
-    return context.commit('productsAll', res)
+    context.commit('productsAll', res)
+    return res
 }
 context.del = async function (id) {
     const sid = user.shopID();
