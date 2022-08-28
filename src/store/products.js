@@ -27,6 +27,13 @@ context.get = async function () {
     res = hasError(res, data.products)
     return context.commit('products', res)
 }
+context.getProduct = async function (id) {
+    if (!id) return;
+    let res = await get(`api/product/${id}`)
+    console.log("🚀 ~ res", res)
+    res = hasError(res, data.product)
+    return context.commit('product', res)
+}
 context.getAllProducts = async function () {
     let shops = await get(`api/shops`)
     let res = await post(`api/multishop`, shops)

@@ -13,10 +13,14 @@
     import user from "@/store/user.js";
     import { mq } from "@/assets/library/MediaQuery.svelte";
     import { onMount } from "svelte";
+    import {  location } from "svelte-spa-router";
+
+    let loc = $location.split('/')
+    loc = loc[loc.length - 1]
 
     onMount(async () => {
         user.get();
-        //await products.get();
+        await products.getProduct(loc);
         await shops.get($products.product.shopID);
     });
 </script>
