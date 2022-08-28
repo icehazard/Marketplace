@@ -155,4 +155,29 @@ api.patch('/:pid', async (req, res) => {
     return res.status(200).json(edit)
 })
 
+api.get('/:pid', async (req, res) => {
+    const authed = await auth(req.headers)
+
+    if (!authed) {
+        return res.status(401).end();
+    }
+
+    const accId = authed._id;
+    const pid = parseInt(req.params.pid)
+
+    if (!productHandler.Products.has(pid))
+        return res.status(400).json({status: "error", error: "This product doesn't exist!"})
+
+    let p = productHandler.Products.get(pid)
+    let sid = p.shopID
+
+    if (!shopHandler.Shops.has(parseInt(sid)))
+        return res.status(400).json({status: "error", error: "That shop does not exist!"})
+
+    if (!await accountHandler.Accounts.get(accId).ownsShopID(sid))
+        return res.status(400).json({status: "error", error: "You do not own this shop!"})
+
+    return res.status(200).json(p)
+})
+
 module.exports = api

@@ -34,6 +34,7 @@ context.get = async function (id) {
     context.commit('coverPic', res.cover)
     context.commit('desc', res.description)
     context.commit('shipping', res.shipping)
+    console.log(res)
     if (res.length == 0) push('#/')
     return res
 }
