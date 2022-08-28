@@ -59,12 +59,14 @@
                 </button>
             </div>
         {/if}
-        <img
-            src={`http://localhost:8080/api/image/` + Object.values(data.photos).slice(0, 1)}
-            alt="logo"
-            class="h100"
-            class:darken={menu}
-        />
+        {#if Object.keys(data.photos).length}
+            <img
+                src={`http://localhost:8080/api/image/` + Object.values(data.photos).slice(0, 1)}
+                alt="logo"
+                class="h100"
+                class:darken={menu}
+            />
+        {/if}
     </section>
     <hr class="hr w100" />
     <section class="col pa-15  space-between h100 w100">
