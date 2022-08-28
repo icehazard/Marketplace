@@ -59,12 +59,14 @@
                 </button>
             </div>
         {/if}
-        <img
-            src={`http://localhost:8080/api/image/` + Object.values(data.photos).slice(0, 1)}
-            alt="logo"
-            class="h100"
-            class:darken={menu}
-        />
+        {#if Object.keys(data.photos).length}
+            <img
+                src={`http://localhost:8080/api/image/` + Object.values(data.photos).slice(0, 1)}
+                alt="logo"
+                class="h100"
+                class:darken={menu}
+            />
+        {/if}
     </section>
     <hr class="hr w100" />
     <section class="col pa-15  space-between h100 w100">
@@ -76,7 +78,7 @@
             </button>
             {/if}
         </div>
-        <span class="weight-600 text-start">{formatCurrency(data.price) || ""}</span>
+        <span class="weight-600 text-start">{data.price ? formatCurrency(data.price) : formatCurrency(0.00)}</span>
         <div class="row space-between gap-10 opacity-60">
             <div class="row center gap-5 nowrap grow justify-start">
                 <Rating rating={Math.random() * 5} />

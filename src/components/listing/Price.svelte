@@ -37,7 +37,7 @@
     </div>
 {/if}
     <div class="row space-between align-center">
-        <div class="font-26">{formatCurrency($products?.product?.price) || ""}</div>
+        <div class="font-26">{formatCurrency($products.product.price ? $products.product.price : 0.00)}</div>
 
         {#if !$isOwnShop}
             <Button primary on:click={handleClick} text="ADD TO CART" />

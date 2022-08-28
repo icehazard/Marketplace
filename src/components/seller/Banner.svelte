@@ -53,7 +53,7 @@
                 >
                     <Icon icon="carbon:delivery-truck" width="18" />
                     <span> Shipping fee:</span>
-                    <span class="weight-600"> {formatCurrency($shops.shipping?.regular)}</span>
+                    <span class="weight-600"> {$shops.shipping ? formatCurrency($shops.shipping.regular) : "click to set"}</span>
                 </button>
             {/if}
         </h1>
