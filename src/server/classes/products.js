@@ -54,7 +54,6 @@ class Product {
         this._id = _id;
         this.name = data.name;
         this.desc = data.desc;
-        this.imageURL = data.imageURL;
         this.shopID = data.shopID;
         this.price = data.price;
         this.qty = data.qty;
@@ -65,7 +64,7 @@ class Product {
     async saveToDB() {
         //dont need await
         dbhandler.cols.list.colProducts.updateOne({_id: this._id}, {$set: {name: this.name, desc: this.desc,
-                imageURL: this.imageURL, shopID: this.shopID, price: this.price, qty: this.qty, photos: this.photos,
+             shopID: this.shopID, price: this.price, qty: this.qty, photos: this.photos,
                 status: this.status}}, {upsert: true})
     }
 
@@ -105,8 +104,6 @@ class Product {
         //check if owns that product
         if (payload.desc)
             pobj.desc = payload.desc
-        if (payload.imageURL)
-            pobj.imageURL = payload.imageURL
         if (payload.name)
             pobj.name = payload.name
         if (payload.price)

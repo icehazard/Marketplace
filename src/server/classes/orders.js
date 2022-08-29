@@ -117,8 +117,6 @@ class Order {
         //check if owns that product
         if (payload.desc)
             pobj.desc = payload.desc
-        if (payload.imageURL)
-            pobj.imageURL = payload.imageURL
         if (payload.name)
             pobj.name = payload.name
         if (payload.price)

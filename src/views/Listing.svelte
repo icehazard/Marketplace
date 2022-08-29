@@ -19,9 +19,9 @@
     loc = loc[loc.length - 1];
 
     onMount(async () => {
-        user.get();
-        products.getProduct(loc);
+        await products.getProduct(loc);
         shops.get($products.product.shopID);
+        user.get();
     });
 </script>
 

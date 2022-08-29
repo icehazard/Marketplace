@@ -30,7 +30,6 @@ context.get = async function () {
 context.getProduct = async function (id) {
     if (!id) return;
     let res = await get(`api/product/${id}`)
-    console.log("🚀 ~ res", res)
     res = hasError(res, data.product)
     return context.commit('product', res)
 }

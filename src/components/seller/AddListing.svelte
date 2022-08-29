@@ -9,7 +9,6 @@
     let show = false;
 
     async function AddListing() {
-
         $products.product = {
             desc: "",
             name: "",
@@ -18,10 +17,11 @@
             qty: "",
             shopName: "",
         };
-        await products.post();
-        let res = await products.getAllProducts();
+        let res = await products.post();
+        await products.getAllProducts();
         push(`#/listing/${res.nid}`);
     }
+
     function toggleShow() {
         show = !show;
     }
