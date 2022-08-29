@@ -8,6 +8,7 @@
     import { formatCurrency } from "@/assets/library/CommonFunctions.js";
     import { isOwnShop } from "@/store/shops.js";
     import user from "@/store/user";
+import { isFiniteNumber } from "tls";
     export let data = [];
 
     let menu = false;
@@ -59,13 +60,17 @@
                 </button>
             </div>
         {/if}
-        {#if Object.keys(data.photos).length}
-            <img
-                src={`http://localhost:8080/api/image/` + Object.values(data.photos).slice(0, 1)}
-                alt="logo"
-                class="h100"
-                class:darken={menu}
-            />
+    
+
+        {#if  Object.keys(data.photos).length}
+        <img
+        src={`http://localhost:8080/api/image/` + Object.values(data.photos).slice(0, 1)}
+        alt="logo"
+        class="h100"
+        class:darken={menu}
+    />
+        {:else}
+        <span>No Image</span>
         {/if}
     </section>
     <hr class="hr w100" />

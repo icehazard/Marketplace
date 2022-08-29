@@ -10,30 +10,27 @@
     import "@/assets/css/swiper.css";
 </script>
 
-<div class="shade1 pa-30 curve col gap-20 ">
-    <div class="opacity-75 row align-center gap-10">
-        <Icon icon="ant-design:shop-filled" />
-        <div>More from Seller</div>
-    </div>
-    <div class="row gap-10 ">
-        <Swiper
-            slidesPerView={"auto"}
-            spaceBetween={10}
-            pagination={{
-                clickable: true,
-            }}
-            modules={[Pagination]}
-        >
-            {#if $shops.products > 0}
+{#if $shops.products > 0}
+    <div class="shade1 pa-30 curve col gap-20 ">
+        <div class="opacity-75 row align-center gap-10">
+            <Icon icon="ant-design:shop-filled" />
+            <div>More from Seller</div>
+        </div>
+        <div class="row gap-10 ">
+            <Swiper
+                slidesPerView={"auto"}
+                spaceBetween={10}
+                pagination={{
+                    clickable: true,
+                }}
+                modules={[Pagination]}
+            >
                 {#each $shops.products as product}
                     <SwiperSlide>
                         <Item data={product} />
                     </SwiperSlide>
                 {/each}
-            {/if}
-        </Swiper>
+            </Swiper>
+        </div>
     </div>
-</div>
-
-<style>
-</style>
+{/if}
