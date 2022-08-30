@@ -34,7 +34,8 @@ import { isFiniteNumber } from "tls";
     }
 </script>
 
-<button class=" h-300 curve col shade1 fast main" on:click={viewListing}>
+<button class=" h-300 curve col shade1 fast main" class:opacity-60="{data.status ? false : true}" on:click={viewListing}>
+
     <section class="h-180 center w100 relative overflow-hidden curve-top">
         {#if menu}
             <div
@@ -60,7 +61,8 @@ import { isFiniteNumber } from "tls";
                 </button>
             </div>
         {/if}
-    
+
+
 
         {#if  Object.keys(data.photos).length}
         <img
@@ -92,8 +94,13 @@ import { isFiniteNumber } from "tls";
             <div class=" grow justify-end ellipsis">
                 <span class="ellipsis ">{data.shopName || ""}</span>
             </div>
+            {#if !data.status}
+                <div class="pa-5 red--text opacity-100">DISABLED</div>
+            {/if}
         </div>
+
     </section>
+
 </button>
 
 <style>

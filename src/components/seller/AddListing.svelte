@@ -39,7 +39,7 @@
         {/if}
         {#each Array(4) as _, i}
             {#if $products.products[i]}
-                <Item data={$products.products[i]} />
+                <Item data={$products.products[i]}/>
             {:else}
                 <button class="w100 shade1 center shine" on:click={AddListing}>
                     <span class="opacity-75 font-14">No Product</span>
