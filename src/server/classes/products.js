@@ -58,7 +58,8 @@ class Product {
         this.price = data.price;
         this.qty = data.qty;
         this.photos = data.photos || {};
-        this.status = 0;
+        this.status = data.status || 0;
+        console.log("Status ", this.status)
     }
 
     async saveToDB() {
