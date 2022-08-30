@@ -15,10 +15,10 @@ context.post = async function () {
     const prod = context.val('product');
     return await post(`api/shop/${id}/product`, prod)
 }
-context.edit = async function () {
+context.edit = async function (payload) {
     const id = context.val('product')._id;
     const prod = context.val('product');
-    return await patch(`api/product/${id}`, prod)
+    return await patch(`api/product/${id}`, {...prod, ...payload})
 }
 context.get = async function () {
     const id = user.shopID();

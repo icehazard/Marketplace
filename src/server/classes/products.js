@@ -102,15 +102,15 @@ class Product {
         //     return {status: "error", error: "You do not have permission to edit this product!"}
 
         //check if owns that product
-        if (payload.desc)
+        if (payload.hasOwnProperty("desc"))
             pobj.desc = payload.desc
-        if (payload.name)
+        if (payload.hasOwnProperty("name"))
             pobj.name = payload.name
-        if (payload.price)
+        if (payload.hasOwnProperty("price"))
             pobj.price = payload.price
-        if (payload.qty)
+        if (payload.hasOwnProperty("qty"))
             pobj.qty = payload.qty
-        if (payload.status)
+        if (payload.hasOwnProperty("status"))
             pobj.status = payload.status
 
         pobj.saveToDB()
