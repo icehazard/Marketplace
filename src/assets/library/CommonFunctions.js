@@ -176,3 +176,7 @@ export function hasError(data, initVal) {
     initVal = initVal ? initVal : [];
     return error ? initVal : data;
 }
+
+export function hasErrorNonRetarded(data, initVal) {
+    return data.status == 'error';
+}

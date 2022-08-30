@@ -1,6 +1,7 @@
 import { persist, post, get, del, patch, hasError } from '@/assets/library/CommonFunctions.js'
 import user from '@/store/user.js'
 import { derived } from "svelte/store";
+import {hasErrorNonRetarded} from "../assets/library/CommonFunctions";
 
 const data = {
     products: [],
@@ -18,7 +19,11 @@ context.post = async function () {
 context.edit = async function (payload) {
     const id = context.val('product')._id;
     const prod = context.val('product');
-    return await patch(`api/product/${id}`, {...prod, ...payload})
+    let res = await patch(`api/product/${id}`, {...prod, ...payload});
+    let error = hasErrorNonRetarded(res)
+    if (!error)
+        context.commit('product', {...prod, ...payload})
+    return error;
 }
 context.get = async function () {
     const id = user.shopID();
