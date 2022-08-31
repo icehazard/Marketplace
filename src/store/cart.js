@@ -25,8 +25,14 @@ context.syncCartFromServer = async function () {
     let res = await post(`api/multiproduct`, { products })
     res = Object.values(res).flat();
     res.forEach((el, idx) => el.qtyCart = cartVal[idx].qtyCart)
+    context.checkValid(res)
     context.commit('cart', res)
     return res
+}
+context.checkValid = async function (items) {
+    let validate = items.map(validFunc)
+    validate = validate.includes(true)
+    //if (validate) errorFunc(items)
 }
 context.removeFromCart = async function (item) {
     let index = context.val('cart').findIndex((el) => Object.is(el, item));
@@ -65,3 +71,21 @@ export const sumQtyTotal = derived(context, () => {
 });
 
 export default context;
+
+function validFunc(el, idx){
+
+    let cartVal = context.val('cart')
+    let con1 = cartVal[idx].qtyCart > Number(el.qty)
+    let con2 = Number(cartVal[idx].price) !== Number(el.price)
+    if (con1 || con2) errorFunc(el, idx)
+    return con1 || con2
+}
+
+function errorFunc(el, idx){
+    let cartVal = context.val('cart')
+    let con1 = cartVal[idx].qtyCart > Number(el.qty)
+    if (con1) cartVal[idx].qtyCart = Number(el.qty)
+    context.commit('cart', cartVal)
+    console.log("ERROR")
+ 
+}
