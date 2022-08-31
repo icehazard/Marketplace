@@ -7,9 +7,9 @@
     import Description from "comp/modals/seller/Description.svelte";
     import Location from "comp/modals/seller/Location.svelte";
     import Shipping from "comp/modals/seller/Shipping.svelte";
+    import PaymentTypes from "comp/modals/seller/PaymentTypes.svelte";
     import { openModal } from "svelte-modals";
     import { formatCurrency } from "@/assets/library/CommonFunctions.js";
-
 </script>
 
 <div class="row gap-20 shade1 pa-20 curved center">
@@ -53,20 +53,43 @@
                 >
                     <Icon icon="carbon:delivery-truck" width="18" />
                     <span> Shipping fee:</span>
-                    <span class="weight-600"> {$shops.shipping ? formatCurrency($shops.shipping.regular) : "click to set"}</span>
+                    <span class="weight-600">
+                        {$shops.shipping
+                            ? formatCurrency($shops.shipping.regular)
+                            : "click to set"}</span
+                    >
                 </button>
             {/if}
         </h1>
-        <div class="row gap-20 align-center parent">
-            {#if $shops.desc}
-                <span> {$shops.desc}</span>
-            {:else}
-                <span class="font-14 opacity-75">No Description</span>
-            {/if}
+        <div class="row gap-20 align-center parent space-between">
+            <div class="align-center gap-20">
+                {#if $shops.desc}
+                    <span> {$shops.desc}</span>
+                {:else}
+                    <span class="font-14 opacity-75">No Description</span>
+                {/if}
+                {#if $isOwnShop}
+                    <button on:click={() => openModal(Description)} class="child slow">
+                        <Icon icon="fluent:edit-20-regular" width="20" />
+                    </button>
+                {/if}
+            </div>
             {#if $isOwnShop}
-                <button on:click={() => openModal(Description)} class="child slow">
-                    <Icon icon="fluent:edit-20-regular" width="20" />
+                <button
+                    on:click={() => openModal(PaymentTypes)}
+                    class="pa-10 shine curve"
+                    data-tooltip="Click to update shipping types"
+                >
+                    <div class="row gap-10">
+                        <div class="orange pa-5 curve">Cypto</div>
+                        <div class="blue pa-5 curve">Bank transfer</div>
+                    </div>
                 </button>
+            {:else}
+                <div class="row gap-10 pa-10">
+                    <div class="orange pa-5 curve">Cypto</div>
+                    <div class="blue pa-5 curve">Bank transfer</div>
+                </div>
             {/if}
         </div>
         <div class="weight-300 opacity-75 align-center gap-20 parent">

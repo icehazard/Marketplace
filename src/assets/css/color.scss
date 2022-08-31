@@ -1,6 +1,7 @@
 :root {
     --primary: #00B04E;
     --red : #F44336;
+    --orange: #EF9125;
     --shade0: #161616;
     --shade1: #1a1a1a;
     --shade2: #222222;
@@ -30,6 +31,7 @@ $white: #ffffff;
 $red : #F44336;
 $blue: #263850;
 $green: #66BB6A;
+$orange: #EF9125;
 
 $shade0: #161616;
 $shade1: #1a1a1a;
@@ -54,6 +56,10 @@ $primaryActive: #ef6698;
 
 .red {
     background-color: $red;
+}
+
+.orange {
+    background-color: $orange;
 }
 
 .blue {

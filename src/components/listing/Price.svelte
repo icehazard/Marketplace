@@ -24,10 +24,10 @@
         lifetime: 2,
     };
 
-    $: inStock = Number($products.product.qty) > 0
+    $: inStock = Number($products.product.qty) > 0;
 
     function handleClick(redirect) {
-        if (!inStock) return  acts.add(noStock)
+        if (!inStock) return acts.add(noStock);
         if ($cart.cart.length > 0) {
             let currentCartShop = $cart.cart[0].shopName;
             let newCartShop = $products.product.shopName;
@@ -73,32 +73,30 @@
             </button>
         </div>
     {:else}
-       <div class="row space-between">
-        <div class="opacity-75 row align-center gap-10">
-            <Icon icon="icomoon-free:price-tag" />
-            <div>Price</div>
+        <div class="row space-between">
+            <div class="opacity-75 row align-center gap-10">
+                <Icon icon="icomoon-free:price-tag" />
+                <div>Price</div>
+            </div>
+            <div class="center gap-10 opacity-75">
+                <Icon icon="ic:round-production-quantity-limits" />
+                <div>Stock</div>
+            </div>
         </div>
-        <div class="center gap-10 opacity-75">
-            <Icon icon="ic:round-production-quantity-limits" />
-            <div>Stock</div>
-        </div>
-       </div>
     {/if}
     <div class="row space-between align-center">
         <div class="font-26">
             {formatCurrency($products.product.price ? $products.product.price : 0.0)}
         </div>
-      
+
         {#if !inStock}
-        <div class="red--text">Out of stock</div>
+            <div class="red--text">Out of stock</div>
         {/if}
-      
-     
-            <div class="font-22">
-                {$products.product.qty || 0}
-               <span class="font-14 opacity-75">G</span>
-            </div>
-  
+
+        <div class="font-22">
+            {$products.product.qty || 0}
+            <span class="font-14 opacity-75">G</span>
+        </div>
     </div>
     {#if !$isOwnShop}
         <div class="row gap-20">
