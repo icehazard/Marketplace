@@ -103,6 +103,7 @@ export async function deleteImage(route, data) {
 
 
 export async function post(route, data) {
+    console.log("🚀 ~ dataStore", data)
     let url = `http://${WEBPACK_URL}/${route}`;
     let res = await fetch(url, {
         method: "POST",

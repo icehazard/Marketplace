@@ -24,10 +24,13 @@
         res = await res.json();
 
         if (res.resp == "success") {
+            let redirect = $user.redirect
             $user.username = res.username;
             $user.token = res.token;
             user.get();
-            push("#/");
+            user.redirect = false
+            if (redirect) return push(`#/${redirect}`);
+            if (!redirect) return push("#/");
         } else {
             message = "Account already Exists";
         }

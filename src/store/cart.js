@@ -33,16 +33,15 @@ context.updateItem = function (item) {
 }
 
 context.submitCart = async function (address, payment) {
-    let data = [];
+    let data = {};
     let item = []
     let cartVal = context.val('cart')
     cartVal.forEach(el => item.push({ _id: el._id, shopID: el.shopID, qty: el.qty }))
     data.items = item;
     data.address = address;
     data.payment = payment;
-    console.log("🚀 ~ data", data)
-    let res = await post("api/order", data);
-    console.log("🚀 ~ res", res)
+    console.log("🚀 ~ data1111", data)
+    return await post("api/order", data);
 }
 
 export const sumPriceTotal = derived(context, () => {
