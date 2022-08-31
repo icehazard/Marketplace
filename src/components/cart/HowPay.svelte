@@ -16,7 +16,7 @@
     async function next() {
         if (pending) return;
         if (!$user.email) $user.redirect = 'orders/active/2'
-        //let res = await cart.submitCart(defaultAddress, bank);
+        let res = await cart.submitCart(defaultAddress, bank);
         pending = true;
         setTimeout(() => {
             pending = false;
