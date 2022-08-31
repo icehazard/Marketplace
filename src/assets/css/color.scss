@@ -65,6 +65,12 @@ $primaryActive: #ef6698;
 .blue {
     background-color: $blue;
 }
+.disblue {
+    background-color: hsl(235,calc(1*85.6%),64.7%)
+}
+.dismagenta {
+    background-color: hsl(148deg 47% 32%);
+}
 
 .green {
     background-color: $green;

@@ -82,10 +82,10 @@
                 >
                     <div class="row gap-10">
                         {#if $shops.paymentMask & 1}
-                            <div class="blue pa-5 curve">Bank transfer</div>
+                            <div class="disblue pa-5 curve">Bank transfer</div>
                         {/if}
                         {#if $shops.paymentMask & 2}
-                            <div class="orange pa-5 curve">Crypto</div>
+                            <div class="dismagenta pa-5 curve">Crypto</div>
                         {/if}
                     </div>
                 </button>
