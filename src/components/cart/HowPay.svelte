@@ -86,7 +86,7 @@
             </div>
             <!-- <hr /> -->
             <div class="py-20 center">
-                <Button pending={pending} on:click={next} text="PROCEED TO CHECKOUT" />
+                <Button primary pending={pending} on:click={next} text="PROCEED TO CHECKOUT" />
             </div>
             <div class="col py-20 font-12 text-center gap-10 opacity-75">
                 <p>

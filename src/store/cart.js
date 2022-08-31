@@ -41,7 +41,8 @@ context.submitCart = async function (address, payment) {
     data.address = address;
     data.payment = payment;
     console.log("🚀 ~ data", data)
-   // let res = await get("api/payment", data);
+    let res = await post("api/order", data);
+    console.log("🚀 ~ res", res)
 }
 
 export const sumPriceTotal = derived(context, () => {
