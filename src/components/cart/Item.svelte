@@ -24,7 +24,7 @@
                     <Field
                         type="number"
                         on:change={cart.updateItem(data)}
-                        bind:value={data.qty}
+                        bind:value={data.qtyCart}
                         label="0"
                     />
                 </div>

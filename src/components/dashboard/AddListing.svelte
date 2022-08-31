@@ -99,7 +99,7 @@
                 </div>
             </div>
             <div class="col">
-                <Field bind:value={$products.qty} label="Quality" />
+                <Field bind:value={$products.qtyCart} label="Quality" />
             </div>
         </div>
         <hr />
