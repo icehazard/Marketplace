@@ -33,12 +33,26 @@ api.post('/', async (req, res) => {
     }
 
 
-    let {items, payment} = req.body;
-    let paymentType = payment;
+    let {products, paymentType} = req.body;
 
+    if (products.length > 20)
+        return res.status(400).json({status: "error", error: "You cannot buy more than 20 items at once!"});
 
+    let errorIds = [];
+    for (let pId of products) {
+        if (!productHandler.Products.has(pId)) {
+            errorIds.push(pId);
+        }
+    }
 
-    let add = orderHandler.Orders.insert(trade)
+    if (errorIds.length) {
+        return res.status(400).json({status: "error", error: "Some item IDs are invalid!", data: errorIds});
+    }
+
+    if (paymentType !== "BANK" && paymentType !== "CRYPTO")
+        return res.status(400).json({status: "error", error: "Payment type is invalid!", data: errorIds});
+
+    let add = orderHandler.Orders.insert(req.body)
 
     if (add.status === "error")
         return res.status(400).json(res);
