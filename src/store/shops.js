@@ -24,10 +24,10 @@ const context = persist('shops', data)
 
 context.get = async function (id) {
     let res = await get(`api/shop/${id}`)
-    console.log("🚀 ~ res", res)
+    let paymentMask = 'paymentMask' in res ? res.paymentMask : 3;
     res = hasError(res, data.products)
     context.commit('id', res._id)
-    context.commit('name', res.shopName) 
+    context.commit('name', res.shopName)
     context.commit('address', res.address)
     context.commit('shopType', res.shopType)
     context.commit('name', res.shopName)
@@ -36,7 +36,7 @@ context.get = async function (id) {
     context.commit('coverPic', res.cover)
     context.commit('desc', res.description)
     context.commit('shipping', res.shipping)
-    context.commit('paymentMask', res.paymentMask ? res.paymentMask : 3)
+    context.commit('paymentMask', paymentMask)
 
     if (res.length == 0) push('#/')
     return res
@@ -58,7 +58,7 @@ context.postProductImage = async function (data, index) {
 context.deleteProductImage = async function (data, index) {
     let url = `api/product/${products.val('product')._id}/album?index=` + index;
     let res = await deleteImage(url, data)
-    return 
+    return
 }
 
 context.postProfile = async function (data) {
