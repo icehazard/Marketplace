@@ -81,13 +81,13 @@
                     data-tooltip="Click to update shipping types"
                 >
                     <div class="row gap-10">
-                        <div class="orange pa-5 curve">Cypto</div>
+                        <div class="orange pa-5 curve">Crypto</div>
                         <div class="blue pa-5 curve">Bank transfer</div>
                     </div>
                 </button>
             {:else}
                 <div class="row gap-10 pa-10">
-                    <div class="orange pa-5 curve">Cypto</div>
+                    <div class="orange pa-5 curve">Crypto</div>
                     <div class="blue pa-5 curve">Bank transfer</div>
                 </div>
             {/if}
