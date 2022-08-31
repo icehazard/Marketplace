@@ -162,7 +162,7 @@ api.get('/:pid', async (req, res) => {
     //     return res.status(401).end();
     // }
 
-    const accId = authed._id;
+    //const accId = authed._id;
     const pid = parseInt(req.params.pid)
 
     if (!productHandler.Products.has(pid))
