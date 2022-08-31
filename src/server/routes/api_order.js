@@ -31,15 +31,23 @@ api.post('/', async (req, res) => {
     if (!authed) {
         return res.status(401).end();
     }
+    const userID = authed._id;
 
+    let me = accountHandler.Accounts.has(userID)
 
-    let {products, paymentType} = req.body;
+    if (!me) {
+        return res.status(400).json({status: 'Error! Couldnt find your user ID! Please contact admin.'})
+    }
+    me = accountHandler.Accounts.get(userID)
+
+    let {products, paymentType, address} = req.body;
 
     if (products.length > 20)
         return res.status(400).json({status: "error", error: "You cannot buy more than 20 items at once!"});
 
     let errorIds = [];
-    for (let pId of products) {
+    for (let p of products) {
+        let pId = p._id
         if (!productHandler.Products.has(pId)) {
             errorIds.push(pId);
         }
@@ -49,14 +57,19 @@ api.post('/', async (req, res) => {
         return res.status(400).json({status: "error", error: "Some item IDs are invalid!", data: errorIds});
     }
 
+    if (!me.hasDeliveryAddress(address))
+        return res.status(400).json({status: "error", error: "You dont have this delivery address saved! Contact admin please."});
+
     if (paymentType !== "BANK" && paymentType !== "CRYPTO")
         return res.status(400).json({status: "error", error: "Payment type is invalid!", data: errorIds});
 
-    let add = orderHandler.Orders.insert(req.body)
+    let resp = await orderHandler.Orders.insert(req.body)
 
-    if (add.status === "error")
-        return res.status(400).json(res);
+    if (resp.status === "error")
+        return res.status(400).json(resp);
 
+
+    return res.status(200).json(resp)
 })
 
 module.exports = api

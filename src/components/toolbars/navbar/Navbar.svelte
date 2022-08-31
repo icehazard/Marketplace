@@ -20,7 +20,7 @@
 	let balanceBtc = satoshiToBtcString($totalBalance);
 
 	$: rate = currencies.find((el) => el.id == "BTC")?.convert;
-	$: $user.currency, (balance = formatCurrency($totalBalance/100000000 * rate)), (balanceBtc = satoshiToBtcString($totalBalance));
+	$: $user.currency, (balance = $totalBalance ? formatCurrency($totalBalance/100000000 * rate) : formatCurrency(0.00)), (balanceBtc = satoshiToBtcString($totalBalance));
 
 	function toggle() {
 		showModal = !showModal;

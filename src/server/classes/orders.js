@@ -32,8 +32,8 @@ Orders.prototype.insert = async function(payload) {
 
     let orderObj = new Order(nid, payload)
     this.orders.set(nid, orderObj)
-    orderObj.saveToDB()
-    return {status: "ok"}
+    orderObj.saveToDB();
+    return {status: "ok", orderId: nid}
 };
 
 Orders.prototype.exists = function(id) {
@@ -73,12 +73,13 @@ class Order {
     constructor(_id, data)
     {
         this._id = _id;
-        this.name = data.name;
+        this.address = data.address;
+        this.paymentType = data.paymentType;
     }
 
     async saveToDB() {
         //dont need await
-        dbhandler.cols.list.colOrders.updateOne({_id: this._id}, {$set: {}}, {upsert: true})
+        dbhandler.cols.list.colOrders.updateOne({_id: this._id, address: this.address, paymentType: this.paymentType}, {$set: {}}, {upsert: true})
     }
 
     async deleteFromDB() {
