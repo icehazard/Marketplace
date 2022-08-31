@@ -26,11 +26,14 @@ const upload = multer({ dest: 'images/' })
 const {auth} = require("./auth")
 
 api.post('/', async (req, res) => {
+    let {products, paymentType, address, shopId} = req.body;
+
     const authed = await auth(req.headers)
 
     if (!authed) {
         return res.status(401).end();
     }
+
     const userID = authed._id;
 
     let me = accountHandler.Accounts.has(userID)
@@ -40,7 +43,11 @@ api.post('/', async (req, res) => {
     }
     me = accountHandler.Accounts.get(userID)
 
-    let {products, paymentType, address} = req.body;
+    if (!shopHandler.Shops.has(parseInt(shopId)))
+        return res.status(400).json({status: "error", error: "That shop does not exist!"})
+
+    if (await me.ownsShopID(shopId))
+        return res.status(400).json({status: "error", error: "You cannot make an order to your own shop!"})
 
     if (products.length > 20)
         return res.status(400).json({status: "error", error: "You cannot buy more than 20 items at once!"});
