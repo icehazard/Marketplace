@@ -44,11 +44,11 @@ context.submitCart = async function (address, paymentType) {
     let data = {};
     let item = []
     let cartVal = context.val('cart')
-    cartVal.forEach(el => item.push({ _id: el._id, shopID: el.shopID, qty: el.qtyCart }))
+    cartVal.forEach(el => item.push({ _id: el._id, qty: el.qtyCart }))
     data.products = item;
     data.address = address;
     data.paymentType = paymentType;
-    console.log("🚀 ~ data", data)
+    data.shopID = cartVal[0].shopID
     return await post("api/order", data);
 }
 
