@@ -77,7 +77,7 @@
                             bind:checked={maskCrypto}
                        
                         />
-                        <div >
+                        <div on:click={maskCryptoFunc}>
                             <div class=" pa-5 curve  grow" class:opacity-50={!maskCrypto}>
                                 Cypto
                             </div>
