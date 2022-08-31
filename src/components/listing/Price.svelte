@@ -12,13 +12,22 @@
     import CartNewShop from "comp/modals/listing/CartNewShop.svelte";
     import { acts } from "@tadashi/svelte-notification";
 
-    let noti = {
+    let noStock = {
+        mode: "danger",
+        message: `Out of stock`,
+        lifetime: 2,
+    };
+
+    let added = {
         mode: "success",
         message: `Added ${$products.product.name} to your cart`,
         lifetime: 2,
     };
 
+    $: inStock = Number($products.product.qty) > 0
+
     function handleClick(redirect) {
+        if (!inStock) return  acts.add(noStock)
         if ($cart.cart.length > 0) {
             let currentCartShop = $cart.cart[0].shopName;
             let newCartShop = $products.product.shopName;
@@ -26,7 +35,7 @@
             if (currentCartShop == newCartShop) {
                 cart.addToCart($products.product);
                 if (redirect) push("#/cart");
-                else acts.add(noti);
+                else acts.add(added);
             } else openModal(CartNewShop, { product: $products.product });
         } else {
             cart.addToCart($products.product);
@@ -73,6 +82,11 @@
         <div class="font-26">
             {formatCurrency($products.product.price ? $products.product.price : 0.0)}
         </div>
+      
+        {#if !inStock}
+        <div class="red--text">Out of stock</div>
+        {/if}
+      
         {#if $isOwnShop}
             <div class="font-26">
                 {$products.product.qty || 0}
@@ -82,7 +96,7 @@
     </div>
     {#if !$isOwnShop}
         <div class="row gap-20">
-            <Button primary on:click={() => handleClick(false)} text="ADD TO CART" />
+            <Button primary={inStock} on:click={() => handleClick(false)} text="ADD TO CART" />
             <Button on:click={() => handleClick(true)} text="BUY NOW" />
         </div>
     {/if}
