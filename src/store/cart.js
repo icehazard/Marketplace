@@ -54,7 +54,7 @@ context.submitCart = async function (address, paymentType) {
     data.products = item;
     data.address = address;
     data.paymentType = paymentType;
-    data.shopID = cartVal[0].shopID
+    data.shopId = cartVal[0].shopID
     return await post("api/order", data);
 }
 

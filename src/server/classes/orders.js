@@ -75,11 +75,15 @@ class Order {
         this._id = _id;
         this.address = data.address;
         this.paymentType = data.paymentType;
+        this.products = data.products.map(i => {return {_id: i._id, qty: i.qty}})
+        this.shopId = data.shopId;
     }
 
     async saveToDB() {
         //dont need await
-        dbhandler.cols.list.colOrders.updateOne({_id: this._id, address: this.address, paymentType: this.paymentType}, {$set: {}}, {upsert: true})
+        dbhandler.cols.list.colOrders.updateOne({_id: this._id, address: this.address, paymentType: this.paymentType,
+        products: this.products, shopId: this.shopId},
+        {$set: {}}, {upsert: true})
     }
 
     async deleteFromDB() {
