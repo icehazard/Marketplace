@@ -3,6 +3,7 @@
     import Item from "comp/listings/Item.svelte";
 
     import products from "@/store/products.js";
+    console.log($products)
 
     products.getAllProducts(true);
 </script>
@@ -10,7 +11,7 @@
 <main class="row container my-50 gap-40 grow">
     <Categories />
     <section class="grow">
-        {#if $products.products}
+        {#if $products.productsAll}
             {#each $products.productsAll as product}
                     <Item data={product} />
             {/each}
