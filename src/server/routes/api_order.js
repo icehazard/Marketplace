@@ -33,7 +33,9 @@ api.post('/', async (req, res) => {
     }
 
 
-    let {trade} = req.body;
+    let {items, payment} = req.body;
+    let paymentType = payment;
+
 
 
     let add = orderHandler.Orders.insert(trade)
