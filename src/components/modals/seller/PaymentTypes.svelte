@@ -15,7 +15,7 @@
     let maskCrypto = totalMask & MASK_CRYPTO;
 
     function save() {
-        shops.patch({ paymentType: totalMask });
+        shops.patch({ paymentMask: totalMask });
         closeModal();
     }
 
