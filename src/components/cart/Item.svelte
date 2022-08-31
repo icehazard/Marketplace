@@ -5,10 +5,13 @@
     import { formatCurrency } from "@/assets/library/CommonFunctions.js";
 
     export let data = [];
+    $: src = `http://localhost:8080/api/image/` + Object.values(data.photos).slice(0, 1);
 </script>
 
 <div class="row shade1 curve wrapper">
-    <img src={`http://localhost:8080/api/image/` + Object.values(data.photos).slice(0, 1)} alt="" />
+    {#if data.photos}
+        <img src={src} alt="" />
+    {/if}
     <div class="row pa-20 grow gap-50">
         <div class="col  grow overflow-hidden gap-10">
             <div class="weight-600 font-18">{data.name}</div>
@@ -18,7 +21,12 @@
             <div class="row h-40 gap-20 center">
                 <label for="cars">Quantity:</label>
                 <div class="row w-100">
-                    <Field type='number' on:change={cart.updateItem(data)} bind:value={data.qty} label="0" />
+                    <Field
+                        type="number"
+                        on:change={cart.updateItem(data)}
+                        bind:value={data.qty}
+                        label="0"
+                    />
                 </div>
             </div>
         </div>
