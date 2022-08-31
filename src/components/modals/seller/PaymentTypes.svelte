@@ -5,6 +5,7 @@
     import { closeModal } from "svelte-modals";
     import { scale } from "svelte/transition";
     import Checkbox from "comp/atoms/Checkbox.svelte";
+import { onDestroy } from "svelte";
 
     export let isOpen;
 
@@ -22,9 +23,14 @@
     }
 
     function maskFun(val) {
+        console.log("🚀 ~ val", val)
         if (totalMask & val != 0) totalMask &= ~val;
         else totalMask |= val;
     }
+
+    onDestroy(() => {
+        totalMask = 0
+    })
 </script>
 
 {#if isOpen}
@@ -38,8 +44,9 @@
                 <span class="font-24">Update Payment Types</span>
                 <span class="opacity-50">Select the payment options you provide</span>
                 <div class="col gap-10">
-                    <button class="row gap-20" on:click={() => maskFun(MASK_BANK)}>
+                    <button class="row gap-20" >
                         <Checkbox
+                        on:change={() => maskFun(MASK_BANK)}
                             secondaryColor="var(--shade5)"
                             primaryColor="var(--primary)"
                             duration="150"
@@ -49,8 +56,9 @@
                             mask={maskBank}
                         />
                     </button>
-                    <button class="row gap-20 align-center" on:click={() => maskFun(MASK_CRYPTO)}>
+                    <button class="row gap-20 align-center" >
                         <Checkbox
+                        on:change={() => maskFun(MASK_CRYPTO)}
                             size="2rem"
                             duration="150"
                             secondaryColor="var(--shade5)"
