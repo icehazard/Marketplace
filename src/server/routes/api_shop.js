@@ -91,6 +91,7 @@ api.get('/:sid', async (req, res) => {
     payload.cover = getShop.cover;
     payload.profile = getShop.profile;
     payload.products = products;
+    payload.paymentMask = getShop.paymentMask
 
     return res.status(200).json(payload)
 })
