@@ -51,7 +51,7 @@
                 <span class="font-24">Update Payment Types</span>
                 <span class="opacity-50">Select the payment options you provide</span>
                 <div class="col gap-10">
-                    <button class="row gap-20">
+                    <button class="row">
                         <Checkbox
                             secondaryColor="var(--shade5)"
                             primaryColor="var(--primary)"
