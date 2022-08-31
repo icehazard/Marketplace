@@ -40,7 +40,8 @@ context.getProduct = async function (id) {
 }
 context.getAllProducts = async function () {
     let shops = await get(`api/shops`)
-    let res = await post(`api/multishop`, shops)
+    let res = await post(`api/multishop?onlyactive=true`, shops)
+    console.log(res)
     res = Object.values(res).flat();
     context.commit('productsAll', res)
     return res
