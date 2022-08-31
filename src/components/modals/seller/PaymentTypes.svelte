@@ -12,7 +12,7 @@ import { onDestroy } from "svelte";
     const MASK_BANK = 1;
     const MASK_CRYPTO = 2;
 
-    let totalMask = $shops.paymentType;
+    let totalMask = 0;
     let maskBank = totalMask & MASK_BANK;
     let maskCrypto = totalMask & MASK_CRYPTO;
 
@@ -23,9 +23,10 @@ import { onDestroy } from "svelte";
     }
 
     function maskFun(val) {
-        console.log("🚀 ~ val", val)
-        if (totalMask & val != 0) totalMask &= ~val;
+        if ((totalMask & val) != 0) totalMask &= ~val;
         else totalMask |= val;
+
+        console.log("🚀 ~ TM", totalMask)
     }
 
     onDestroy(() => {
@@ -46,24 +47,24 @@ import { onDestroy } from "svelte";
                 <div class="col gap-10">
                     <button class="row gap-20" >
                         <Checkbox
-                        on:change={() => maskFun(MASK_BANK)}
                             secondaryColor="var(--shade5)"
                             primaryColor="var(--primary)"
                             duration="150"
                             size="2rem"
                             bind:checked={maskBank}
+                            on:change={() => maskFun(MASK_BANK)}
                             label="Bank"
                             mask={maskBank}
                         />
                     </button>
                     <button class="row gap-20 align-center" >
                         <Checkbox
-                        on:change={() => maskFun(MASK_CRYPTO)}
                             size="2rem"
                             duration="150"
                             secondaryColor="var(--shade5)"
                             primaryColor="var(--primary)"
                             bind:checked={maskCrypto}
+                            on:change={() => maskFun(MASK_CRYPTO)}
                             label="CRYPTO"
                             mask={maskCrypto}
                         />
