@@ -50,8 +50,8 @@ context.editHomeAddress = async function (idx, data) {
     return res
 }
 context.get = async function () {
-    let email = context.val('email')
-    if (!email) return;
+    let username = context.val('username')
+    if (!username) return;
     let res = await get('api/me')
     res = hasError(res, data.me)
     context.commit('me', res.shops)

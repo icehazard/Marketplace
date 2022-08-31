@@ -27,7 +27,7 @@
         </div>
     {/if}
 
-    <div>
+    <div class="white_space_preline">
         {$products?.product?.desc || "No Description"}
     </div>
 </div>

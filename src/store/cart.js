@@ -13,7 +13,6 @@ context.addToCart = async function (item) {
 
     let el = cartVal.findIndex((el) => el._id == item._id)
     if (el >= 0) {
-
         cartVal[el].qtyCart = Number(cartVal[el].qtyCart) + 1
         context.commit('cart', [...cartVal])
     } else {

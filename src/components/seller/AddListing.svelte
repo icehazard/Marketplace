@@ -13,8 +13,8 @@
             desc: "",
             name: "",
             photos: {},
-            price: "",
-            qty: "",
+            price: 0,
+            qty: 0,
             shopName: "",
         };
         let res = await products.post();

@@ -313,6 +313,11 @@
   white-space: normal;
 }
 
+.white_space_preline {
+  white-space: pre-line;
+  ;
+}
+
 .missingText {
   min-height: 19px;
 }
@@ -471,11 +476,11 @@
   border-top-right-radius: 8px;
 }
 
-.min-max-content{
+.min-max-content {
   min-width: max-content;
 }
 
-.w-fit-content{
+.w-fit-content {
   width: fit-content;
 }
 
