@@ -20,6 +20,16 @@ context.addToCart = async function (item) {
         context.commit('cart', [...cartVal, item])
     }
 }
+context.syncCartFromServer = async function () {
+    let cartVal = context.val('cart')
+    let products = cartVal.map(el => el._id)
+    let res = await post(`api/multiproduct`, {products})
+    res = Object.values(res).flat();
+    res.forEach((el, idx) => el.qtyCart = cartVal[idx].qtyCart)
+    console.log("🚀 ~ res", res)
+    context.commit('cart', res)
+    return res
+}
 context.removeFromCart = async function (item) {
     let index = context.val('cart').findIndex((el) => Object.is(el, item));
     context.val('cart').splice(index, 1)

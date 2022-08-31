@@ -3,8 +3,9 @@
     import HowPay from "comp/cart/HowPay.svelte";
     import Item from "comp/cart/Item.svelte";
     import Header from "comp/cart/Header.svelte";
-
     import cart from "@/store/cart.js";
+
+    cart.syncCartFromServer();
 </script>
 
 <main class="row container my-50 gap-50 grow">
