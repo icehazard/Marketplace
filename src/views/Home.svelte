@@ -4,7 +4,7 @@
 
     import products from "@/store/products.js";
 
-    products.getAllProducts();
+    products.getAllProducts(true);
 </script>
 
 <main class="row container my-50 gap-40 grow">

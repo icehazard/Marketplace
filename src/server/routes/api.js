@@ -447,11 +447,14 @@ api.post('/send/:symbol', async (req, res) => {
 
 api.post('/multishop', async (req, res) => {
     const shops = req.body;
-
+    let {onlyactive} = req.params;
     if (!Array.isArray(shops))
     {
         return res.status(400).json({status: "error", error: `Shops field should be an array!`})
     }
+
+    if (onlyactive)
+        onlyactive = true;
 
     let payload = {};
 
@@ -461,7 +464,7 @@ api.post('/multishop', async (req, res) => {
                 status: "error",
                 error: `One of the shop ids is invalid! Check provided list!`
             })
-        payload[shopId] = shopHandler.Shops.get(shopId).getProductList();
+        payload[shopId] = shopHandler.Shops.get(shopId).getProductList(onlyactive);
     }
 
     return res.status(200).json(payload);
