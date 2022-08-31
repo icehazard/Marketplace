@@ -119,7 +119,7 @@ class Shop {
         console.log("🚀 result", result)
     }
 
-    getProductList(onlyActive=true) {
+    getProductList(onlyActive=false) {
         let res = []
 
         for (let [k, v] of this.products){
