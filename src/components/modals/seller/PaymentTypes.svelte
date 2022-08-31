@@ -63,7 +63,7 @@
                             mask={maskBank}
                         />
                     </button>
-                    <button class="row gap-20 align-center">
+                    <button class="row align-center">
                         <Checkbox
                             size="2rem"
                             duration="150"
