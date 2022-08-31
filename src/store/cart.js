@@ -1,5 +1,7 @@
 import user from '@/store/user'
 import { derived } from "svelte/store";
+import { openModal } from "svelte-modals";
+import Photos from "comp/modals/listing/Photos";
 import { persist, get, post, hasError, del } from '@/assets/library/CommonFunctions.js'
 
 const data = {
@@ -9,8 +11,7 @@ const data = {
 const context = persist('cart', data)
 
 context.addToCart = async function (item) {
-    let cartVal = context.val('cart')
-
+    let cartVal = context.val('cart');
     let el = cartVal.findIndex((el) => el._id == item._id)
     if (el >= 0) {
         cartVal[el].qtyCart = Number(cartVal[el].qtyCart) + 1

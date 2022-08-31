@@ -9,10 +9,19 @@
     import { isOwnShop } from "@/store/shops.js";
     import Price from "comp/modals/listing/Price.svelte";
     import Quantity from "comp/modals/listing/Quantity.svelte";
+    import CartNewShop from "comp/modals/listing/CartNewShop.svelte";
 
     function handleClick() {
-        cart.addToCart($products.product);
-        push("#/cart");
+        if ($cart.cart.length > 0) {
+            let currentCartShop = $cart.cart[0].shopName;
+            let newCartShop = $products.product.shopName;
+            if (currentCartShop !== newCartShop)
+                openModal(CartNewShop, { product: $products.product });
+            else push("#/cart");
+        } else {
+            cart.addToCart($products.product);
+            push("#/cart");
+        }
     }
 </script>
 
