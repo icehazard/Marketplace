@@ -30,9 +30,12 @@ context.syncCartFromServer = async function () {
     return res
 }
 context.checkValid = async function (items) {
+    let cartVal = context.val('cart')
     let validate = items.map(validFunc)
     validate = validate.includes(true)
-    //if (validate) errorFunc(items)
+    if (!validate) return;
+    console.log("ERORR You cart has been updated")
+    items.map((el, idx) => el.qtyCart = Number(cartVal[idx].qty))
 }
 context.removeFromCart = async function (item) {
     let index = context.val('cart').findIndex((el) => Object.is(el, item));
@@ -73,19 +76,8 @@ export const sumQtyTotal = derived(context, () => {
 export default context;
 
 function validFunc(el, idx){
-
     let cartVal = context.val('cart')
     let con1 = cartVal[idx].qtyCart > Number(el.qty)
     let con2 = Number(cartVal[idx].price) !== Number(el.price)
-    if (con1 || con2) errorFunc(el, idx)
     return con1 || con2
-}
-
-function errorFunc(el, idx){
-    let cartVal = context.val('cart')
-    let con1 = cartVal[idx].qtyCart > Number(el.qty)
-    if (con1) cartVal[idx].qtyCart = Number(el.qty)
-    context.commit('cart', cartVal)
-    console.log("ERROR")
- 
 }
