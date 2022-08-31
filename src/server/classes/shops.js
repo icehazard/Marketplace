@@ -119,10 +119,13 @@ class Shop {
         console.log("🚀 result", result)
     }
 
-    getProductList() {
+    getProductList(onlyActive=true) {
         let res = []
 
         for (let [k, v] of this.products){
+            if (onlyActive && v.status != 1)
+                continue;
+
             let shop = shops.get(v.shopID);
             v.shopName = shop.shopName
             res.push(v)

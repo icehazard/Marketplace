@@ -156,11 +156,11 @@ api.patch('/:pid', async (req, res) => {
 })
 
 api.get('/:pid', async (req, res) => {
-    const authed = await auth(req.headers)
+    // const authed = await auth(req.headers)
 
-    if (!authed) {
-        return res.status(401).end();
-    }
+    // if (!authed) {
+    //     return res.status(401).end();
+    // }
 
     const accId = authed._id;
     const pid = parseInt(req.params.pid)
@@ -174,8 +174,8 @@ api.get('/:pid', async (req, res) => {
     if (!shopHandler.Shops.has(parseInt(sid)))
         return res.status(400).json({status: "error", error: "That shop does not exist!"})
 
-    if (!await accountHandler.Accounts.get(accId).ownsShopID(sid))
-        return res.status(400).json({status: "error", error: "You do not own this shop!"})
+    // if (!await accountHandler.Accounts.get(accId).ownsShopID(sid))
+    //     return res.status(400).json({status: "error", error: "You do not own this shop!"})
 
     return res.status(200).json(p)
 })
