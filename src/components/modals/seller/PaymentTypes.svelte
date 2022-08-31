@@ -15,31 +15,14 @@
     let maskBank = totalMask & MASK_BANK;
     let maskCrypto = totalMask & MASK_CRYPTO;
 
-    // $: maskCrypto, maskCryptoFunc()
-
-    // $: maskBank, maskBankFunc()
-
     function save() {
         shops.patch({ paymentMask: totalMask });
         console.log("🚀 ~ totalMask", totalMask);
         closeModal();
     }
 
-    function maskBankFunc() {
-
-        console.log("🚀 ~ maskBank2", maskBank)
-        maskBank = !maskBank;
-        maskFun(MASK_BANK);
-    }
-    function maskCryptoFunc() {
-        maskCrypto = !maskCrypto;
-        console.log("🚀 ~ maskCrypto3", maskCrypto)
-        maskFun(MASK_CRYPTO);
-
-    }
-
     function maskFun(val) {
-        if (totalMask & (val != 0)) totalMask &= ~val;
+        if (totalMask & val != 0) totalMask &= ~val;
         else totalMask |= val;
     }
 </script>
@@ -55,36 +38,27 @@
                 <span class="font-24">Update Payment Types</span>
                 <span class="opacity-50">Select the payment options you provide</span>
                 <div class="col gap-10">
-                    <button  class="row gap-20">
+                    <button class="row gap-20" on:click={() => maskFun(MASK_BANK)}>
                         <Checkbox
                             secondaryColor="var(--shade5)"
                             primaryColor="var(--primary)"
                             duration="150"
                             size="2rem"
                             bind:checked={maskBank}
-                            id="1"
+                            label="Bank"
+                            mask={maskBank}
                         />
-                        <div >
-                            <div class=" pa-5 curve" class:opacity-50={!maskBank}>Bank</div>
-                        </div>
                     </button>
-                    {maskCrypto}
-                    <button class="row gap-20 align-center ">
+                    <button class="row gap-20 align-center" on:click={() => maskFun(MASK_CRYPTO)}>
                         <Checkbox
                             size="2rem"
                             duration="150"
                             secondaryColor="var(--shade5)"
                             primaryColor="var(--primary)"
-                            id="2"
-                          
                             bind:checked={maskCrypto}
-                            label="CRYPTO" mask={maskCrypto}
+                            label="CRYPTO"
+                            mask={maskCrypto}
                         />
-<!--                        <div on:click={maskCryptoFunc}>-->
-<!--                            <div class=" pa-5 curve  grow" class:opacity-50={!maskCrypto}>-->
-<!--                                Cypto-->
-<!--                            </div>-->
-<!--                        </div>-->
                     </button>
                 </div>
             </div>
