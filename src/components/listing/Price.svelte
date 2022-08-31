@@ -73,10 +73,16 @@
             </button>
         </div>
     {:else}
+       <div class="row space-between">
         <div class="opacity-75 row align-center gap-10">
             <Icon icon="icomoon-free:price-tag" />
             <div>Price</div>
         </div>
+        <div class="center gap-10 opacity-75">
+            <Icon icon="ic:round-production-quantity-limits" />
+            <div>Stock</div>
+        </div>
+       </div>
     {/if}
     <div class="row space-between align-center">
         <div class="font-26">
@@ -87,12 +93,12 @@
         <div class="red--text">Out of stock</div>
         {/if}
       
-        {#if $isOwnShop}
-            <div class="font-26">
+     
+            <div class="font-22">
                 {$products.product.qty || 0}
                <span class="font-14 opacity-75">G</span>
             </div>
-        {/if}
+  
     </div>
     {#if !$isOwnShop}
         <div class="row gap-20">
