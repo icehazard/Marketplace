@@ -6,6 +6,8 @@ const morgan = require('morgan')
 const { WEB_SERVER_PORT } = require('./Config.json')
 const apiRoute = require('./routes/api.js')
 const productRoute = require('./routes/api_product')
+const orderRoute = require('./routes/api_order')
+
 const shopRoute = require('./routes/api_shop.js')
 
 const path = require('path')
@@ -231,6 +233,7 @@ wss.on('connection', function(ws) {
     app.use('/api', apiRoute)
     app.use('/api/product', productRoute)
     app.use('/api/shop', shopRoute)
+    app.use('/api/order', orderRoute)
 
     function auth(data) {
         //clearTimeout(auth_timeout);
