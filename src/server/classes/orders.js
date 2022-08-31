@@ -82,7 +82,7 @@ class Order {
     async saveToDB() {
         //dont need await
         dbhandler.cols.list.colOrders.updateOne({_id: this._id, address: this.address, paymentType: this.paymentType,
-        products: this.products},
+        products: this.products, shopId: this.shopId},
         {$set: {}}, {upsert: true})
     }
 

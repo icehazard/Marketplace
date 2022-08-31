@@ -214,10 +214,13 @@ class Account {
         let shopObject = await shopHandler.Shops.getShopByOwnerId(this._id)
         console.log("🚀 ~ file: accounts.js ~ line 208 ~ Account ~ ownsShopID ~ shopObjects", this._id)
 
-        
+        if (!shopObject) //has no shop
+            return false
+
         if (shopObject._id == sid)
             return true
         else console.log("BOPE", shopObject.ownerID, sid)
+        return false
     }
 
     async getDepositAddress() {
