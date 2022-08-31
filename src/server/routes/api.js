@@ -446,8 +446,9 @@ api.post('/send/:symbol', async (req, res) => {
 })
 
 api.post('/multishop', async (req, res) => {
-    const shops = req.body;
-    let {onlyactive} = req.params;
+    let {shops, onlyactive} = req.body;
+
+    console.log("Shops: ", shops)
     if (!Array.isArray(shops))
     {
         return res.status(400).json({status: "error", error: `Shops field should be an array!`})

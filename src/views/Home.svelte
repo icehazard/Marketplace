@@ -12,9 +12,7 @@
     <section class="grow">
         {#if $products.products}
             {#each $products.productsAll as product}
-                {#if product.status}
                     <Item data={product} />
-                {/if}
             {/each}
         {/if}
     </section>
