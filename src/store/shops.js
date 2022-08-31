@@ -36,7 +36,7 @@ context.get = async function (id) {
     context.commit('coverPic', res.cover)
     context.commit('desc', res.description)
     context.commit('shipping', res.shipping)
-    context.commit('paymentMask', res.paymentMask)
+    context.commit('paymentMask', res.paymentMask ? res.paymentMask : 3)
 
     if (res.length == 0) push('#/')
     return res
