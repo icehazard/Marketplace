@@ -10,16 +10,12 @@
 	import { Modals, closeModal } from "svelte-modals";
 	import MediaQuery from "@/assets/library/MediaQuery.svelte";
 	import { replace } from "svelte-spa-router";
+	import { Notifications, acts } from "@tadashi/svelte-notification";
 	const socket = new WebSocket("ws://www.localhost:8085");
 
 	function conditionsFailed(event) {
 		replace("/signup");
 	}
-	// if ($user.token) {
-	// 	console.log;
-	// 	user.get();
-	// 	user.setTheme();
-	// }
 
 	user.get();
 	user.setTheme();
@@ -32,6 +28,7 @@
 	<Mobile />
 	<Footer />
 	<Drawer />
+	<Notifications />
 	<Modals>
 		<div
 			transition:fade={{ duration: 100 }}

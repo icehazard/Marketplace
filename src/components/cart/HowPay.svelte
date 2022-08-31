@@ -7,15 +7,18 @@
     import { formatCurrency } from "@/assets/library/CommonFunctions.js";
     import pluralize from "pluralize";
     import { push } from "svelte-spa-router";
+    import { acts } from "@tadashi/svelte-notification";
 
     $: defaultAddress = $user.addresses.find((el) => el.default == true)?.address;
 
     let bank = "CRYPTO";
     let pending = false;
     let addressError = false;
-
+    let noti = { mode: "danger", message: `Please select an address`, lifetime: 2 };
     async function next() {
+        if (!defaultAddress) acts.add(noti)
         if (!defaultAddress) return (addressError = true);
+        
         if (pending) return;
         if (!$user.email) $user.redirect = "cart";
         pending = true;

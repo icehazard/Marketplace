@@ -1,8 +1,6 @@
-import user from '@/store/user'
 import { derived } from "svelte/store";
-import { openModal } from "svelte-modals";
-import Photos from "comp/modals/listing/Photos";
-import { persist, get, post, hasError, del } from '@/assets/library/CommonFunctions.js'
+import { acts } from "@tadashi/svelte-notification";
+import { persist, post,} from '@/assets/library/CommonFunctions.js'
 
 const data = {
     cart: [],
@@ -36,6 +34,8 @@ context.checkValid = async function (items) {
     let validate = items.map(validFunc)
     validate = validate.includes(true)
     if (!validate) return;
+    let noti ={ mode: "danger", message: `A product's price or stock level has changed`, lifetime: 2 };
+    acts.add(noti)
     console.log("ERORR You cart has been updated")
     items.map((el, idx) => el.qtyCart = Number(cartVal[idx].qty))
 }
@@ -48,7 +48,8 @@ context.updateItem = function (item) {
     let cartVal = context.val('cart')
     let con1 = Number(item.qty) < Number(item.qtyCart)
     if (con1) item.qtyCart = Number(item.qty)
-    if (con1) console.log("Not enough items in the store's stock")
+    let noti = { mode: "danger", message: `Not enough items in the store's stock to add to your cat`, lifetime: 2 };
+    if (con1) acts.add(noti)
     else item.qtyCart = Number(item.qtyCart)
     if (Math.sign(item.qtyCart) < 1) context.removeFromCart(item)
     context.commit('cart', [...cartVal])
