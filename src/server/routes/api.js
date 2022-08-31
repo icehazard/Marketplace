@@ -470,6 +470,31 @@ api.post('/multishop', async (req, res) => {
 
     return res.status(200).json(payload);
 })
+api.post('/multiproduct', async (req, res) => {
+    let {products, onlyactive} = req.body;
+
+    console.log("Shops: ", products)
+    if (!Array.isArray(products))
+    {
+        return res.status(400).json({status: "error", error: `Shops field should be an array!`})
+    }
+
+    if (onlyactive)
+        onlyactive = true;
+
+    let payload = [];
+
+    for (let pId of products) {
+        if (!productHandler.Products.has(pId))
+            return res.status(400).json({
+                status: "error",
+                error: `One of the product ids is invalid! Check provided list!`
+            })
+        payload.push(productHandler.Products.get(pId));
+    }
+
+    return res.status(200).json(payload);
+})
 
 api.get('/shops', async (req, res) => {
     let {limit, order} = req.params;
