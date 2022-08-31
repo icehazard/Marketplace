@@ -4,6 +4,7 @@
     import shops from "@/store/shops.js";
     import { closeModal } from "svelte-modals";
     import { scale } from "svelte/transition";
+    import Checkbox from "svelte-checkbox";
 
     export let isOpen;
 
@@ -14,20 +15,31 @@
     let maskBank = totalMask & MASK_BANK;
     let maskCrypto = totalMask & MASK_CRYPTO;
 
+    // $: maskCrypto, maskCryptoFunc()
+
+    // $: maskBank, maskBankFunc()
+
     function save() {
         shops.patch({ paymentMask: totalMask });
+        console.log("🚀 ~ totalMask", totalMask);
         closeModal();
     }
 
     function maskBankFunc() {
+
+        console.log("🚀 ~ maskBank2", maskBank)
         maskBank = !maskBank;
-        if (maskBank) totalMask |= MASK_BANK;
-        if (!maskBank) totalMask &= ~MASK_BANK;
+        maskFun(MASK_BANK);
     }
     function maskCryptoFunc() {
         maskCrypto = !maskCrypto;
-        if (maskCrypto) totalMask |= MASK_CRYPTO;
-        if (!maskCrypto)  totalMask &= ~MASK_CRYPTO;
+        console.log("🚀 ~ maskCrypto3", maskCrypto)
+        maskFun(MASK_CRYPTO);
+    }
+
+    function maskFun(val) {
+        if (totalMask & (val != 0)) totalMask &= ~val;
+        else totalMask |= val;
     }
 </script>
 
@@ -42,20 +54,35 @@
                 <span class="font-24">Update Payment Types</span>
                 <span class="opacity-50">Select the payment options you provide</span>
                 <div class="col gap-10">
-                    <div class="row gap-20">
-                        <input type="checkbox" on:click={maskBankFunc} checked={maskBank} />
-                        <button on:click={maskBankFunc}>
+                    <button  class="row gap-20">
+                        <Checkbox
+                            secondaryColor="var(--shade5)"
+                            primaryColor="var(--primary)"
+                            duration="150"
+                            size="2rem"
+                            bind:checked={maskBank}
+                        />
+                        <div >
                             <div class=" pa-5 curve" class:opacity-50={!maskBank}>Bank</div>
-                        </button>
-                    </div>
-                    <div class="row gap-20 align-center ">
-                        <input type="checkbox" on:click={maskCryptoFunc} checked={maskCrypto} />
-                        <button on:click={maskCryptoFunc}>
+                        </div>
+                    </button>
+                    {maskCrypto}
+                    <button class="row gap-20 align-center ">
+                        <Checkbox
+                            size="2rem"
+                            duration="150"
+                            secondaryColor="var(--shade5)"
+                            primaryColor="var(--primary)"
+                          
+                            bind:checked={maskCrypto}
+                       
+                        />
+                        <div >
                             <div class=" pa-5 curve  grow" class:opacity-50={!maskCrypto}>
-                               cypto
+                                Cypto
                             </div>
-                        </button>
-                    </div>
+                        </div>
+                    </button>
                 </div>
             </div>
             <div class="actions row shade2 pa-25 gap-10">
