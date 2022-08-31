@@ -13,7 +13,7 @@
 	const socket = new WebSocket("ws://www.localhost:8085");
 
 	function conditionsFailed(event) {
-		replace("/login");
+		replace("/signup");
 	}
 	// if ($user.token) {
 	// 	console.log;

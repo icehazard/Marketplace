@@ -13,14 +13,16 @@
     let bank = "CRYPTO";
     let pending = false
 
-    function next() {
+    async function next() {
         if (pending) return;
-        cart.submitCart(defaultAddress, bank);
+        if (!$user.email) $user.redirect = 'orders/active/2'
+        //let res = await cart.submitCart(defaultAddress, bank);
         pending = true;
         setTimeout(() => {
             pending = false;
+            push('#/orders/active/2')
         }, 2000);
-        // push('#/orders/active/2')
+   
     }
 </script>
 

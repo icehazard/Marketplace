@@ -1,9 +1,7 @@
 <script>
     import Categories from "comp/toolbars/categories/Categories.svelte";
     import Item from "comp/listings/Item.svelte";
-
     import products from "@/store/products.js";
-    console.log($products)
 
     products.getAllProducts(true);
 </script>

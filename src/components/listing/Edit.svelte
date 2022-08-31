@@ -5,10 +5,7 @@
 
     let toggler = $products.product.status;
 
-    console.log(toggler)
-
     function handleClick() {
-        console.log("Triggering")
         products.edit({ status: Number(!toggler) });
     }
 </script>

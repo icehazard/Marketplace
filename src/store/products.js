@@ -43,7 +43,6 @@ context.getAllProducts = async function (onlyactive=false) {
     let res = await post(`api/multishop` + (onlyactive ? "?onlyactive=true" : ""), {shops, onlyactive})
 
     res = Object.values(res).flat();
-    console.log(res)
     context.commit('productsAll', res)
     return res
 }
