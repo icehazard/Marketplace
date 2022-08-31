@@ -4,7 +4,7 @@
     import shops from "@/store/shops.js";
     import { closeModal } from "svelte-modals";
     import { scale } from "svelte/transition";
-    import Checkbox from "svelte-checkbox";
+    import Checkbox from "comp/atoms/Checkbox.svelte";
 
     export let isOpen;
 
@@ -35,6 +35,7 @@
         maskCrypto = !maskCrypto;
         console.log("🚀 ~ maskCrypto3", maskCrypto)
         maskFun(MASK_CRYPTO);
+
     }
 
     function maskFun(val) {
@@ -61,6 +62,7 @@
                             duration="150"
                             size="2rem"
                             bind:checked={maskBank}
+                            id="1"
                         />
                         <div >
                             <div class=" pa-5 curve" class:opacity-50={!maskBank}>Bank</div>
@@ -73,15 +75,16 @@
                             duration="150"
                             secondaryColor="var(--shade5)"
                             primaryColor="var(--primary)"
+                            id="2"
                           
                             bind:checked={maskCrypto}
-                       
+                            label="CRYPTO" mask={maskCrypto}
                         />
-                        <div on:click={maskCryptoFunc}>
-                            <div class=" pa-5 curve  grow" class:opacity-50={!maskCrypto}>
-                                Cypto
-                            </div>
-                        </div>
+<!--                        <div on:click={maskCryptoFunc}>-->
+<!--                            <div class=" pa-5 curve  grow" class:opacity-50={!maskCrypto}>-->
+<!--                                Cypto-->
+<!--                            </div>-->
+<!--                        </div>-->
                     </button>
                 </div>
             </div>
