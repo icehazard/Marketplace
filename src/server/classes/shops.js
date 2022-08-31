@@ -84,6 +84,7 @@ class Shop {
         this.shopType = data.shopType;
         this.ownerID = data.ownerID;
         this.address = data.address;
+        this.paymentMask = data.paymentMask;
         this.nameBankAccount = data.nameBankAccount;
         this.bankName = data.bankName;
         this.BankAccountNumber = data.BankAccountNumber;
@@ -181,6 +182,9 @@ class Shop {
             this.BankAccountNumber = data.BankAccountNumber;
         if (data.shipping)
             this.shipping = data.shipping;
+        if (data.paymentMask)
+            this.paymentMask = data.paymentMask;
+            
 
         this.saveToDB();
         return true;
@@ -201,7 +205,7 @@ class Shop {
     async saveToDB() {
         dbhandler.cols.list.colShops.updateOne({ _id: this._id }, {
             $set: {
-                shopName: this.shopName, address: this.address,
+                shopName: this.shopName, address: this.address, paymentMask: this.paymentMask,
                 nameBankAccount: this.nameBankAccount, bankName: this.bankName, BankAccountNumber: this.BankAccountNumber,
                 cover: this.cover, profile: this.profile, description: this.description, shipping: this.shipping
             }
