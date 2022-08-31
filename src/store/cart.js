@@ -10,8 +10,10 @@ const context = persist('cart', data)
 
 context.addToCart = async function (item) {
     let cartVal = context.val('cart')
+
     let el = cartVal.findIndex((el) => el._id == item._id)
     if (el >= 0) {
+
         cartVal[el].qtyCart = Number(cartVal[el].qtyCart) + 1
         context.commit('cart', [...cartVal])
     } else {
@@ -43,8 +45,11 @@ context.removeFromCart = async function (item) {
     context.commit('cart', context.val('cart'))
 }
 context.updateItem = function (item) {
-    item.qtyCart = Number(item.qtyCart)
     let cartVal = context.val('cart')
+    let con1 = Number(item.qty) < Number(item.qtyCart)
+    if (con1) item.qtyCart = Number(item.qty)
+    if (con1) console.log("Not enough items in the store's stock")
+    else item.qtyCart = Number(item.qtyCart)
     if (Math.sign(item.qtyCart) < 1) context.removeFromCart(item)
     context.commit('cart', [...cartVal])
 }
@@ -75,7 +80,7 @@ export const sumQtyTotal = derived(context, () => {
 
 export default context;
 
-function validFunc(el, idx){
+function validFunc(el, idx) {
     let cartVal = context.val('cart')
     let con1 = cartVal[idx].qtyCart > Number(el.qty)
     let con2 = Number(cartVal[idx].price) !== Number(el.price)
