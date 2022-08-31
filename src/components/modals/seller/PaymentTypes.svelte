@@ -1,44 +1,42 @@
 <script>
-    import Field from "comp/atoms/TextField.svelte";
     import Button from "comp/atoms/Button.svelte";
     import shops from "@/store/shops.js";
     import { closeModal } from "svelte-modals";
     import { scale } from "svelte/transition";
     import Checkbox from "comp/atoms/Checkbox.svelte";
-    import { onDestroy } from "svelte";
     import { acts } from "@tadashi/svelte-notification";
 
     export let isOpen;
 
-    let noti = {
-        mode: "success",
-        message: `Updated accepted payment methods`,
-        lifetime: 2,
-    };
-
-    let error = {
-        mode: "success",
-        message: `Updated accepted payment methods`,
-        lifetime: 2,
-    };
+    let msg1 = `Updated accepted payment methods`;
+    let msg2 = `You must have at least one payment type available`;
+    let msg3 = "Error";
 
     const MASK_BANK = 1;
     const MASK_CRYPTO = 2;
 
-    let totalMask = 0;
+    let totalMask = $shops.paymentMask;
     let maskBank = totalMask & MASK_BANK;
     let maskCrypto = totalMask & MASK_CRYPTO;
 
     async function save() {
+        if (totalMask == 0) return acts.add(notify(0, msg2));
         let res = await shops.patch({ paymentMask: totalMask });
-        if (res == 200)  acts.add(noti);
-        else acts.add(error);
+        if (res == 200) acts.add(notify(1, msg1));
+        else acts.add(notify(0, msg3));
+        shops.get($shops.id);
         closeModal();
     }
-
     function handleMask(val) {
         if ((totalMask & val) != 0) totalMask &= ~val;
         else totalMask |= val;
+    }
+    function notify(status, msg) {
+        return {
+            mode: status == 0 ? "error" : "success",
+            message: msg,
+            lifetime: 2,
+        };
     }
 </script>
 

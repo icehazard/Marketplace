@@ -81,15 +81,23 @@
                     data-tooltip="Click to update shipping types"
                 >
                     <div class="row gap-10">
-                        <div class="orange pa-5 curve">Crypto</div>
-                        <div class="blue pa-5 curve">Bank transfer</div>
+                        {#if $shops.paymentMask & 1}
+                            <div class="blue pa-5 curve">Bank transfer</div>
+                        {/if}
+                        {#if $shops.paymentMask & 2}
+                            <div class="orange pa-5 curve">Crypto</div>
+                        {/if}
                     </div>
                 </button>
             {:else}
-                <div class="row gap-10 pa-10">
-                    <div class="orange pa-5 curve">Crypto</div>
+            <div class="row gap-10 pa-10">
+                {#if $shops.paymentMask & 1}
                     <div class="blue pa-5 curve">Bank transfer</div>
-                </div>
+                {/if}
+                {#if $shops.paymentMask & 2}
+                    <div class="orange pa-5 curve">Crypto</div>
+                {/if}
+            </div>
             {/if}
         </div>
         <div class="weight-300 opacity-75 align-center gap-20 parent">
