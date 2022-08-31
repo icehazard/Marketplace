@@ -5,9 +5,22 @@
     import { closeModal } from "svelte-modals";
     import { scale } from "svelte/transition";
     import Checkbox from "comp/atoms/Checkbox.svelte";
-import { onDestroy } from "svelte";
+    import { onDestroy } from "svelte";
+    import { acts } from "@tadashi/svelte-notification";
 
     export let isOpen;
+
+    let noti = {
+        mode: "success",
+        message: `Updated accepted payment methods`,
+        lifetime: 2,
+    };
+
+    let error = {
+        mode: "success",
+        message: `Updated accepted payment methods`,
+        lifetime: 2,
+    };
 
     const MASK_BANK = 1;
     const MASK_CRYPTO = 2;
@@ -16,22 +29,17 @@ import { onDestroy } from "svelte";
     let maskBank = totalMask & MASK_BANK;
     let maskCrypto = totalMask & MASK_CRYPTO;
 
-    function save() {
-        shops.patch({ paymentMask: totalMask });
-        console.log("🚀 ~ totalMask", totalMask);
+    async function save() {
+        let res = await shops.patch({ paymentMask: totalMask });
+        if (res == 200)  acts.add(noti);
+        else acts.add(error);
         closeModal();
     }
 
-    function maskFun(val) {
+    function handleMask(val) {
         if ((totalMask & val) != 0) totalMask &= ~val;
         else totalMask |= val;
-
-        console.log("🚀 ~ TM", totalMask)
     }
-
-    onDestroy(() => {
-        totalMask = 0
-    })
 </script>
 
 {#if isOpen}
@@ -45,26 +53,26 @@ import { onDestroy } from "svelte";
                 <span class="font-24">Update Payment Types</span>
                 <span class="opacity-50">Select the payment options you provide</span>
                 <div class="col gap-10">
-                    <button class="row gap-20" >
+                    <button class="row gap-20">
                         <Checkbox
                             secondaryColor="var(--shade5)"
                             primaryColor="var(--primary)"
                             duration="150"
                             size="2rem"
                             bind:checked={maskBank}
-                            on:change={() => maskFun(MASK_BANK)}
+                            on:change={() => handleMask(MASK_BANK)}
                             label="Bank"
                             mask={maskBank}
                         />
                     </button>
-                    <button class="row gap-20 align-center" >
+                    <button class="row gap-20 align-center">
                         <Checkbox
                             size="2rem"
                             duration="150"
                             secondaryColor="var(--shade5)"
                             primaryColor="var(--primary)"
                             bind:checked={maskCrypto}
-                            on:change={() => maskFun(MASK_CRYPTO)}
+                            on:change={() => handleMask(MASK_CRYPTO)}
                             label="CRYPTO"
                             mask={maskCrypto}
                         />

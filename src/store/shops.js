@@ -12,6 +12,7 @@ const data = {
     coverPic: "",
     displayPic: "",
     products: [],
+    paymentMask: 0,
     shipping: {
         regular: 35,
         minFree: 1000,
@@ -23,6 +24,7 @@ const context = persist('shops', data)
 
 context.get = async function (id) {
     let res = await get(`api/shop/${id}`)
+    console.log("🚀 ~ res", res)
     res = hasError(res, data.products)
     context.commit('id', res._id)
     context.commit('name', res.shopName) 
@@ -34,6 +36,8 @@ context.get = async function (id) {
     context.commit('coverPic', res.cover)
     context.commit('desc', res.description)
     context.commit('shipping', res.shipping)
+    context.commit('paymentMask', res.paymentMask)
+
     if (res.length == 0) push('#/')
     return res
 }
