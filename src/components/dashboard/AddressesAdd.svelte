@@ -12,6 +12,7 @@
     let el;
     let id = $location.split("/")[3];
     $: type = $location.includes("edit");
+    $: choose = $location.includes("choose");
 
     function add() {
         let data = {
@@ -22,6 +23,7 @@
         };
 
         user.postHomeAddress(data);
+        if (choose) return push("#/addresses/choose");
         push("#/addresses/overview");
     }
 

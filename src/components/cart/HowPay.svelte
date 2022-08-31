@@ -12,12 +12,15 @@
 
     let bank = "CRYPTO";
     let pending = false
+    let addressError = false
 
     async function next() {
+        if (!defaultAddress) return addressError = true
         if (pending) return;
-        if (!$user.email) $user.redirect = 'orders/active/2'
-        //let res = await cart.submitCart(defaultAddress, bank);
+        if (!$user.email) $user.redirect = 'cart'
+         let res = await cart.submitCart(defaultAddress, bank);
         pending = true;
+        addressError = false
         setTimeout(() => {
             pending = false;
             push('#/orders/active/2')
@@ -25,7 +28,7 @@
    
     }
 </script>
-
+{addressError}
 {#if $mq.lg_}
     <div class="w-400 w100">
         <aside class="shade1 w-400 w100 px-20 curve ">
@@ -67,10 +70,17 @@
                     <div class="col align-center gap-10">{formatCurrency(0)}</div>
                 </div>
             </div>
+           {#if addressError}
+           <div class="row  red--text font-14 weight-600" >
+            Please select an address
+        </div>
+           {/if}
             <div class="row space-between align-center pb-20 pt-10">
-                <div class="font-14 weight-300">{defaultAddress || "No address selected"}</div>
+                <div class="font-14 weight-300" class:red--text={addressError}>
+                    {defaultAddress || "No address selected"}
+                </div>
                 <a href="#/addresses/choose">
-                    <Icon icon="fluent:edit-16-regular" width="22" color="var(--primary)" />
+                    <Icon icon="fluent:edit-16-regular" width="22" color={!addressError ? 'var(--primary)' : 'var(--red)'}  />
                 </a>
             </div>
             <!-- <hr /> -->
@@ -88,7 +98,7 @@
             </div>
             <!-- <hr /> -->
             <div class="py-20 center">
-                <Button primary pending={pending} on:click={next} text="PROCEED TO CHECKOUT" />
+                <Button primary={!addressError} pending={pending} on:click={next} text="PROCEED TO CHECKOUT" />
             </div>
             <div class="col py-20 font-12 text-center gap-10 opacity-75">
                 <p>

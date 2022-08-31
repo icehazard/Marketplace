@@ -8,6 +8,7 @@
     $: choose = $location.includes("choose");
 
     function addNew() {
+        if (choose) return push(`#/addresses/add/choose`);
         push("#/addresses/add");
     }
 
