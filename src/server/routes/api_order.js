@@ -46,7 +46,7 @@ api.post('/', async (req, res) => {
     if (!shopHandler.Shops.has(parseInt(shopId)))
         return res.status(400).json({status: "error", error: "That shop does not exist!"})
 
-    let shop = shopHandler.Shops.has(parseInt(shopId));
+    let shop = shopHandler.Shops.get(parseInt(shopId));
 
     if (await me.ownsShopID(shopId))
         return res.status(400).json({status: "error", error: "You cannot make an order to your own shop!"})
@@ -60,8 +60,24 @@ api.post('/', async (req, res) => {
         if (!productHandler.Products.has(pId)) {
             errorIds.push(pId);
         }
-        if (shopId != p.shopID)
+        p.qty = Number(p.qty)
+
+        if (!p.qty) {
             errorIds.push(pId);
+        }
+
+        let memProd = productHandler.Products.get(pId)
+
+        if (pId != shopId)
+            errorIds.push(pId);
+
+        if (p.qty > memProd.qty)
+            errorIds.push(pId);
+        else
+        {
+            memProd.qty -= p.qty;
+            memProd.saveToDB()
+        }
     }
 
     if (errorIds.length) {
@@ -78,7 +94,6 @@ api.post('/', async (req, res) => {
 
     if (resp.status === "error")
         return res.status(400).json(resp);
-
 
     return res.status(200).json(resp)
 })

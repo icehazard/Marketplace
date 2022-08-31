@@ -144,6 +144,15 @@ api.post('/:sid/product', async (req, res) => {
 
     console.log("Got shop ID", sid)
 
+    if (!data.qty)
+        data.qty = 0;
+    if (!data.name)
+        data.name = "";
+    if (!data.desc)
+        data.desc = "";
+    if (!data.price)
+        data.price = 0;
+
     let add = await shopHandler.Shops.get(parseInt(sid)).addProduct(data)
 
     if (add.status !== "ok")
