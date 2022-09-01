@@ -214,14 +214,20 @@ api.get('/me', async (req, res) => {
 
     if (!sids) sids = []
 
+    let ogord = me.getOrders()
+
+    let ord = me.getOrders()
+
     let payload = {
         shops: sids,
         recentAddresses: me.getRecentAddresses(),
         balances: me.getAllBalances(),
         deliveryAddresses: me.getDeliveryAddresses(),
-        orders: (me.getOrders() && me.getOrders().length) ? me.getOrders().map(i => orderHandler.Orders.get(i._id)) : []
+        orders: (ord && ord.length) ? ord.map(i => {
+            console.log("Checking order id", i)
+            return orderHandler.Orders.get(i)
+        }) : []
     }
-
     res.status(200).json(payload)
 })
 
