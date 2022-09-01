@@ -19,21 +19,27 @@
 </script>
 
 <button class="row w100 align-center border py-20 curve shine gap-15 pa-5" on:click={view}>
-    <img {src} alt="" class="w-100 h-100 curve" />
+    <div class="relative">
+        <img {src} alt="" class="w-100 h-100 curve" />
+        <div class="absolute p-bottom w100  h-40 center ">
+            <span class="shadow weight-600 "> 1 item(s)</span>
+        </div>
+    </div>
     <div class="col grow justify-center gap-10 pr-20">
-       <div class="row space-between">
         <span>PRODUCT STATUS</span>
-        <span class="font-14">Order ID: {order._id}</span>
-       </div>
         <span class="opacity-75">{order.shopName} </span>
-       
+
         <span class="font-12">{order.address}</span>
         <div class="row space-between">
             <span class="font-14" bind:this={el} datetime={order.created_at} />
-            <div class="weight-600 font-14">{order.products.length} item(s)</div>
+            <span class="font-14">Order ID: {order._id}</span>
         </div>
     </div>
 </button>
 
 <style>
+
+    .absolute{
+        backdrop-filter: brightness(0.4)  blur(1px);
+    }
 </style>
