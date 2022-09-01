@@ -69,6 +69,8 @@ Orders.prototype.loadFromDB = async function(id) {
             if (accountHandler.Accounts.has(p.uid)) {
                 let acc = accountHandler.Accounts.get(p.uid)
                 acc.orders.push(p._id)
+                console.log(acc.orders)
+
             }
         }
 
