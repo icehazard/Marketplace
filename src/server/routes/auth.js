@@ -1,5 +1,6 @@
 const Config = require("../Config.json");
 const jwt = require("jsonwebtoken");
+let accountHandler = require("../classes/accounts")
 
 const SECRET_KEY = Config.SECRET_KEY;
 
@@ -22,6 +23,14 @@ async function auth(data) {
         if (decoded) {
             return decoded;
         }
+
+        console.log(decoded)
+
+        if (!decoded._id)
+            return false;
+
+        if (!accountHandler.Accounts.has(decoded._id))
+            return false;
 
         return false
     }
