@@ -4,6 +4,15 @@
   let data = [
     { sender: true, text: "Did you eat anything cocksucker", time: "17:54" },
   ];
+
+  let msg = '';
+
+  function submit(){
+    console.log(msg)
+    data = [...data, { sender: true, text: msg, time: "17:54" }]
+
+    msg = '';
+  }
 </script>
 
 <div class="grow col">
@@ -12,9 +21,9 @@
       <Bubble item={item} />
     {/each}
   </div>
-  <div class="row shade0 px-20  h-60 align-center">
-    <input type="text" class="w100" placeholder="Write a message" />
-  </div>
+  <form class="row shade0 px-20  h-60 align-center" on:submit={submit}>
+    <input  bind:value={msg}  type="text" class="w100" placeholder="Write a message" />
+  </form>
 </div>
 
 <style>

@@ -1,4 +1,5 @@
 let dbhandler = require("../db/dbhandler")
+let productHandler = require('./products')
 const accountHandler = require("./accounts")
 
 let orders = new Orders()
@@ -82,6 +83,7 @@ class Order {
 
     constructor(_id, data)
     {
+        let pic = productHandler.Products.get(data.products[0]._id).photos
         this._id = _id;
         this.address = data.address;
         this.paymentType = data.paymentType;
@@ -89,13 +91,14 @@ class Order {
         this.shopId = data.shopId;
         this.uid = data.uid;
         this.created_at = data.created_at;
-        this.total = data.total;    
+        this.total = data.total;
+        this.productPhoto =  Object.values(pic)[0] 
     }
 
     async saveToDB() {
         //dont need await
         dbhandler.cols.list.colOrders.updateOne({_id: this._id, address: this.address, paymentType: this.paymentType,
-        products: this.products, shopId: this.shopId, uid: this.uid, created_at: this.created_at, total: this.total},
+        products: this.products, shopId: this.shopId, uid: this.uid, created_at: this.created_at, total: this.total, productPhoto: this.productPhoto},
         {$set: {}}, {upsert: true})
     }
 
