@@ -4,6 +4,10 @@
     import Contacts from "comp/orders/Contacts.svelte";
     import Details from "comp/orders/Details.svelte";
     import Categories from "comp/toolbars/categories/Settings.svelte";
+    import orders from '@/store/orders'
+
+    orders.get();
+
 </script>
 
 <section class="row h100 container gap-50 pt-50">
@@ -14,7 +18,7 @@
             <Contacts />
             <section class="grow col relative lol">
                 <Floating />
-                <Map />
+                <!-- <Map /> -->
             </section>
         </div>
     </div>
