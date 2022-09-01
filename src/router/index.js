@@ -41,6 +41,7 @@ export default {
     "/Wallet/send": wrap({ asyncComponent: WalletSend, conditions: [auth] }),
     "/Wallet/transactions": wrap({ asyncComponent: WalletTransactions, conditions: [auth] }),
     "/orders/overview": wrap({ asyncComponent: Orders, conditions: [auth] }),
+    "/orders/active": wrap({ asyncComponent: ActiveOrder, conditions: [auth] }),
     "/orders/active/:id": wrap({ asyncComponent: ActiveOrder, conditions: [auth] }),
     "/orders/view/:id": wrap({ asyncComponent: ViewOrder, conditions: [auth] }),
     "/cart": wrap({ asyncComponent: Cart }),
