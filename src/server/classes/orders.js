@@ -35,6 +35,7 @@ Orders.prototype.insert = async function(payload) {
     this.orders.set(nid, orderObj)
     orderObj.saveToDB();
     accountHandler.Accounts.get(payload.uid).orders.push(nid)
+   
     return {status: "ok", orderId: nid}
 };
 
