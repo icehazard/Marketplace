@@ -18,6 +18,7 @@ const shopHandler = require("./classes/shops");
 const productHandler = require("./classes/products");
 const addressHandler = require("./classes/address");
 const serverHandler = require("./classes/server");
+const orderHandler = require("./classes/orders");
 
 //const trackTxHandler = require("./classes/tracktx");
 const txHandler = require("./classes/tx");
@@ -64,6 +65,7 @@ wss.on('connection', function(ws) {
     await shopHandler.Shops.loadProductsIntoShops()
     await addressHandler.Addresses.loadFromDB() //has to be after accounts
     await serverHandler.Server.loadFromDB()
+    await orderHandler.Orders.loadFromDB() //has to be after accounts
     //await trackTxHandler.Tracktx.loadFromDB()
 
     let checkEvents = (symbol) => {

@@ -51,6 +51,9 @@ api.post('/', async (req, res) => {
     if (await me.ownsShopID(shopId))
         return res.status(400).json({status: "error", error: "You cannot make an order to your own shop!"})
 
+    if (!products || !products.length)
+        return res.status(400).json({status: "error", error: "You must provide product list!"});
+
     if (products.length > 20)
         return res.status(400).json({status: "error", error: "You cannot buy more than 20 items at once!"});
 
@@ -84,6 +87,19 @@ api.post('/', async (req, res) => {
         return res.status(400).json({status: "error", error: "Some item IDs are invalid!", data: errorIds});
     }
 
+    // order fine, now reduce existing qty
+    for (let p of products) {
+        let pId = p._id
+
+        let memProd = productHandler.Products.get(pId)
+
+        if (p.qty <= memProd.qty)
+        {
+            memProd.qty -= p.qty;
+            memProd.saveToDB()
+        }
+    }
+
     if (!me.hasDeliveryAddress(address))
         return res.status(400).json({status: "error", error: "You dont have this delivery address saved! Contact admin please."});
 
@@ -96,6 +112,37 @@ api.post('/', async (req, res) => {
         return res.status(400).json(resp);
 
     return res.status(200).json(resp)
+})
+
+api.get('/:id', async (req, res) => {
+    const authed = await auth(req.headers)
+
+    if (!authed) {
+        return res.status(401).end();
+    }
+
+    const accId = authed._id;
+
+    if (!accountHandler.Accounts.has(accId))
+        return res.status(400).json({status: "error", error: "Your acc doesnt exist! Contact admin please."})
+
+    let acc = accountHandler.Accounts.get(accId)
+    const oid = parseInt(req.params.id)
+
+    if (!oid)
+    {
+        return res.status(400).json({status: "error", error: "Order id is invalid!"})
+    }
+
+    if (!acc.hasOrder(oid))
+        return res.status(400).json({status: "error", error: "This order doesn't belong to you!"})
+
+    if (!orderHandler.Orders.has(oid))
+        return res.status(400).json({status: "error", error: "Order doesnt exist!"})
+
+    let order = orderHandler.Orders.get(oid)
+
+    return res.status(200).json(order)
 })
 
 module.exports = api

@@ -1,4 +1,5 @@
 let dbhandler = require("../db/dbhandler")
+const accountHandler = require("./accounts")
 
 let orders = new Orders()
 
@@ -29,7 +30,7 @@ Orders.prototype.insert = async function(payload) {
     }
 
     payload._id = nid;
-
+    payload.created_at = new Date();
     let orderObj = new Order(nid, payload)
     this.orders.set(nid, orderObj)
     orderObj.saveToDB();
@@ -62,8 +63,14 @@ Orders.prototype.loadFromDB = async function(id) {
     let data = await dbhandler.cols.list.colOrders.find({}).toArray()
 
     for (let p of data)
-        if (!this.getOrders().has(p._id))
-            this.getOrders().set(p._id, new Product(p._id, p))
+        if (!this.getOrders().has(p._id)) {
+            this.getOrders().set(p._id, new Order(p._id, p))
+
+            if (accountHandler.Accounts.has(p.uid)) {
+                let acc = accountHandler.Accounts.get(p.uid)
+                acc.orders.push(p._id)
+            }
+        }
 
     console.log(`*** Loaded ${this.getOrders().size} orders!`)
 };
@@ -77,6 +84,8 @@ class Order {
         this.paymentType = data.paymentType;
         this.products = data.products.map(i => {return {_id: i._id, qty: i.qty}})
         this.shopId = data.shopId;
+        this.uid = data.uid;
+        this.created_at = data.created_at;
     }
 
     async saveToDB() {

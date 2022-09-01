@@ -42,7 +42,6 @@ Accounts.prototype.loadFromDB = async function() {
     console.log(`*** Loaded ${this.getAccounts().size} accounts!`)
 };
 
-
 const SECRET_KEY = Config.SECRET_KEY;
 
 class Account {
@@ -332,6 +331,14 @@ class Account {
     hasDeliveryAddress(adr) {
         return this.deliveryAddresses.findIndex(i => i.address === adr) !== -1;
     }
+
+    hasOrder(oid) {
+        if (!this.orders || !this.orders.length)
+            return false;
+
+        return this.orders.includes(oid)
+    }
+
 
 }
 
