@@ -58,15 +58,15 @@ api.post('/', async (req, res) => {
         return res.status(400).json({status: "error", error: "You cannot buy more than 20 items at once!"});
 
     let errorIds = [];
-    for (let uiProd of products) {
-        let pId = uiProd._id
+    for (let p of products) {
+        let pId = p._id
         if (!productHandler.Products.has(pId)) {
             errorIds.push(pId);
         }
 
-        uiProd.qty = Number(uiProd.qty)
+        p.qty = Number(p.qty)
 
-        if (!uiProd.qty) {
+        if (!p.qty) {
             errorIds.push(pId);
             console.log("XXX > cant qty")
         }
@@ -78,13 +78,13 @@ api.post('/', async (req, res) => {
             errorIds.push(pId);
         }
 
-        if (uiProd.qty > memProd.qty) {
+        if (p.qty > memProd.qty) {
             errorIds.push(pId);
             console.log("XXX > qty higher than mem")
         }
         else
         {
-            memProd.qty -= uiProd.qty;
+            memProd.qty -= p.qty;
             memProd.saveToDB()
         }
     }
@@ -94,11 +94,14 @@ api.post('/', async (req, res) => {
     }
 
     // order fine, now reduce existing qty
+    let sum = 0
+
     for (let p of products) {
         let pId = p._id
 
         let memProd = productHandler.Products.get(pId)
 
+        sum += Number(memProd.price) * Number(p.qty)
         if (p.qty <= memProd.qty)
         {
             memProd.qty -= p.qty;
@@ -106,6 +109,7 @@ api.post('/', async (req, res) => {
         }
     }
 
+    req.body.total = sum;
     if (!me.hasDeliveryAddress(address))
         return res.status(400).json({status: "error", error: "You dont have this delivery address saved! Contact admin please."});
 

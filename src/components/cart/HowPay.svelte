@@ -6,7 +6,7 @@
     import cart, { sumPriceTotal, sumQtyTotal } from "@/store/cart.js";
     import { formatCurrency, notify } from "@/assets/library/CommonFunctions.js";
     import pluralize from "pluralize";
-    import { push } from "svelte-spa-router";
+    import { push, location } from "svelte-spa-router";
     import { acts } from "@tadashi/svelte-notification";
 
     $: defaultAddress = $user.addresses.find((el) => el.default == true)?.address;
@@ -29,8 +29,8 @@
     }
 
     function handleSuccess(res) {
-        console.log("🚀 ~ res", res)
-        notify(1, res)
+        cart.reset();
+        notify(1, "You have successfully placed your order");
         push(`#/orders/active/${res.orderId}`);
     }
 </script>

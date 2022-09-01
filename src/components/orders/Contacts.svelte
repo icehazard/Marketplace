@@ -1,6 +1,8 @@
 <script>
     import Icon from "@iconify/svelte";
     import Contact from "./Contact";
+    import orders from '@/store/orders'
+    import user from '@/store/user'
 </script>
 
 <section class="w-500 w100 h100 col ">
@@ -12,8 +14,8 @@
         </div>
     </div>
     <div class="gap-20 col pa-20">
-        {#each Array(6) as _, i}
-            <Contact  />
+        {#each $user.orders as order}
+            <Contact  order={order} />
         {/each}
     </div>
 </section>

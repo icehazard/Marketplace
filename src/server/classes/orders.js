@@ -35,6 +35,7 @@ Orders.prototype.insert = async function(payload) {
     this.orders.set(nid, orderObj)
     orderObj.saveToDB();
     accountHandler.Accounts.get(payload.uid).orders.push(nid)
+   
     return {status: "ok", orderId: nid}
 };
 
@@ -69,7 +70,7 @@ Orders.prototype.loadFromDB = async function(id) {
 
             if (accountHandler.Accounts.has(p.uid)) {
                 let acc = accountHandler.Accounts.get(p.uid)
-                acc.orders.push(p._id)
+                acc.orders.push(p)
             }
         }
 
@@ -87,12 +88,13 @@ class Order {
         this.shopId = data.shopId;
         this.uid = data.uid;
         this.created_at = data.created_at;
+        this.total = data.total;
     }
 
     async saveToDB() {
         //dont need await
         dbhandler.cols.list.colOrders.updateOne({_id: this._id, address: this.address, paymentType: this.paymentType,
-        products: this.products, shopId: this.shopId, uid: this.uid, created_at: this.created_at},
+        products: this.products, shopId: this.shopId, uid: this.uid, created_at: this.created_at, total: this.total},
         {$set: {}}, {upsert: true})
     }
 
@@ -138,6 +140,8 @@ class Order {
             pobj.price = payload.price
         if (payload.qty)
             pobj.qty = payload.qty
+        if (payload.total)
+            pobj.total = payload.total
 
         pobj.saveToDB()
         return {status: "ok"}
