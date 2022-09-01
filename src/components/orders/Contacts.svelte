@@ -1,7 +1,7 @@
 <script>
     import Icon from "@iconify/svelte";
     import Contact from "./Contact";
-    import orders from '@/store/orders'
+
     import user from '@/store/user'
 </script>
 

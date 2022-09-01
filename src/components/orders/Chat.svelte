@@ -2,6 +2,7 @@
   import Bubble from "./Bubble.svelte";
   import { afterUpdate } from "svelte";
   import wsStore, {ws} from "@/store/ws"
+  import orders from '@/store/orders'
   let data = $wsStore.wsdata;
   let msg = "";
 
@@ -22,7 +23,7 @@
     console.log("Sent chat msg: ", msg);
     //data = [...data, { sender: true, text: msg, time: new Date() }];
     let payload = { sender: true, opcode: "chat", receiverId: $orders.order.shopId, msg, time: new Date() }
-    context.commit('wsdata', [...wsStore.val('wsdata'), payload])
+    wsStore.commit('wsdata', [...wsStore.val('wsdata'), payload])
     ws.send(JSON.stringify(payload))
     msg = "";
     ws.send(JSON.stringify({ sender: true, text: msg, time: "17:54" }))
