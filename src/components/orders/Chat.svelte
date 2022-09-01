@@ -1,17 +1,20 @@
 <script>
   import Bubble from "./Bubble.svelte";
-  import wsdata, {ws} from "@/store/ws"
-  let data = $wsdata.wsdata;
+  import wsStore, {ws} from "@/store/ws"
+  let data = $wsStore.wsdata;
   let msg = "";
   import orders from "@/store/orders"
+  import context from "../../store/ws";
   console.log(ws)
   $: {
-    $wsdata.wsdata, console.log($wsdata.wsdata), data = $wsdata.wsdata;
+    $wsStore.wsdata, console.log($wsStore.wsdata), data = $wsStore.wsdata;
   }
   function submit() {
     console.log("Sent chat msg: ", msg);
-    data = [...data, { sender: true, text: msg, time: new Date() }];
-    ws.send(JSON.stringify({ sender: true, opcode: "chat", receiverId: $orders.order.shopId, msg, time: new Date() }))
+    //data = [...data, { sender: true, text: msg, time: new Date() }];
+    let payload = { sender: true, opcode: "chat", receiverId: $orders.order.shopId, msg, time: new Date() }
+    context.commit('wsdata', [...wsStore.val('wsdata'), payload])
+    ws.send(JSON.stringify(payload))
     msg = "";
   }
 </script>
