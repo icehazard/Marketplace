@@ -1,36 +1,31 @@
 <script>
   import Bubble from "./Bubble.svelte";
   import ws from "comp/network/ws.js"
+  let data = [];
+  let msg = "";
 
-  let data = [
-    { sender: true, text: "Did you eat anything cocksucker", time: "17:54" },
-  ];
-
-  let msg = '';
-
-  function submit(){
-    console.log(msg)
-    data = [...data, { sender: true, text: msg, time: "17:54" }]
+  function submit() {
+    console.log(msg);
+    data = [...data, { sender: true, text: msg, time: "17:54" }];
+    msg = "";
     ws.send(JSON.stringify({ sender: true, text: msg, time: "17:54" }))
-    msg = '';
   }
 </script>
 
 <div class="grow col">
   <div class="col grow frame">
     {#each data as item}
-      <Bubble item={item} />
+      <Bubble {item} />
     {/each}
   </div>
-  <form class="row shade0 px-20  h-60 align-center" on:submit={submit}>
-    <input  bind:value={msg}  type="text" class="w100" placeholder="Write a message" />
+  <form class="row shade0 px-20  h-60 align-center" on:submit|preventDefault={submit}>
+    <input bind:value={msg} type="text" class="w100" placeholder="Write a message" />
   </form>
 </div>
 
 <style>
-  .frame{
+  .frame {
     height: calc(100vh - 190px);
     overflow: overlay;
   }
-  
 </style>
