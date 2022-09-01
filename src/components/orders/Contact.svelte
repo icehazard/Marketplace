@@ -24,10 +24,9 @@
         <span>PRODUCT STATUS</span>
         <span class="opacity-75">{order._id}</span>
         <span class="font-12">{order.address}</span>
-        <span class="font-14" bind:this={el} datetime={order.created_at} />
         <div class="row space-between">
-            <div class="weight-600 font-14">5 items</div>
-            <div>d</div>
+            <span class="font-14" bind:this={el} datetime={order.created_at} />
+            <div class="weight-600 font-14">{order.products.length} item(s)</div>
         </div>
     </div>
 </button>
