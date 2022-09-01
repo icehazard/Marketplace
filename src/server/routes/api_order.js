@@ -72,7 +72,7 @@ api.post('/', async (req, res) => {
 
         let memProd = productHandler.Products.get(pId)
 
-        if (pId != shopId) {
+        if (p.shopID != shopId) {
             console.log("XXX > shop no match")
             errorIds.push(pId);
         }
