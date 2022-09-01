@@ -54,6 +54,7 @@ class Account {
             ['ETH', new Map()],  ['BTCt', new Map()]])
         this.balances = a.balances || {BTC: 0, DOGE: 0, LTC: 0, ETH: 0, BTCt: 0}
         this.deliveryAddresses = a.deliveryAddresses || [];
+        this.orders = a.orders || [];
     }
 
     /*** ACCOUNT LOGIN ***/
@@ -301,6 +302,9 @@ class Account {
     }
     getDeliveryAddresses() {
         return this.deliveryAddresses;
+    }
+    getOrders() {
+        return this.orders;
     }
     newDeliveryAddress(adr) {
         if (adr.default) {

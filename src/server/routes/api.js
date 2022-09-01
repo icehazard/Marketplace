@@ -218,6 +218,7 @@ api.get('/me', async (req, res) => {
         recentAddresses: me.getRecentAddresses(),
         balances: me.getAllBalances(),
         deliveryAddresses: me.getDeliveryAddresses(),
+        orders: me.getOrders()
     }
 
     res.status(200).json(payload)
