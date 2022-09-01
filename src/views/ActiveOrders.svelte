@@ -14,6 +14,7 @@
         let loc = $location.split("/");
         loc = loc[loc.length - 1];
         if (isNaN(loc) &&  $user.orders.length !== 0) return getLast();
+
         orders.get(loc);
     }
     async function getLast() {

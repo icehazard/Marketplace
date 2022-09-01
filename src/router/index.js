@@ -23,6 +23,8 @@ const Wallet = () => import("@/views/Wallet.svelte");
 const WalletReceive = () => import("@/views/WalletReceive.svelte");
 const WalletSend = () => import("@/views/WalletSend.svelte");
 const WalletTransactions = () => import("@/views/WalletTransactions.svelte");
+const Policy = () => import("@/views/Policy.svelte");
+const Terms = () => import("@/views/Terms.svelte");
 
 export default {
     "/": wrap({ asyncComponent: Home }),
@@ -55,6 +57,8 @@ export default {
     "/seller": wrap({ asyncComponent: Seller }),
     "/login": wrap({ asyncComponent: Login }),
     "/signup": wrap({ asyncComponent: Signup }),
+    "/policy": wrap({ asyncComponent: Policy }),
+    "/terms": wrap({ asyncComponent: Terms }),
 }
 
 function auth(detail) {

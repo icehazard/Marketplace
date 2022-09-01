@@ -21,8 +21,8 @@
 <button class="row w100 align-center border py-20 curve shine gap-15 pa-5" on:click={view}>
     <div class="relative">
         <img {src} alt="" class="w-100 h-100 curve" />
-        <div class="absolute p-bottom w100  h-40 center ">
-            <span class="shadow weight-600 "> 1 item(s)</span>
+        <div class="absolute p-bottom w100 mb-4 h-40 center ">
+            <span class="font-14"> 1 item(s)</span>
         </div>
     </div>
     <div class="col grow justify-center gap-10 pr-20">

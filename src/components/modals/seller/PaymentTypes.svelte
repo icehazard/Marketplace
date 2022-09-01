@@ -33,7 +33,7 @@
     }
     function notify(status, msg) {
         let state = status == 0 ? "error" : "success";
-        return { mode: state, message: msg, lifetime: 2 };
+        return {mode: state, message: msg, lifetime: 2};
     }
 </script>
 

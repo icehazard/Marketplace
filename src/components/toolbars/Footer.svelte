@@ -24,9 +24,9 @@
         <div class="row gap-20 line-height-20 nowrap">
             <button> © { APP_NAME }</button>
             <span>|</span>
-            <button>Terms of Use</button>
+            <a href='#/terms'>Terms of Use</a>
             <span>|</span>
-            <button>Privacy</button>
+            <a href='#/policy'>Privacy</a>
         </div>
     </div>
 </footer>
