@@ -1,6 +1,7 @@
 let dbhandler = require("../db/dbhandler")
 let productHandler = require('./products')
 const accountHandler = require("./accounts")
+const shopHandler = require("./shops")
 
 let orders = new Orders()
 
@@ -74,6 +75,17 @@ Orders.prototype.loadFromDB = async function(id) {
                 let acc = accountHandler.Accounts.get(p.uid)
                 acc.orders.push(p._id)
             }
+
+            let shopId = p.shopId;
+            if (shopHandler.Shops.has(shopId))
+            {
+                let shop = shopHandler.Shops.get(shopId)
+                if (accountHandler.Accounts.has(shop.ownerID)) {
+                    let shopOwnerAcc = accountHandler.Accounts.get(shop.ownerID)
+                    shopOwnerAcc.orders.push(p._id)
+                }
+            }
+
         }
 
     console.log(`*** Loaded ${this.getOrders().size} orders!`)

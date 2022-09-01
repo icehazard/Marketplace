@@ -1,14 +1,18 @@
 <script>
   import Bubble from "./Bubble.svelte";
-  import ws from "comp/network/ws.js"
-  let data = [];
+  import wsdata, {ws} from "@/store/ws"
+  let data = $wsdata.wsdata;
   let msg = "";
-
+  import orders from "@/store/orders"
+  console.log(ws)
+  $: {
+    $wsdata.wsdata, console.log($wsdata.wsdata), data = $wsdata.wsdata;
+  }
   function submit() {
-    console.log(msg);
-    data = [...data, { sender: true, text: msg, time: "17:54" }];
+    console.log("Sent chat msg: ", msg);
+    data = [...data, { sender: true, text: msg, time: new Date() }];
+    ws.send(JSON.stringify({ sender: true, opcode: "chat", receiverId: $orders.order.shopId, msg, time: new Date() }))
     msg = "";
-    ws.send(JSON.stringify({ sender: true, text: msg, time: "17:54" }))
   }
 </script>
 

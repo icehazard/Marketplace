@@ -11,12 +11,21 @@ let orderHandler = require('../classes/orders')
 
 const {auth} = require('../routes/auth')
 
-function getSocketById(_id) {
-    for (const [k,v] of wss.clients.entries())
-        if (v._id === _id)
-            return wss.clients[k]
-
-    return false
+function getSocketsById(_id) {
+    let sockets = []
+    wss.clients.forEach(function each(client) {
+        if (client._id == _id) {
+            console.log('Client.ID: ' + _id);
+            sockets.push(client)
+        }
+    });
+    console.log("FINISHED")
+    // for (const [k,v] of wss.clients.entries()) {
+    //     //console.log(v._id);
+    //     if (v._id === _id)
+    //         return wss.clients[k]
+    // }
+    return sockets
 }
 function sendToId(_id, msg) {
     let tar = getSocketById(_id);
@@ -30,6 +39,32 @@ function sendToId(_id, msg) {
     catch(e) {
 
     }
+}
+function sendToIdByShop(shopId, msg) {
+
+    if (!shopHandler.Shops.has(shopId)) {
+        console.log(`Shop has no shopid`, shopId)
+        return false;
+    }
+
+    let shop = shopHandler.Shops.get(shopId)
+    let _id = shop.ownerID;
+    let tar = getSocketsById(_id);
+
+    if (!tar || !tar.length) {
+        console.log('Couldnt find target', tar);
+        return false;
+    }
+
+    for (let s of tar) {
+        console.log("Sending from ", s._id)
+        try {
+            s.send(msg)
+        } catch (e) {
+            console.log(e)
+        }
+    }
+    return true
 }
 
 wss.on('connection', async function(ws, req) {
@@ -45,9 +80,11 @@ wss.on('connection', async function(ws, req) {
         if (!orders || !orders.length)
             return false;
 
-        for (let o of orders)
-            if (shopHandler.Shops.has(o.shopID) && shopHandler.Shops.get(o.shopID).ownerID == targetUid)
+        for (let o of orders) {
+            //console.log(o)
+            if (shopHandler.Shops.has(o.shopId) && shopHandler.Shops.get(o.shopId).ownerID === targetUid)
                 return true
+        }
     }
     ws.haveMutualOrderByShopId = function(shopId) {
         let sender = this._id;
@@ -62,8 +99,10 @@ wss.on('connection', async function(ws, req) {
             return false;
 
         for (let o of orders)
-            if (o.shopID == shopId)
+            if (o.shopId == shopId) {
+                console.log("Found WS target!")
                 return true
+            }
     }
 
     if (!req.url.includes("/?token="))
@@ -91,8 +130,8 @@ wss.on('connection', async function(ws, req) {
             if (json.opcode == "chat") {
                 let receiverId = json.receiverId
                 //if (wss.clients)
-                if (ws.haveMutualOrderByTarUid(receiverId))
-                    sendToId(receiverId, json)
+                if (ws.haveMutualOrderByShopId(receiverId))
+                    sendToIdByShop(receiverId, JSON.stringify(json))
                 else
                     console.log("NO MUTUAL ORDER WITH REC ID", receiverId)
             }
