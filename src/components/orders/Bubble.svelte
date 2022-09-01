@@ -9,7 +9,7 @@
             class:primary={!item.sender}
             class:shade3={item.sender}
         >
-            {item.text}
+            {item.msg}
         </div>
         <span class="font-14">{item.time}</span>
     </div>

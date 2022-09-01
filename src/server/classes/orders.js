@@ -75,6 +75,17 @@ Orders.prototype.loadFromDB = async function(id) {
                 let acc = accountHandler.Accounts.get(p.uid)
                 acc.orders.push(p._id)
             }
+
+            let shopId = p.shopId;
+            if (shopHandler.Shops.has(shopId))
+            {
+                let shop = shopHandler.Shops.get(shopId)
+                if (accountHandler.Accounts.has(shop.ownerID)) {
+                    let shopOwnerAcc = accountHandler.Accounts.get(shop.ownerID)
+                    shopOwnerAcc.orders.push(p._id)
+                }
+            }
+
         }
 
     console.log(`*** Loaded ${this.getOrders().size} orders!`)
@@ -84,8 +95,8 @@ class Order {
 
     constructor(_id, data)
     {
-    
-   
+
+
         let item = productHandler.Products.get(data.products[0]._id)
         this._id = _id;
         this.address = data.address;
@@ -96,7 +107,7 @@ class Order {
         this.created_at = data.created_at;
         this.total = data.total;
         this.shopName = shopHandler.Shops.get(data.shopId).shopName
-        this.productPhoto =  Object.values(item.photos)[0] 
+        this.productPhoto =  Object.values(item.photos)[0]
     }
 
     async saveToDB() {

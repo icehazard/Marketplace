@@ -11,7 +11,7 @@
 	import MediaQuery from "@/assets/library/MediaQuery.svelte";
 	import { replace } from "svelte-spa-router";
 	import { Notifications, acts } from "@tadashi/svelte-notification";
-	import ws from 'comp/network/ws.js'
+	import ws from '@/store/ws'
 	function conditionsFailed(event) {
 		replace("/signup");
 	}
