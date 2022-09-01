@@ -3,6 +3,11 @@ const { WebSocketServer } = require('ws');
 const wss = new WebSocketServer({
     port: 8085
 });
+let accountHandler = require("../classes/accounts")
+let shopHandler = require('../classes/shops')
+let productHandler = require('../classes/products')
+let addressHandler = require('../classes/address')
+let orderHandler = require('../classes/orders')
 
 const {auth} = require('../routes/auth')
 
@@ -28,19 +33,54 @@ function sendToId(_id, msg) {
 }
 
 wss.on('connection', async function(ws, req) {
+    ws.haveMutualOrderByTarUid = function(targetUid) {
+        let sender = this._id;
+        let acc = accountHandler.Accounts.get(sender)
+        let ord = acc.orders;
+
+        let orders = (ord && ord.length) ? ord.map(i => {
+            return orderHandler.Orders.get(i)
+        }) : []
+
+        if (!orders || !orders.length)
+            return false;
+
+        for (let o of orders)
+            if (shopHandler.Shops.has(o.shopID) && shopHandler.Shops.get(o.shopID).ownerID == targetUid)
+                return true
+    }
+    ws.haveMutualOrderByShopId = function(shopId) {
+        let sender = this._id;
+        let acc = accountHandler.Accounts.get(sender)
+        let ord = acc.orders;
+
+        let orders = (ord && ord.length) ? ord.map(i => {
+            return orderHandler.Orders.get(i)
+        }) : []
+
+        if (!orders || !orders.length)
+            return false;
+
+        for (let o of orders)
+            if (o.shopID == shopId)
+                return true
+    }
+
     if (!req.url.includes("/?token="))
         return ws.close();
 
     let token = req.url.replace("/?token=", "");
     const authed = await auth({token})
 
-    if (!authed) {
+    if (token !== "guest" && !authed) {
         console.log("WS UNAUTHED!", token)
         return ws.close();
     }
 
-    const _id = authed._id;
-    ws._id = _id;
+    if (token !== "guest") {
+        const _id = authed._id;
+        ws._id = _id;
+    }
 
     ws.on('message', function(message) {
         console.log('received: %s', message);
@@ -51,7 +91,10 @@ wss.on('connection', async function(ws, req) {
             if (json.opcode == "chat") {
                 let receiverId = json.receiverId
                 //if (wss.clients)
-                sendToId(receiverId, json)
+                if (ws.haveMutualOrderByTarUid(receiverId))
+                    sendToId(receiverId, json)
+                else
+                    console.log("NO MUTUAL ORDER WITH REC ID", receiverId)
             }
 
         }

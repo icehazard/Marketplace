@@ -1,5 +1,6 @@
 <script>
   import Bubble from "./Bubble.svelte";
+  import ws from "comp/network/ws.js"
 
   let data = [
     { sender: true, text: "Did you eat anything cocksucker", time: "17:54" },
@@ -10,7 +11,7 @@
   function submit(){
     console.log(msg)
     data = [...data, { sender: true, text: msg, time: "17:54" }]
-
+    ws.send(JSON.stringify({ sender: true, text: msg, time: "17:54" }))
     msg = '';
   }
 </script>
