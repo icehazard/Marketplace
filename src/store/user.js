@@ -53,11 +53,13 @@ context.get = async function () {
     let username = context.val('username')
     if (!username) return;
     let res = await get('api/me')
+    console.log("🚀 ~ res", res)
     res = hasError(res, data.me)
     context.commit('me', res.shops)
     context.commit('address', res.recentAddresses?.BTCt?._id)
     context.commit('balances', res.balances)
     context.commit('shipping', res.shipping)
+    context.commit('orders', res.orders)
     context.commit('addresses', res.deliveryAddresses)
 }
 context.shopID = function () {

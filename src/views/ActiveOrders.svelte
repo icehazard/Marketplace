@@ -5,8 +5,13 @@
     import Details from "comp/orders/Details.svelte";
     import Categories from "comp/toolbars/categories/Settings.svelte";
     import orders from '@/store/orders'
+    import user from '@/store/user'
+    import {  location } from "svelte-spa-router";
 
-    orders.get();
+    let loc = $location.split("/");
+    loc = loc[loc.length - 1];
+
+    orders.get(loc);
 
 </script>
 

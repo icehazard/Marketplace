@@ -11,7 +11,7 @@ const data = {
 const context = persist('orders', data)
 
 context.get = async function (id) {
-    let res = await get(`api/shop/${id}`)
+    let res = await get(`api/order/${id}`)
     console.log("🚀 ~ res", res)
 }
 
