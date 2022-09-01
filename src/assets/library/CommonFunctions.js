@@ -2,6 +2,7 @@ import { writable, get as getStore } from "svelte/store";
 import { WEBPACK_URL } from "@/config";
 import user from '@/store/user.js'
 import { currencies } from '@/assets/library/options.js'
+import { acts } from "@tadashi/svelte-notification";
 
 export function clickOutside(element, callbackFunction) {
     function onClick(event) {
@@ -101,6 +102,12 @@ export async function deleteImage(route, data) {
     return res.status
 }
 
+export function notify(status, message) {
+    let con = status == 0 || status == 'error'
+    let mode = con ? "error" : "success";
+    let data = { mode, message, lifetime: 2 };
+    acts.add(data);
+}
 
 export async function post(route, data) {
     let url = `http://${WEBPACK_URL}/${route}`;
