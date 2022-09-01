@@ -4,6 +4,7 @@ var jwt = require('jsonwebtoken');
 const Config = require("../Config.json");
 const common = require("./common")
 const shopHandler = require("./shops")
+
 const fetch = require("node-fetch");
 const base64 = require("base-64");
 const bitcore = require("bitcore-lib");
@@ -304,7 +305,7 @@ class Account {
         return this.deliveryAddresses;
     }
     getOrders() {
-        return this.orders;
+        return this.orders
     }
     newDeliveryAddress(adr) {
         if (adr.default) {

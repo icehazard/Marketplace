@@ -9,6 +9,7 @@ let accountHandler = require("../classes/accounts")
 let shopHandler = require('../classes/shops')
 let productHandler = require('../classes/products')
 let addressHandler = require('../classes/address')
+let orderHandler = require('../classes/orders')
 
 const fetch = require("node-fetch");
 const Config = require("../Config.json");
@@ -218,7 +219,7 @@ api.get('/me', async (req, res) => {
         recentAddresses: me.getRecentAddresses(),
         balances: me.getAllBalances(),
         deliveryAddresses: me.getDeliveryAddresses(),
-        orders: me.getOrders()
+        orders: (me.getOrders() && me.getOrders().length) ? me.getOrders().map(i => orderHandler.Orders.get(i._id)) : []
     }
 
     res.status(200).json(payload)
