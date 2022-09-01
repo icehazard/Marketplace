@@ -34,6 +34,7 @@ Orders.prototype.insert = async function(payload) {
     let orderObj = new Order(nid, payload)
     this.orders.set(nid, orderObj)
     orderObj.saveToDB();
+    console.log("PUSHING NID", nid)
     accountHandler.Accounts.get(payload.uid).orders.push(nid)
    
     return {status: "ok", orderId: nid}
@@ -70,7 +71,7 @@ Orders.prototype.loadFromDB = async function(id) {
 
             if (accountHandler.Accounts.has(p.uid)) {
                 let acc = accountHandler.Accounts.get(p.uid)
-                acc.orders.push(p)
+                acc.orders.push(p._id)
             }
         }
 
