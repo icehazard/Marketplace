@@ -28,8 +28,9 @@
         else notify(res.status, res.error);
     }
 
-    function handleSuccess(res) {
+    async function handleSuccess(res) {
         cart.reset();
+        await user.get();
         notify(1, "You have successfully placed your order");
         push(`#/orders/active/${res.orderId}`);
     }
