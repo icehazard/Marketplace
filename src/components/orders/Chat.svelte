@@ -1,6 +1,6 @@
 <script>
   import Bubble from "./Bubble.svelte";
-
+  import ws from "comp/network/ws.js"
   let data = [];
   let msg = "";
 
@@ -8,6 +8,7 @@
     console.log(msg);
     data = [...data, { sender: true, text: msg, time: "17:54" }];
     msg = "";
+    ws.send(JSON.stringify({ sender: true, text: msg, time: "17:54" }))
   }
 </script>
 

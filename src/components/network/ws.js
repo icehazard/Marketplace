@@ -1,6 +1,6 @@
 import ReconnectingWebSocket from 'reconnecting-websocket';
 import user from "@/store/user.js";
-const ws = new ReconnectingWebSocket(`ws://127.0.0.1:8085?token=${user.val('token')}`);
+const ws = new ReconnectingWebSocket(`ws://127.0.0.1:8085?token=${user.val('token') || "guest"}`);
 
 ws.addEventListener("open", function (event) {
     console.log("WS connected");
