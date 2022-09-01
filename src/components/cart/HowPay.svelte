@@ -4,7 +4,7 @@
     import { mq } from "@/assets/library/MediaQuery.svelte";
     import user from "@/store/user";
     import cart, { sumPriceTotal, sumQtyTotal } from "@/store/cart.js";
-    import { formatCurrency } from "@/assets/library/CommonFunctions.js";
+    import { formatCurrency, notify } from "@/assets/library/CommonFunctions.js";
     import pluralize from "pluralize";
     import { push } from "svelte-spa-router";
     import { acts } from "@tadashi/svelte-notification";
@@ -16,9 +16,8 @@
     let addressError = false;
     let noti = { mode: "danger", message: `Please select an address`, lifetime: 2 };
     async function next() {
-        if (!defaultAddress) acts.add(noti)
+        if (!defaultAddress) acts.add(noti);
         if (!defaultAddress) return (addressError = true);
-        
         if (pending) return;
         if (!$user.email) $user.redirect = "cart";
         pending = true;
@@ -26,15 +25,12 @@
         pending = false;
         addressError = false;
         if (res.status == "ok") return handleSuccess(res);
-        else handleFailure(res);
+        else notify(res.status, res.error);
     }
 
     function handleSuccess(res) {
+        notify(res.status, res)
         push(`#/orders/active/${res.orderId}`);
-    }
-
-    function handleFailure() {
-        res;
     }
 </script>
 

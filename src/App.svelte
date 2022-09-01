@@ -23,7 +23,7 @@
 
 <section class="col vh100">
 	<Navbar />
-	<Router {routes} on:conditionsFailed={conditionsFailed} />
+	<Router {routes} on:conditionsFailed={conditionsFailed} restoreScrollState={true} />
 	<MediaQuery />
 	<Mobile />
 	<Footer />

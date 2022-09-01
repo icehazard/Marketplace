@@ -7,12 +7,17 @@
 	import Title from "./Title.svelte";
 	import Circle from "comp/atoms/Circle.svelte";
 	import { mq } from "@/assets/library/MediaQuery.svelte";
-	import {clickOutside, formatCurrency, satoshiToBtcString} from "@/assets/library/CommonFunctions.js";
+	import cart from "@/store/cart.js";
+	import {
+		clickOutside,
+		formatCurrency,
+		satoshiToBtcString,
+	} from "@/assets/library/CommonFunctions.js";
 	import user, { totalBalance } from "@/store/user.js";
 	import { isShopActive } from "@/store/user.js";
 	import Icon from "@iconify/svelte";
 	import Notifications from "./Notifications.svelte";
-	import shops from '@/store/shops'
+	import shops from "@/store/shops";
 
 	let showModal = false;
 	let showNotifications = false;
@@ -20,7 +25,11 @@
 	let balanceBtc = satoshiToBtcString($totalBalance);
 
 	$: rate = currencies.find((el) => el.id == "BTC")?.convert;
-	$: $user.currency, (balance = $totalBalance ? formatCurrency($totalBalance/100000000 * rate) : formatCurrency(0.00)), (balanceBtc = satoshiToBtcString($totalBalance));
+	$: $user.currency,
+		(balance = $totalBalance
+			? formatCurrency(($totalBalance / 100000000) * rate)
+			: formatCurrency(0.0)),
+		(balanceBtc = satoshiToBtcString($totalBalance));
 
 	function toggle() {
 		showModal = !showModal;
@@ -35,11 +44,11 @@
 		showNotifications = false;
 	}
 	function shopRoute() {
-		let url = `#/shops/id/${user.shopID()}`
+		let url = `#/shops/id/${user.shopID()}`;
 		$isShopActive ? push(url) : push("#/store/create");
 	}
-	function toggleDrawer(){
-		$user.drawer = !$user.drawer
+	function toggleDrawer() {
+		$user.drawer = !$user.drawer;
 	}
 </script>
 
@@ -52,20 +61,30 @@
 				{#if $mq.lg_}
 					<div class="row gap-10">
 						<Circle
+							badge={4}
 							to="orders/active/42"
 							tooltip="Messages"
 							icon="fluent:text-bullet-list-square-clock-20-regular"
 						/>
-						<Circle tooltip="Cart" to="cart" icon="akar-icons:cart" />
+						<Circle
+							badge={$cart.cart.length}
+							tooltip="Cart"
+							to="cart"
+							icon="akar-icons:cart"
+						/>
 						<button on:click={shopRoute}>
 							<Circle tooltip="Shop Manager" icon="fluent:building-shop-16-regular" />
 						</button>
 						<div class="relative" use:clickOutside={closeNotifications}>
-							<button 	on:click={toggleNotifications}>
-								<Circle tooltip="Notifications" icon="fluent:alert-16-regular" />
+							<button on:click={toggleNotifications}>
+								<Circle
+									badge={1}
+									tooltip="Notifications"
+									icon="fluent:alert-16-regular"
+								/>
 							</button>
 							{#if showNotifications}
-							<Notifications />
+								<Notifications />
 							{/if}
 						</div>
 					</div>
@@ -80,7 +99,7 @@
 							on:click={toggle}
 						>
 							{#if $user.username}
-								 {balance}
+								{balance}
 							{:else}
 								<Icon icon="fluent:line-horizontal-3-20-regular" />
 							{/if}
@@ -122,7 +141,7 @@
 				{/if}
 				{#if $mq._md}
 					<button on:click={toggleDrawer}>
-						<Circle tooltip="menu"  icon="eva:menu-fill" />
+						<Circle tooltip="menu" icon="eva:menu-fill" />
 					</button>
 				{/if}
 			</section>
@@ -156,12 +175,12 @@
 	}
 
 	.absolute {
-        top: 50px;
-    }
+		top: 50px;
+	}
 
-	.w-200{
-        min-width: 200px;
-    }
+	.w-200 {
+		min-width: 200px;
+	}
 
 	@media only screen and (max-width: 1200px) {
 		.mobile-w100 {

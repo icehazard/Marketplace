@@ -48,7 +48,7 @@ context.updateItem = function (item) {
     let cartVal = context.val('cart')
     let con1 = Number(item.qty) < Number(item.qtyCart)
     if (con1) item.qtyCart = Number(item.qty)
-    let noti = { mode: "danger", message: `Not enough items in the store's stock to add to your cat`, lifetime: 2 };
+    let noti = { mode: "danger", message: `Not enough items in the store's stock to add to your cart`, lifetime: 2 };
     if (con1) acts.add(noti)
     else item.qtyCart = Number(item.qtyCart)
     if (Math.sign(item.qtyCart) < 1) context.removeFromCart(item)

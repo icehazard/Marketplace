@@ -32,11 +32,8 @@
         else totalMask |= val;
     }
     function notify(status, msg) {
-        return {
-            mode: status == 0 ? "error" : "success",
-            message: msg,
-            lifetime: 2,
-        };
+        let state = status == 0 ? "error" : "success";
+        return { mode: state, message: msg, lifetime: 2 };
     }
 </script>
 
