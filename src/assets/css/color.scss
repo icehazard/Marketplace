@@ -1,5 +1,6 @@
 :root {
     --primary: #00B04E;
+    --accent: #DF0051;
     --red : #F44336;
     --orange: #EF9125;
     --shade0: #161616;
@@ -78,6 +79,14 @@ $primaryActive: #ef6698;
 
 .primary {
     background-color: $primary;
+}
+
+.accent {
+    background-color: var(--accent);
+}
+
+.accent--text {
+    color: var(--accent);
 }
 
 .primary--text {

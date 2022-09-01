@@ -85,7 +85,7 @@
                             <div class="disblue pa-5 curve">Bank transfer</div>
                         {/if}
                         {#if $shops.paymentMask & 2}
-                            <div class="dismagenta pa-5 curve">Crypto</div>
+                            <div class="accent pa-5 curve">Crypto</div>
                         {/if}
                     </div>
                 </button>
@@ -95,7 +95,7 @@
                     <div class="blue pa-5 curve">Bank transfer</div>
                 {/if}
                 {#if $shops.paymentMask & 2}
-                    <div class="orange pa-5 curve">Crypto</div>
+                    <div class="accent pa-5 curve">Crypto</div>
                 {/if}
             </div>
             {/if}

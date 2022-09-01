@@ -3,6 +3,7 @@
     import { formatCurrency } from "@/assets/library/CommonFunctions.js";
     import * as timeago from "timeago.js";
     import { onMount } from "svelte";
+    import pluralize from "pluralize";
 
     export let order = {};
     let el;
@@ -22,7 +23,10 @@
     <div class="relative">
         <img {src} alt="" class="w-100 h-100 curve" />
         <div class="absolute p-bottom w100 mb-4 h-40 center ">
-            <span class="font-14"> 1 item(s)</span>
+            <span class="font-14">
+                {order.products.length}
+                {pluralize("item", order.products.length)}
+            </span>
         </div>
     </div>
     <div class="col grow justify-center gap-10 pr-20">
@@ -38,8 +42,7 @@
 </button>
 
 <style>
-
-    .absolute{
-        backdrop-filter: brightness(0.4)  blur(1px);
+    .absolute {
+        backdrop-filter: brightness(0.4) blur(1px);
     }
 </style>

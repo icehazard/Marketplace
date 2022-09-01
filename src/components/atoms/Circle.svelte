@@ -26,7 +26,7 @@
 
 <div class="relative">
    {#if badge > 0}
-   <div class="red pa-3 absolute z-3 round p-right font-12 nopointer center text--center">
+   <div class="accent pa-3 absolute z-3 round p-right font-12 nopointer center text--center">
     {badge}
 </div>
    {/if}

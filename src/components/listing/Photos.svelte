@@ -130,6 +130,12 @@
                             <Icon icon="fluent:add-circle-16-regular" height="50" color="grey" />
                         </button>
                     </SwiperSlide>
+                {:else}
+                    <SwiperSlide>
+                        <div class="pa-50 curve shade3">
+                            <Icon icon="carbon:no-image" height="50" color="grey" />
+                        </div>
+                    </SwiperSlide>
                 {/if}
             {/each}
         </Swiper>

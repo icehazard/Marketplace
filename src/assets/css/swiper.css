@@ -10,7 +10,7 @@
 
 .swiper-pagination-bullet-active {
   color: #fff;
-  background: #DF0051;
+  background: var(--accent);
 }
 
 .swiper{
