@@ -9,7 +9,6 @@
     import { push, location } from "svelte-spa-router";
     import { acts } from "@tadashi/svelte-notification";
 
-
     $: defaultAddress = $user.addresses.find((el) => el.default == true)?.address;
 
     let bank = "CRYPTO";
@@ -30,8 +29,8 @@
     }
 
     function handleSuccess(res) {
-        console.log("🚀 ~ res", res)
-        notify(1, res.status)
+        cart.reset();
+        notify(1, "You have successfully placed your order");
         push(`#/orders/active/${res.orderId}`);
     }
 </script>

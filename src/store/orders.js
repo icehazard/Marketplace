@@ -5,14 +5,15 @@ import user from '@/store/user'
 import products from '@/store/products'
 
 const data = {
-
+    order: {}
 }
 
 const context = persist('orders', data)
 
 context.get = async function (id) {
     let res = await get(`api/order/${id}`)
-    console.log("🚀 ~ res", res)
+    context.commit('order', res)
+    return;
 }
 
 export default context;
