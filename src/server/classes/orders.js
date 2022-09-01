@@ -82,7 +82,7 @@ class Order {
         this._id = _id;
         this.address = data.address;
         this.paymentType = data.paymentType;
-        this.products = data.products.map(i => {return {_id: i._id, qty: i.qty}})
+        this.products = data.products ? data.products.map(i => {return {_id: i._id, qty: i.qty}}) : []
         this.shopId = data.shopId;
         this.uid = data.uid;
         this.created_at = data.created_at;
