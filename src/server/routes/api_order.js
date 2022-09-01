@@ -113,7 +113,6 @@ api.post('/', async (req, res) => {
         return res.status(400).json({status: "error", error: "Payment type is invalid!", data: errorIds});
 
     req.body.uid = userID;
-    console.log("Setting uid to ", userID)
     let resp = await orderHandler.Orders.insert(req.body)
 
     if (resp.status === "error")
