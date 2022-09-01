@@ -219,7 +219,7 @@ api.get('/me', async (req, res) => {
         recentAddresses: me.getRecentAddresses(),
         balances: me.getAllBalances(),
         deliveryAddresses: me.getDeliveryAddresses(),
-        orders: (me.getOrders() && me.getOrders().length) ? me.getOrders().map(i => orderHandler.Orders.get(i._id)) : []
+        orders:me.getOrders()
     }
 
     res.status(200).json(payload)

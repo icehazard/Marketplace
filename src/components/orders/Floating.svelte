@@ -1,5 +1,7 @@
 <script>
+	import orders from '@/store/orders';
     import Chat from "./Chat.svelte";
+    
 
     let expand = true;
 
@@ -21,7 +23,7 @@
     <div class="row space-between align-center gap-20 pa-20">
         <div class="col gap-20 ">
             <span class="opacity-75">Order ID</span>
-            <span>#233238723</span>
+            <span>{$orders.order}</span>
         </div>
         <div class="col gap-20">
             <span class="opacity-75">Product</span>
