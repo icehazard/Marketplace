@@ -22,19 +22,19 @@
     </div>
     <hr />
     <div class="row space-between align-center gap-20 pa-20">
-        <div class="col gap-20 ">
+        <div class="col gap-20 grow">
             <span class="opacity-75">Order ID</span>
             <span>{$orders.order._id}</span>
         </div>
-        <div class="col gap-20">
+        <div class="col gap-20 grow">
             <span class="opacity-75">Product</span>
             <span>White Widow</span>
         </div>
-        <div class="col gap-20">
+        <div class="col gap-20 grow">
             <span class="opacity-75">Price</span>
             <span>{formatCurrency($orders.order.total)}</span>
         </div>
-        <div class="col gap-20">
+        <div class="col gap-20 grow">
             <span class="opacity-75">Address</span>
             <span>{$orders.order.address}</span>
         </div>

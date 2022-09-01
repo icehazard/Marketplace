@@ -89,7 +89,7 @@ class Order {
         this.shopId = data.shopId;
         this.uid = data.uid;
         this.created_at = data.created_at;
-        this.total = data.total;
+        this.total = data.total;    
     }
 
     async saveToDB() {

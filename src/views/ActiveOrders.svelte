@@ -6,16 +6,23 @@
     import Categories from "comp/toolbars/categories/Settings.svelte";
     import orders from "@/store/orders";
     import user from "@/store/user";
-    import { location } from "svelte-spa-router";
+    import { push, location } from "svelte-spa-router";
+
+   $: $location, update();
 
     function update() {
         let loc = $location.split("/");
         loc = loc[loc.length - 1];
+        if (isNaN(loc)) return getLast();
         orders.get(loc);
     }
+    async function getLast() {
+        await user.get();
+        let id = $user.orders[0]._id
+        orders.get(id);
+        push(`#/orders/active/${id}`)
+    }
 
-    $: $location, update();
-    
     update();
     user.get();
 </script>
