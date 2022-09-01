@@ -1,5 +1,8 @@
 <script>
+	import orders from '@/store/orders';
     import Chat from "./Chat.svelte";
+    import { formatCurrency } from "@/assets/library/CommonFunctions.js";
+    
 
     let expand = true;
 
@@ -19,21 +22,21 @@
     </div>
     <hr />
     <div class="row space-between align-center gap-20 pa-20">
-        <div class="col gap-20 ">
+        <div class="col gap-20 grow">
             <span class="opacity-75">Order ID</span>
-            <span>#233238723</span>
+            <span>{$orders.order._id}</span>
         </div>
-        <div class="col gap-20">
+        <div class="col gap-20 grow">
             <span class="opacity-75">Product</span>
             <span>White Widow</span>
         </div>
-        <div class="col gap-20">
+        <div class="col gap-20 grow">
             <span class="opacity-75">Price</span>
-            <span>EUR 289</span>
+            <span>{formatCurrency($orders.order.total)}</span>
         </div>
-        <div class="col gap-20">
+        <div class="col gap-20 grow">
             <span class="opacity-75">Address</span>
-            <span>Soi king pattana 4</span>
+            <span>{$orders.order.address}</span>
         </div>
     </div>
     <hr>

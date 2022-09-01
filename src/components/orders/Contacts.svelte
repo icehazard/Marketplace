@@ -14,7 +14,7 @@
         </div>
     </div>
     <div class="gap-20 col pa-20">
-        {#each $user.orders as order}
+        {#each $user.orders.reverse() as order}
             <Contact  order={order} />
         {/each}
     </div>

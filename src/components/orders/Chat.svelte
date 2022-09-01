@@ -3,14 +3,6 @@
 
   let data = [
     { sender: true, text: "Did you eat anything cocksucker", time: "17:54" },
-    { sender: false, text: "Did you eat anything cocksucker", time: "18:04" },
-    { sender: true, text: "Did you eat anything cocksucker", time: "18:24" },
-    { sender: true, text: "Did you eat anything cocksucker", time: "17:54" },
-    { sender: false, text: "Did you eat anything cocksucker", time: "18:04" },
-    { sender: true, text: "Did you eat anything cocksucker", time: "18:24" },
-    { sender: true, text: "Did you eat anything cocksucker", time: "17:54" },
-    { sender: false, text: "Did you eat anything cocksucker", time: "18:04" },
-    { sender: true, text: "Did you eat anything cocksucker", time: "18:24" },
   ];
 </script>
 

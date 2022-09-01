@@ -4,15 +4,27 @@
     import Contacts from "comp/orders/Contacts.svelte";
     import Details from "comp/orders/Details.svelte";
     import Categories from "comp/toolbars/categories/Settings.svelte";
-    import orders from '@/store/orders'
-    import user from '@/store/user'
-    import {  location } from "svelte-spa-router";
+    import orders from "@/store/orders";
+    import user from "@/store/user";
+    import { push, location } from "svelte-spa-router";
 
-    let loc = $location.split("/");
-    loc = loc[loc.length - 1];
+   $: $location, update();
 
-    orders.get(loc);
+    function update() {
+        let loc = $location.split("/");
+        loc = loc[loc.length - 1];
+        if (isNaN(loc)) return getLast();
+        orders.get(loc);
+    }
+    async function getLast() {
+        await user.get();
+        let id = $user.orders[0]._id
+        orders.get(id);
+        push(`#/orders/active/${id}`)
+    }
 
+    update();
+    user.get();
 </script>
 
 <section class="row h100 container gap-50 pt-50">
@@ -30,7 +42,7 @@
 </section>
 
 <style>
-    .lol{
+    .lol {
         height: calc(100vh - 200px);
     }
 </style>
