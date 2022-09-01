@@ -224,7 +224,6 @@ api.get('/me', async (req, res) => {
         balances: me.getAllBalances(),
         deliveryAddresses: me.getDeliveryAddresses(),
         orders: (ord && ord.length) ? ord.map(i => {
-            console.log("Checking order id", i)
             return orderHandler.Orders.get(i)
         }) : []
     }

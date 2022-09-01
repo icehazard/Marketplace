@@ -11,12 +11,12 @@
 	import MediaQuery from "@/assets/library/MediaQuery.svelte";
 	import { replace } from "svelte-spa-router";
 	import { Notifications, acts } from "@tadashi/svelte-notification";
-	const socket = new WebSocket("ws://www.localhost:8085");
-
+	import ws from 'comp/network/ws.js'
 	function conditionsFailed(event) {
 		replace("/signup");
 	}
 
+	console.log(ws)
 	user.get();
 	user.setTheme();
 </script>

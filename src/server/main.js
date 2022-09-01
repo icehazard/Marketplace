@@ -29,16 +29,7 @@ const Config = require("./Config.json");
 const fetch = require("node-fetch");
 const base64 = require("base-64");
 const { check } = require("bitcoinjs-lib/src/bip66");
-
-let WebSocketServer = require('ws').Server
-let wss = new WebSocketServer({ port: 8085 });
-
-wss.on('connection', function(ws) {
-    ws.on('message', function(message) {
-        console.log('received: %s', message);
-    });
-    ws.send('something');
-});
+const ws = require("./classes/ws");
 
 (async () => {
 
