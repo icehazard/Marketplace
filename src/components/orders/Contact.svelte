@@ -9,9 +9,9 @@
     </div>
     <div class="col grow justify-center gap-15 pr-20">
         <span>Amnesia Haze</span>
-        <span>{order}</span>
-        <span>Soi King Pattana 3, Rawai, Phuket</span>
-        <span>EUR 34</span>
+        <span>{order._id}</span>
+        <span>{order.address}</span>
+        <span>{order.total}</span>
     </div>
 </button>
 

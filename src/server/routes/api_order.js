@@ -94,11 +94,14 @@ api.post('/', async (req, res) => {
     }
 
     // order fine, now reduce existing qty
+    let sum = 0
+
     for (let p of products) {
         let pId = p._id
 
         let memProd = productHandler.Products.get(pId)
 
+        sum += Number(memProd.price) * Number(p.qty)
         if (p.qty <= memProd.qty)
         {
             memProd.qty -= p.qty;
@@ -106,6 +109,7 @@ api.post('/', async (req, res) => {
         }
     }
 
+    req.body.total = sum;
     if (!me.hasDeliveryAddress(address))
         return res.status(400).json({status: "error", error: "You dont have this delivery address saved! Contact admin please."});
 
