@@ -29,7 +29,8 @@
     }
 
     function handleSuccess(res) {
-        notify(res.status, res)
+        console.log("🚀 ~ res", res)
+        notify(1, res)
         push(`#/orders/active/${res.orderId}`);
     }
 </script>

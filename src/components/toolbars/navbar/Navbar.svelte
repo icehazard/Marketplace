@@ -62,8 +62,9 @@
 					<div class="row gap-10">
 						<Circle
 							badge={4}
-							to="orders/active/42"
-							tooltip="Messages"
+							clearClick
+							to="orders/active"
+							tooltip="Orders"
 							icon="fluent:text-bullet-list-square-clock-20-regular"
 						/>
 						<Circle
@@ -79,6 +80,7 @@
 							<button on:click={toggleNotifications}>
 								<Circle
 									badge={1}
+									clearClick
 									tooltip="Notifications"
 									icon="fluent:alert-16-regular"
 								/>

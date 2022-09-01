@@ -8,12 +8,14 @@
     export let icon = "";
     export let tooltip = "";
     export let badge = 0;
+    export let clearClick = false
 
     let el;
 
     $: goTo = to ? true : false;
 
     function click() {
+        if (clearClick) badge = 0;
         dispatch("click");
     }
 
