@@ -22,8 +22,13 @@
       <Bubble {item} />
     {/each}
   </div>
-  <form class="row shade0 px-20  h-60 align-center" on:submit|preventDefault={submit}>
-    <input bind:value={msg} type="text" class="w100" placeholder="Write a message" />
+  <form class="row align-center" on:submit|preventDefault={submit}>
+    <input
+      bind:value={msg}
+      type="text"
+      class="w100 px-20 shade0 h-60"
+      placeholder="Write a message"
+    />
   </form>
 </div>
 

@@ -12,6 +12,7 @@
     function open() {
         expand = true;
     }
+
 </script>
 
 <div class="shade1 absolute p-bottom col  z-2  slow" class:expanded={expand}>
@@ -36,7 +37,7 @@
         </div>
         <div class="col gap-20 grow">
             <span class="opacity-75">Address</span>
-            <span>{$orders.order.address}</span>
+            <span class="font-14">{$orders.order.address}</span>
         </div>
     </div>
     <hr>
