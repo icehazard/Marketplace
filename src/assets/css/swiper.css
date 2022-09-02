@@ -13,6 +13,10 @@
   background: var(--accent);
 }
 
+.swiper-wrapper{
+  gap: 10px;
+}
+
 .swiper{
   margin-left: 0;
   margin-right: 0;
