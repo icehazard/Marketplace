@@ -5,12 +5,17 @@
     import { formatCurrency } from "@/assets/library/CommonFunctions.js";
 
     export let data = [];
+
     $: src = `http://localhost:8080/api/image/` + Object.values(data.photos).slice(0, 1);
 </script>
 
 <div class="row shade1 curve wrapper">
-    {#if data.photos}
-        <img src={src} alt="" />
+    {#if Object.keys(data.photos).length > 0}
+        <img {src} alt="" />
+    {:else}
+        <span class="imgWrapper center">
+            <Icon icon="carbon:no-image" height="50" color="grey" />
+        </span>
     {/if}
     <div class="row pa-20 grow gap-50">
         <div class="col  grow overflow-hidden gap-10">
@@ -43,6 +48,13 @@
 
 <style>
     img {
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 10px;
+    }
+
+    .imgWrapper {
         width: 200px;
         height: 200px;
         object-fit: cover;

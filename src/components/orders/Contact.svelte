@@ -1,6 +1,7 @@
 <script>
     import { push } from "svelte-spa-router";
     import { formatCurrency } from "@/assets/library/CommonFunctions.js";
+    import Icon from "@iconify/svelte";
     import * as timeago from "timeago.js";
     import { onMount } from "svelte";
     import pluralize from "pluralize";
@@ -21,8 +22,14 @@
 
 <button class="row w100 align-center border py-20 curve shine gap-15 pa-5" on:click={view}>
     <div class="relative">
-        <img {src} alt="" class="w-100 h-100 curve" />
-        <div class="absolute p-bottom w100 mb-4 h-40 center ">
+        <div class="placeholder center">
+            {#if order.productPhoto}
+                <img {src} alt="" class="w-100 h-100 curve" />
+            {:else}
+                <Icon icon="carbon:no-image" height="50" color="grey" />
+            {/if}
+        </div>
+        <div class="absolute p-bottom w100 h-40 center ">
             <span class="font-14">
                 {order.products.length}
                 {pluralize("item", order.products.length)}
@@ -44,5 +51,10 @@
 <style>
     .absolute {
         backdrop-filter: brightness(0.4) blur(1px);
+    }
+
+    .placeholder {
+        height: 100px;
+        width: 100px;
     }
 </style>
