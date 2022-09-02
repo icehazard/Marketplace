@@ -51,14 +51,12 @@ context.postCover = async function (data) {
 
 context.postProductImage = async function (data, index) {
     let url = `api/product/${products.val('product')._id}/album?index=` + index;
-    let res = await postImage(url, data)
-    return res.avatar
+    return await postImage(url, data);
 }
 
 context.deleteProductImage = async function (data, index) {
     let url = `api/product/${products.val('product')._id}/album?index=` + index;
-    let res = await deleteImage(url, data)
-    return
+    return await deleteImage(url, data)
 }
 
 context.postProfile = async function (data) {

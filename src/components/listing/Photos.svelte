@@ -5,6 +5,8 @@
     import Icon from "@iconify/svelte";
     import shops from "@/store/shops";
     import { isOwnProduct } from "@/store/products.js";
+    import { notify } from "@/assets/library/CommonFunctions.js";
+    import { fly } from 'svelte/transition';
 
     import { Swiper, SwiperSlide } from "swiper/svelte";
     import { Pagination } from "swiper";
@@ -18,54 +20,53 @@
     let maxPics = 5;
     let newval = false;
 
-    $: currentImg = current();
+    $: currentImg = Object.values($products?.product?.photos || []).slice(0, maxPics);
+    $: currentImg, checkIndex();
+    $: index, checkIndex();
 
-    function current() {
-        try {
-            return Object.values($products?.product?.photos).slice(0, maxPics);
-        } catch {
-            return [];
-        }
+    function checkIndex() {
+        if (index + 1 <= currentImg.length) return;
+        index = currentImg.length - 1;
     }
-
     function openPicker(idx, val) {
         newval = val;
         if (!$isOwnProduct) return;
         index = idx;
         picker.click();
     }
-
     function switching(idx) {
         index = idx;
     }
-
     async function upload(e) {
         image.src = URL.createObjectURL(e.target.files.item(0));
         let formData = new FormData(el);
         this.load = true;
-        setTimeout(async () => {
-            let id = $products.productsAll.findIndex((el) => el._id == $products.product._id);
-            let highest = 0;
-            for (let x of Object.keys($products.product.photos)) {
-                if (x > highest) highest = x;
-            }
-            highest = Number(highest) + 1;
-            let idx = newval ? highest : Object.keys($products.productsAll[id].photos)[index];
-            console.log("🚀 ~ idx", idx);
-            await shops.postProductImage(formData, idx);
-            await products.getAllProducts();
-            $products.product = $products.productsAll[id];
-            this.load = false;
-            picker.files = new DataTransfer().files;
-        }, 0);
+        let id = $products.productsAll.findIndex((el) => el._id == $products.product._id);
+        let highest = 0;
+        for (let x of Object.keys($products.product.photos)) {
+            if (x > highest) highest = x;
+        }
+        highest = Number(highest) + 1;
+        let idx = newval ? highest : Object.keys($products.productsAll[id].photos)[index];
+        let res = await shops.postProductImage(formData, idx);
+        if (res.photo) notify(1, "You have successfully uploaded a picture");
+        else notify(0, "Upload unsuccessfull");
+        await products.getAllProducts();
+        await products.get();
+        $products.product = $products.productsAll[id];
+        index = currentImg.length
+        this.load = false;
+        picker.files = new DataTransfer().files;
     }
     async function del() {
         let formData = new FormData(el);
         let id = $products.products.findIndex((el) => el._id == $products.product._id);
-        // console.log("🚀 ~ id", $products.products[id])
         let keys = Object.keys($products.products[id].photos);
-        await shops.deleteProductImage(formData, Number(keys[index]));
+        let res = await shops.deleteProductImage(formData, Number(keys[index]));
+        if (res == 200) notify(1, "Product picture deleted");
+        else notify(0, "Could not delete the picture");
         await products.get();
+        await products.getAllProducts();
         $products.product = $products.products[id];
     }
 </script>
@@ -74,21 +75,27 @@
     <form bind:this={el} class="none" enctype="multipart/form-data">
         <input type="file" on:change={upload} name="avatar" bind:this={picker} />
     </form>
+   
+        <img
+            src={`http://localhost:8080/api/image/` + currentImg[index]}
+            class:none={currentImg[index] ? false : true}
+            class:own={$isOwnProduct}
+            alt=""
+            bind:this={image}
+            class="main h-300 w-300 w100"
+            on:click={() => openPicker(index, false)}
+        />
 
-    <img
-        src={`http://localhost:8080/api/image/` + currentImg[index]}
-        class:none={currentImg[index] ? false : true}
-        class:own={$isOwnProduct}
-        alt=""
-        bind:this={image}
-        class="main h-300 w-300 w100"
-        on:click={() => openPicker(index, false)}
-    />
-    <span
-        class="absolute shade2 shadow curve font-14 w-50 h-30 ma-10 center w100 p-top p-left nopointer nowrap"
-    >
-        {index + 1} / {currentImg.length}
-    </span>
+   
+
+    {#if currentImg.length > 0}
+        <span
+            class="absolute shade2 shadow curve font-14 w-50 h-30 ma-10 center w100 p-top p-left nopointer nowrap"
+        >
+            {index + 1} / {currentImg.length}
+        </span>
+    {/if}
+
     {#if $isOwnProduct}
         <button class="absolute p-top p-right pa-10 red--text " on:click={del}>
             <Icon icon="fluent:delete-12-regular" width="20" />
