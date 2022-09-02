@@ -50,7 +50,7 @@
 
 <style>
     .absolute {
-        backdrop-filter: brightness(0.4) blur(1px);
+        backdrop-filter: brightness(0.7) blur(1px);
     }
 
     .placeholder {
