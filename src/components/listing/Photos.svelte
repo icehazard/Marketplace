@@ -32,11 +32,11 @@
         picker.click();
     }
     function switching(idx) {
-        restart();
         index = idx;
     }
 
     async function upload(e) {
+        console.log('a')
         image.src = URL.createObjectURL(e.target.files.item(0));
         let formData = new FormData(el);
         this.load = true;
@@ -70,7 +70,7 @@
     }
 </script>
 
-<button class="shade1 curve center relative h-400">
+<button class="shade1 curve center relative h-400" >
     <form bind:this={el} class="none" enctype="multipart/form-data">
         <input type="file" on:change={upload} name="avatar" bind:this={picker} />
     </form>
@@ -81,7 +81,6 @@
         alt=""
         bind:this={image}
         class="main w-300 w100 h-400"
-        on:click={() => openPicker(index, false)}
     />
 
     {#if currentImg.length == 0}
@@ -100,7 +99,7 @@
             <Icon icon="fluent:delete-12-regular" width="20" />
         </button>
     {/if}
-    <div class="edit "><Edit /></div>
+    <!-- <div class="edit "><Edit /></div> -->
 </button>
 <div class="curve col gap-20 ">
     <div class="row gap-10 ">
@@ -155,11 +154,11 @@
         transition: all 0.3s ease;
     }
 
-    .own:hover {
+    /* .own:hover {
         backdrop-filter: brightness(0.5);
         filter: brightness(0.5);
-    }
-    button:hover .edit {
+    } */
+    /* button:hover .edit {
         opacity: 1;
     }
 
@@ -168,7 +167,7 @@
         transition: all 0.2s ease-out;
         position: absolute;
         pointer-events: none;
-    }
+    } */
     button {
         overflow: hidden;
     }
