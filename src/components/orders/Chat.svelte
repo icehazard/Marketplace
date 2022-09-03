@@ -1,6 +1,6 @@
 <script>
   import Bubble from "./Bubble.svelte";
-  import { afterUpdate } from "svelte";
+  import { afterUpdate, onMount } from "svelte";
   import { ws } from "@/store/ws";
   import orders from "@/store/orders";
   import user from "@/store/user";
@@ -8,10 +8,10 @@
   let msg = "";
   let el;
 
-  function scroll() {
+  function scroll(force) {
     if (!el) return;
     let dif = el.scrollTop + 500 - el.scrollHeight;
-    if (dif < -120) return;
+    if (dif < -120 && !force) return;
     el.scrollTop = el.scrollHeight;
   }
   function submit() {
@@ -34,6 +34,10 @@
 
   afterUpdate(() => {
     scroll();
+  });
+
+  onMount(() => {
+    scroll(true);
   });
 </script>
 
