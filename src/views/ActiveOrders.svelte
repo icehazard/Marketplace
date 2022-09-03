@@ -9,7 +9,7 @@
     import { mq } from "@/assets/library/MediaQuery.svelte";
 
     $: $location, update();
-    let menu = false;
+    let menu = true;
 
     function update() {
         let loc = $location.split("/");
@@ -34,7 +34,7 @@
 <section class="row h100 container gap-50 pt-50">
     <div class="col grow gap-20">
         <Details />
-        {#if $mq.md_}
+        {#if $mq.lg_}
             <div class="row grow gap-20">
                 <Contacts />
                 <section class="grow col relative containerHeight">

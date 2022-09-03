@@ -6,6 +6,8 @@
     import { mq } from "@/assets/library/MediaQuery.svelte";
     import Contact from "./Contact";
     import user from "@/store/user";
+    import Product from "./Product.svelte";
+    import Button from "../atoms/Button.svelte";
 </script>
 
 <div class="shade1 p-bottom col  z-2  slow">
@@ -55,10 +57,19 @@
         <span class="font-14">{$orders.order.address}</span>
     </div>
     <hr />
+    <div class="row pa-15">
+        <span class="opacity-75 w100 nowrap"
+            >Purchased {pluralize("item", $orders.order.products.length)}:</span
+        >
+    </div>
     <div class="gap-20 col pa-20">
-        <!-- {#each $orders.order.products as order}
-             {order._id} 
-        {/each} -->
+        {#each $orders.order.products as product}
+            <Product {product} />
+        {/each}
+    </div>
+    <div class="row pa-15 space-between grow align-end h100">
+        Cancel Order
+        <Button text="Cancel" />
     </div>
 </div>
 

@@ -9,6 +9,7 @@
     export let disable = false;
     export let pending = false;
     export let primary = false;
+    export let danger = false;
 
     let connect = () => {
         dispatch("click");
@@ -18,6 +19,7 @@
 <button
     class="curve center shine borderStrong  py-10 px-40 text-center nowrap"
     class:primary
+    class:danger
     class:disable
     disabled={disable}
     class:hack={block}
