@@ -10,7 +10,8 @@ module.exports = {
     COLLECTION_SERVER: 'server',
     COLLECTION_PROCESSED_TXS: 'processed_txs',
     COLLECTION_TRACKED_TXS: 'tracked_txs',
-    COLLECTION_ORDERS: 'orders'
+    COLLECTION_ORDERS: 'orders',
+    COLLECTION_CHAT: 'chat'
 
 
 }

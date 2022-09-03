@@ -55,6 +55,7 @@
     "pluralize": "^8.0.0",
     "qrcode": "^1.5.0",
     "reconnecting-websocket": "^4.4.0",
+    "snowflakey": "^0.2.0",
     "svelte-checkbox": "^1.0.1",
     "svelte-forms-lib": "^2.0.1",
     "svelte-loading-spinners": "^0.1.7",

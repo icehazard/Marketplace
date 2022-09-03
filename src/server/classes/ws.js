@@ -3,6 +3,7 @@ const { WebSocketServer } = require('ws');
 const wss = new WebSocketServer({
     port: 8085
 });
+let dbHandler = require("../db/dbhandler")
 let accountHandler = require("../classes/accounts")
 let shopHandler = require('../classes/shops')
 let productHandler = require('../classes/products')
@@ -130,8 +131,10 @@ wss.on('connection', async function(ws, req) {
             if (json.opcode == "chat") {
                 let receiverId = json.receiverId
                 //if (wss.clients)
-                if (ws.haveMutualOrderByShopId(receiverId))
+                if (ws.haveMutualOrderByShopId(receiverId)) {
                     sendToIdByShop(receiverId, JSON.stringify(json))
+
+                }
                 else
                     console.log("NO MUTUAL ORDER WITH REC ID", receiverId)
             }

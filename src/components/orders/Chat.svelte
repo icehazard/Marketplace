@@ -3,6 +3,8 @@
   import { afterUpdate } from "svelte";
   import wsStore, {ws} from "@/store/ws"
   import orders from '@/store/orders'
+  import {snowflake} from 'comp/utils/snowflake'
+
   let data = $wsStore.wsdata;
   let msg = "";
 
@@ -22,7 +24,8 @@
   function submit() {
     console.log("Sent chat msg: ", msg);
     //data = [...data, { sender: true, text: msg, time: new Date() }];
-    let payload = { sender: true, opcode: "chat", receiverId: $orders.order.shopId, msg, time: new Date() }
+    let payload = { sender: true, nonce: snowflake.generate(), opcode: "chat", receiverId: $orders.order.shopId, msg, time: new Date() }
+    console.log(payload)
     wsStore.commit('wsdata', [...wsStore.val('wsdata'), payload])
     ws.send(JSON.stringify(payload))
     msg = "";
