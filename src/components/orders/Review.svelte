@@ -53,8 +53,10 @@
         </div>
     </div>
     <div class="row gap-20 pa-15">
-        <span class="opacity-75 w-120 w100">Delivery Address</span>
-        <span class="font-14">{$orders.order.address}</span>
+        <span class="opacity-75 w-120 nowrap">Delivery Address</span>
+        <span class="font-14 text-end w100" class:text-end={!$mq.md_} class:w100={!$mq.md_}>
+            {$orders.order.address}
+        </span>
     </div>
     <hr />
     <div class="row pa-15">

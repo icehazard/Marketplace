@@ -1,13 +1,10 @@
-import { persist, post, get, hasError, postImage, patch, deleteImage } from '@/assets/library/CommonFunctions.js'
-import { derived } from "svelte/store";
-import { push } from "svelte-spa-router";
-import user from '@/store/user'
-import products from '@/store/products'
+import { persist, get } from '@/assets/library/CommonFunctions.js'
 import { notify } from "@/assets/library/CommonFunctions.js";
 
 const data = {
     order: {},
-    chat: []
+    chat: [],
+    smMenu: true
 }
 
 const context = persist('orders', data)

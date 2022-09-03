@@ -9,8 +9,9 @@
     import { mq } from "@/assets/library/MediaQuery.svelte";
 
     $: $location, update();
-    let menu = true;
 
+    $orders.smMenu = true;
+    
     function update() {
         let loc = $location.split("/");
         if (!loc.includes("orders")) return;
@@ -44,7 +45,7 @@
             </div>
         {:else}
             <div class="row grow gap-20">
-                {#if menu}
+                {#if $orders.smMenu}
                     <Contacts />
                 {:else}
                     <section class="grow col relative containerHeight">

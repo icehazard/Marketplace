@@ -28,7 +28,6 @@
       senderId: $user._id,
       msg,
       _id: new Date(),
-      time: new Date(),
     };
   }
 
