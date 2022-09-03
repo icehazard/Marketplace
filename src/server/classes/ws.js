@@ -145,5 +145,4 @@ wss.on('connection', async function(ws, req) {
         }
 
     });
-    ws.send('something');
 });

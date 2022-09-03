@@ -1,5 +1,6 @@
 <script>
     export let item;
+    import dayjs from 'dayjs'
 </script>
 
 <div class="row pa-20 " class:justify-end={item.sender}>
@@ -11,6 +12,6 @@
         >
             {item.msg}
         </div>
-        <span class="font-14">{item.time}</span>
+        <span class="font-14">{dayjs(item.time).format("HH:mm")}</span>
     </div>
 </div>

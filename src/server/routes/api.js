@@ -219,6 +219,8 @@ api.get('/me', async (req, res) => {
     let ord = me.getOrders()
 
     let payload = {
+        _id: me._id,
+        username: me.username,
         shops: sids,
         recentAddresses: me.getRecentAddresses(),
         balances: me.getAllBalances(),

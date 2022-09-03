@@ -152,6 +152,14 @@ api.get('/:id', async (req, res) => {
         return res.status(400).json({status: "error", error: "Order doesnt exist!"})
 
     let order = orderHandler.Orders.get(oid)
+ 
+    for (let x in order.products){
+        let prod =  order.products[x]
+        let qty = prod.qty
+        let memProd = productHandler.Products.get(prod._id)
+        order.products[x] = memProd
+        order.products[x].qty = qty
+    }
 
     return res.status(200).json(order)
 })

@@ -81,6 +81,10 @@ $primaryActive: #ef6698;
     background-color: $primary;
 }
 
+.danger {
+    background-color: var(--red);
+}
+
 .accent {
     background-color: var(--accent);
 }

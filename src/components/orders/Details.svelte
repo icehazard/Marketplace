@@ -1,6 +1,4 @@
 <script>
-  import Floating from "./Floating.svelte";
-  import Map from "./../atoms/Map.svelte";
   import Icon from "@iconify/svelte";
 </script>
 

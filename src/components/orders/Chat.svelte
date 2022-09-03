@@ -1,41 +1,49 @@
 <script>
   import Bubble from "./Bubble.svelte";
-  import { afterUpdate } from "svelte";
-  import wsStore, {ws} from "@/store/ws"
-  import orders from '@/store/orders'
-  import {snowflake} from 'comp/utils/snowflake'
+  import { afterUpdate, onMount } from "svelte";
+  import { ws } from "@/store/ws";
+  import orders from "@/store/orders";
+  import user from "@/store/user";
 
-  let data = $wsStore.wsdata;
   let msg = "";
-
   let el;
 
-  function scroll() {
+  function scroll(force) {
     if (!el) return;
     let dif = el.scrollTop + 500 - el.scrollHeight;
-    if (dif < -120) return;
+    if (dif < -120 && !force) return;
     el.scrollTop = el.scrollHeight;
+  }
+  function submit() {
+    let payload = generatePayload();
+    ws.send(JSON.stringify(payload));
+    orders.addMsgToStore(payload);
+    msg = "";
+  }
+  function generatePayload() {
+    return {
+      opcode: "chat",
+      orderId: $orders.order._id,
+      receiverId: $orders.order.shopId,
+      senderId: $user._id,
+      msg,
+      _id: new Date(),
+      time: new Date(),
+    };
   }
 
   afterUpdate(() => {
     scroll();
   });
 
-  function submit() {
-    console.log("Sent chat msg: ", msg);
-    //data = [...data, { sender: true, text: msg, time: new Date() }];
-    let payload = { sender: true, nonce: snowflake.generate(), opcode: "chat", receiverId: $orders.order.shopId, msg, time: new Date() }
-    console.log(payload)
-    wsStore.commit('wsdata', [...wsStore.val('wsdata'), payload])
-    ws.send(JSON.stringify(payload))
-    msg = "";
-    ws.send(JSON.stringify({ sender: true, text: msg, time: "17:54" }))
-  }
+  onMount(() => {
+    scroll(true);
+  });
 </script>
 
 <div class="grow col">
   <div class="col grow frame" bind:this={el}>
-    {#each data as item}
+    {#each $orders.chat as item}
       <Bubble {item} />
     {/each}
   </div>

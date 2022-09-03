@@ -16,7 +16,6 @@
 		replace("/signup");
 	}
 
-	console.log(ws)
 	user.get();
 	user.setTheme();
 </script>

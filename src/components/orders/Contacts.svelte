@@ -1,8 +1,7 @@
 <script>
     import Icon from "@iconify/svelte";
     import Contact from "./Contact";
-
-    import user from '@/store/user'
+    import user from "@/store/user";
 </script>
 
 <section class="w-500 w100 h100 col ">
@@ -15,7 +14,7 @@
     </div>
     <div class="gap-20 col pa-20">
         {#each $user.orders.reverse() as order}
-            <Contact  order={order} />
+            <Contact {order} />
         {/each}
     </div>
 </section>

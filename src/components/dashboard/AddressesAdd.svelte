@@ -14,31 +14,27 @@
     $: type = $location.includes("edit");
     $: choose = $location.includes("choose");
 
-    function add() {
-        let data = {
-            name: "Address",
+    function payload(name, address, icon, init) {
+        return {
+            name,
             address,
-            icon: "fluent:location-16-regular",
-            default: true,
+            icon,
+            default: init,
         };
-
+    }
+    function add() {
+        let default_icon = "fluent:location-16-regular";
+        let data = payload("Address", address, default_icon, true);
         user.postHomeAddress(data);
         if (choose) return push("#/addresses/choose");
         push("#/addresses/overview");
     }
-
     function edit() {
-        let data = {
-            name: $user.addresses[id].name,
-            address,
-            icon: $user.addresses[id].icon,
-            default: $user.addresses[id].default,
-        };
-
+        let obj = $user.addresses[id];
+        let data = payload(obj.name, address, obj.icon, obj.default);
         user.editHomeAddress(id, data);
         push("#/addresses/overview");
     }
-
     function updateAddres(addr) {
         address = addr.detail;
     }
@@ -60,11 +56,15 @@
         </button>
     </div>
     <div class="row pa-20 gap-20 shade3 curve space-between">
-       <div class="w-500 w100 grow">
-        <Field label="Type an address" bind:ref={el} bind:value={address} />
-       </div>
+        <div class="w-500 w100 grow">
+            <Field label="Type an address" bind:ref={el} bind:value={address} />
+        </div>
         {#if $mq.sm_}
-        <Button text="{type ? 'Save' : 'Add'} Address" on:click={() => (type ? edit() : add())} />
+            <Button
+            primary
+                text="{type ? 'Save' : 'Add'} Address"
+                on:click={() => (type ? edit() : add())}
+            />
         {/if}
     </div>
     <div class="row grow">
@@ -72,9 +72,13 @@
     </div>
 </div>
 {#if !$mq.sm_}
-<div class="fixed w100">
-    <Button block='true' text="{type ? 'Save' : 'Add'} Address" on:click={() => (type ? edit() : add())} />
-</div>
+    <div class="fixed w100">
+        <Button
+            block="true"
+            text="{type ? 'Save' : 'Add'} Address"
+            on:click={() => (type ? edit() : add())}
+        />
+    </div>
 {/if}
 
 <style>
@@ -82,4 +86,3 @@
         bottom: 55px;
     }
 </style>
-

@@ -1,5 +1,6 @@
 import ReconnectingWebSocket from 'reconnecting-websocket';
 import user from "@/store/user.js";
+import orders from "@/store/orders.js";
 import { persist, get, post, hasError, del } from '@/assets/library/CommonFunctions.js'
 
 const ws = new ReconnectingWebSocket(`ws://127.0.0.1:8085?token=${user.val('token') || "guest"}`);
@@ -24,12 +25,16 @@ ws.addEventListener("message", function (event) {
     try {
         let json = JSON.parse(event.data);
         console.log(json)
+
+        if (json.opcode == 'chat') {
+            orders.addMsgToStore(json.data)
+        }
+
         context.commit('wsdata', [...context.val('wsdata'), json])
     }
     catch (e) {
-        console.log("Couldnt parse WS message");
-        console.log(event.data)
+        console.log("Couldnt parse WS message:", event.data);
     }
 })
 export default context
-export {ws}
+export { ws }

@@ -12,7 +12,7 @@
 </script>
 
 {#if $mq._md && $user.drawer}
-    <aside class="shade3 w100 h100 curve fixed" transition:fade>
+    <aside class="shade3 w100 h100 curve fixed z-2" transition:fade>
         <div class="h-60" />
         <a
             href="#/account"
