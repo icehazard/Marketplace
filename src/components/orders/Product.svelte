@@ -25,7 +25,7 @@
     </div>
     <div class="col grow justify-center gap-10 pr-20">
         <span> {product.name}</span>
-        <span class="opacity-75">{product.shopName} </span>
+        <span class="opacity-75">{$orders.order.shopName} </span>
         <span class="font-12 h-50 overflow-hidden">{product.desc}</span>
         <span class="font-14">Quantity: {product.qty}</span>
     </div>

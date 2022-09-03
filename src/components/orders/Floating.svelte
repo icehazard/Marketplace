@@ -22,9 +22,9 @@
 
 <div class="shade1 absolute p-bottom col  z-2  slow" class:expanded={expand}>
     <div class="row space-between pa-10 gap-20">
-        <button on:click={open} class="border curve pa-15 grow center">Chat </button>
-        <button on:click={details} class="border curve pa-15 grow center"> Details</button>
-        <button on:click={close} class="border curve pa-15 grow center"> Map </button>
+        <button on:click={open} class:primary={expand && !review} class="border curve pa-15 grow center shine">Chat </button>
+        <button on:click={details} class:primary={expand && review} class="border curve pa-15 grow center shine"> Details</button>
+        <button on:click={close} class:primary={!expand && !review} class="border curve pa-15 grow center shine"> Map </button>
     </div>
     <hr />
     {#if !review}

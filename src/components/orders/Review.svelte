@@ -69,8 +69,8 @@
             <Product {product} />
         {/each}
     </div>
-    <div class="row pa-15 space-between grow align-end h100">
-        Cancel Order
+    <div class="row pa-15 space-between grow h100 align-center">
+        <span>Cancel Order?</span>
         <Button text="Cancel" />
     </div>
 </div>

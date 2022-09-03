@@ -107,12 +107,12 @@
 }
 
 .shine {
-  transition: 0.3s all ease;
+  transition: 0.1s all;
 }
 
 .shine:hover {
-  filter: contrast(0.9);
-  color: var(--shade6);
+  filter: brightness(1.1);
+  backdrop-filter: brightness(1.4);
 }
 
 .gap-1 {
