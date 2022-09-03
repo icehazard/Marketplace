@@ -4,7 +4,7 @@
   import { ws } from "@/store/ws";
   import orders from "@/store/orders";
   import user from "@/store/user";
-  import {snowflake} from "comp/utils/snowflake"
+  import { snowflake } from "comp/utils/snowflake";
 
   let msg = "";
   let el;
@@ -49,6 +49,7 @@
   </div>
   <form class="row align-center" on:submit|preventDefault={submit}>
     <input
+      maxlength="200"
       bind:value={msg}
       type="text"
       class="w100 px-20 shade0 h-60"
