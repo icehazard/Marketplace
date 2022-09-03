@@ -4,6 +4,7 @@
   import { ws } from "@/store/ws";
   import orders from "@/store/orders";
   import user from "@/store/user";
+  import {snowflake} from "comp/utils/snowflake"
 
   let msg = "";
   let el;
@@ -27,7 +28,7 @@
       receiverId: $orders.order.shopId,
       senderId: $user._id,
       msg,
-      _id: new Date(),
+      _id: snowflake.generate(),
     };
   }
 
