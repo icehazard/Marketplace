@@ -14,8 +14,8 @@
     <div class="col" class:row={$mq.md_}>
         <div class="col grow">
             <div class="row gap-20 pa-15 align-center">
-                <span class="opacity-75 w100" class:w-120={$mq.md_}> Order number </span>
-                <span class="font-14 ">{$orders.order._id}</span>
+                <span class="opacity-75 w100" class:w-120={$mq.md_}>Order number </span>
+                <span class="font-14 nowrap"># {$orders.order._id}</span>
             </div>
             <hr />
             <div class="row gap-20 pa-15 align-center">
@@ -45,8 +45,8 @@
             <div class="row gap-20 pa-15 align-center">
                 <span class="opacity-75 w100" class:w-80={$mq.md_}>Total Items</span>
                 <span class="font-14 opacity-75 nowrap">
-                    {$orders.order.products.length}
-                    {pluralize("item", $orders.order.products.length)}
+                    {$orders.order.products?.length}
+                    {pluralize("item", $orders.order.products?.length)}
                 </span>
             </div>
             <hr />
@@ -61,13 +61,15 @@
     <hr />
     <div class="row pa-15">
         <span class="opacity-75 w100 nowrap"
-            >Purchased {pluralize("item", $orders.order.products.length)}:</span
+            >Purchased {pluralize("item", $orders.order.products?.length)}:</span
         >
     </div>
     <div class="gap-20 col pa-20">
-        {#each $orders.order.products as product}
-            <Product {product} />
-        {/each}
+        {#if $orders.order.products}
+            {#each $orders.order.products as product}
+                <Product {product} />
+            {/each}
+        {/if}
     </div>
     <div class="row pa-15 space-between grow align-end h100">
         Cancel Order

@@ -61,7 +61,7 @@
         bottom: 0px;
         width: 100%;
         height: 180px;
-
+        /* overflow: hidden; */
         border-top-left-radius: 6px;
         border-top-right-radius: 6px;
     }
