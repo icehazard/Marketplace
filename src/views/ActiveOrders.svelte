@@ -16,11 +16,13 @@
         if (isNaN(loc) &&  $user.orders.length !== 0) return getLast();
 
         orders.get(loc);
+        orders.getChat(loc)
     }
     async function getLast() {
         await user.get();
         let id = $user.orders[0]._id
-        orders.get(id);
+        await orders.get(id);
+        await orders.getChat(id)
         push(`#/orders/active/${id}`)
     }
 

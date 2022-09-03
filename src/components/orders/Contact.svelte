@@ -5,6 +5,8 @@
     import * as timeago from "timeago.js";
     import { onMount } from "svelte";
     import pluralize from "pluralize";
+    import orders from "@/store/orders";
+    import dayjs from "dayjs";
 
     export let order = {};
     let el;
@@ -13,6 +15,7 @@
 
     function view() {
         push(`#/orders/active/${order._id}`);
+        orders.clear("chat");
     }
 
     onMount(() => {
@@ -42,7 +45,12 @@
 
         <span class="font-12">{order.address}</span>
         <div class="row space-between">
-            <span class="font-14" bind:this={el} datetime={order.created_at} />
+            <span
+                class="font-14"
+                bind:this={el}
+                datetime={order.created_at}
+                data-tooltip={dayjs(order.created_at).format("HH:mm DD/MM/YYYY")}
+            />
             <span class="font-14">Order ID: {order._id}</span>
         </div>
     </div>

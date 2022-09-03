@@ -44,6 +44,12 @@ export function persist(name, data) {
         value.set(temp)
         return temp
     };
+    value.clear = (key) => {
+        let temp = getStore(value)
+        temp[key] = data[key];
+        value.set(temp)
+        return temp
+    };
     return value;
 }
 

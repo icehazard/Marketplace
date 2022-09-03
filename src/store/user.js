@@ -3,6 +3,7 @@ import { derived } from "svelte/store";
 import { persist, get, post, hasError, del } from '@/assets/library/CommonFunctions.js'
 
 const data = {
+    _id: 0,
     username: '',
     token: '',
     currency: 'THB',
@@ -30,14 +31,14 @@ context.getAddress = async function () {
 context.postHomeAddress = async function (data) {
     let addresses = context.val('addresses')
     context.commit('addresses', [...addresses, data])
-     let res = await post("api/me", {address : data});
+    let res = await post("api/me", { address: data });
     return res
 }
 context.delHomeAddress = async function (idx, item) {
     let addresses = context.val('addresses')
     addresses.splice(idx, 1)
     context.commit('addresses', addresses)
-    let res = await del("api/me", {address : item});
+    let res = await del("api/me", { address: item });
     return res
 }
 context.editHomeAddress = async function (idx, data) {
@@ -46,7 +47,7 @@ context.editHomeAddress = async function (idx, data) {
     addresses[idx] = data
     data.oldAddress = oldAddress;
     context.commit('addresses', addresses)
-    let res = await post("api/me", {address : data});
+    let res = await post("api/me", { address: data });
     return res
 }
 context.get = async function () {
@@ -54,6 +55,8 @@ context.get = async function () {
     if (!username) return;
     let res = await get('api/me')
     res = hasError(res, data.me)
+    context.commit('_id', res._id)
+    context.commit('username', res.username)
     context.commit('me', res.shops)
     context.commit('address', res.recentAddresses?.BTCt?._id)
     context.commit('balances', res.balances)
