@@ -25,6 +25,7 @@ const WalletSend = () => import("@/views/WalletSend.svelte");
 const WalletTransactions = () => import("@/views/WalletTransactions.svelte");
 const Policy = () => import("@/views/Policy.svelte");
 const Terms = () => import("@/views/Terms.svelte");
+const Admin = () => import("@/views/Admin.svelte");
 
 export default {
     "/": wrap({ asyncComponent: Home }),
@@ -34,10 +35,10 @@ export default {
     "/store/listing/edit/:id": wrap({ asyncComponent: AddListing }),
     "/settings": wrap({ asyncComponent: Settings, conditions: [auth] }),
     "/addresses/overview": wrap({ asyncComponent: Addresses }),
-    "/addresses/choose": wrap({ asyncComponent: Addresses}),
-    "/addresses/add": wrap({ asyncComponent: AddressesAdd}),
-    "/addresses/add/choose": wrap({ asyncComponent: AddressesAdd}),
-    "/addresses/edit/:id": wrap({ asyncComponent: AddressesAdd}),
+    "/addresses/choose": wrap({ asyncComponent: Addresses }),
+    "/addresses/add": wrap({ asyncComponent: AddressesAdd }),
+    "/addresses/add/choose": wrap({ asyncComponent: AddressesAdd }),
+    "/addresses/edit/:id": wrap({ asyncComponent: AddressesAdd }),
     "/wallet/overview": wrap({ asyncComponent: Wallet, conditions: [auth] }),
     "/wallet/receive": wrap({ asyncComponent: WalletReceive, conditions: [auth] }),
     "/Wallet/send": wrap({ asyncComponent: WalletSend, conditions: [auth] }),
@@ -59,11 +60,12 @@ export default {
     "/signup": wrap({ asyncComponent: Signup }),
     "/policy": wrap({ asyncComponent: Policy }),
     "/terms": wrap({ asyncComponent: Terms }),
+    "/admin": wrap({ asyncComponent: Admin, conditions: [auth] }),
 }
 
 function auth(detail) {
     if (!user.val('username')) return false;
     return true;
-    
-   
+
+
 }

@@ -1,5 +1,6 @@
 import { push } from "svelte-spa-router";
 import { derived } from "svelte/store";
+import cart from './cart'
 import { persist, get, post, hasError, del } from '@/assets/library/CommonFunctions.js'
 
 const data = {
