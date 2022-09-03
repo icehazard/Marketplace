@@ -70,7 +70,7 @@
     }
 </script>
 
-<button class="shade1 curve center relative h-400" >
+<div class="shade1 curve center relative h-400" >
     <form bind:this={el} class="none" enctype="multipart/form-data">
         <input type="file" on:change={upload} name="avatar" bind:this={picker} />
     </form>
@@ -84,7 +84,7 @@
     />
 
     {#if currentImg.length == 0}
-        <Icon icon="carbon:image" height="50" color="grey" />
+    <Icon icon="carbon:no-image" height="50" color="grey" />
     {/if}
     {#if currentImg.length > 0}
         <span
@@ -100,7 +100,7 @@
         </button>
     {/if}
     <!-- <div class="edit "><Edit /></div> -->
-</button>
+</div>
 <div class="curve col gap-20 ">
     <div class="row gap-10 ">
         <Swiper

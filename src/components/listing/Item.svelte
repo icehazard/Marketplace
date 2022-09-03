@@ -2,6 +2,7 @@
     import { push } from "svelte-spa-router";
     import Rating from "comp/atoms/Rating.svelte";
     import { formatCurrency } from "@/assets/library/CommonFunctions.js";
+    import Icon from "@iconify/svelte";
     export let data = [];
 
     function viewListing() {
@@ -18,7 +19,7 @@
                 class="h100"
             />
         {:else}
-            <span>No Image</span>
+            <Icon icon="carbon:no-image" height="50" color="grey" />
         {/if}
     </section>
     <hr class="hr w100" />

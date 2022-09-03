@@ -61,8 +61,6 @@
 				{#if $mq.lg_}
 					<div class="row gap-10">
 						<Circle
-							badge={4}
-							clearClick
 							to="orders/active"
 							tooltip="Orders"
 							icon="fluent:text-bullet-list-square-clock-20-regular"
@@ -79,8 +77,6 @@
 						<div class="relative" use:clickOutside={closeNotifications}>
 							<button on:click={toggleNotifications}>
 								<Circle
-									badge={1}
-									clearClick
 									tooltip="Notifications"
 									icon="fluent:alert-16-regular"
 								/>

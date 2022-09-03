@@ -8,7 +8,7 @@
     import { formatCurrency } from "@/assets/library/CommonFunctions.js";
     import { isOwnShop } from "@/store/shops.js";
     import user from "@/store/user";
-import { isFiniteNumber } from "tls";
+    import { isFiniteNumber } from "tls";
     export let data = [];
 
     let menu = false;
@@ -34,8 +34,11 @@ import { isFiniteNumber } from "tls";
     }
 </script>
 
-<button class=" h-300 curve col shade1 fast main" class:opacity-60="{data.status ? false : true}" on:click={viewListing}>
-
+<button
+    class=" h-300 curve col shade1 fast main"
+    class:opacity-60={data.status ? false : true}
+    on:click={viewListing}
+>
     <section class="h-180 center w100 relative overflow-hidden curve-top">
         {#if menu}
             <div
@@ -62,17 +65,15 @@ import { isFiniteNumber } from "tls";
             </div>
         {/if}
 
-
-
-        {#if  Object.keys(data.photos).length}
-        <img
-        src={`http://localhost:8080/api/image/` + Object.values(data.photos).slice(0, 1)}
-        alt="logo"
-        class="h100"
-        class:darken={menu}
-    />
+        {#if Object.keys(data.photos).length}
+            <img
+                src={`http://localhost:8080/api/image/` + Object.values(data.photos).slice(0, 1)}
+                alt="logo"
+                class="h100"
+                class:darken={menu}
+            />
         {:else}
-        <span>No Image</span>
+            <Icon icon="carbon:no-image" height="50" color="grey" />
         {/if}
     </section>
     <hr class="hr w100" />
@@ -80,12 +81,14 @@ import { isFiniteNumber } from "tls";
         <div class="row w100 space-between">
             <span class="ellipsis text-start">{data.name || ""}</span>
             {#if data.shopID == user.shopID()}
-            <button class="pa-5 shine round center" on:click|stopPropagation={() => toggle()}>
-                <Icon icon="fluent:more-vertical-16-regular" />
-            </button>
+                <button class="pa-5 shine round center" on:click|stopPropagation={() => toggle()}>
+                    <Icon icon="fluent:more-vertical-16-regular" />
+                </button>
             {/if}
         </div>
-        <span class="weight-600 text-start">{data.price ? formatCurrency(data.price) : formatCurrency(0.00)}</span>
+        <span class="weight-600 text-start"
+            >{data.price ? formatCurrency(data.price) : formatCurrency(0.0)}</span
+        >
         <div class="row space-between gap-10 opacity-60">
             <div class="row center gap-5 nowrap grow justify-start">
                 <Rating rating={Math.random() * 5} />
@@ -98,9 +101,7 @@ import { isFiniteNumber } from "tls";
                 <div class="pa-5 red--text opacity-100">DISABLED</div>
             {/if}
         </div>
-
     </section>
-
 </button>
 
 <style>
