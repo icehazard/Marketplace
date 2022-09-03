@@ -65,11 +65,9 @@
         >
     </div>
     <div class="gap-20 col pa-20">
-        {#if $orders.order.products}
-            {#each $orders.order.products as product}
-                <Product {product} />
-            {/each}
-        {/if}
+        {#each $orders.order.products || [] as product}
+            <Product {product} />
+        {/each}
     </div>
     <div class="row pa-15 space-between grow align-end h100">
         Cancel Order

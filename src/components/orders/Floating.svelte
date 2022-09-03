@@ -4,7 +4,7 @@
     import Chat from "./Chat.svelte";
 
     let expand = true;
-    let review = true;
+    let review = false;
 
     function close() {
         expand = false;

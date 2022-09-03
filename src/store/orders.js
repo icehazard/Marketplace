@@ -16,7 +16,6 @@ context.get = async function (id) {
 }
 
 context.getChat = async function (id) {
-    return;
     let res = await get(`api/chat/${id}`)
     context.commit('chat', res)
     return res;
