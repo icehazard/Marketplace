@@ -53,7 +53,7 @@
                 datetime={order.created_at}
                 data-tooltip={dayjs(order.created_at).format("HH:mm DD/MM/YYYY")}
             />
-            <span class="font-14">Order ID: {order._id}</span>
+            <span class="font-14 nowrap">Order ID: # {order._id}</span>
         </div>
     </div>
 </button>
