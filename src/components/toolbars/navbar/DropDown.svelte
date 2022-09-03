@@ -21,20 +21,20 @@
         Address
     </a>
     <hr />
-    <a on:click={close} href="#/orders/overview" class="menuItem w100 center py-10 curve shine">
+    <a on:click={close} href="#/orders/active" class="menuItem w100 center py-10 curve shine">
         Orders
     </a>
     <hr />
-    <!-- <a on:click={close} href="#/store/settings" class="menuItem w100 center py-10 curve shine">
-        Shop
-    </a>
-    <hr /> -->
     <a on:click={close} href="#/wallet/overview" class="menuItem w100 center py-10 curve shine">
         Wallet
     </a>
     <hr />
     <a on:click={close} href="#/settings" class="menuItem w100 center py-10 curve shine">
         Settings
+    </a>
+    <hr />
+    <a on:click={close} href="#/admin" class="menuItem w100 center py-10 curve shine">
+        Admin
     </a>
     <hr />
     <button on:click={logoutFunc} class="menuItem w100 center py-10 curve shine"> Logout </button>
