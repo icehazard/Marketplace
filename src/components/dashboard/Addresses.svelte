@@ -35,7 +35,7 @@
             <span>Address</span>
         </h1>
         {#if $mq.sm_}
-            <Button text="Add New Address" on:click={addNew} />
+            <Button primary text="Add New Address" on:click={addNew} />
         {/if}
     </div>
     <div class="grow col shade3 curve">
@@ -45,12 +45,6 @@
             </div>
         {/if}
         {#each $user.addresses as item, idx}
-            <!-- <label class="check">
-                <div>Cryptocurrency</div>
-                <input type="radio" checked="checked" name="radio" />
-                <span class="checkmark" />
-            </label> -->
-
             <label class="row cursor-pointer shine check">
                 <input type="radio" checked={item.default} name="radio" class="none" />
                 <span class="checkmark" />
@@ -88,7 +82,7 @@
 
 {#if !$mq.sm_}
     <div class="fixed w100">
-        <Button text="Add New Address" block="true" on:click={addNew} />
+        <Button primary text="Add New Address" block="true" on:click={addNew} />
     </div>
 {/if}
 

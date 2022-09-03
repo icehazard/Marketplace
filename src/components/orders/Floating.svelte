@@ -1,47 +1,59 @@
 <script>
-	import orders from '@/store/orders';
+    import orders from "@/store/orders";
+    import Review from "comp/orders/Review.svelte";
     import Chat from "./Chat.svelte";
-    import { formatCurrency } from "@/assets/library/CommonFunctions.js";
-    
 
     let expand = true;
+    let review = false;
 
     function close() {
         expand = false;
+        review = false;
     }
     function open() {
         expand = true;
+        review = false;
     }
-
+    function details() {
+        expand = true;
+        review = true;
+    }
 </script>
 
 <div class="shade1 absolute p-bottom col  z-2  slow" class:expanded={expand}>
-    <div class="row space-between pa-20 gap-20">
-        <button on:click={open} class="border curve pa-10 grow center">Chat </button>
-        <button on:click={close} class="border curve pa-10 grow center"> Map </button>
-        <button on:click={close} class="border curve pa-10 grow center"> Cancel Order</button>
+    <div class="row space-between pa-10 gap-20">
+        <button on:click={open} class="border curve pa-15 grow center">Chat </button>
+        <button on:click={details} class="border curve pa-15 grow center"> Details</button>
+        <button on:click={close} class="border curve pa-15 grow center"> Map </button>
     </div>
     <hr />
-    <div class="row space-between align-center gap-20 pa-20">
-        <div class="col gap-20 grow">
-            <span class="opacity-75">Order ID</span>
-            <span>{$orders.order._id}</span>
+    {#if !review}
+        <div class="row">
+            <div class="col grow">
+                <div class="row gap-20 pa-15 align-center">
+                    <span class="opacity-75 w-120 w100">Shop name</span>
+                    <span class="font-14 ">{$orders.order.shopName}</span>
+                </div>
+                <hr />
+            </div>
+            <div class="col mx-20">
+                <div class="row gap-20 pa-15 align-center">
+                    <span class="opacity-75 w-80 w100">Status</span>
+                    <span class="font-14 ">STATUS</span>
+                </div>
+                <hr />
+            </div>
         </div>
-        <div class="col gap-20 grow">
-            <span class="opacity-75">Product</span>
-            <span>White Widow</span>
-        </div>
-        <div class="col gap-20 grow">
-            <span class="opacity-75">Price</span>
-            <span>{formatCurrency($orders.order.total)}</span>
-        </div>
-        <div class="col gap-20 grow">
-            <span class="opacity-75">Address</span>
+        <div class="row gap-20 pa-15">
+            <span class="opacity-75 w-120 w100">Delivery Address</span>
             <span class="font-14">{$orders.order.address}</span>
         </div>
-    </div>
-    <hr>
-    <Chat />
+        <hr />
+        <Chat />
+    {/if}
+    {#if review}
+        <Review />
+    {/if}
 </div>
 
 <style>
@@ -56,6 +68,5 @@
 
     .expanded {
         height: 100%;
-       
     }
 </style>
