@@ -9,6 +9,7 @@ let shopHandler = require('../classes/shops')
 let productHandler = require('../classes/products')
 let addressHandler = require('../classes/address')
 let orderHandler = require('../classes/orders')
+let chatHandler = require('../classes/chat')
 
 const {auth} = require('../routes/auth')
 
@@ -133,7 +134,7 @@ wss.on('connection', async function(ws, req) {
                 //if (wss.clients)
                 if (ws.haveMutualOrderByShopId(receiverId)) {
                     sendToIdByShop(receiverId, JSON.stringify(json))
-
+                    chatHandler.Chats.insert({_id: json._id, senderId: ws._id, orderId: json.orderId, msg: json.msg })
                 }
                 else
                     console.log("NO MUTUAL ORDER WITH REC ID", receiverId)

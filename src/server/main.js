@@ -7,8 +7,9 @@ const { WEB_SERVER_PORT } = require('./Config.json')
 const apiRoute = require('./routes/api.js')
 const productRoute = require('./routes/api_product')
 const orderRoute = require('./routes/api_order')
-
+const chatRoute = require('./routes/api_chat')
 const shopRoute = require('./routes/api_shop.js')
+const adminRoute = require('./routes/api_admin.js')
 
 const path = require('path')
 const dbhandler = require("./db/dbhandler")
@@ -19,6 +20,7 @@ const productHandler = require("./classes/products");
 const addressHandler = require("./classes/address");
 const serverHandler = require("./classes/server");
 const orderHandler = require("./classes/orders");
+const chatHandler = require("./classes/chat");
 
 //const trackTxHandler = require("./classes/tracktx");
 const txHandler = require("./classes/tx");
@@ -57,6 +59,8 @@ const ws = require("./classes/ws");
     await addressHandler.Addresses.loadFromDB() //has to be after accounts
     await serverHandler.Server.loadFromDB()
     await orderHandler.Orders.loadFromDB() //has to be after accounts
+    await chatHandler.Chats.loadFromDB()
+
     //await trackTxHandler.Tracktx.loadFromDB()
 
     let checkEvents = (symbol) => {
@@ -227,6 +231,8 @@ const ws = require("./classes/ws");
     app.use('/api/product', productRoute)
     app.use('/api/shop', shopRoute)
     app.use('/api/order', orderRoute)
+    app.use('/api/chat', chatRoute)
+    app.use('/api/admin', adminRoute)
 
     function auth(data) {
         //clearTimeout(auth_timeout);

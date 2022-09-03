@@ -221,6 +221,11 @@ class Shop {
         return { status: "error", error: "Shop does not contain this product!" }
     }
 
+    async approveShop() {
+        this.status = 1;
+        this.saveToDB()
+    }
+
     async deleteProduct(pid) {
         if (this.products.has(pid)) {
             //delete from db first then from shop's memory, doesnt need await

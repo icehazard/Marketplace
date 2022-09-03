@@ -2,6 +2,7 @@ let dbhandler = require("../db/dbhandler")
 let productHandler = require('./products')
 const accountHandler = require("./accounts")
 let shopHandler = require('./shops')
+let chatHandler = require('./chat')
 
 let orders = new Orders()
 
@@ -110,14 +111,20 @@ class Order {
 
     async saveToDB() {
         //dont need await
-        dbhandler.cols.list.colOrders.updateOne({_id: this._id, address: this.address, paymentType: this.paymentType, shopName: this.shopName,
-        products: this.products, shopId: this.shopId, uid: this.uid, created_at: this.created_at, total: this.total, productPhoto: this.productPhoto},
-        {$set: {}}, {upsert: true})
+        dbhandler.cols.list.colOrders.updateOne({_id: this._id},
+        {$set: { address: this.address, paymentType: this.paymentType, shopName: this.shopName,
+                products: this.products, shopId: this.shopId, uid: this.uid, created_at: this.created_at, total: this.total,
+                productPhoto: this.productPhoto}}, {upsert: true})
     }
 
     async deleteFromDB() {
         //dont need await
         dbhandler.cols.list.colOrders.deleteOne({_id: this._id})
+    }
+
+    getChatMessages() {
+        console.log(chatHandler.Chats.getMessagesByOrderId(this._id))
+        return chatHandler.Chats.getMessagesByOrderId(this._id)
     }
 
     addOrEditPhoto(index, file)
