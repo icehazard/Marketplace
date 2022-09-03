@@ -29,15 +29,15 @@
                 <Icon icon="carbon:no-image" height="50" color="grey" />
             {/if}
         </div>
-        <div class="absolute p-bottom w100 h-40 center ">
-            <span class="font-14">
+    </div>
+    <div class="col grow justify-center gap-10 pr-20">
+        <div class="row space-between">
+            <span>PRODUCT STATUS</span>
+            <span class="font-14 opacity-75">
                 {order.products.length}
                 {pluralize("item", order.products.length)}
             </span>
         </div>
-    </div>
-    <div class="col grow justify-center gap-10 pr-20">
-        <span>PRODUCT STATUS</span>
         <span class="opacity-75">{order.shopName} </span>
 
         <span class="font-12">{order.address}</span>
@@ -49,10 +49,6 @@
 </button>
 
 <style>
-    .absolute {
-        backdrop-filter: brightness(0.7) blur(1px);
-    }
-
     .placeholder {
         height: 100px;
         width: 100px;
