@@ -14,7 +14,7 @@
 
     function submitData() {
         review = true;
-        $active = 0;
+       // $active = 0;
         submit();
     }
 

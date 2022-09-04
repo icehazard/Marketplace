@@ -38,13 +38,14 @@
     async function submitShopForApproval() {
         let data = { shopName, shopType, address, lat, lng, bankAccName, bankName, bankAccNr };
         let res = await post("api/shop", data);
+        console.log("🚀 ~ res", res);
         await user.get();
         let msg1 = "You must confirm the terms and conditions";
     }
 
-  onMount(() => {
-    user.get();
-  })
+    onMount(() => {
+        user.get();
+    });
 </script>
 
 <section class="grow col gap-40">
@@ -79,3 +80,10 @@
         {/if}
     </div>
 </section>
+
+<style>
+    .round {
+        min-width: 25px;
+        min-height: 25px;
+    }
+</style>

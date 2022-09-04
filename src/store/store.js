@@ -9,3 +9,13 @@ export function reset(){
     active.set('')
 }
 
+import { persist } from '@/assets/library/CommonFunctions.js'
+
+const data = {
+    active: 0,
+    valid: [false, false, false, false, false]
+}
+
+const context = persist('wizardStore', data)
+
+export default context

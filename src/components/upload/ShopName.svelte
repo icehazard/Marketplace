@@ -42,7 +42,14 @@
     <div class="pt-50  row w-sm  w100  z-2">
         <div class=" center w100">
             <div class="w60">
-                <Button on:click={next} type="button" disable={$shopValid[0]} text="CONTINUE" />
+                <Button
+                    primary={!$shopValid[0]}
+                    block
+                    on:click={next}
+                    type="button"
+                    disable={$shopValid[0]}
+                    text="CONTINUE"
+                />
             </div>
         </div>
     </div>
