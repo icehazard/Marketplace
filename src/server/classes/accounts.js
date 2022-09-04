@@ -191,7 +191,7 @@ class Account {
         if (!data)
             return common.roles.ROLE_USER
 
-        return data._id;
+        return data.role;
         // switch (data._id) {
         //     case common.roles.ROLE_SHOP_OWNER:
         //         return common.roles.ROLE_SHOP_OWNER
