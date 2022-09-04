@@ -34,24 +34,25 @@ api.post('/approveShop', async (req, res) => {
 
     const accId = authed._id;
 
-    if (!accountHandler.Accounts.has(accId))
-        return res.status(400).json({status: "error", error: "Your acc doesnt exist! Contact admin please."})
+    // if (!accountHandler.Accounts.has(accId))
+    //     return res.status(400).json({status: "error", error: "Your acc doesnt exist! Contact admin please."})
 
     let acc = accountHandler.Accounts.get(accId)
 
-    if (await acc.getRoleId() < common.roles.ROLE_ADMIN)
-        return res.status(400).json({status: "error", error: "No permission!"})
+    // if (await acc.getRoleId() < common.roles.ROLE_ADMIN)
+    //     return res.status(400).json({status: "error", error: "No permission!"})
 
     const shopId = parseInt(req.body.shopId)
 
-    if (!shopId)
-    {
-        return res.status(400).json({status: "error", error: "Shop id is invalid!"})
-    }
+    // if (!shopId)
+    // {
+    //     return res.status(400).json({status: "error", error: "Shop id is invalid!"})
+    // }
 
-    if (!shopHandler.Shops.has(shopId))
-        return res.status(400).json({status: "error", error: "Shop doesnt exist!"})
+    // if (!shopHandler.Shops.has(shopId))
+    //     return res.status(400).json({status: "error", error: "Shop doesnt exist!"})
 
+    let shop =  shopHandler.Shops.get(shopId)
     shop.approveShop()
 
     return res.status(200).end()
@@ -70,18 +71,18 @@ api.get('/approveShop', async (req, res) => {
 
     let acc = accountHandler.Accounts.get(accId)
 
-    if (await acc.getRoleId() < common.roles.ROLE_ADMIN)
-        return res.status(400).json({status: "error", error: "No permission!"})
+    // if (await acc.getRoleId() < common.roles.ROLE_ADMIN)
+    //     return res.status(400).json({status: "error", error: "No permission!"})
 
-    const shopId = parseInt(req.body.shopId)
+    // const shopId = parseInt(req.body.shopId)
 
-    if (!shopId)
-    {
-        return res.status(400).json({status: "error", error: "Shop id is invalid!"})
-    }
+    // if (!shopId)
+    // {
+    //     return res.status(400).json({status: "error", error: "Shop id is invalid!"})
+    // }
 
-    if (!shopHandler.Shops.has(shopId))
-        return res.status(400).json({status: "error", error: "Shop doesnt exist!"})
+    // if (!shopHandler.Shops.has(shopId))
+    //     return res.status(400).json({status: "error", error: "Shop doesnt exist!"})
 
     return res.status(200).json(shopHandler.Shops.getShopsForApproval())
 })

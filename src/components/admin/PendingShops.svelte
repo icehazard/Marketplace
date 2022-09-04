@@ -9,9 +9,12 @@
         push(`#/shops/id/${id}`);
     }
 
-    function activate(id) {
-        admin.post(id)
+    async function activate(id) {
+        let res = await admin.post(id);
+        console.log("🚀 ~ res", res)
+        admin.get()
     }
+    
 </script>
 
 <section class="grow col gap-20">
@@ -27,24 +30,27 @@
         <hr />
         <div class="col w100">
             {#each $admin.pendingShops as shop}
-                s
-            {/each}
-
-            <button
-                on:click={() => viewProfile("id")}
-                class="row shine w100 pa-20 space-between row shade3 align-center justify-start gap-50"
-            >
-                <span class="row grow">Thai seed bank</span>
-                <span class="row">21/06/2022</span>
-                <button on:click|stopPropagation>
-                    <Button primary text="Approve" on:click={() => activate()} />
+                <button
+                    on:click={() => viewProfile("id")}
+                    class="row shine w100 pa-20 space-between row shade3 align-center justify-start gap-50"
+                >
+                    <span class="row grow">{shop.shopName || "No name provided"} </span>
+                    <span class="row">{shop.shopType}</span>
+                    <button on:click|stopPropagation>
+                        <Button primary text="Approve" on:click={() => activate(shop._id)} />
+                    </button>
+                    <div class="justify-end">
+                        <Icon icon="fluent:chevron-right-28-regular" width="20" />
+                    </div>
                 </button>
-                <div class="justify-end">
-                    <Icon icon="fluent:chevron-right-28-regular" width="20" />
-                </div>
-            </button>
-            <hr />
+                <hr />
+            {/each}
         </div>
+        {#if $admin.pendingShops.length == 0}
+           <div class="center pa-50">
+            <span>No shops pending</span>
+           </div>
+        {/if}
     </div>
 </section>
 

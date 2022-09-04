@@ -1,4 +1,4 @@
-import { persist, get, hasError } from '@/assets/library/CommonFunctions.js'
+import { persist, get, post, hasError } from '@/assets/library/CommonFunctions.js'
 
 const data = {
     pendingShops: [],
@@ -7,13 +7,15 @@ const data = {
 const context = persist('admin', data)
 
 context.get = async function () {
-    let res = await get(`/api/chat/${id}`)
-    res = hasError(res, data.products)
+    let res = await get(`api/admin/approveShop`)
+    console.log("🚀 ~ res", res)
+    res = hasError(res, data.pendingShops)
     return context.commit('pendingShops', res)
 }
 
 context.post = async function (id) {
-    return await post(`/api/admin/approveShop`, id)
+    let data = {shopId: id}
+    return await post(`api/admin/approveShop`, data)
 }
 
 export default context

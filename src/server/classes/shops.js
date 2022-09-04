@@ -36,12 +36,12 @@ Shops.prototype.has = function (id) {
     return this.getShops().has(id);
 };
 Shops.prototype.getShopsForApproval = function () {
-
     let final = []
-    for (let x of this.shops)
-        if (x.status == 0)
-            final.push(x)
-
+   
+    for (let x of this.shops.values()) {
+        if (x.status == 0) final.push(x)
+    }
+    console.log("🚀 ~ final", final)
     return final
 };
 Shops.prototype.getShopByOwnerId = function (oid) {
@@ -100,6 +100,7 @@ class Shop {
         this.description = data.description || null;
         this.cover = data.cover || null;
         this.profile = data.profile || null;
+        this.status = data.status
     }
 
     static async postShop(userID, payload) {
@@ -128,10 +129,10 @@ class Shop {
         console.log("🚀 result", result)
     }
 
-    getProductList(onlyActive=false) {
+    getProductList(onlyActive = false) {
         let res = []
 
-        for (let [k, v] of this.products){
+        for (let [k, v] of this.products) {
             if (onlyActive && v.status != 1)
                 continue;
 
@@ -192,7 +193,7 @@ class Shop {
             this.shipping = data.shipping;
         if (data.paymentMask)
             this.paymentMask = data.paymentMask;
-            
+
 
         this.saveToDB();
         return true;

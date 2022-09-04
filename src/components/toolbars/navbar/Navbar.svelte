@@ -89,7 +89,7 @@
 				{/if}
 			</section>
 			<section class="row gap-20 align-center ">
-				<span class="weight-600 opacity-75">{$user.username}</span>
+				<span class="weight-600 opacity-75">{$user.username || ''}</span>
 				{#if $mq.lg_}
 					<div class="relative row center" use:clickOutside={close}>
 						<button
