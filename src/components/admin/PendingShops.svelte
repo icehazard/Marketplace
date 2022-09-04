@@ -4,6 +4,7 @@
     import admin from "@/store/admin";
     import Field from "comp/atoms/TextField.svelte";
     import Button from "comp/atoms/Button.svelte";
+    import { notify } from "@/assets/library/CommonFunctions.js";
 
     function viewProfile(id) {
         push(`#/shops/id/${id}`);
@@ -11,7 +12,8 @@
 
     async function activate(id) {
         let res = await admin.post(id);
-        console.log("🚀 ~ res", res)
+        if (res == 200) notify(1, "Approval Successful");
+        else notify(0, "Approval unsuccessfull");
         admin.get()
     }
     

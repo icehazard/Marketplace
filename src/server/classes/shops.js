@@ -41,7 +41,6 @@ Shops.prototype.getShopsForApproval = function () {
     for (let x of this.shops.values()) {
         if (x.status == 0) final.push(x)
     }
-    console.log("🚀 ~ final", final)
     return final
 };
 Shops.prototype.getShopByOwnerId = function (oid) {
@@ -216,7 +215,7 @@ class Shop {
             $set: {
                 shopName: this.shopName, address: this.address, paymentMask: this.paymentMask,
                 nameBankAccount: this.nameBankAccount, bankName: this.bankName, BankAccountNumber: this.BankAccountNumber,
-                cover: this.cover, profile: this.profile, description: this.description, shipping: this.shipping
+                cover: this.cover, profile: this.profile, description: this.description, shipping: this.shipping, status: this.status
             }
         })
     }

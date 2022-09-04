@@ -8,7 +8,6 @@ const context = persist('admin', data)
 
 context.get = async function () {
     let res = await get(`api/admin/approveShop`)
-    console.log("🚀 ~ res", res)
     res = hasError(res, data.pendingShops)
     return context.commit('pendingShops', res)
 }
