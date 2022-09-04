@@ -56,5 +56,34 @@ api.post('/approveShop', async (req, res) => {
 
     return res.status(200).end()
 })
+api.get('/approveShop', async (req, res) => {
+    const authed = await auth(req.headers)
+
+    if (!authed) {
+        return res.status(401).end();
+    }
+
+    const accId = authed._id;
+
+    if (!accountHandler.Accounts.has(accId))
+        return res.status(400).json({status: "error", error: "Your acc doesnt exist! Contact admin please."})
+
+    let acc = accountHandler.Accounts.get(accId)
+
+    if (await acc.getRoleId() < common.roles.ROLE_ADMIN)
+        return res.status(400).json({status: "error", error: "No permission!"})
+
+    const shopId = parseInt(req.body.shopId)
+
+    if (!shopId)
+    {
+        return res.status(400).json({status: "error", error: "Shop id is invalid!"})
+    }
+
+    if (!shopHandler.Shops.has(shopId))
+        return res.status(400).json({status: "error", error: "Shop doesnt exist!"})
+
+    return res.status(200).json(shopHandler.Shops.getShopsForApproval())
+})
 
 module.exports = api

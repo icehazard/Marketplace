@@ -35,7 +35,15 @@ Shops.prototype.get = function (id) {
 Shops.prototype.has = function (id) {
     return this.getShops().has(id);
 };
+Shops.prototype.getShopsForApproval = function () {
 
+    let final = []
+    for (let x of this.shops)
+        if (x.status == 0)
+            final.push(x)
+
+    return final
+};
 Shops.prototype.getShopByOwnerId = function (oid) {
     console.log(this.getShopsByOwner())
     console.log("oid is", oid)
