@@ -16,7 +16,6 @@ function Accounts()
     this.getAccounts = function() {
         return this.accs;
     }
-
 }
 
 Accounts.prototype.insert = function(obj) {
@@ -56,6 +55,9 @@ class Account {
         this.balances = a.balances || {BTC: 0, DOGE: 0, LTC: 0, ETH: 0, BTCt: 0}
         this.deliveryAddresses = a.deliveryAddresses || [];
         this.orders = a.orders || [];
+        this.fullName = a.fullName;
+        this.email = a.email;
+        this.cellNo = a.cellNo
     }
 
     /*** ACCOUNT LOGIN ***/
@@ -261,7 +263,13 @@ class Account {
     async saveToDB() {
         console.log(this.deliveryAddresses)
         dbhandler.cols.list.colAccounts.updateOne({_id: this._id},
-            {$set: {balances: this.balances, deliveryAddresses: this.deliveryAddresses}}, {upsert: true})
+            {$set: {
+                balances: this.balances, 
+                deliveryAddresses: this.deliveryAddresses, 
+                fullName: this.fullName, 
+                email: this.email, 
+                cellNo: this.cellNo
+            }}, {upsert: true})
     }
     getRecentAddresses() {
         let payload = {
@@ -344,7 +352,19 @@ class Account {
         return this.orders.includes(oid)
     }
 
+    async editAccount(pid, payload){
+        let accObj = accs.get(pid)
 
+        if ("fullName" in payload)
+            accObj.fullName = payload.fullName
+        if ("cellNo" in payload)
+            accObj.cellNo = payload.cellNo
+        if ("email" in payload)
+            accObj.email = payload.email
+
+        await accObj.saveToDB()
+        return {status: "ok"}
+    }
 }
 
 let accs = new Accounts()

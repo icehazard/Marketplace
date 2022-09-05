@@ -193,3 +193,7 @@ export function hasError(data, initVal) {
 export function hasErrorNonRetarded(data, initVal) {
     return data.status == 'error';
 }
+
+export const validateEmail = function (email) {
+    return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)
+  }
