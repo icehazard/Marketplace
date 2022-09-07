@@ -5,17 +5,73 @@
     import { formatCurrency } from "@/assets/library/CommonFunctions.js";
     import { mq } from "@/assets/library/MediaQuery.svelte";
     import Contact from "./Contact";
+    import Icon from "@iconify/svelte";
     import user from "@/store/user";
     import Product from "./Product.svelte";
     import Button from "../atoms/Button.svelte";
+    import generatePayload from "promptpay-qr";
+    import QRCode from "qrcode";
+    import { onMount } from "svelte";
+
+    const mobileNumber = $user.cellNo; //needs shop mobile number to work
+    const amount = 4.2;
+    let el;
+
+    function generateQr() {
+        const payload = generatePayload(mobileNumber, { amount });
+        QRCode.toCanvas(el, payload);
+    }
+
+    onMount(() => {
+        generateQr();
+    });
+
+    let active = 0;
+
+    let headings = [
+        { text: "Confirmation" },
+        { text: "Packing" },
+        { text: "In transit" },
+        { text: "Delivered" },
+    ];
 </script>
 
-<div class="shade1 p-bottom col  z-2  slow">
+<div class="shade1 p-bottom col col gap-10  z-2  slow">
+    <div class="row shade1 space-btween pa-20 align-center gap-10">
+        {#each headings as heading, index}
+            <button class="center gap-10">
+                <div class="center pa-4 primary round" class:shade4={index > active}>
+                    {#if active > index}
+                        <Icon icon="fluent:checkmark-16-regular" color="white" />
+                    {:else}
+                        <div class="w-16 center font-14 weight-300">{index + 1}</div>
+                    {/if}
+                </div>
+                <span class:shade5--text={index !== active}>{heading.text}</span>
+            </button>
+            {#if index < headings.length - 1}
+                <hr class="grow border" />
+            {/if}
+        {/each}
+    </div>
+    <div class="pa-10">
+        <div class="center shade3 curved pb-20">
+            <span class="w100 pa-10">Prompay QR code for payment </span>
+            <div class="center pa-20">
+                <canvas bind:this={el} />
+            </div>
+        </div>
+    </div>
     <div class="col" class:row={$mq.md_}>
         <div class="col grow">
             <div class="row gap-20 pa-15 align-center">
                 <span class="opacity-75 w100" class:w-120={$mq.md_}>Order number </span>
                 <span class="font-14 nowrap"># {$orders.order._id}</span>
+            </div>
+            <hr />
+            <div class="row gap-20 pa-15 align-center">
+                <span class="opacity-75 w100" class:w-120={$mq.md_}>Customer Name</span>
+                <span class="font-14 nowrap"> {$orders.order.fullName || "No Name Provided"}</span>
             </div>
             <hr />
             <div class="row gap-20 pa-15 align-center">
@@ -33,20 +89,26 @@
         </div>
         <div class="col grow">
             <div class="row gap-20 pa-15 align-center">
-                <span class="opacity-75  w100" class:w-80={$mq.md_}>Status</span>
-                <span class="font-14">STATUS</span>
+                <span class="opacity-75 w100" class:w-120={$mq.md_}>Payment Status</span>
+                <span class="font-14 nowrap">Payment Status</span>
             </div>
             <hr />
             <div class="row gap-20 pa-15 align-center">
-                <span class="opacity-75 w100 " class:w-80={$mq.md_}>Total Price</span>
+                <span class="opacity-75 w100 " class:w-120={$mq.md_}>Total Price</span>
                 <span class="font-14 nowrap">{formatCurrency($orders.order.total)}</span>
             </div>
             <hr />
             <div class="row gap-20 pa-15 align-center">
-                <span class="opacity-75 w100" class:w-80={$mq.md_}>Total Items</span>
-                <span class="font-14 opacity-75 nowrap">
-                    {$orders.order.products?.length}
-                    {pluralize("item", $orders.order.products?.length)}
+                <span class="opacity-75 w100" class:w-120={$mq.md_}>Payment type</span>
+                <span class="font-14 nowrap">
+                    {$orders.order.paymentType}
+                </span>
+            </div>
+            <hr />
+            <div class="row gap-20 pa-15 align-center">
+                <span class="opacity-75 w100 " class:w-120={$mq.md_}>Mobile Number</span>
+                <span class="font-14 nowrap">
+                    {$orders.order.cellNo || "No Number Provided"}
                 </span>
             </div>
             <hr />
@@ -59,10 +121,14 @@
         </span>
     </div>
     <hr />
-    <div class="row pa-15">
-        <span class="opacity-75 w100 nowrap"
-            >Purchased {pluralize("item", $orders.order.products?.length)}:</span
-        >
+    <div class="row pa-15 gap-10 align-center">
+        <span class="opacity-75  nowrap"
+            >Purchased {pluralize("item", $orders.order.products?.length)}
+        </span>
+        <span class="font-14 nowrap opacity-75">
+            ({$orders.order.products?.length}
+            {pluralize("item", $orders.order.products?.length)}) :
+        </span>
     </div>
     <div class="gap-20 col pa-20">
         {#each $orders.order.products || [] as product}
@@ -76,4 +142,8 @@
 </div>
 
 <style>
+    .round {
+        min-width: 25px;
+        min-height: 25px;
+    }
 </style>
