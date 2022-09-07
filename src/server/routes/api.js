@@ -220,6 +220,9 @@ api.get('/me', async (req, res) => {
 
     let payload = {
         _id: me._id,
+        fullName: me.fullName,
+        email: me.email,
+        cellNo: me.cellNo,
         username: me.username,
         shops: sids,
         recentAddresses: me.getRecentAddresses(),
@@ -256,6 +259,27 @@ api.post('/me', async (req, res) => {
     me.saveToDB();
 
     res.status(200).end()
+})
+
+api.patch('/me', async (req, res) => {
+    const authed = await auth(req.headers)
+
+    if (!authed) return res.status(401).end();
+
+    const accId = parseInt( authed._id);
+    const data = req.body;
+
+    let acc = await accountHandler.Accounts.get(accId)
+
+    if (!accountHandler.Accounts.has(accId))
+        return res.status(400).json({status: "error", error: "This Account doesn't exist!"})
+   
+    let edit = await acc.editAccount(accId, data)
+
+    if (edit.status !== "ok")
+        return res.status(400).json(edit)
+
+    return res.status(200).json(edit)
 })
 
 api.delete('/me', async (req, res) => {

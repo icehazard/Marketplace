@@ -3,7 +3,7 @@
     import Button from "comp/atoms/Button.svelte";
     import Icon from "@iconify/svelte";
     import { createForm } from "svelte-forms-lib";
-    import { shopValid, active} from "@/store/store.js";
+    import { shopValid, active } from "@/store/store.js";
     import * as yup from "yup";
     import banksLogo from "banks-logo";
     import { afterUpdate, beforeUpdate, onMount } from "svelte";
@@ -173,9 +173,16 @@
     </div>
     <div class="pt-50  row w-sm  w100  z-2">
         <div class=" center w100">
-        <div class="w60">
-            <Button on:click={next} type="button" disable={!validate} text="CONTINUE" />
-        </div>
+            <div class="w60">
+                <Button
+                    primary={!$shopValid[0]}
+                    block
+                    on:click={next}
+                    type="button"
+                    disable={!validate}
+                    text="CONTINUE"
+                />
+            </div>
         </div>
     </div>
 </form>

@@ -63,6 +63,7 @@
         </div>
         <div class="curve row gap-10 w-sm">
             <button
+                type="button"
                 class="item col grow center  ratio relative col1"
                 class:active={shopType === 1}
                 on:click={() => changeIndex(1)}
@@ -89,6 +90,7 @@
                 <p class="absolute p-bottom p-left px-10 py-5 ma-5 shade3 curve font-18">Online</p>
             </button>
             <button
+                type="button"
                 class="curve item row grow center col ratio relative col2"
                 on:click={() => changeIndex(2)}
                 class:active={shopType === 2}
@@ -117,6 +119,7 @@
                 </p>
             </button>
             <button
+                type="button"
                 class="curve item row grow center col ratio relative col3"
                 class:active={shopType === 3}
                 on:click={() => changeIndex(3)}
@@ -147,9 +150,16 @@
     </div>
     <div class="pt-50  row w-sm  w100  z-2">
         <div class=" center w100">
-           <div class="w60">
-            <Button on:click={next} type="button" disable={$shopValid[1]} text="CONTINUE" />
-           </div>
+            <div class="w60">
+                <Button
+                    primary={!$shopValid[0]}
+                    block
+                    on:click={next}
+                    type="button"
+                    disable={$shopValid[1]}
+                    text="CONTINUE"
+                />
+            </div>
         </div>
     </div>
 </form>
@@ -168,7 +178,7 @@
     }
 
     .item {
-        transition: 0.3s all ease;
+        transition: 0.05s all linear;
     }
     .item:hover {
         filter: contrast(1.5);

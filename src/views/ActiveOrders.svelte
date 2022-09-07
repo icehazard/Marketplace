@@ -61,5 +61,6 @@
 <style>
     .containerHeight {
         height: calc(100vh - 200px);
+        overflow: overlay;
     }
 </style>

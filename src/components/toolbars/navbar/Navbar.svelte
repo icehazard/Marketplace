@@ -74,7 +74,7 @@
 						<button on:click={shopRoute}>
 							<Circle tooltip="Shop Manager" icon="fluent:building-shop-16-regular" />
 						</button>
-						<div class="relative" use:clickOutside={closeNotifications}>
+						<!-- <div class="relative" use:clickOutside={closeNotifications}>
 							<button on:click={toggleNotifications}>
 								<Circle
 									tooltip="Notifications"
@@ -84,7 +84,7 @@
 							{#if showNotifications}
 								<Notifications />
 							{/if}
-						</div>
+						</div> -->
 					</div>
 				{/if}
 			</section>

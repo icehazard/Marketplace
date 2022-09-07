@@ -1,12 +1,14 @@
 import { push } from "svelte-spa-router";
 import { derived } from "svelte/store";
 import cart from './cart'
-import { persist, get, post, hasError, del } from '@/assets/library/CommonFunctions.js'
+import { persist, get, post, patch, hasError, del } from '@/assets/library/CommonFunctions.js'
 
 const data = {
     _id: 0,
     username: '',
     token: '',
+    fullName: '',
+    cellNo: '',
     currency: 'THB',
     theme: 'dark',
     lang: "ENG",
@@ -35,6 +37,10 @@ context.postHomeAddress = async function (data) {
     let res = await post("api/me", { address: data });
     return res
 }
+context.patch = async function (data) {
+    return await patch("api/me", data);
+}
+
 context.delHomeAddress = async function (idx, item) {
     let addresses = context.val('addresses')
     addresses.splice(idx, 1)
@@ -58,12 +64,15 @@ context.get = async function () {
     res = hasError(res, data.me)
     context.commit('_id', res._id)
     context.commit('username', res.username)
+    context.commit('email', res.email)
     context.commit('me', res.shops)
     context.commit('address', res.recentAddresses?.BTCt?._id)
     context.commit('balances', res.balances)
     context.commit('shipping', res.shipping)
     context.commit('orders', res.orders.reverse())
     context.commit('addresses', res.deliveryAddresses)
+    context.commit('fullName', res.fullName)
+    context.commit('cellNo', res.cellNo)
 }
 context.shopID = function () {
     if (!context.val('me')[0]) return 0;

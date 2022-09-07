@@ -26,6 +26,7 @@ const WalletTransactions = () => import("@/views/WalletTransactions.svelte");
 const Policy = () => import("@/views/Policy.svelte");
 const Terms = () => import("@/views/Terms.svelte");
 const Admin = () => import("@/views/Admin.svelte");
+const BankPayment = () => import("@/views/BankPayment.svelte");
 
 export default {
     "/": wrap({ asyncComponent: Home }),
@@ -61,6 +62,7 @@ export default {
     "/policy": wrap({ asyncComponent: Policy }),
     "/terms": wrap({ asyncComponent: Terms }),
     "/admin": wrap({ asyncComponent: Admin, conditions: [auth] }),
+    "/bankPayment": wrap({ asyncComponent: BankPayment }),
 }
 
 function auth(detail) {
