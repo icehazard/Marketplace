@@ -34,11 +34,20 @@ Orders.prototype.insert = async function(payload) {
 
     payload._id = nid;
     payload.created_at = new Date();
+    payload.paymentStatus = 0;
+    payload.deliveryStatus = 0;
+
+    let customerAcc = accountHandler.Accounts.get(payload.uid)
+
+    let addr = customerAcc.getDeliveryAddress(payload.address)
+    payload.name = addr.name
+    payload.phone = addr.phone
+
     let orderObj = new Order(nid, payload)
     this.orders.set(nid, orderObj)
     orderObj.saveToDB();
     console.log("PUSHING NID", nid)
-    accountHandler.Accounts.get(payload.uid).orders.push(nid)
+    customerAcc.orders.push(nid)
    
     return {status: "ok", orderId: nid}
 };
@@ -107,6 +116,10 @@ class Order {
         this.total = data.total;
         this.shopName = shopHandler.Shops.get(data.shopId).shopName
         this.productPhoto =  Object.values(item.photos)[0]
+        this.name = data.name; //person name (addressed to)
+        this.phone = data.phone; //person cellphone
+        this.deliveryStatus = data.deliveryStatus;
+        this.paymentStatus = data.paymentStatus;
     }
 
     async saveToDB() {
@@ -114,9 +127,14 @@ class Order {
         dbhandler.cols.list.colOrders.updateOne({_id: this._id},
         {$set: { address: this.address, paymentType: this.paymentType, shopName: this.shopName,
                 products: this.products, shopId: this.shopId, uid: this.uid, created_at: this.created_at, total: this.total,
-                productPhoto: this.productPhoto}}, {upsert: true})
+                productPhoto: this.productPhoto, name: this.name, phone: this.phone, deliveryStatus: this.deliveryStatus,
+                paymentStatus: this.paymentStatus}}, {upsert: true})
     }
 
+    async markPaid() {
+        this.paymentStatus = 1;
+        this.saveToDB()
+    }
     async deleteFromDB() {
         //dont need await
         dbhandler.cols.list.colOrders.deleteOne({_id: this._id})

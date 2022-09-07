@@ -164,4 +164,37 @@ api.get('/:id', async (req, res) => {
     return res.status(200).json(order)
 })
 
+api.get('/:id/markpaid', async (req, res) => {
+    const authed = await auth(req.headers)
+
+    if (!authed) {
+        return res.status(401).end();
+    }
+
+    const accId = authed._id;
+
+    if (!accountHandler.Accounts.has(accId))
+        return res.status(400).json({status: "error", error: "Your acc doesnt exist! Contact admin please."})
+
+    let acc = accountHandler.Accounts.get(accId)
+    const oid = parseInt(req.params.id)
+
+    if (!oid)
+    {
+        return res.status(400).json({status: "error", error: "Order id is invalid!"})
+    }
+
+    if (!acc.hasOrder(oid))
+        return res.status(400).json({status: "error", error: "This order doesn't belong to you!"})
+
+    if (!orderHandler.Orders.has(oid))
+        return res.status(400).json({status: "error", error: "Order doesnt exist!"})
+
+    let order = orderHandler.Orders.get(oid)
+
+    order.markPaid()
+
+    return res.status(200).end()
+})
+
 module.exports = api

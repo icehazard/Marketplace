@@ -337,6 +337,14 @@ class Account {
         return this.deliveryAddresses.findIndex(i => i.address === adr) !== -1;
     }
 
+    getDeliveryAddress(adr) {
+        let idx = this.deliveryAddresses.findIndex(i => i.address === adr)
+        if (idx !== -1)
+            return this.deliveryAddresses[idx]
+
+        return false
+    }
+
     hasOrder(oid) {
         if (!this.orders || !this.orders.length)
             return false;

@@ -55,7 +55,7 @@ Addresses.prototype.loadFromDB = async function() {
 
     for (let addr of data)
         if (!this.getAddresses().has(addr._id)) {
-            let a = new Address(addr._id, addr.ownerID, addr.symbol, addr.keyId)
+            let a = new Address(addr._id, addr)
             this.getAddresses().set(addr._id, a)
             this.getAddressesByKeyId().set(addr.keyId, a)
             if (accountHandler.Accounts.has(addr.ownerID))
@@ -72,12 +72,12 @@ Addresses.prototype.loadFromDB = async function() {
 
 class Address {
 
-    constructor(_id, ownerID, symbol, keyId)
+    constructor(_id, data)
     {
         this._id = _id;
-        this.ownerID = ownerID
-        this.symbol = symbol;  //symbol is e.g BTC
-        this.keyId = keyId;
+        this.ownerID = data.ownerID
+        this.symbol = data.symbol;  //symbol is e.g BTC
+        this.keyId = data.keyId;
     }
 
     async saveToDB() {
