@@ -15,6 +15,7 @@ const data = {
     lang: "ENG",
     address: '',
     addresses: [],
+    orders: [],
     balances: {},
     me: [],
     drawer: false,
@@ -70,7 +71,7 @@ context.get = async function () {
     context.commit('address', res.recentAddresses?.BTCt?._id)
     context.commit('balances', res.balances)
    // context.commit('shipping', res.shipping)
-   // context.commit('orders', res.orders.reverse())
+    context.commit('orders', res.orders.reverse())
     context.commit('addresses', res.deliveryAddresses)
     context.commit('fullName', res.fullName)
     context.commit('cellNo', res.cellNo)
