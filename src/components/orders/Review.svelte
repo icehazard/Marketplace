@@ -22,7 +22,7 @@
     $: $location, generateQr();
 
     function generateQr() {
-        if (!mounted || $orders.order.paymentStatus) return;
+        if (!mounted ) return;
         const payload = generatePayload(mobileNumber, { amount });
         QRCode.toCanvas(el, payload);
     }
