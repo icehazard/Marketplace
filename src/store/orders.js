@@ -20,6 +20,9 @@ context.getChat = async function (id) {
     context.commit('chat', res)
     return res;
 }
+context.markAsPaid = async function (id) {
+    return await get(`api/order/${id}/markPaid`)
+}
 
 context.addMsgToStore = async function (msg) {
     let chat = context.val('chat')
