@@ -15,12 +15,7 @@
     $: choose = $location.includes("choose");
 
     function payload(name, address, icon, init) {
-        return {
-            name,
-            address,
-            icon,
-            default: init,
-        };
+        return { name, address, icon, default: init };
     }
     function add() {
         let default_icon = "fluent:location-16-regular";
@@ -55,17 +50,30 @@
             <span>Back</span>
         </button>
     </div>
-    <div class="row pa-20 gap-20 shade3 curve space-between">
-        <div class="w-500 w100 grow">
-            <Field label="Type an address" bind:ref={el} bind:value={address} />
+    <div class="col pa-20 shade3 curve gap-20">
+        <div class="row space-between gap-20">
+            <div class="w-500 w100 grow gap-10 col">
+                <span class="font-12 weight-300 opacity-75">Full Name</span>
+                <Field label="Type an address" bind:ref={el} bind:value={address} />
+            </div>
+            {#if $mq.sm_}
+                <Button
+                    primary
+                    text="{type ? 'Save' : 'Add'} Address"
+                    on:click={() => (type ? edit() : add())}
+                />
+            {/if}
         </div>
-        {#if $mq.sm_}
-            <Button
-            primary
-                text="{type ? 'Save' : 'Add'} Address"
-                on:click={() => (type ? edit() : add())}
-            />
-        {/if}
+        <div class="row gap-20">
+            <div class="w-500 w100 grow gap-10 col">
+                <span class="font-12 weight-300 opacity-75">Full Name</span>
+                <Field label="Type an address" bind:ref={el} bind:value={address} />
+            </div>
+            <div class="w-500 w100 grow gap-10 col">
+                <span class="font-12 weight-300 opacity-75">Full Name</span>
+                <Field label="Type an address" bind:ref={el} bind:value={address} />
+            </div>
+        </div>
     </div>
     <div class="row grow">
         <Map {address} textfield={el} on:updateAddres={updateAddres} />

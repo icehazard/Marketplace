@@ -80,6 +80,21 @@
             {#if addressError}
                 <div class="row  red--text font-14 weight-600">Please select an address</div>
             {/if}
+            <div class="row  align-center  py-10">
+              <div class="col grow justify-center gap-10">
+                <span class="font-12 weight-300 opacity-75">Full Name</span>
+                <div class="font-14 weight-300" class:red--text={addressError}>
+                    {$user.fullName || "No Name selected"}
+                </div>
+              </div>
+              <div class="col grow justify-center  gap-10">
+                <span class="font-12 weight-300 opacity-75">Mobile number</span>
+                <div class="font-14 weight-300" class:red--text={addressError}>
+                    {$user.cellNo || "No Number selected"}
+                </div>
+              </div>
+            </div>
+            <span class="font-12 weight-300 opacity-75 ">Delivery Address</span>
             <div class="row space-between align-center pb-20 pt-10">
                 <div class="font-14 weight-300" class:red--text={addressError}>
                     {defaultAddress || "No address selected"}

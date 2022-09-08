@@ -54,14 +54,7 @@
             {/if}
         {/each}
     </div>
-    <div class="pa-10">
-        <div class="center shade3 curved pb-20">
-            <span class="w100 pa-10">Prompay QR code for payment </span>
-            <div class="center pa-20">
-                <canvas bind:this={el} />
-            </div>
-        </div>
-    </div>
+
     <div class="col" class:row={$mq.md_}>
         <div class="col grow">
             <div class="row gap-20 pa-15 align-center">
@@ -112,6 +105,14 @@
                 </span>
             </div>
             <hr />
+        </div>
+    </div>
+    <div class="pa-10">
+        <div class="center pb-20">
+            <span class="w100 pa-10">Prompay QR code for payment </span>
+            <div class="center pa-20">
+                <canvas bind:this={el} />
+            </div>
         </div>
     </div>
     <div class="row gap-20 pa-15">
