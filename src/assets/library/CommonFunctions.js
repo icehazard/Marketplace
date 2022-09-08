@@ -34,6 +34,7 @@ export function set(name, type) {
 export function persist(name, data) {
     let local = localStorage.getItem(name)
     const value = writable(local ? JSON.parse(local) : data);
+    if (!local)  value.set(copy(data))
     value.subscribe(val => { localStorage.setItem(name, JSON.stringify(val)) });
     value.reset = () => value.set(copy(data))
     value.val = (key) => getStore(value)[key]
