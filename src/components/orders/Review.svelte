@@ -16,21 +16,20 @@
     const mobileNumber = $user.cellNo; //needs shop mobile number to work
     const amount = 4.2;
     let el;
-    console.log($orders.order);
 
     function generateQr() {
         const payload = generatePayload(mobileNumber, { amount });
         QRCode.toCanvas(el, payload);
     }
-    async function paid(){
-        let res = await orders.markAsPaid($orders.order._id)
-        await orders.get($orders.order._id)
-        if (res.status == 'ok') notify(1, 'Marked as paid')
-        else notify(0, 'Server error')
+    async function paid() {
+        let res = await orders.markAsPaid($orders.order._id);
+        await orders.get($orders.order._id);
+        if (res.status == "ok") notify(1, "Marked as paid");
+        else notify(0, "Server error");
     }
 
     onMount(() => {
-        generateQr();
+        if (!$orders.order.paymentStatus) generateQr();
     });
 
     let active = $orders.order.deliveryStatus;
@@ -90,7 +89,8 @@
         <div class="col grow">
             <div class="row gap-20 pa-15 align-center">
                 <span class="opacity-75 w100" class:w-120={$mq.md_}>Payment Status</span>
-                <span class="font-14 nowrap">{$orders.order.paymentStatus ? 'Paid' : 'Unpaid'}</span>
+                <span class="font-14 nowrap">{$orders.order.paymentStatus ? "Paid" : "Unpaid"}</span
+                >
             </div>
             <hr />
             <div class="row gap-20 pa-15 align-center">
@@ -121,27 +121,31 @@
         </span>
     </div>
     <hr />
-    <div class="pa-10">
-        <div class="center pb-20">
-            <div class="row w100">
-                <span class="w100 pa-10">Prompay QR code for payment </span>
-                <img
-                    class="w-100 white mr-10"
-                    src="https://www.designil.com/wp-content/uploads/2020/04/prompt-pay-logo.png"
-                    alt=""
-                />
-            </div>
-            <div class="center pa-20">
-                <canvas bind:this={el} />
+    {#if $orders.order.paymentStatus == 0}
+        <div class="pa-10">
+            <div class="center pb-20">
+                <div class="row w100">
+                    <span class="w100 pa-10">Prompay QR code for payment </span>
+                    <img
+                        class="w-100 white mr-10"
+                        src="https://www.designil.com/wp-content/uploads/2020/04/prompt-pay-logo.png"
+                        alt=""
+                    />
+                </div>
+                <div class="center pa-20">
+                    <canvas bind:this={el} />
+                </div>
             </div>
         </div>
-    </div>
-    <hr>
-    <div class="row pa-15 space-between grow h100 align-center">
-        <span>Mark as paid</span>
-        <Button on:click={paid} primary text="Paid" />
-    </div>
-    <hr>
+        <hr />
+        <div class="row pa-15 space-between grow h100 align-center">
+            <span>Mark as paid</span>
+            <Button on:click={paid} primary text="Paid" />
+        </div>
+        <hr />
+    {/if}
+
+
 
     <div class="row pa-15 gap-10 align-center">
         <span class="opacity-75  nowrap"
@@ -157,7 +161,7 @@
             <Product {product} />
         {/each}
     </div>
-    <hr>
+    <hr />
     <div class="row pa-15 space-between grow h100 align-center">
         <span>Cancel Order?</span>
         <Button text="Cancel" />

@@ -10,9 +10,7 @@ const data = {
 const context = persist('orders', data)
 
 context.get = async function (id) {
-    console.log("🚀 ~ id", id)
     let res = await get(`api/order/${id}`)
-    console.log("🚀 ~ res", res)
     context.commit('order', res)
     return res;
 }
