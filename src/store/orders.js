@@ -10,7 +10,9 @@ const data = {
 const context = persist('orders', data)
 
 context.get = async function (id) {
+    console.log("🚀 ~ id", id)
     let res = await get(`api/order/${id}`)
+    console.log("🚀 ~ res", res)
     context.commit('order', res)
     return res;
 }
@@ -19,6 +21,9 @@ context.getChat = async function (id) {
     let res = await get(`api/chat/${id}`)
     context.commit('chat', res)
     return res;
+}
+context.markAsPaid = async function (id) {
+    return await get(`api/order/${id}/markPaid`)
 }
 
 context.addMsgToStore = async function (msg) {

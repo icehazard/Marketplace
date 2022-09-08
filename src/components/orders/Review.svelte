@@ -2,7 +2,7 @@
     import orders from "@/store/orders";
     import dayjs from "dayjs";
     import pluralize from "pluralize";
-    import { formatCurrency } from "@/assets/library/CommonFunctions.js";
+    import { formatCurrency, notify } from "@/assets/library/CommonFunctions.js";
     import { mq } from "@/assets/library/MediaQuery.svelte";
     import Contact from "./Contact";
     import Icon from "@iconify/svelte";
@@ -17,16 +17,23 @@
     const amount = 4.2;
     let el;
     console.log($orders.order);
+
     function generateQr() {
         const payload = generatePayload(mobileNumber, { amount });
         QRCode.toCanvas(el, payload);
+    }
+    async function paid(){
+        let res = await orders.markAsPaid($orders.order._id)
+        await orders.get($orders.order._id)
+        if (res.status == 'ok') notify(1, 'Marked as paid')
+        else notify(0, 'Server error')
     }
 
     onMount(() => {
         generateQr();
     });
 
-    let active = 0;
+    let active = $orders.order.deliveryStatus;
 
     let headings = [
         { text: "Confirmation" },
@@ -83,7 +90,7 @@
         <div class="col grow">
             <div class="row gap-20 pa-15 align-center">
                 <span class="opacity-75 w100" class:w-120={$mq.md_}>Payment Status</span>
-                <span class="font-14 nowrap">Payment Status</span>
+                <span class="font-14 nowrap">{$orders.order.paymentStatus ? 'Paid' : 'Unpaid'}</span>
             </div>
             <hr />
             <div class="row gap-20 pa-15 align-center">
@@ -107,6 +114,13 @@
             <hr />
         </div>
     </div>
+    <div class="row gap-20 pa-15">
+        <span class="opacity-75 w-120 nowrap">Delivery Address</span>
+        <span class="font-14 text-end w100" class:text-end={!$mq.md_} class:w100={!$mq.md_}>
+            {$orders.order.address}
+        </span>
+    </div>
+    <hr />
     <div class="pa-10">
         <div class="center pb-20">
             <div class="row w100">
@@ -117,19 +131,18 @@
                     alt=""
                 />
             </div>
-
             <div class="center pa-20">
                 <canvas bind:this={el} />
             </div>
         </div>
     </div>
-    <div class="row gap-20 pa-15">
-        <span class="opacity-75 w-120 nowrap">Delivery Address</span>
-        <span class="font-14 text-end w100" class:text-end={!$mq.md_} class:w100={!$mq.md_}>
-            {$orders.order.address}
-        </span>
+    <hr>
+    <div class="row pa-15 space-between grow h100 align-center">
+        <span>Mark as paid</span>
+        <Button on:click={paid} primary text="Paid" />
     </div>
-    <hr />
+    <hr>
+
     <div class="row pa-15 gap-10 align-center">
         <span class="opacity-75  nowrap"
             >Purchased {pluralize("item", $orders.order.products?.length)}
@@ -144,6 +157,7 @@
             <Product {product} />
         {/each}
     </div>
+    <hr>
     <div class="row pa-15 space-between grow h100 align-center">
         <span>Cancel Order?</span>
         <Button text="Cancel" />

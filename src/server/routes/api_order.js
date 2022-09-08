@@ -194,7 +194,7 @@ api.get('/:id/markpaid', async (req, res) => {
 
     order.markPaid()
 
-    return res.status(200).end()
+    return res.json({status: 'ok'})
 })
 
 module.exports = api
