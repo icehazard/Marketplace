@@ -164,7 +164,7 @@ api.get('/:id', async (req, res) => {
     return res.status(200).json(order)
 })
 
-api.get('/:id/markpaid', async (req, res) => {
+api.post('/:id/markpaid', async (req, res) => {
     const authed = await auth(req.headers)
 
     if (!authed) {
