@@ -101,7 +101,7 @@
             <div class="row gap-20 pa-15 align-center">
                 <span class="opacity-75 w100 " class:w-120={$mq.md_}>Mobile Number</span>
                 <span class="font-14 nowrap">
-                    {$orders.order.cellNo || "No Number Provided"}
+                    {$orders.order.phone || "No Number Provided"}
                 </span>
             </div>
             <hr />
