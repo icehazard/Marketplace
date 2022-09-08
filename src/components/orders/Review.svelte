@@ -11,16 +11,18 @@
     import generatePayload from "promptpay-qr";
     import QRCode from "qrcode";
     import { onMount } from "svelte";
+    import {  location } from "svelte-spa-router";
 
     const mobileNumber = $user.cellNo; //needs shop mobile number to work
     const amount = 4.2;
     let el;
-    let mounted = false
+    let mounted = false;
 
-    $: $orders.order.paymentStatus,  generateQr()
+    $: $orders.order.paymentStatus, generateQr();
+    $: $location, generateQr();
 
     function generateQr() {
-        if (!mounted) return;
+        if (!mounted || $orders.order.paymentStatus) return;
         const payload = generatePayload(mobileNumber, { amount });
         QRCode.toCanvas(el, payload);
     }
@@ -32,7 +34,8 @@
     }
 
     onMount(() => {
-        mounted = true
+        generateQr()
+        mounted = true;
     });
 
     let active = $orders.order.deliveryStatus;
@@ -124,7 +127,7 @@
         </span>
     </div>
     <hr />
-    {#if $orders.order.paymentStatus == 0}
+    {#if true}
         <div class="pa-10">
             <div class="center pb-20">
                 <div class="row w100">
@@ -147,8 +150,6 @@
         </div>
         <hr />
     {/if}
-
-
 
     <div class="row pa-15 gap-10 align-center">
         <span class="opacity-75  nowrap"

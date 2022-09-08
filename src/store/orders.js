@@ -1,4 +1,4 @@
-import { persist, get } from '@/assets/library/CommonFunctions.js'
+import { persist, get, post } from '@/assets/library/CommonFunctions.js'
 import { notify } from "@/assets/library/CommonFunctions.js";
 
 const data = {
@@ -21,7 +21,7 @@ context.getChat = async function (id) {
     return res;
 }
 context.markAsPaid = async function (id) {
-    return await get(`api/order/${id}/markPaid`)
+    return await post(`api/order/${id}/markPaid`)
 }
 
 context.addMsgToStore = async function (msg) {
