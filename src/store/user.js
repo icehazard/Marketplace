@@ -5,6 +5,7 @@ import { persist, get, post, patch, hasError, del } from '@/assets/library/Commo
 
 const data = {
     _id: 0,
+    email : '',
     username: '',
     token: '',
     fullName: '',
@@ -68,8 +69,8 @@ context.get = async function () {
     context.commit('me', res.shops)
     context.commit('address', res.recentAddresses?.BTCt?._id)
     context.commit('balances', res.balances)
-    context.commit('shipping', res.shipping)
-    context.commit('orders', res.orders.reverse())
+   // context.commit('shipping', res.shipping)
+   // context.commit('orders', res.orders.reverse())
     context.commit('addresses', res.deliveryAddresses)
     context.commit('fullName', res.fullName)
     context.commit('cellNo', res.cellNo)

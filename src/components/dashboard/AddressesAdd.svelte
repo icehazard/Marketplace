@@ -50,7 +50,7 @@
             <span>Back</span>
         </button>
     </div>
-    <div class="col pa-20 shade3 curve gap-20">
+    <div class="col pa-20 shade3 curve gap-10">
         <div class="row space-between gap-20">
             <div class="w-500 w100 grow gap-10 col">
                 <span class="font-12 weight-300 opacity-75">Full Name</span>

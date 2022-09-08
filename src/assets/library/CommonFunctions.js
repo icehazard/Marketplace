@@ -41,6 +41,7 @@ export function persist(name, data) {
     value.commit = (key, val) => {
         let temp = getStore(value)
         temp[key] = val;
+        if (val == null || val == undefined)  temp[key] = data[key]
         value.set(temp)
         return temp
     };
@@ -50,6 +51,13 @@ export function persist(name, data) {
         value.set(temp)
         return temp
     };
+    for (let x of Object.keys(data)) {
+        if (!Object.keys(JSON.parse(local) || {}).includes(x)) {
+            let temp = getStore(value)
+            temp[x] = data[x];
+            value.set(temp)
+        }
+    }
     return value;
 }
 
@@ -196,4 +204,4 @@ export function hasErrorNonRetarded(data, initVal) {
 
 export const validateEmail = function (email) {
     return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)
-  }
+}
