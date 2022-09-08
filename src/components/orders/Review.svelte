@@ -4,7 +4,6 @@
     import pluralize from "pluralize";
     import { formatCurrency, notify } from "@/assets/library/CommonFunctions.js";
     import { mq } from "@/assets/library/MediaQuery.svelte";
-    import Contact from "./Contact";
     import Icon from "@iconify/svelte";
     import user from "@/store/user";
     import Product from "./Product.svelte";
@@ -16,8 +15,12 @@
     const mobileNumber = $user.cellNo; //needs shop mobile number to work
     const amount = 4.2;
     let el;
+    let mounted = false
+
+    $: $orders.order.paymentStatus,  generateQr()
 
     function generateQr() {
+        if (!mounted) return;
         const payload = generatePayload(mobileNumber, { amount });
         QRCode.toCanvas(el, payload);
     }
@@ -29,7 +32,7 @@
     }
 
     onMount(() => {
-        if (!$orders.order.paymentStatus) generateQr();
+        mounted = true
     });
 
     let active = $orders.order.deliveryStatus;
