@@ -9,17 +9,19 @@
     import { mq } from "@/assets/library/MediaQuery.svelte";
 
     let address = "";
+    let fullName = "";
+    let cellNo = "";
     let el;
     let id = $location.split("/")[3];
     $: type = $location.includes("edit");
     $: choose = $location.includes("choose");
 
-    function payload(name, address, icon, init) {
-        return { name, address, icon, default: init };
+    function payload(name, address, fullName, cellNo, icon, init) {
+        return { name, address, fullName, cellNo, icon, default: init };
     }
     function add() {
         let default_icon = "fluent:location-16-regular";
-        let data = payload("Address", address, default_icon, true);
+        let data = payload("Address", address, fullName, cellNo, default_icon, true);
         user.postHomeAddress(data);
         if (choose) return push("#/addresses/choose");
         push("#/addresses/overview");
@@ -36,6 +38,8 @@
 
     onMount(() => {
         if (type) address = $user.addresses[id].address;
+        fullName = $user.addresses[id]?.fullName || $user.fullName;
+        cellNo = $user.addresses[id]?.cellNo || $user.cellNo;
     });
 </script>
 
@@ -54,7 +58,7 @@
         <div class="row space-between gap-20">
             <div class="w-500 w100 grow gap-10 col">
                 <span class="font-12 weight-300 opacity-75">Full Name</span>
-                <Field label="Type an address" bind:ref={el} bind:value={address} />
+                <Field label="Type an address" bind:ref={el} bind:value={fullName} />
             </div>
             {#if $mq.sm_}
                 <Button
@@ -66,11 +70,11 @@
         </div>
         <div class="row gap-20">
             <div class="w-500 w100 grow gap-10 col">
-                <span class="font-12 weight-300 opacity-75">Full Name</span>
-                <Field label="Type an address" bind:ref={el} bind:value={address} />
+                <span class="font-12 weight-300 opacity-75">Cell No</span>
+                <Field label="Type an address" bind:ref={el} bind:value={cellNo} />
             </div>
             <div class="w-500 w100 grow gap-10 col">
-                <span class="font-12 weight-300 opacity-75">Full Name</span>
+                <span class="font-12 weight-300 opacity-75">Delivery Address</span>
                 <Field label="Type an address" bind:ref={el} bind:value={address} />
             </div>
         </div>
