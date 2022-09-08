@@ -28,7 +28,7 @@
     }
     function edit() {
         let obj = $user.addresses[id];
-        let data = payload(obj.name, address, obj.icon, obj.default);
+        let data = payload(obj.name, address, fullName, cellNo, obj.icon, obj.default);
         user.editHomeAddress(id, data);
         push("#/addresses/overview");
     }
