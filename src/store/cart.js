@@ -64,6 +64,7 @@ context.submitCart = async function (address, paymentType) {
     data.address = address;
     data.paymentType = paymentType;
     data.shopId = cartVal[0].shopID
+    console.log("🚀 ~ data", data)
     return await post("api/order", data);
 }
 

@@ -16,12 +16,12 @@
     $: type = $location.includes("edit");
     $: choose = $location.includes("choose");
 
-    function payload(name, address, fullName, cellNo, icon, init) {
-        return { name, address, fullName, cellNo, icon, default: init };
+    function payload(fullName, address, cellNo, icon, init) {
+        return { name: fullName, address, phone: cellNo, icon, default: init };
     }
     function add() {
         let default_icon = "fluent:location-16-regular";
-        let data = payload("Address", address, fullName, cellNo, default_icon, true);
+        let data = payload(fullName, address, cellNo, default_icon, true);
         user.postHomeAddress(data);
         if (choose) return push("#/addresses/choose");
         addToStore();
@@ -29,7 +29,7 @@
     }
     function edit() {
         let obj = $user.addresses[id];
-        let data = payload(obj.name, address, fullName, cellNo, obj.icon, obj.default);
+        let data = payload(fullName, address, cellNo, obj.icon, obj.default);
         user.editHomeAddress(id, data);
         addToStore();
         push("#/addresses/overview");
@@ -38,8 +38,14 @@
         address = addr.detail;
     }
     function addToStore() {
-        if (!$user.fullName) user.commit("fullName", fullName);
-        if (!$user.cellNo) user.commit("cellNo", cellNo);
+        if (!$user.fullName && fullName) {
+            user.commit("fullName", fullName);
+            user.patch({ fullName });
+        }
+        if (!$user.cellNo && cellNo) {
+            user.commit("cellNo", cellNo);
+            user.patch({ cellNo });
+        }
     }
 
     onMount(() => {

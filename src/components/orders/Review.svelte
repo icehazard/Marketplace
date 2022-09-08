@@ -16,7 +16,7 @@
     const mobileNumber = $user.cellNo; //needs shop mobile number to work
     const amount = 4.2;
     let el;
-
+    console.log($orders.order);
     function generateQr() {
         const payload = generatePayload(mobileNumber, { amount });
         QRCode.toCanvas(el, payload);
@@ -64,7 +64,7 @@
             <hr />
             <div class="row gap-20 pa-15 align-center">
                 <span class="opacity-75 w100" class:w-120={$mq.md_}>Customer Name</span>
-                <span class="font-14 nowrap"> {$orders.order.fullName || "No Name Provided"}</span>
+                <span class="font-14 nowrap"> {$orders.order.name || "No Name Provided"}</span>
             </div>
             <hr />
             <div class="row gap-20 pa-15 align-center">
@@ -109,7 +109,15 @@
     </div>
     <div class="pa-10">
         <div class="center pb-20">
-            <span class="w100 pa-10">Prompay QR code for payment </span>
+            <div class="row w100">
+                <span class="w100 pa-10">Prompay QR code for payment </span>
+                <img
+                    class="w-100 white mr-10"
+                    src="https://www.designil.com/wp-content/uploads/2020/04/prompt-pay-logo.png"
+                    alt=""
+                />
+            </div>
+
             <div class="center pa-20">
                 <canvas bind:this={el} />
             </div>
