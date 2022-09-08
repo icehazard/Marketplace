@@ -24,16 +24,22 @@
         let data = payload("Address", address, fullName, cellNo, default_icon, true);
         user.postHomeAddress(data);
         if (choose) return push("#/addresses/choose");
+        addToStore();
         push("#/addresses/overview");
     }
     function edit() {
         let obj = $user.addresses[id];
         let data = payload(obj.name, address, fullName, cellNo, obj.icon, obj.default);
         user.editHomeAddress(id, data);
+        addToStore();
         push("#/addresses/overview");
     }
     function updateAddres(addr) {
         address = addr.detail;
+    }
+    function addToStore() {
+        if (!$user.fullName) user.commit("fullName", fullName);
+        if (!$user.cellNo) user.commit("cellNo", cellNo);
     }
 
     onMount(() => {
