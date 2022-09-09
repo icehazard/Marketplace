@@ -11,7 +11,7 @@
     import generatePayload from "promptpay-qr";
     import QRCode from "qrcode";
     import { onMount } from "svelte";
-    import {  location } from "svelte-spa-router";
+    import { location } from "svelte-spa-router";
 
     const mobileNumber = $user.cellNo; //needs shop mobile number to work
     const amount = 4.2;
@@ -22,7 +22,7 @@
     $: $location, generateQr();
 
     function generateQr() {
-        if (!mounted ) return;
+        if (!mounted) return;
         const payload = generatePayload(mobileNumber, { amount });
         QRCode.toCanvas(el, payload);
     }
@@ -34,7 +34,7 @@
     }
 
     onMount(() => {
-        generateQr()
+        generateQr();
         mounted = true;
     });
 
@@ -66,7 +66,30 @@
             {/if}
         {/each}
     </div>
-
+    <div class="pa-10" class:none={$orders.order.paymentStatus}>
+        <div class="center pb-20">
+            <div class="row w100">
+                <span class="w100 pa-10">Prompay QR code for payment </span>
+                <img
+                    class="w-100 white mr-10"
+                    src="https://www.designil.com/wp-content/uploads/2020/04/prompt-pay-logo.png"
+                    alt=""
+                />
+            </div>
+            <div class="center pa-20">
+                <canvas bind:this={el} />
+            </div>
+        </div>
+    </div>
+    <hr class:none={$orders.order.paymentStatus} />
+    <div
+        class="row pa-15 space-between grow h100 align-center"
+        class:none={$orders.order.paymentStatus}
+    >
+        <span>Mark as paid</span>
+        <Button on:click={paid} primary text="Paid" />
+    </div>
+    <hr class:none={$orders.order.paymentStatus} />
     <div class="col" class:row={$mq.md_}>
         <div class="col grow">
             <div class="row gap-20 pa-15 align-center">
@@ -127,29 +150,8 @@
         </span>
     </div>
     <hr />
-    {#if true}
-        <div class="pa-10">
-            <div class="center pb-20">
-                <div class="row w100">
-                    <span class="w100 pa-10">Prompay QR code for payment </span>
-                    <img
-                        class="w-100 white mr-10"
-                        src="https://www.designil.com/wp-content/uploads/2020/04/prompt-pay-logo.png"
-                        alt=""
-                    />
-                </div>
-                <div class="center pa-20">
-                    <canvas bind:this={el} />
-                </div>
-            </div>
-        </div>
-        <hr />
-        <div class="row pa-15 space-between grow h100 align-center">
-            <span>Mark as paid</span>
-            <Button on:click={paid} primary text="Paid" />
-        </div>
-        <hr />
-    {/if}
+
+
 
     <div class="row pa-15 gap-10 align-center">
         <span class="opacity-75  nowrap"
