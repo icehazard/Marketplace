@@ -7,7 +7,7 @@
   import user from "@/store/user";
   import { snowflake } from "comp/utils/snowflake";
 
-  let msg = "";
+  let msg = "sdf";
   let el;
 
   function scroll(force) {
@@ -57,9 +57,9 @@
       placeholder="Write a message"
     />
 
-    <button class="slow h100 wrapHidden relative overflow-hidden center " class:wrapShow={msg}>
+    <button class="slow h100 wrapHidden shade2 relative overflow-hidden center " class:wrapShow={msg}>
       <div
-        class="round pa-10 shade3 center slow absolute arrowHidden center overflow-hidden"
+        class="round pa-10  blue center slow absolute arrowHidden center overflow-hidden"
         class:arrowShow={msg}
       >
         <Icon icon="fa:paper-plane" height="20" />
