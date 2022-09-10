@@ -1,5 +1,5 @@
 <script>
-    import { post } from "@/assets/library/CommonFunctions.js";
+    import { post } from "@/assets/js/util.js";
     import Confirm from "./Confirm.svelte";
     import GetPaid from "./GetPaid.svelte";
     import Address from "./Address.svelte";

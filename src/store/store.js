@@ -1,4 +1,4 @@
-import { set } from '@/assets/library/CommonFunctions.js'
+import { set } from '@/assets/js/util.js'
 
 export const active = set('active', 0)
 export const shopValid = set('shopValid', [false, false, false, false, false])
@@ -9,7 +9,7 @@ export function reset(){
     active.set('')
 }
 
-import { persist } from '@/assets/library/CommonFunctions.js'
+import { persist } from '@/assets/js/util.js'
 
 const data = {
     active: 0,

@@ -1,6 +1,6 @@
 <script>
-    import { currencies } from "@/assets/library/options.js";
-    import { formatCurrency } from "@/assets/library/CommonFunctions.js";
+    import { currencies } from "@/assets/js/options.js";
+    import { formatCurrency } from "@/assets/js/util.js";
     import user, {totalBalance} from "@/store/user.js";
     import Icon from "@iconify/svelte";
 

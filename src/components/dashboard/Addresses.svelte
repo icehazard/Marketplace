@@ -3,7 +3,7 @@
     import Button from "../atoms/Button.svelte";
     import { push, location } from "svelte-spa-router";
     import user from "@/store/user";
-    import { mq } from "@/assets/library/MediaQuery.svelte";
+    import { mq } from "@/assets/js/MediaQuery.svelte";
 
     $: choose = $location.includes("choose");
 

@@ -4,7 +4,7 @@
     import shops from "@/store/shops.js";
     import { closeModal } from "svelte-modals";
     import { scale } from "svelte/transition";
-    import { currencies } from "@/assets/library/options.js";
+    import { currencies } from "@/assets/js/options.js";
     import user from "@/store/user.js";
 
     $: symbol = currencies.filter((el) => el.id == $user?.currency)[0]?.symbol;

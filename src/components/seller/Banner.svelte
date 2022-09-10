@@ -9,7 +9,7 @@
     import Shipping from "comp/modals/seller/Shipping.svelte";
     import PaymentTypes from "comp/modals/seller/PaymentTypes.svelte";
     import { openModal } from "svelte-modals";
-    import { formatCurrency } from "@/assets/library/CommonFunctions.js";
+    import { formatCurrency } from "@/assets/js/util.js";
 </script>
 
 <div class="row gap-20 shade1 pa-20 curved center">

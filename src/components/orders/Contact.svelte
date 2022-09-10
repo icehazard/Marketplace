@@ -1,13 +1,11 @@
 <script>
     import { push } from "svelte-spa-router";
-    import { formatCurrency } from "@/assets/library/CommonFunctions.js";
     import Icon from "@iconify/svelte";
     import * as timeago from "timeago.js";
     import { onMount } from "svelte";
     import pluralize from "pluralize";
     import orders from "@/store/orders";
     import dayjs from "dayjs";
-
 
     export let order = {};
     let el;
@@ -25,7 +23,7 @@
     });
 </script>
 
-<button class="row w100 align-center border py-20 curve shine gap-15 pa-5" on:click={view}>
+<button class="row w100 align-center border py-20 curve shine gap-15 ma-5" on:click={view}>
     <div class="relative">
         <div class="placeholder center">
             {#if order.productPhoto}

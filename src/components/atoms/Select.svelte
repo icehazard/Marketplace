@@ -1,6 +1,6 @@
 <script>
     import Icon from "@iconify/svelte";
-    import { clickOutside } from "@/assets/library/CommonFunctions.js";
+    import { clickOutside } from "@/assets/js/util.js";
     import { createEventDispatcher } from "svelte";
     const dispatch = createEventDispatcher();
 

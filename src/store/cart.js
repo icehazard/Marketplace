@@ -1,6 +1,6 @@
 import { derived } from "svelte/store";
 import { acts } from "@tadashi/svelte-notification";
-import { persist, post,} from '@/assets/library/CommonFunctions.js'
+import { persist, post,} from '@/assets/js/util.js'
 
 const data = {
     cart: [],

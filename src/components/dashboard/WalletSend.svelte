@@ -1,8 +1,8 @@
 <script>
     import Field from "comp/atoms/TextField.svelte";
     import Button from "comp/atoms/Button.svelte";
-    import { languages, themes, currencies } from "@/assets/library/options.js";
-    import { formatCurrency } from "@/assets/library/CommonFunctions.js";
+    import { languages, themes, currencies } from "@/assets/js/options.js";
+    import { formatCurrency } from "@/assets/js/util.js";
     import user, {totalBalance} from "@/store/user.js";
     import Icon from "@iconify/svelte";
 

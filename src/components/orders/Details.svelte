@@ -1,7 +1,7 @@
 <script>
   import Icon from "@iconify/svelte";
   import { push, location } from "svelte-spa-router";
-  import { mq } from "@/assets/library/MediaQuery.svelte";
+  import { mq } from "@/assets/js/MediaQuery.svelte";
   import orders from "@/store/orders";
 
   let loc = $location.split("/");

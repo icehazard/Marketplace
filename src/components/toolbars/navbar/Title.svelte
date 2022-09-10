@@ -1,6 +1,6 @@
 <script>
     import logo from "@/assets/images/logo.svg";
-    import { mq } from "@/assets/library/MediaQuery.svelte";
+    import { mq } from "@/assets/js/MediaQuery.svelte";
     import { fade } from "svelte/transition";
     import { APP_NAME } from "@/config";
 </script>

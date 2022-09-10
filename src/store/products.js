@@ -1,7 +1,7 @@
-import { persist, post, get, del, patch, hasError } from '@/assets/library/CommonFunctions.js'
+import { persist, post, get, del, patch, hasError } from '@/assets/js/util.js'
 import user from '@/store/user.js'
 import { derived } from "svelte/store";
-import {hasErrorNonRetarded} from "../assets/library/CommonFunctions";
+import {hasErrorNonRetarded} from "../assets/js/util";
 
 const data = {
     products: [],

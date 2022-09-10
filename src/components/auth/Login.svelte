@@ -3,7 +3,7 @@
     import Field from "comp/atoms/TextField.svelte";
     import { push } from "svelte-spa-router";
     import user from "@/store/user.js";
-    import { post } from "@/assets/library/CommonFunctions.js";
+    import { post } from "@/assets/js/util.js";
 
     let username = "";
     let password = "";

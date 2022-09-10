@@ -1,4 +1,4 @@
-import { persist, post, get, hasError, postImage, patch, deleteImage } from '@/assets/library/CommonFunctions.js'
+import { persist, post, get, hasError, postImage, patch, deleteImage } from '@/assets/js/util.js'
 import { derived } from "svelte/store";
 import { push } from "svelte-spa-router";
 import user from '@/store/user'

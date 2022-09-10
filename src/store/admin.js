@@ -1,4 +1,4 @@
-import { persist, get, post, hasError } from '@/assets/library/CommonFunctions.js'
+import { persist, get, post, hasError } from '@/assets/js/util.js'
 
 const data = {
     pendingShops: [],

@@ -2,7 +2,7 @@
     import Icon from "@iconify/svelte";
     import Contact from "./Contact";
     import user from "@/store/user";
-    import { mq } from "@/assets/library/MediaQuery.svelte";
+    import { mq } from "@/assets/js/MediaQuery.svelte";
 </script>
 
 <section class="w100 h100 shade3 col curved" class:desktop={$mq.lg_}>
@@ -13,7 +13,7 @@
             <input type="text" class="w100 shade2" placeholder="Search Orders" />
         </div>
     </div>
-    <div class="gap-20 col " class:pa-20={$mq.sm_}>
+    <div class="col " class:pa-20={$mq.sm_}>
         <hr>
         {#each $user.orders as order}
             <Contact {order} />

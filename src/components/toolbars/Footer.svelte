@@ -1,8 +1,8 @@
 <script>
     import user from "@/store/user.js";
     import { APP_NAME } from "@/config";
-    import { currencies } from "@/assets/library/options.js";
-    import { mq } from "@/assets/library/MediaQuery.svelte";
+    import { currencies } from "@/assets/js/options.js";
+    import { mq } from "@/assets/js/MediaQuery.svelte";
     import { push, location } from "svelte-spa-router";
 
     $: symbol = currencies.filter((el) => el.id == $user?.currency)[0]?.symbol;

@@ -4,7 +4,7 @@
     import Icon from "@iconify/svelte";
     import shops from "@/store/shops";
     import { isOwnProduct } from "@/store/products.js";
-    import { notify } from "@/assets/library/CommonFunctions.js";
+    import { notify } from "@/assets/js/util.js";
     import { Swiper, SwiperSlide } from "swiper/svelte";
     import { Pagination } from "swiper";
 

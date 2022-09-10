@@ -1,5 +1,5 @@
-import { persist, get, post } from '@/assets/library/CommonFunctions.js'
-import { notify } from "@/assets/library/CommonFunctions.js";
+import { persist, get, post } from '@/assets/js/util.js'
+import { notify } from "@/assets/js/util.js";
 
 const data = {
     order: {},
