@@ -13,7 +13,7 @@
             <input type="text" class="w100 shade2" placeholder="Search Orders" />
         </div>
     </div>
-    <div class="gap-20 col " class:pa-20={$mq.sm_}>
+    <div class="col " class:pa-20={$mq.sm_}>
         <hr>
         {#each $user.orders as order}
             <Contact {order} />
