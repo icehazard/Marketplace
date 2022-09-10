@@ -1,5 +1,5 @@
 <script>
-    import { mq } from "@/assets/library/MediaQuery.svelte";
+    import { mq } from "@/assets/js/MediaQuery.svelte";
     import Icon from "@iconify/svelte";
 </script>
 

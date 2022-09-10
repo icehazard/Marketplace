@@ -2,8 +2,8 @@
     import orders from "@/store/orders";
     import dayjs from "dayjs";
     import pluralize from "pluralize";
-    import { formatCurrency, notify } from "@/assets/library/CommonFunctions.js";
-    import { mq } from "@/assets/library/MediaQuery.svelte";
+    import { formatCurrency, notify } from "@/assets/js/util.js";
+    import { mq } from "@/assets/js/MediaQuery.svelte";
     import Icon from "@iconify/svelte";
     import user from "@/store/user";
     import Product from "./Product.svelte";

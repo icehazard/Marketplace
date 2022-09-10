@@ -8,7 +8,7 @@
 	import routes from "./router/index";
 	import { fade } from "svelte/transition";
 	import { Modals, closeModal } from "svelte-modals";
-	import MediaQuery from "@/assets/library/MediaQuery.svelte";
+	import MediaQuery from "@/assets/js/MediaQuery.svelte";
 	import { replace } from "svelte-spa-router";
 	import { Notifications, acts } from "@tadashi/svelte-notification";
 	import ws from '@/store/ws'

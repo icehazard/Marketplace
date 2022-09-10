@@ -1,6 +1,6 @@
 <script>
-    import { formatCurrency, get } from "@/assets/library/CommonFunctions.js";
-    import { currencies } from "@/assets/library/options.js";
+    import { formatCurrency, get } from "@/assets/js/util.js";
+    import { currencies } from "@/assets/js/options.js";
     import { Shadow } from 'svelte-loading-spinners'
     import user, {totalBalance} from "@/store/user.js";
     import Icon from "@iconify/svelte";

@@ -2,17 +2,17 @@
 	import DropDown from "./DropDown.svelte";
 	import { push } from "svelte-spa-router";
 	import Button from "comp/atoms/Button.svelte";
-	import { currencies } from "@/assets/library/options.js";
+	import { currencies } from "@/assets/js/options.js";
 	import Search from "./Search.svelte";
 	import Title from "./Title.svelte";
 	import Circle from "comp/atoms/Circle.svelte";
-	import { mq } from "@/assets/library/MediaQuery.svelte";
+	import { mq } from "@/assets/js/MediaQuery.svelte";
 	import cart from "@/store/cart.js";
 	import {
 		clickOutside,
 		formatCurrency,
 		satoshiToBtcString,
-	} from "@/assets/library/CommonFunctions.js";
+	} from "@/assets/js/util.js";
 	import user, { totalBalance } from "@/store/user.js";
 	import { isShopActive } from "@/store/user.js";
 	import Icon from "@iconify/svelte";

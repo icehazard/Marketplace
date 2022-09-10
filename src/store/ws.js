@@ -1,7 +1,7 @@
 import ReconnectingWebSocket from 'reconnecting-websocket';
 import user from "@/store/user.js";
 import orders from "@/store/orders.js";
-import { persist, get, post, hasError, del } from '@/assets/library/CommonFunctions.js'
+import { persist, get, post, hasError, del } from '@/assets/js/util.js'
 
 const ws = new ReconnectingWebSocket(`ws://127.0.0.1:8085?token=${user.val('token') || "guest"}`);
 const data = {

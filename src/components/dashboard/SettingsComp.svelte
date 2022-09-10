@@ -2,7 +2,7 @@
     import user from "@/store/user.js";
     import Select from "./../atoms/Select.svelte";
     import Icon from "@iconify/svelte";
-    import { languages, themes, currencies } from "@/assets/library/options.js";
+    import { languages, themes, currencies } from "@/assets/js/options.js";
 
     function selectedCurrency(item) {
         $user.currency = item.detail.id;

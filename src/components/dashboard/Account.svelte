@@ -1,10 +1,10 @@
 <script>
     import Icon from "@iconify/svelte";
     import Field from "comp/atoms/TextField.svelte";
-    import { mq } from "@/assets/library/MediaQuery.svelte";
+    import { mq } from "@/assets/js/MediaQuery.svelte";
     import user from "@/store/user";
     import { onDestroy } from "svelte";
-    import { validateEmail, notify } from "@/assets/library/CommonFunctions.js";
+    import { validateEmail, notify } from "@/assets/js/util.js";
 
     onDestroy(() => {
         if (validateEmail()) return notify(0, "Email format not valid");

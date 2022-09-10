@@ -4,7 +4,7 @@
     import admin from "@/store/admin";
     import Field from "comp/atoms/TextField.svelte";
     import Button from "comp/atoms/Button.svelte";
-    import { notify } from "@/assets/library/CommonFunctions.js";
+    import { notify } from "@/assets/js/util.js";
 
     function viewProfile(id) {
         push(`#/shops/id/${id}`);

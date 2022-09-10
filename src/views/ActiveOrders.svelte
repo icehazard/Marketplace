@@ -6,7 +6,7 @@
     import orders from "@/store/orders";
     import user from "@/store/user";
     import { push, location } from "svelte-spa-router";
-    import { mq } from "@/assets/library/MediaQuery.svelte";
+    import { mq } from "@/assets/js/MediaQuery.svelte";
 
     $: $location, update();
 

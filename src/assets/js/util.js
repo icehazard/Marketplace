@@ -1,7 +1,7 @@
 import { writable, get as getStore } from "svelte/store";
 import { WEBPACK_URL } from "@/config";
 import user from '@/store/user.js'
-import { currencies } from '@/assets/library/options.js'
+import { currencies } from '@/assets/js/options.js'
 import { acts } from "@tadashi/svelte-notification";
 
 export function clickOutside(element, callbackFunction) {

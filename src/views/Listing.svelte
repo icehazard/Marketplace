@@ -11,7 +11,7 @@
     import Shipping from "comp/listing/Shipping.svelte";
     import shops from "@/store/shops.js";
     import user from "@/store/user.js";
-    import { mq } from "@/assets/library/MediaQuery.svelte";
+    import { mq } from "@/assets/js/MediaQuery.svelte";
     import { onMount } from "svelte";
     import { location } from "svelte-spa-router";
 

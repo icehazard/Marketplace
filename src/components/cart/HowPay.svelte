@@ -1,10 +1,10 @@
 <script>
     import Icon from "@iconify/svelte";
     import Button from "comp/atoms/Button.svelte";
-    import { mq } from "@/assets/library/MediaQuery.svelte";
+    import { mq } from "@/assets/js/MediaQuery.svelte";
     import user from "@/store/user";
     import cart, { sumPriceTotal, sumQtyTotal } from "@/store/cart.js";
-    import { formatCurrency, notify } from "@/assets/library/CommonFunctions.js";
+    import { formatCurrency, notify } from "@/assets/js/util.js";
     import pluralize from "pluralize";
     import { push, location } from "svelte-spa-router";
     import { acts } from "@tadashi/svelte-notification";

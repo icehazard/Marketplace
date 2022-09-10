@@ -6,7 +6,7 @@
     import { push, location, pop } from "svelte-spa-router";
     import user from "@/store/user";
     import { onMount } from "svelte";
-    import { mq } from "@/assets/library/MediaQuery.svelte";
+    import { mq } from "@/assets/js/MediaQuery.svelte";
 
     let address = "";
     let fullName = "";

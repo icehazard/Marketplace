@@ -1,6 +1,6 @@
 <script>
     import Icon from "@iconify/svelte";
-    import { mq } from "@/assets/library/MediaQuery.svelte";
+    import { mq } from "@/assets/js/MediaQuery.svelte";
     import active from 'svelte-spa-router/active'
 
     import {link} from 'svelte-spa-router'

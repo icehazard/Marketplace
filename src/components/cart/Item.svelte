@@ -2,7 +2,7 @@
     import Field from "comp/atoms/TextField.svelte";
     import cart from "@/store/cart.js";
     import Icon from "@iconify/svelte";
-    import { formatCurrency } from "@/assets/library/CommonFunctions.js";
+    import { formatCurrency } from "@/assets/js/util.js";
 
     export let data = [];
 

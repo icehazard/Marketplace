@@ -4,8 +4,8 @@
     import Rating from "comp/atoms/Rating.svelte";
     import products from "@/store/products.js";
     import { slide } from "svelte/transition";
-    import { clickOutside } from "@/assets/library/CommonFunctions.js";
-    import { formatCurrency } from "@/assets/library/CommonFunctions.js";
+    import { clickOutside } from "@/assets/js/util.js";
+    import { formatCurrency } from "@/assets/js/util.js";
     import { isOwnShop } from "@/store/shops.js";
     import user from "@/store/user";
     import { isFiniteNumber } from "tls";

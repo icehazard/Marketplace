@@ -2,7 +2,7 @@
     import Icon from "@iconify/svelte";
     import Contact from "./Contact";
     import user from "@/store/user";
-    import { mq } from "@/assets/library/MediaQuery.svelte";
+    import { mq } from "@/assets/js/MediaQuery.svelte";
 </script>
 
 <section class="w100 h100 shade3 col curved" class:desktop={$mq.lg_}>

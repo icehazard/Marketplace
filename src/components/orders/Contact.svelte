@@ -1,6 +1,6 @@
 <script>
     import { push } from "svelte-spa-router";
-    import { formatCurrency } from "@/assets/library/CommonFunctions.js";
+    import { formatCurrency } from "@/assets/js/util.js";
     import Icon from "@iconify/svelte";
     import * as timeago from "timeago.js";
     import { onMount } from "svelte";

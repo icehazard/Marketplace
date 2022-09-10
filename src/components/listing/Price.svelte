@@ -4,7 +4,7 @@
     import Button from "comp/atoms/Button.svelte";
     import products from "@/store/products.js";
     import { push } from "svelte-spa-router";
-    import { formatCurrency } from "@/assets/library/CommonFunctions.js";
+    import { formatCurrency } from "@/assets/js/util.js";
     import { openModal } from "svelte-modals";
     import { isOwnShop } from "@/store/shops.js";
     import Price from "comp/modals/listing/Price.svelte";
