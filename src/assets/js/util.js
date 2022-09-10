@@ -124,6 +124,14 @@ export function notify(status, message) {
     acts.add(data);
 }
 
+export function tell(res, success, errror ) {
+    let con = res.status == 'ok' || res == 200;
+    let mode = con ? "success" : "error";
+    let message = con ? success : errror;
+    let data = { mode, message, lifetime: 2 };
+    acts.add(data);
+}
+
 export async function post(route, data) {
     let url = `http://${WEBPACK_URL}/${route}`;
     let res = await fetch(url, {
@@ -206,3 +214,10 @@ export function hasErrorNonRetarded(data, initVal) {
 export const validateEmail = function (email) {
     return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)
 }
+
+export const wait = function (time) {
+    if (!time) time = 0;
+    return new Promise((resolve) => {
+      setTimeout(resolve, time);
+    });
+  };

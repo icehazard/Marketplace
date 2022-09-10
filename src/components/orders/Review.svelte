@@ -1,41 +1,16 @@
 <script>
+	import Payments from './Payments.svelte';
     import orders from "@/store/orders";
     import dayjs from "dayjs";
     import pluralize from "pluralize";
-    import { formatCurrency, notify } from "@/assets/js/util.js";
+    import { formatCurrency, tell } from "@/assets/js/util";
     import { mq } from "@/assets/js/MediaQuery.svelte";
     import Icon from "@iconify/svelte";
-    import user from "@/store/user";
     import Product from "./Product.svelte";
     import Button from "../atoms/Button.svelte";
-    import generatePayload from "promptpay-qr";
-    import QRCode from "qrcode";
-    import { onDestroy, onMount } from "svelte";
-    import { location } from "svelte-spa-router";
 
     let active = $orders.order.deliveryStatus;
-    const mobileNumber = $user.cellNo; //needs shop mobile number to work
-    const amount = 4.2;
-    let el;
-
-    $: $orders.order.paymentStatus, generateQr();
-    $: $location, generateQr();
-
-    function generateQr() {
-        if (!el) return;
-        const payload = generatePayload(mobileNumber, { amount });
-        QRCode.toCanvas(el, payload);
-    }
-    async function paid() {
-        let res = await orders.markAsPaid($orders.order._id);
-        await orders.get($orders.order._id);
-        notify(res, "Marked as paid", "Server error");
-    }
-
-    onMount(() => {
-        generateQr();
-    });
-
+ 
     let headings = [
         { text: "Confirmation" },
         { text: "Packing" },
@@ -62,30 +37,7 @@
             {/if}
         {/each}
     </div>
-    <div class="pa-10" class:none={$orders.order.paymentStatus}>
-        <div class="center pb-20">
-            <div class="row w100">
-                <span class="w100 pa-10">Prompay QR code for payment </span>
-                <img
-                    class="w-100 white mr-10"
-                    src="https://www.designil.com/wp-content/uploads/2020/04/prompt-pay-logo.png"
-                    alt=""
-                />
-            </div>
-            <div class="center pa-20">
-                <canvas bind:this={el} />
-            </div>
-        </div>
-    </div>
-    <hr class:none={$orders.order.paymentStatus} />
-    <div
-        class="row pa-15 space-between grow h100 align-center"
-        class:none={$orders.order.paymentStatus}
-    >
-        <span>Mark as paid</span>
-        <Button on:click={paid} primary text="Paid" />
-    </div>
-    <hr class:none={$orders.order.paymentStatus} />
+   <Payments />
     <div class="col" class:row={$mq.md_}>
         <div class="col grow">
             <div class="row gap-20 pa-15 align-center">
