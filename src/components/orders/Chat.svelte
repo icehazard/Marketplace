@@ -7,7 +7,7 @@
   import user from "@/store/user";
   import { snowflake } from "comp/utils/snowflake";
 
-  let msg = "sdf";
+  let msg = "";
   let el;
 
   function scroll(force) {
@@ -35,10 +35,12 @@
 
   afterUpdate(() => {
     scroll();
+
   });
 
   onMount(() => {
     scroll(true);
+
   });
 </script>
 

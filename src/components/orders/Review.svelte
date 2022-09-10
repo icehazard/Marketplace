@@ -10,35 +10,31 @@
     import Button from "../atoms/Button.svelte";
     import generatePayload from "promptpay-qr";
     import QRCode from "qrcode";
-    import { onMount } from "svelte";
+    import { onDestroy, onMount } from "svelte";
     import { location } from "svelte-spa-router";
 
+    let active = $orders.order.deliveryStatus;
     const mobileNumber = $user.cellNo; //needs shop mobile number to work
     const amount = 4.2;
     let el;
-    let mounted = false;
 
     $: $orders.order.paymentStatus, generateQr();
     $: $location, generateQr();
 
     function generateQr() {
-        if (!mounted) return;
+        if (!el) return;
         const payload = generatePayload(mobileNumber, { amount });
         QRCode.toCanvas(el, payload);
     }
     async function paid() {
         let res = await orders.markAsPaid($orders.order._id);
         await orders.get($orders.order._id);
-        if (res.status == "ok") notify(1, "Marked as paid");
-        else notify(0, "Server error");
+        notify(res, "Marked as paid", "Server error");
     }
 
     onMount(() => {
         generateQr();
-        mounted = true;
     });
-
-    let active = $orders.order.deliveryStatus;
 
     let headings = [
         { text: "Confirmation" },
@@ -150,8 +146,6 @@
         </span>
     </div>
     <hr />
-
-
 
     <div class="row pa-15 gap-10 align-center">
         <span class="opacity-75  nowrap"
