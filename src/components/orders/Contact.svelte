@@ -42,8 +42,7 @@
             </span>
         </div>
         <span class="opacity-75">{order.shopName} </span>
-
-        <span class="font-12">{order.address}</span>
+        <span class="font-12 opacity-75 weight-300 ellipsis">{order.address}</span>
         <div class="row space-between">
             <span
                 class="font-14"
@@ -60,5 +59,9 @@
     .placeholder {
         height: 100px;
         width: 100px;
+    }
+
+    .ellipsis{
+        max-width: 280px;
     }
 </style>

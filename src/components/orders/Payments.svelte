@@ -13,7 +13,7 @@
   import { afterUpdate, onMount, tick } from "svelte";
   import { location } from "svelte-spa-router";
 
-  let tab = 0;
+  let tab = 1;
   const mobileNumber = $user.cellNo; //needs shop mobile number to work
   const amount = 4.2;
   let el;
@@ -46,7 +46,7 @@
     <button class="grow py-10 center slow" on:click={() => switchTab(1)} class:active={tab === 1}>
       Bank Transfer
     </button>
-    <button class="grow py-10 center slow" on:click={() => switchTab(2)} class:active={tab === 2}>
+    <button disabled class="grow py-10 center slow" on:click={() => switchTab(2)} class:active={tab === 2}>
       Crypto
     </button>
   </div>
@@ -64,7 +64,22 @@
         </div>
       </div>
     {:else if tab === 1}
-      <span>div 2</span>
+      <div class="col gap-50 align-center">
+        <span>
+          Please transfer {formatCurrency($orders.order.total)} amount to {$orders.order.shopName}
+        </span>
+        <div class="col gap-20">
+          <div class="row  align-center">
+            <span class="span  weight-600 font-14">Account Name </span>
+            <span class=" font-18">THAI44432I5U444</span>
+          </div>
+          <div class="row  align-center">
+            <span class="span weight-600 font-14">Account number </span>
+            <div class="  font-18 nowrap">Sebastian Whitlock</div>
+          </div>
+        </div>
+        <span>Once transfer is completed, mark order as paid.</span>
+      </div>
     {:else if tab === 2}
       <span>div 3</span>
     {/if}
@@ -87,9 +102,8 @@
       </span>
     </span>
   </section>
-  <hr/>
+  <hr />
 </div>
-
 
 <style>
   .active {
@@ -98,5 +112,14 @@
 
   h2 {
     letter-spacing: 2px;
+  }
+
+  .span {
+    width: 150px;
+  }
+
+  button:disabled{
+    cursor: not-allowed;
+    filter:  brightness(0.25);
   }
 </style>
