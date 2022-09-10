@@ -104,13 +104,35 @@ class Product {
 
         //check if owns that product
         if (payload.hasOwnProperty("desc"))
-            pobj.desc = payload.desc
+        {
+            let parsed = String(payload.desc)
+            if (parsed.length >= 150)
+                return {status: "error", error: `Invalid description length!`}
+
+            pobj.desc = parsed
+        }
         if (payload.hasOwnProperty("name"))
-            pobj.name = payload.name
-        if (payload.hasOwnProperty("price"))
-            pobj.price = payload.price
-        if (payload.hasOwnProperty("qty"))
-            pobj.qty = payload.qty
+        {
+            let parsed = String(payload.name)
+            if (parsed.length <= 0 || parsed.length >= 70)
+                return {status: "error", error: `Invalid name length!`}
+
+            pobj.name = parsed
+        }
+        if (payload.hasOwnProperty("price")) {
+            let parsed = Number(payload.qty)
+            if (parsed <= 0 || parsed >= 100000)
+                return {status: "error", error: `Invalid price!`}
+
+            pobj.price = parsed
+        }
+        if (payload.hasOwnProperty("qty")) {
+            let parsed = Number(payload.qty)
+            if (parsed <= 0 || parsed >= 2000)
+                return {status: "error", error: `Invalid quantity!`}
+
+            pobj.qty = parsed
+        }
         if (payload.hasOwnProperty("status"))
             pobj.status = payload.status
 

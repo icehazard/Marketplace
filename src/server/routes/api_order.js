@@ -68,24 +68,16 @@ api.post('/', async (req, res) => {
 
         if (!p.qty) {
             errorIds.push(pId);
-            console.log("XXX > cant qty")
         }
 
         let memProd = productHandler.Products.get(pId)
 
         if (memProd.shopID != shopId) {
-            console.log("XXX > shop no match")
             errorIds.push(pId);
         }
 
         if (p.qty > memProd.qty) {
             errorIds.push(pId);
-            console.log("XXX > qty higher than mem")
-        }
-        else
-        {
-            memProd.qty -= p.qty;
-            memProd.saveToDB()
         }
     }
 
