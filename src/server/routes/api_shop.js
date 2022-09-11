@@ -92,6 +92,9 @@ api.get('/:sid', async (req, res) => {
     payload.profile = getShop.profile;
     payload.products = products;
     payload.paymentMask = getShop.paymentMask
+    payload.BankAccountNumber = getShop.BankAccountNumber
+    payload.nameBankAccount = getShop.nameBankAccount
+    payload.bankName = getShop.bankName
 
     return res.status(200).json(payload)
 })

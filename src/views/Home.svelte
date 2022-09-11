@@ -2,6 +2,8 @@
     import Categories from "comp/toolbars/categories/Categories.svelte";
     import Item from "comp/listings/Item.svelte";
     import products from "@/store/products.js";
+    import { searchList } from "@/assets/js/util";
+    import user from "@/store/user";
 
     products.getAllProducts(true);
 </script>
@@ -10,8 +12,12 @@
     <Categories />
     <section class="grow">
         {#if $products.productsAll}
-            {#each $products.productsAll as product}
-                    <Item data={product} />
+            {#each searchList($products.productsAll, $user.searchNav) as product}
+                <Item data={product} />
+            {:else}
+                <div class="row center pa-20 weight-300 letter-space-1 noResult">
+                    No results found
+                </div>
             {/each}
         {/if}
     </section>
@@ -22,5 +28,8 @@
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr));
         gap: 20px;
+    }
+    .noResult {
+        grid-column: 1 / -1;
     }
 </style>

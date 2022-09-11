@@ -12,6 +12,7 @@
 	import { replace } from "svelte-spa-router";
 	import { Notifications, acts } from "@tadashi/svelte-notification";
 	import ws from '@/store/ws'
+	
 	function conditionsFailed(event) {
 		replace("/signup");
 	}

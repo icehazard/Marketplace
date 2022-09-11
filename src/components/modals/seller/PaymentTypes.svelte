@@ -1,4 +1,5 @@
 <script>
+    import Field from "comp/atoms/TextField.svelte";
     import Button from "comp/atoms/Button.svelte";
     import shops from "@/store/shops.js";
     import { closeModal } from "svelte-modals";
@@ -8,20 +9,26 @@
 
     export let isOpen;
 
-    let msg1 = `Updated accepted payment methods`;
+    let msg1 = `Updated accepted payments`;
     let msg2 = `You must have at least one payment type available`;
     let msg3 = "Error";
 
     const MASK_BANK = 1;
     const MASK_CRYPTO = 2;
-
+    const MASK_PROMPTPAY = 4;
     let totalMask = $shops.paymentMask;
     let maskBank = totalMask & MASK_BANK;
     let maskCrypto = totalMask & MASK_CRYPTO;
+    let maskPromptpay = totalMask & MASK_PROMPTPAY;
 
     async function save() {
         if (totalMask == 0) return acts.add(notify(0, msg2));
-        let res = await shops.patch({ paymentMask: totalMask });
+        let res = await shops.patch({
+            paymentMask: totalMask,
+            bankName: $shops.bankName,
+            nameBankAccount: $shops.nameBankAccount,
+            BankAccountNumber: $shops.BankAccountNumber,
+        });
         if (res == 200) acts.add(notify(1, msg1));
         else acts.add(notify(0, msg3));
         shops.get($shops.id);
@@ -33,7 +40,7 @@
     }
     function notify(status, msg) {
         let state = status == 0 ? "error" : "success";
-        return {mode: state, message: msg, lifetime: 2};
+        return { mode: state, message: msg, lifetime: 2 };
     }
 </script>
 
@@ -72,6 +79,32 @@
                             mask={maskCrypto}
                         />
                     </button>
+                    <button class="row align-center">
+                        <Checkbox
+                            size="2rem"
+                            duration="150"
+                            secondaryColor="var(--shade5)"
+                            primaryColor="var(--primary)"
+                            bind:checked={maskPromptpay}
+                            on:change={() => handleMask(maskPromptpay)}
+                            label="Promptpay"
+                            mask={maskPromptpay}
+                        />
+                    </button>
+                </div>
+                <div class="col gap-20">
+                    <div class="col gap-5">
+                        <span class="span  weight-600 font-14">Bank Name </span>
+                        <Field bind:value={$shops.bankName} />
+                    </div>
+                    <div class="col gap-5">
+                        <span class="span  weight-600 font-14">Account Name </span>
+                        <Field bind:value={$shops.nameBankAccount} />
+                    </div>
+                    <div class="col gap-5">
+                        <span class="span weight-600 font-14">Account number </span>
+                        <Field bind:value={$shops.BankAccountNumber} />
+                    </div>
                 </div>
             </div>
             <div class="actions row shade2 pa-25 gap-10">

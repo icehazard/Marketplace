@@ -28,7 +28,8 @@
   }
   async function paid() {
     let res = await orders.markAsPaid($orders.order._id);
-    tell(res, "Marked as paid", "Server error");
+    let errormsg = "Server error, please try again or contact support";
+    tell(res, "Marked as paid", errormsg);
     orders.get($orders.order._id);
   }
 
@@ -39,18 +40,36 @@
 
 <div class="col" class:none={$orders.order.paymentStatus}>
   <h2 class="row center pb-40 weight-300">Pick Payment Method</h2>
-  <div class="row ">
-    <button class="grow py-10 center slow" on:click={() => switchTab(0)} class:active={tab === 0}>
+  <div class="row overflow-hidden">
+    <button
+      data-tooltip={false ? "Seller does not support this payment method" : "Pay by Prompay QR"}
+      class="grow py-10 center slow"
+      on:click={() => switchTab(0)}
+      class:active={tab === 0}
+    >
       Prompay QR
     </button>
-    <button class="grow py-10 center slow" on:click={() => switchTab(1)} class:active={tab === 1}>
+    <button
+      data-tooltip={false ? "Seller does not support this payment method" : "Pay by Bank Transfer"}
+      class="grow py-10 center slow"
+      on:click={() => switchTab(1)}
+      class:active={tab === 1}
+    >
       Bank Transfer
     </button>
-    <button disabled class="grow py-10 center slow" on:click={() => switchTab(2)} class:active={tab === 2}>
+    <button
+      disabled
+      data-tooltip={true
+        ? "Seller does not support this payment method"
+        : "Pay with Cryptocurrency"}
+      class="grow py-10 center slow"
+      on:click={() => switchTab(2)}
+      class:active={tab === 2}
+    >
       Crypto
     </button>
   </div>
-  <div class="tabs h-300 active pa-30">
+  <div class="tabs h-350 active pa-30 pt-60">
     {#if tab === 0}
       <div class="">
         <div class="center">
@@ -66,16 +85,21 @@
     {:else if tab === 1}
       <div class="col gap-50 align-center">
         <span>
-          Please transfer {formatCurrency($orders.order.total)} amount to {$orders.order.shopName}
+          Please transfer {formatCurrency($orders.order.total)}
+          amount to {$orders.order.shop.shopName}
         </span>
         <div class="col gap-20">
           <div class="row  align-center">
+            <span class="span  weight-600 font-14">Bank Name </span>
+            <span class=" font-18">{$orders.order.shop.bankName || "No details provided"}</span>
+          </div>
+          <div class="row  align-center">
             <span class="span  weight-600 font-14">Account Name </span>
-            <span class=" font-18">THAI44432I5U444</span>
+            <span class=" font-18">{$orders.order.shop.BankAccountNumber || "No details provided"}</span>
           </div>
           <div class="row  align-center">
             <span class="span weight-600 font-14">Account number </span>
-            <div class="  font-18 nowrap">Sebastian Whitlock</div>
+            <div class="  font-18 nowrap">{$orders.order.shop.nameBankAccount || "No details provided"}</div>
           </div>
         </div>
         <span>Once transfer is completed, mark order as paid.</span>
@@ -118,8 +142,8 @@
     width: 150px;
   }
 
-  button:disabled{
+  button:disabled {
     cursor: not-allowed;
-    filter:  brightness(0.25);
+    color: rgba(255, 255, 255, 0.2);
   }
 </style>

@@ -19,7 +19,8 @@ const data = {
     balances: {},
     me: [],
     drawer: false,
-    redirect: false
+    redirect: false,
+    searchNav: ""
 }
 
 const context = persist('user', data)

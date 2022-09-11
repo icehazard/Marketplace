@@ -8,6 +8,7 @@
     import dayjs from "dayjs";
 
     export let order = {};
+    
     let el;
 
     $: src = `http://localhost:8080/api/image/` + order.productPhoto;

@@ -34,7 +34,7 @@ export function set(name, type) {
 export function persist(name, data) {
     let local = localStorage.getItem(name)
     const value = writable(local ? JSON.parse(local) : data);
-    if (!local)  value.set(copy(data))
+    if (!local) value.set(copy(data))
     value.subscribe(val => { localStorage.setItem(name, JSON.stringify(val)) });
     value.reset = () => value.set(copy(data))
     value.val = (key) => getStore(value)[key]
@@ -42,7 +42,7 @@ export function persist(name, data) {
     value.commit = (key, val) => {
         let temp = getStore(value)
         temp[key] = val;
-        if (val == null || val == undefined)  temp[key] = data[key]
+        if (val == null || val == undefined) temp[key] = data[key]
         value.set(temp)
         return temp
     };
@@ -124,7 +124,7 @@ export function notify(status, message) {
     acts.add(data);
 }
 
-export function tell(res, success, errror ) {
+export function tell(res, success, errror) {
     let con = res.status == 'ok' || res == 200;
     let mode = con ? "success" : "error";
     let message = con ? success : errror;
@@ -218,6 +218,17 @@ export const validateEmail = function (email) {
 export const wait = function (time) {
     if (!time) time = 0;
     return new Promise((resolve) => {
-      setTimeout(resolve, time);
+        setTimeout(resolve, time);
     });
-  };
+};
+
+export const searchList = function (list, term) {
+    if (!term) return list;
+    return list.filter((el) => Object.values(el).filter(util).length > 0);
+
+    function util(item) {
+        let result = JSON.stringify(item || "");
+        result = result.toLowerCase().replaceAll('"', "");
+        return result.search(term.toLowerCase()) >= 0;
+    }
+}
