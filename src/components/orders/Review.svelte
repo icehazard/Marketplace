@@ -1,5 +1,5 @@
 <script>
-	import Payments from './Payments.svelte';
+    import Payments from "./Payments.svelte";
     import orders from "@/store/orders";
     import dayjs from "dayjs";
     import pluralize from "pluralize";
@@ -8,15 +8,22 @@
     import Icon from "@iconify/svelte";
     import Product from "./Product.svelte";
     import Button from "../atoms/Button.svelte";
+    import SellerOrderManager from "./SellerOrderManager.svelte";
+    import Track from "./Track.svelte";
+    import user from "@/store/user";
 
-    let active = $orders.order.deliveryStatus;
- 
+    $: active = $orders.order.deliveryStatus;
+
     let headings = [
         { text: "Confirmation" },
         { text: "Packing" },
         { text: "In transit" },
         { text: "Delivered" },
     ];
+
+    function editTracking() {
+        $orders.showTracking = true;
+    }
 </script>
 
 <div class="shade1 p-bottom col col gap-10  z-2  slow">
@@ -37,7 +44,9 @@
             {/if}
         {/each}
     </div>
-   <Payments />
+    <SellerOrderManager />
+   
+    <Payments />
     <div class="col" class:row={$mq.md_}>
         <div class="col grow">
             <div class="row gap-20 pa-15 align-center">
@@ -98,7 +107,19 @@
         </span>
     </div>
     <hr />
-
+    <div class="row gap-20 pa-15 align-center">
+        <span class="opacity-75 w-120 nowrap">Tracking Number</span>
+        <span class="font-14 text-end w100" class:text-end={!$mq.md_} class:w100={!$mq.md_}>
+            {$orders.order.trackingNumber || "No tracking number supplied"}
+        </span>
+       {#if user.shopID() == $orders.order.shopId}
+       <button on:click={editTracking} class="center">
+        <Icon icon="fluent:edit-16-regular" width="16" color="var(--primary)" />
+    </button>
+       {/if}
+    </div>
+    <hr />
+    <Track />
     <div class="row pa-15 gap-10 align-center">
         <span class="opacity-75  nowrap"
             >Purchased {pluralize("item", $orders.order.products?.length)}
@@ -108,6 +129,8 @@
             {pluralize("item", $orders.order.products?.length)}) :
         </span>
     </div>
+ 
+  
     <div class="gap-20 col pa-20">
         {#each $orders.order.products || [] as product}
             <Product {product} />

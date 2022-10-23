@@ -1,9 +1,10 @@
-import { persist, get, post } from '@/assets/js/util.js'
+import { persist, get, post, patch } from '@/assets/js/util.js'
 import { notify } from "@/assets/js/util.js";
 
 const data = {
     order: {},
     chat: [],
+    tracking: {},
     smMenu: true
 }
 
@@ -14,7 +15,6 @@ context.get = async function (id) {
     context.commit('order', res)
     return res;
 }
-
 context.getChat = async function (id) {
     let res = await get(`api/chat/${id}`)
     context.commit('chat', res)
@@ -23,7 +23,15 @@ context.getChat = async function (id) {
 context.markAsPaid = async function (id) {
     return await post(`api/order/${id}/markPaid`)
 }
-
+context.patch = async function (id, data) {
+    return await patch(`api/order/${id}`, data)
+}
+context.track = async function (data) {
+    let order =  context.val('order')
+    let res = await post(`api/order/track`, { trackingNo: data, id: order._id })
+    context.commit('tracking', res.data || false)
+    return res
+}
 context.addMsgToStore = async function (msg) {
     let chat = context.val('chat')
     let active = context.val('order')

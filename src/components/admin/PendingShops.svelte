@@ -4,7 +4,7 @@
     import admin from "@/store/admin";
     import Field from "comp/atoms/TextField.svelte";
     import Button from "comp/atoms/Button.svelte";
-    import { notify } from "@/assets/js/util.js";
+    import { notify } from "@/assets/js/util";
 
     function viewProfile(id) {
         push(`#/shops/id/${id}`);
@@ -14,9 +14,8 @@
         let res = await admin.post(id);
         if (res == 200) notify(1, "Approval Successful");
         else notify(0, "Approval unsuccessfull");
-        admin.get()
+        admin.get();
     }
-    
 </script>
 
 <section class="grow col gap-20">
@@ -49,9 +48,9 @@
             {/each}
         </div>
         {#if $admin.pendingShops.length == 0}
-           <div class="center pa-50">
-            <span>No shops pending</span>
-           </div>
+            <div class="center pa-50">
+                <span>No shops pending</span>
+            </div>
         {/if}
     </div>
 </section>

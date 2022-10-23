@@ -12,13 +12,16 @@
 
     $orders.smMenu = true;
     
-    function update() {
+    async function update() {
         let loc = $location.split("/");
         if (!loc.includes("orders")) return;
         loc = loc[loc.length - 1];
         if (isNaN(loc) && $user.orders.length !== 0) return getLast();
-        orders.get(loc);
+        orders.clear("tracking");
+        await orders.get(loc);
         orders.getChat(loc);
+        orders.track($orders.order.trackingNumber);
+
     }
     async function getLast() {
         await user.get();

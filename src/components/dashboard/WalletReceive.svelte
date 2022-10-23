@@ -16,6 +16,7 @@
     async function copy() {
         await navigator.clipboard.writeText($user.address);
         tooltip = "Copied!";
+        notify(1, "Copied to clipboard");
     }
     function tooltipDefault() {
         tooltip = "Click to copy";

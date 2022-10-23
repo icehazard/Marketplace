@@ -115,11 +115,12 @@ class Order {
         this.created_at = data.created_at;
         this.total = data.total;
         this.shopName = shopHandler.Shops.get(data.shopId).shopName
-        this.productPhoto =  Object.values(item.photos)[0]
+        this.productPhoto =  Object.values(item?.photos || [])[0]
         this.name = data.name; //person name (addressed to)
         this.phone = data.phone; //person cellphone
         this.deliveryStatus = data.deliveryStatus;
         this.paymentStatus = data.paymentStatus;
+        this.trackingNumber = data.trackingNumber;
     }
 
     async saveToDB() {
@@ -127,7 +128,7 @@ class Order {
         dbhandler.cols.list.colOrders.updateOne({_id: this._id},
         {$set: { address: this.address, paymentType: this.paymentType, shopName: this.shopName,
                 products: this.products, shopId: this.shopId, uid: this.uid, created_at: this.created_at, total: this.total,
-                productPhoto: this.productPhoto, name: this.name, phone: this.phone, deliveryStatus: this.deliveryStatus,
+                productPhoto: this.productPhoto, name: this.name, phone: this.phone, deliveryStatus: this.deliveryStatus, trackingNumber: this.trackingNumber,
                 paymentStatus: this.paymentStatus}}, {upsert: true})
     }
 
@@ -162,29 +163,16 @@ class Order {
         return fstr;
     }
 
-    async editProduct(ownerID, pid, payload)
+    async editOrder(oid, payload)
     {
-        if (!orders.has(pid))
-            return {status: "error", error: `Cant find product with ID ${pid}`}
+        let oobj = orders.get(oid)
 
-        let pobj = orders.get(pid)
-        //
-        // if (pobj.ownerID != ownerID)
-        //     return {status: "error", error: "You do not have permission to edit this product!"}
+        if (payload.deliveryStatus)
+            oobj.deliveryStatus = payload.deliveryStatus
+        if (payload.trackingNumber)
+            oobj.trackingNumber = payload.trackingNumber
 
-        //check if owns that product
-        if (payload.desc)
-            pobj.desc = payload.desc
-        if (payload.name)
-            pobj.name = payload.name
-        if (payload.price)
-            pobj.price = payload.price
-        if (payload.qty)
-            pobj.qty = payload.qty
-        if (payload.total)
-            pobj.total = payload.total
-
-        pobj.saveToDB()
+        oobj.saveToDB()
         return {status: "ok"}
     }
 }
