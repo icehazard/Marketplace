@@ -3,19 +3,12 @@
 	import Footer from "./components/toolbars/Footer.svelte";
 	import Navbar from "comp/toolbars/navbar/Navbar.svelte";
 	import Mobile from "comp/toolbars/Mobile.svelte";
-	import Drawer from 'comp/toolbars/drawer/Drawer.svelte'
-	import Router from "svelte-spa-router";
-	import routes from "./router/index";
+	import Drawer from "comp/toolbars/drawer/Drawer.svelte";
 	import { fade } from "svelte/transition";
 	import { Modals, closeModal } from "svelte-modals";
 	import MediaQuery from "@/assets/js/MediaQuery.svelte";
-	import { replace } from "svelte-spa-router";
-	import { Notifications, acts } from "@tadashi/svelte-notification";
-	import ws from '@/store/ws'
-	
-	function conditionsFailed(event) {
-		replace("/signup");
-	}
+	import { Notifications} from "@tadashi/svelte-notification";
+	import RouterView from "@/router/index.svelte";
 
 	user.get();
 	user.setTheme();
@@ -23,7 +16,7 @@
 
 <section class="col vh100">
 	<Navbar />
-	<Router {routes} on:conditionsFailed={conditionsFailed} restoreScrollState={true} />
+	<RouterView />
 	<MediaQuery />
 	<Mobile />
 	<Footer />

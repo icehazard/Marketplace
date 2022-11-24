@@ -1,10 +1,9 @@
 <script>
     import Icon from "@iconify/svelte";
     import { mq } from "@/assets/js/MediaQuery.svelte";
-    import active from "svelte-spa-router/active";
+
     import user from "@/store/user";
     import { slide, fly, fade } from "svelte/transition";
-    import { link } from "svelte-spa-router";
 
     function closeDrawer() {
         $user.drawer = false;
@@ -15,7 +14,7 @@
     <aside class="shade3 w100 h100 curve fixed z-2" transition:fade>
         <div class="h-60" />
         <a
-            href="#/account"
+            href="/account"
             class="row px-20 align-center space-between shine w100"
             on:click={closeDrawer}
         >
@@ -27,7 +26,7 @@
         </a>
         <hr />
         <a
-            href="#/addresses/overview"
+            href="/addresses/overview"
             class="row px-20 py-20 align-center space-between w100 shine"
             on:click={closeDrawer}
         >
@@ -39,7 +38,7 @@
         </a>
         <hr />
         <a
-            href="#/orders/overview"
+            href="/orders/overview"
             class="row px-20 py-20 align-center space-between w100 shine"
             on:click={closeDrawer}
         >
@@ -51,7 +50,7 @@
         </a>
         <hr />
         <!-- <a
-            href="#/store/settings"
+            href="/store/settings"
             class="row px-20 py-20 align-center space-between w100 shine"
             on:click={closeDrawer}
         >
@@ -63,7 +62,7 @@
         </a>
         <hr /> -->
         <a
-            href="#/wallet/overview"
+            href="/wallet/overview"
             class="row px-20 py-20 align-center space-between w100 shine"
             on:click={closeDrawer}
         >
@@ -75,7 +74,7 @@
         </a>
         <hr />
         <a
-            href="#/settings"
+            href="/settings"
             class="row px-20 py-20 align-center space-between w100 shine"
             on:click={closeDrawer}
         >

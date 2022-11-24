@@ -3,7 +3,7 @@
     import Icon from "@iconify/svelte";
     import Button from "comp/atoms/Button.svelte";
     import products from "@/store/products.js";
-    import { push } from "svelte-spa-router";
+    import { push } from "@/assets/js/util";
     import { formatCurrency } from "@/assets/js/util.js";
     import { openModal } from "svelte-modals";
     import { isOwnShop } from "@/store/shops.js";
@@ -34,12 +34,12 @@
 
             if (currentCartShop == newCartShop) {
                 cart.addToCart($products.product);
-                if (redirect) push("#/cart");
+                if (redirect) push("/cart");
                 else acts.add(added);
             } else openModal(CartNewShop, { product: $products.product });
         } else {
             cart.addToCart($products.product);
-            if (redirect) push("#/cart");
+            if (redirect) push("/cart");
         }
     }
 </script>

@@ -1,12 +1,13 @@
 <script>
-    import { push } from "svelte-spa-router";
+    import { push } from "@/assets/js/util";
     import Icon from "@iconify/svelte";
     import * as timeago from "timeago.js";
     import { onMount } from "svelte";
     import pluralize from "pluralize";
     import orders from "@/store/orders";
     import dayjs from "dayjs";
-
+    import app from "@/store/app";
+    
     export let order = {};
     
     let el;
@@ -15,7 +16,7 @@
 
     function view() {
         $orders.smMenu = false;
-        push(`#/orders/active/${order._id}`);
+        push(`/orders/active/${order._id}`);
         orders.clear("chat");
     }
 

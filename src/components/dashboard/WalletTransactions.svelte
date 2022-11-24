@@ -1,7 +1,7 @@
 <script>
     import { currencies } from "@/assets/js/options.js";
     import { formatCurrency } from "@/assets/js/util.js";
-    import { push } from 'svelte-spa-router';
+    import { push } from '@/assets/js/util';
     import user, {totalBalance} from "@/store/user.js";
     import Icon from "@iconify/svelte";
 
@@ -11,7 +11,7 @@
     $: rate = currencies.find((el) => el.id == "BTC")?.convert;
 
     function handleClick(){
-        //push('#/orders/view/42')
+        //push('/orders/view/42')
     }
 </script>
 
@@ -19,7 +19,7 @@
     <h1 class="row pl-20 font-36 weight-300 align-center gap-20">
         <Icon icon="fluent:wallet-16-regular" width="30" />
         <span>
-            <a href="#/wallet/overview">WALLET</a>
+            <a href="/wallet/overview">WALLET</a>
             <span class="px-10">></span>
             <span>TRANSACTIONS</span>
         </span>

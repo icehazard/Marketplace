@@ -3,19 +3,19 @@
     import Button from "comp/atoms/Button.svelte";
     import Icon from "@iconify/svelte";
     import Field from "comp/atoms/TextField.svelte";
-    import { push, location } from "svelte-spa-router";
+    import { push } from "@/assets/js/util";
     import products from "@/store/products.js";
     import { FEE } from "@/config";
     import shops from '@/store/shops'
 
-    let edit = $location.includes("edit");
+    let edit = window.location.pathname.includes("edit");
     let btnText = edit ? "EDIT" : "ADD";
     let el, picker; 
 
     const post = async () => {
         let res = edit ? await products.edit() : await products.post();
         products.reset();
-        push("#/");
+        push("/");
     };
     async function upload(data) {
         let formData = new FormData(el);
@@ -36,7 +36,7 @@
     <h1 class="row pl-20 font-36 weight-300 align-center gap-20">
         <Icon icon="fluent:building-shop-16-regular" width="30" />
         <span>
-            <a href="#/store/settings">SHOP</a>
+            <a href="/store/settings">SHOP</a>
             <span class="px-10">></span>
             {btnText}
             YOUR PRODUCT

@@ -29,9 +29,9 @@
     {/if}
     </div>
     <div class="row space-between">
-        <a href={`#/shops/id/${shop?.shopID}`} class="opacity-75 font-18">{shop?.shopName || ""}</a>
+        <a href={`/shops/id/${shop?.shopID}`} class="opacity-75 font-18">{shop?.shopName || ""}</a>
         {#if !$isOwnShop}
-            <a href="#/messages" class="primary--text link">Contact seller</a>
+            <a href="/messages" class="primary--text link">Contact seller</a>
         {/if}
     </div>
 </div>

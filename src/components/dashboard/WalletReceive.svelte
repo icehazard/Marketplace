@@ -44,7 +44,7 @@
     <h1 class="row pl-20 font-36 weight-300 align-center gap-20">
         <Icon icon="fluent:wallet-16-regular" width="30" />
         <span>
-            <a href="#/wallet/overview">WALLET</a>
+            <a href="/wallet/overview">WALLET</a>
             <span class="px-10">></span>
             <span>RECEIVE</span>
         </span>

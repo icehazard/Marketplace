@@ -1,15 +1,13 @@
 <script>
     import Icon from "@iconify/svelte";
     import { mq } from "@/assets/js/MediaQuery.svelte";
-    import active from 'svelte-spa-router/active'
 
-    import {link} from 'svelte-spa-router'
 </script>
 
 {#if $mq.lg_}
     <div class="w-300 w100">
         <aside class="shade3 w-300 w100 curve fixed">
-            <a href="#/account" class="row px-20 align-center space-between shine w100"  use:link  use:active>
+            <a href="/account" class="row px-20 align-center space-between shine w100"   >
                 <div class="row py-20 align-center gap-10">
                     <Icon icon="mdi:account-outline" width="22" />
                     <div>Account</div>
@@ -17,7 +15,7 @@
                 <Icon icon="fluent:chevron-right-16-regular" width="16" />
             </a>
             <hr />
-            <a href="#/addresses/overview" class="row px-20 py-20 align-center space-between w100 shine"  use:link  use:active use:active={  '/addresses/*'}>
+            <a href="/addresses/overview" class="row px-20 py-20 align-center space-between w100 shine"   >
                 <div class="row align-center gap-10">
                     <Icon icon="fluent:location-12-regular" width="22" />
                     <div>Address</div>
@@ -25,7 +23,7 @@
                 <Icon icon="fluent:chevron-right-16-regular" width="16" />
             </a>
             <hr />
-            <a href="#/orders/active" class="row px-20 py-20 align-center space-between w100 shine"  use:link  use:active={  '/orders/*'}>
+            <a href="/orders/active" class="row px-20 py-20 align-center space-between w100 shine"  >
                 <div class="row align-center gap-10">
                     <Icon icon="fluent:text-bullet-list-square-clock-20-regular" width="22" />
                     <div>Orders</div>
@@ -34,7 +32,7 @@
             </a>
             <hr />
   
-            <a href="#/wallet/overview" class="row px-20 py-20 align-center space-between w100 shine"  use:link  use:active={  '/wallet/*'}>
+            <a href="/wallet/overview" class="row px-20 py-20 align-center space-between w100 shine"  >
                 <div class="row align-center gap-10">
                     <Icon icon="fluent:wallet-16-regular" width="22" />
                     <div>Wallet</div>
@@ -42,7 +40,7 @@
                 <Icon icon="fluent:chevron-right-16-regular" width="16" />
             </a>
             <hr />
-            <a href="#/settings" class="row px-20 py-20 align-center space-between w100 shine" use:active>
+            <a href="/settings" class="row px-20 py-20 align-center space-between w100 shine" >
                 <div class="row align-center gap-10">
                     <Icon icon="fluent:settings-16-regular" width="22" />
                     <div>Settings</div>
@@ -50,7 +48,7 @@
                 <Icon icon="fluent:chevron-right-16-regular" width="16" />
             </a>
             <hr />
-            <a href="#/admin" class="row px-20 py-20 align-center space-between w100 shine"  use:link  use:active>
+            <a href="/admin" class="row px-20 py-20 align-center space-between w100 shine"   >
                 <div class="row align-center gap-10">
                     <Icon icon="material-symbols:admin-panel-settings-outline" width="22" />
                     <div>Admin</div>

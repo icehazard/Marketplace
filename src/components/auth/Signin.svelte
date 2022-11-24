@@ -1,7 +1,7 @@
 <script>
     import Button from "comp/atoms/Button.svelte";
     import Field from "comp/atoms/TextField.svelte";
-    import { push } from "svelte-spa-router";
+    import { push } from "@/assets/js/util";
     import { WEBPACK_URL } from "../../config";
     import user from "@/store/user.js";
 
@@ -29,8 +29,8 @@
             $user.token = res.token;
             user.get();
             user.redirect = false
-            if (redirect) return push(`#/${redirect}`);
-            if (!redirect) return push("#/");
+            if (redirect) return push(`/${redirect}`);
+            if (!redirect) return push("/");
         } else {
             message = "Account already Exists";
         }
@@ -56,7 +56,7 @@
             <div class="font-36">Create new account</div>
             <div class="row gap-10">
                 <span>Already A Member?</span>
-                <a href="#/login" class="primary--text"> Login</a>
+                <a href="/login" class="primary--text"> Login</a>
             </div>
         </section>
         <section class="col gap-20">

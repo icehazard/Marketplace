@@ -13,9 +13,8 @@
     import user from "@/store/user.js";
     import { mq } from "@/assets/js/MediaQuery.svelte";
     import { onMount } from "svelte";
-    import { location } from "svelte-spa-router";
 
-    let loc = $location.split("/");
+    let loc = window.location.pathname.split("/");
     loc = loc[loc.length - 1];
 
     onMount(async () => {

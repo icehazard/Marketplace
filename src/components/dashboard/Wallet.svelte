@@ -33,7 +33,7 @@
         </div>
     </div>
     <div class="grow col shade3 curve">
-        <a href="#/wallet/send" type="button" class="row shine w100 pa-20 space-between  shade3">
+        <a href="/wallet/send" type="button" class="row shine w100 pa-20 space-between  shade3">
             <div class="row center gap-20">
                 <Icon icon="uil:money-insert" width="30" />
                 <div class="col gap-10">
@@ -46,7 +46,7 @@
             </div>
         </a>
         <hr />
-        <a href="#/wallet/receive" type="button" class="row shine w100 pa-20 space-between  shade3">
+        <a href="/wallet/receive" type="button" class="row shine w100 pa-20 space-between  shade3">
             <div class="row center gap-20">
                 <Icon icon="uil:money-withdraw" width="30" />
                 <div class="col gap-10">
@@ -60,7 +60,7 @@
         </a>
         <hr />
         <a
-            href="#/wallet/transactions"
+            href="/wallet/transactions"
             class="row shine w100 pa-20 space-between shade3"
         >
             <div class="row center gap-20">

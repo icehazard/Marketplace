@@ -3,11 +3,10 @@
     import { APP_NAME } from "@/config";
     import { currencies } from "@/assets/js/options.js";
     import { mq } from "@/assets/js/MediaQuery.svelte";
-    import { push, location } from "svelte-spa-router";
 
     $: symbol = currencies.filter((el) => el.id == $user?.currency)[0]?.symbol;
 
-    $: hide = $location.includes("/addresses/");
+    $: hide = window.location.pathname.includes("/addresses/");
 </script>
 
 {#if !hide ||  $mq.sm_}
@@ -19,14 +18,14 @@
             <span>|</span>
             <button>English (US)</button>
             <span>|</span>
-            <a href="#/settings"> {symbol} ({$user.currency}) </a>
+            <a href="/settings"> {symbol} ({$user.currency}) </a>
         </div>
         <div class="row gap-20 line-height-20 nowrap">
             <button> © { APP_NAME }</button>
             <span>|</span>
-            <a href='#/terms'>Terms of Use</a>
+            <a href='/terms'>Terms of Use</a>
             <span>|</span>
-            <a href='#/policy'>Privacy</a>
+            <a href='/policy'>Privacy</a>
         </div>
     </div>
 </footer>

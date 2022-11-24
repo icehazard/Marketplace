@@ -1,16 +1,16 @@
 <script>
   import Icon from "@iconify/svelte";
-  import { push, location } from "svelte-spa-router";
+  import { push } from "@/assets/js/util";
   import { mq } from "@/assets/js/MediaQuery.svelte";
   import orders from "@/store/orders";
 
-  let loc = $location.split("/");
+  let loc = window.location.pathname.split("/");
   loc.includes("orders");
 
   function handleClick() {
     $orders.smMenu = true;
     let id = $orders.order._id;
-    push(`#/orders/active/${id}`);
+    push(`/orders/active/${id}`);
   }
 </script>
 

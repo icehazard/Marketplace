@@ -1,6 +1,6 @@
 <script>
 	import DropDown from "./DropDown.svelte";
-	import { push } from "svelte-spa-router";
+	import { push } from "@/assets/js/util";
 	import Button from "comp/atoms/Button.svelte";
 	import { currencies } from "@/assets/js/options.js";
 	import Search from "./Search.svelte";
@@ -44,8 +44,8 @@
 		showNotifications = false;
 	}
 	function shopRoute() {
-		let url = `#/shops/id/${user.shopID()}`;
-		$isShopActive ? push(url) : push("#/store/create");
+		let url = `/shops/id/${user.shopID()}`;
+		$isShopActive ? push(url) : push("/store/create");
 	}
 	function toggleDrawer() {
 		$user.drawer = !$user.drawer;
@@ -111,7 +111,7 @@
 								<div class="absolute shade1 col w100 glass pa-5 w-200 z-2 p-right ">
 									<a
 										on:click={close}
-										href="#/login"
+										href="/login"
 										class="menuItem w-200 w100 center py-10 curve shine"
 									>
 										Login
@@ -119,7 +119,7 @@
 									<hr />
 									<a
 										on:click={close}
-										href="#/signup"
+										href="/signup"
 										class="menuItem w100 center py-10 curve shine"
 									>
 										Register
@@ -127,7 +127,7 @@
 									<hr />
 									<a
 										on:click={close}
-										href="#/store/create"
+										href="/store/create"
 										class="menuItem w100 center py-10 curve shine"
 									>
 										Add a listing

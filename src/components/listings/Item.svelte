@@ -1,21 +1,17 @@
 <script>
     import Icon from "@iconify/svelte";
-    import { push } from "svelte-spa-router";
     import Rating from "comp/atoms/Rating.svelte";
     import products from "@/store/products.js";
     import { slide } from "svelte/transition";
-    import { clickOutside } from "@/assets/js/util.js";
+    import { clickOutside, push } from "@/assets/js/util.js";
     import { formatCurrency } from "@/assets/js/util.js";
-    import { isOwnShop } from "@/store/shops.js";
     import user from "@/store/user";
-    import { isFiniteNumber } from "tls";
     export let data = [];
 
     let menu = false;
-
     function viewListing() {
         $products.product = data;
-        push(`#/listing/${data._id}`);
+        push(`/listing/${data._id}`)
     }
     function close() {
         menu = false;
@@ -29,7 +25,6 @@
     }
     function edit() {
         $products.product = data;
-        push(`#/store/listing/edit/${data._id}`);
         close();
     }
 </script>

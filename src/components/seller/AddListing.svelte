@@ -1,5 +1,5 @@
 <script>
-    import { push } from "svelte-spa-router";
+    import { push } from "@/assets/js/util";
     import shops, { isOwnShop } from "@/store/shops";
     import products from "@/store/products.js";
     import "@lottiefiles/lottie-player";
@@ -19,7 +19,7 @@
         };
         let res = await products.post();
         await products.getAllProducts();
-        push(`#/listing/${res.nid}`);
+        push(`/listing/${res.nid}`);
     }
 
     function toggleShow() {

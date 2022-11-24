@@ -1,12 +1,12 @@
 <script>
-    import { push } from "svelte-spa-router";
+    import { push } from "@/assets/js/util";
     import Rating from "comp/atoms/Rating.svelte";
     import { formatCurrency } from "@/assets/js/util.js";
     import Icon from "@iconify/svelte";
     export let data = [];
 
     function viewListing() {
-        push("#/listing");
+        push("/listing");
     }
 </script>
 

@@ -3,7 +3,7 @@
     import Map from "comp/atoms/Map";
     import Button from "comp/atoms/Button.svelte";
     import Icon from "@iconify/svelte";
-    import { push, location, pop } from "svelte-spa-router";
+    import { push,  pop } from "@/assets/js/util";
     import user from "@/store/user";
     import { onMount } from "svelte";
     import { mq } from "@/assets/js/MediaQuery.svelte";
@@ -12,9 +12,9 @@
     let fullName = "";
     let cellNo = "";
     let el;
-    let id = $location.split("/")[3];
-    $: type = $location.includes("edit");
-    $: choose = $location.includes("choose");
+    let id = window.location.pathname.split("/")[3];
+    $: type = window.location.pathname.includes("edit");
+    $: choose = window.location.pathname.includes("choose");
 
     function payload(fullName, address, cellNo, icon, init) {
         return { name: fullName, address, phone: cellNo, icon, default: init };
@@ -23,16 +23,16 @@
         let default_icon = "fluent:location-16-regular";
         let data = payload(fullName, address, cellNo, default_icon, true);
         user.postHomeAddress(data);
-        if (choose) return push("#/addresses/choose");
+        if (choose) return push("/addresses/choose");
         addToStore();
-        push("#/addresses/overview");
+        push("/addresses/overview");
     }
     function edit() {
         let obj = $user.addresses[id];
         let data = payload(fullName, address, cellNo, obj.icon, obj.default);
         user.editHomeAddress(id, data);
         addToStore();
-        push("#/addresses/overview");
+        push("/addresses/overview");
     }
     function updateAddres(addr) {
         address = addr.detail;

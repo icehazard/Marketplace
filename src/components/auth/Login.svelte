@@ -1,7 +1,7 @@
 <script>
     import Button from "comp/atoms/Button.svelte";
     import Field from "comp/atoms/TextField.svelte";
-    import { push } from "svelte-spa-router";
+    import { push } from "@/assets/js/util";
     import user from "@/store/user.js";
     import { post } from "@/assets/js/util.js";
 
@@ -17,7 +17,7 @@
             $user.username = res.username;
             $user.token = res.token;
             await user.get();
-            push("#/");
+            push("/");
         } else {
             message = "Account/password not found";
         }
@@ -38,7 +38,7 @@
             <div class="font-36">Enter your account</div>
             <div class="row gap-10">
                 <span>Don't Have An Account?</span>
-                <a href="#/signup" class="primary--text">Sign up</a>
+                <a href="/signup" class="primary--text">Sign up</a>
             </div>
         </section>
         <section class="col gap-20">

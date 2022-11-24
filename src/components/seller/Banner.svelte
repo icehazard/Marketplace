@@ -125,7 +125,7 @@
         <div class="w-70 h-70 shade3 round overflow-hidden">
             <img src={$shops.displayPic} alt="" class="round cover h100 w100" />
         </div>
-        <a href="#/messages" class="weight-600 opacity-75">Contact</a>
+        <a href="/messages" class="weight-600 opacity-75">Contact</a>
     </div> -->
 </div>
 

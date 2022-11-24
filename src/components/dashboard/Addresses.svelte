@@ -1,19 +1,19 @@
 <script>
     import Icon from "@iconify/svelte";
     import Button from "../atoms/Button.svelte";
-    import { push, location } from "svelte-spa-router";
+    import { push } from "@/assets/js/util";
     import user from "@/store/user";
     import { mq } from "@/assets/js/MediaQuery.svelte";
 
-    $: choose = $location.includes("choose");
+    $: choose = window.location.pathname.includes("choose");
 
     function addNew() {
-        if (choose) return push(`#/addresses/add/choose`);
-        push("#/addresses/add");
+        if (choose) return push(`/addresses/add/choose`);
+        push("/addresses/add");
     }
 
     function edit(index) {
-        push(`#/addresses/edit/${index}`);
+        push(`/addresses/edit/${index}`);
     }
 
     function del(index, item) {
@@ -24,7 +24,7 @@
         $user.addresses.map((el) => (el.default = false));
         item.default = true;
         user.editHomeAddress(idx, item);
-        if (choose) push(`#/cart`);
+        if (choose) push(`/cart`);
     }
 </script>
 
@@ -41,7 +41,7 @@
     <div class="grow col shade3 curve">
         {#if $user.addresses.length == 0}
             <div class="row center pa-20 weight-300">
-                <a href="#/addresses/add">No address saved. Click to add an address</a>
+                <a href="/addresses/add">No address saved. Click to add an address</a>
             </div>
         {/if}
         {#each $user.addresses as item, idx}

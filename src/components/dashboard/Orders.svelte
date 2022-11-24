@@ -1,11 +1,11 @@
 <script>
-	import { push } from 'svelte-spa-router';
+	import { push } from '@/assets/js/util';
     import Icon from "@iconify/svelte";
     import Field from "comp/atoms/TextField.svelte";
 
     function handleClick(active){
         let page = active  === 'active' ? 'active' : 'view'
-        push(`#/orders/${page}/42`)
+        push(`/orders/${page}/42`)
     }
 </script>
 

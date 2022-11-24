@@ -2,14 +2,13 @@
     import shops from "@/store/shops.js";
     import Icon from "@iconify/svelte";
     import Field from "comp/atoms/TextField.svelte";
-    import { push, location } from "svelte-spa-router";
-    import products from "@/store/products.js";
+    import { push } from "@/assets/js/util";
 
-    let edit = $location.includes("edit");
+    let edit = window.location.pathname.includes("edit");
     let btnText = edit ? "EDIT" : "ADD";
 
     function handleClick() {
-        push("#/store/add");
+        push("/store/add");
     }
 </script>
 

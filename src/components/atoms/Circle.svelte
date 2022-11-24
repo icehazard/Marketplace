@@ -33,7 +33,7 @@
     <a
         bind:this={el}
         on:click={click}
-        href="#/{to}"
+        href="/{to}"
         onclick="return {goTo};"
         class="font-22 border round center pa-10 shade2 fast btn"
     >

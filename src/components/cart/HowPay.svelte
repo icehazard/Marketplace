@@ -6,7 +6,7 @@
     import cart, { sumPriceTotal, sumQtyTotal } from "@/store/cart.js";
     import { formatCurrency, notify } from "@/assets/js/util.js";
     import pluralize from "pluralize";
-    import { push, location } from "svelte-spa-router";
+    import { push } from "@/assets/js/util";
     import { acts } from "@tadashi/svelte-notification";
 
     $: defaultAddress = $user.addresses.find((el) => el.default == true)?.address;
@@ -32,7 +32,7 @@
         cart.reset();
         await user.get();
         notify(1, "You have successfully placed your order");
-        push(`#/orders/active/${res.orderId}`);
+        push(`/orders/active/${res.orderId}`);
     }
 </script>
 
@@ -99,7 +99,7 @@
                 <div class="font-14 weight-300" class:red--text={addressError}>
                     {defaultAddress || "No address selected"}
                 </div>
-                <a href="#/addresses/choose">
+                <a href="/addresses/choose">
                     <Icon
                         icon="fluent:edit-16-regular"
                         width="22"

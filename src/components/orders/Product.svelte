@@ -1,5 +1,5 @@
 <script>
-    import { push } from "svelte-spa-router";
+    import { push } from "@/assets/js/util";
     import Icon from "@iconify/svelte";
     import orders from "@/store/orders";
 
@@ -8,7 +8,7 @@
     $: src = `http://localhost:8080/api/image/` + Object.values(product.photos)[0];
 
     function view() {
-        push(`#/listing/${product._id}`);
+        push(`/listing/${product._id}`);
         orders.clear("chat");
     }
 </script>

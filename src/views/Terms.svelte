@@ -2224,9 +2224,9 @@ Calibri;color:#fff;mso-themecolor:text1;mso-themetint:166;"
                                     data-id="d10c7fd7-0685-12ac-c717-cbc45ff916d1"
                                     data-type="question"
                                     ><a
-                                        href="http://budable.co/#/policy"
+                                        href="http://budable.co/policy"
                                         target="_blank"
-                                        data-custom-class="link">http://budable.co/#/policy</a
+                                        data-custom-class="link">http://budable.co//policy</a
                                     ></bdt
                                 ></strong
                             >. By using the Site or the Marketplace Offerings, you agree to be bound

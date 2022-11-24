@@ -1,7 +1,7 @@
 <script>
     import Field from "comp/atoms/TextField.svelte";
     import Button from "comp/atoms/Button.svelte";
-    import { push } from "svelte-spa-router";
+    import { push } from "@/assets/js/util";
     import cart from "@/store/cart.js";
     import { closeModal } from "svelte-modals";
     import { scale } from "svelte/transition";
@@ -20,7 +20,7 @@
     function save() {
         $cart.cart = [];
         cart.addToCart(product);
-        push("#/cart");
+        push("/cart");
         acts.add(noti);
         closeModal();
     }

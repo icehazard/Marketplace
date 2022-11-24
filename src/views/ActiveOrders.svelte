@@ -4,16 +4,17 @@
     import Map from "comp/atoms/Map";
     import Details from "comp/orders/Details.svelte";
     import orders from "@/store/orders";
+    import app from "@/store/app";
     import user from "@/store/user";
-    import { push, location } from "svelte-spa-router";
+    import { push } from "@/assets/js/util";
     import { mq } from "@/assets/js/MediaQuery.svelte";
 
-    $: $location, update();
+    $: $app.url, update();
 
     $orders.smMenu = true;
     
     async function update() {
-        let loc = $location.split("/");
+        let loc = $app.url.split("/");
         if (!loc.includes("orders")) return;
         loc = loc[loc.length - 1];
         if (isNaN(loc) && $user.orders.length !== 0) return getLast();
@@ -28,7 +29,7 @@
         let id = $user.orders[0]._id;
         await orders.get(id);
         await orders.getChat(id);
-        push(`#/orders/active/${id}`);
+        push(`/orders/active/${id}`);
     }
 
     update();

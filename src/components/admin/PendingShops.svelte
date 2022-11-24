@@ -1,5 +1,5 @@
 <script>
-    import { push } from "svelte-spa-router";
+    import { push } from "@/assets/js/util";
     import Icon from "@iconify/svelte";
     import admin from "@/store/admin";
     import Field from "comp/atoms/TextField.svelte";
@@ -7,7 +7,7 @@
     import { notify } from "@/assets/js/util";
 
     function viewProfile(id) {
-        push(`#/shops/id/${id}`);
+        push(`/shops/id/${id}`);
     }
 
     async function activate(id) {
