@@ -5,7 +5,7 @@
     import { APP_NAME } from "@/config";
 </script>
 
-<a href="/" class="h100 row align-center gap-10">
+<a href="/" class="h100 row align-center gap-10 noActive">
     <img src={logo} alt="logo" class="h100 w-50 slow" />
     {#if $mq.xl_}
         <div transition:fade={{ duration: 100 }}>

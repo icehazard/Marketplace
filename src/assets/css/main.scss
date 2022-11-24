@@ -102,11 +102,16 @@ p{
     background: var(--shade1);
 }
 
+
 a.active {
     background-color: rgba(100, 100, 100, 0.4);
     color: var(--shade6);
 }
 
+a.noActive {
+    background-color: initial;
+    color:  initial;
+}
 @media only screen and (max-width: 576px) {
     .container {
       padding-left: 10px;
