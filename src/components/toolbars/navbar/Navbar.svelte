@@ -8,11 +8,7 @@
 	import Circle from "comp/atoms/Circle.svelte";
 	import { mq } from "@/assets/js/MediaQuery.svelte";
 	import cart from "@/store/cart.js";
-	import {
-		clickOutside,
-		formatCurrency,
-		satoshiToBtcString,
-	} from "@/assets/js/util.js";
+	import { clickOutside, formatCurrency, satoshiToBtcString } from "@/assets/js/util.js";
 	import user, { totalBalance } from "@/store/user.js";
 	import { isShopActive } from "@/store/user.js";
 	import Icon from "@iconify/svelte";
@@ -44,8 +40,8 @@
 		showNotifications = false;
 	}
 	function shopRoute() {
-		let url = `/shops/id/${user.shopID()}`;
-		$isShopActive ? push(url) : push("/store/create");
+		let url = `shops/id/${user.shopID()}`;
+		return $isShopActive ? url : "store/create";
 	}
 	function toggleDrawer() {
 		$user.drawer = !$user.drawer;
@@ -71,25 +67,17 @@
 							to="cart"
 							icon="akar-icons:cart"
 						/>
-						<button on:click={shopRoute}>
-							<Circle tooltip="Shop Manager" icon="fluent:building-shop-16-regular" />
-						</button>
-						<!-- <div class="relative" use:clickOutside={closeNotifications}>
-							<button on:click={toggleNotifications}>
-								<Circle
-									tooltip="Notifications"
-									icon="fluent:alert-16-regular"
-								/>
-							</button>
-							{#if showNotifications}
-								<Notifications />
-							{/if}
-						</div> -->
+
+						<Circle
+							to='shops/id/1'
+							tooltip="Shop Manager"
+							icon="fluent:building-shop-16-regular"
+						/>
 					</div>
 				{/if}
 			</section>
 			<section class="row gap-20 align-center ">
-				<span class="weight-600 opacity-75">{$user.username || ''}</span>
+				<span class="weight-600 opacity-75">{$user.username || ""}</span>
 				{#if $mq.lg_}
 					<div class="relative row center" use:clickOutside={close}>
 						<button
@@ -108,11 +96,11 @@
 							{#if $user.username}
 								<DropDown on:click={close} />
 							{:else}
-								<div class="absolute shade1 col w100 glass pa-5 w-200 z-2 p-right ">
+								<div class="absolute shade1 col w100 glass  w-200 z-2 p-right overflow-hidden">
 									<a
 										on:click={close}
 										href="/login"
-										class="menuItem w-200 w100 center py-10 curve shine"
+										class="menuItem w-200 w100 center py-10 curve shine pa-5"
 									>
 										Login
 									</a>

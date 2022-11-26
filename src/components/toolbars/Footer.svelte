@@ -10,22 +10,22 @@
 </script>
 
 {#if !hide ||  $mq.sm_}
-<footer class="grow w100 h-200 pa-50 gap-20 col font-14 container mb-40">
+<footer class="grow w100 h-200 pa-50 gap-10 col font-14 container mb-40">
     <hr />
     <div class="row wrap gap-20 "class:space-between={$mq.md_} class:center={!$mq.md_}>
-        <div class="row gap-20 line-height-20 nowrap">
-            <button> Thailand </button>
-            <span>|</span>
-            <button>English (US)</button>
-            <span>|</span>
-            <a href="/settings"> {symbol} ({$user.currency}) </a>
+        <div class="row  line-height-20 nowrap">
+            <button  class="pa-7"> Thailand </button>
+            <span  class="pa-7">|</span>
+            <span class="pa-7 curve">English (US)</span>
+            <span class="pa-7">|</span>
+            <a class="pa-7 curve" href="/settings"> {symbol} ({$user.currency}) </a>
         </div>
-        <div class="row gap-20 line-height-20 nowrap">
-            <button> © { APP_NAME }</button>
-            <span>|</span>
-            <a href='/terms'>Terms of Use</a>
-            <span>|</span>
-            <a href='/policy'>Privacy</a>
+        <div class="row line-height-20 nowrap">
+            <button class="pa-7"> © { APP_NAME }</button>
+            <span class="pa-7">|</span>
+            <a class="pa-7 curve" href='/terms'>Terms of Use</a>
+            <span class="pa-7">|</span>
+            <a class="pa-7 curve" href='/policy'>Privacy</a>
         </div>
     </div>
 </footer>

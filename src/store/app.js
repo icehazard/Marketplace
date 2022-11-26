@@ -1,7 +1,7 @@
 import { persist} from '@/assets/js/util.js'
 
 const data = {
-    url: ''
+    url: '/'
 }
 
 const context = persist('app', data)

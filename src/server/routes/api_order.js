@@ -1,3 +1,4 @@
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 const { Router } = require('express')
 const api = Router()
 const db = require('../db/dbhandler')
@@ -222,7 +223,9 @@ api.patch('/:id', async (req, res) => {
 api.post('/track', async (req, res) => {
     let orderId = req.body.id
     let url = `https://api.parcelstrace.com/trace/query`
-    let track = await fetch(url, {
+    let  track 
+try {
+     track = await fetch(url, {
         method: 'POST',
         body: JSON.stringify({ "pno_items": [req.body.trackingNo] }),
         headers: {
@@ -231,8 +234,12 @@ api.post('/track', async (req, res) => {
         }
     });
     track = await track.json()
+} catch (error) {
+    console.log(error)
+    
+}
 
-    if (track.code == 1 ){
+    if (track && track.code == 1 ){
         let flashDelived = track.data.items[0].route_state_text == 'Delivered'
         if (flashDelived) orderHandler.Orders.get(orderId).editOrder(orderId, {deliveryStatus: 3})
         return res.json({ status: 'ok', data: track.data.items[0]})

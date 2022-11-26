@@ -1,7 +1,6 @@
-import { push } from "svelte-spa-router";
 import { derived } from "svelte/store";
 import cart from './cart'
-import { persist, get, post, patch, hasError, del } from '@/assets/js/util.js'
+import { persist, get, post, patch, hasError, del, push } from '@/assets/js/util.js'
 
 const data = {
     _id: 0,
@@ -27,7 +26,7 @@ const context = persist('user', data)
 
 context.logout = function () {
     context.reset(data)
-    push('#/login')
+    push("/login")
 }
 context.getAddress = async function () {
     let res = await get("api/address/BTC");

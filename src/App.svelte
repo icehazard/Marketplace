@@ -7,14 +7,14 @@
 	import { fade } from "svelte/transition";
 	import { Modals, closeModal } from "svelte-modals";
 	import MediaQuery from "@/assets/js/MediaQuery.svelte";
-	import { Notifications} from "@tadashi/svelte-notification";
+	import { Notifications } from "@tadashi/svelte-notification";
 	import RouterView from "@/router/index.svelte";
 
 	user.get();
 	user.setTheme();
 </script>
 
-<section class="col vh100">
+<section class="col vh100" id="app">
 	<Navbar />
 	<RouterView />
 	<MediaQuery />
