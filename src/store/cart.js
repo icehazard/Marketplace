@@ -4,6 +4,7 @@ import { persist, post,} from '@/assets/js/util.js'
 
 const data = {
     cart: [],
+    smList: true
 }
 
 const context = persist('cart', data)
@@ -34,9 +35,9 @@ context.checkValid = async function (items) {
     let validate = items.map(validFunc)
     validate = validate.includes(true)
     if (!validate) return;
-    let noti ={ mode: "danger", message: `A product's price or stock level has changed`, lifetime: 2 };
-    acts.add(noti)
-    console.log("ERORR You cart has been updated")
+    let notify ={ mode: "danger", message: `A product's price or stock level has changed`, lifetime: 2 };
+    acts.add(notify)
+    console.log("ERROR You cart has been updated")
     items.map((el, idx) => el.qtyCart = Number(cartVal[idx].qty))
 }
 context.removeFromCart = async function (item) {
@@ -48,8 +49,8 @@ context.updateItem = function (item) {
     let cartVal = context.val('cart')
     let con1 = Number(item.qty) < Number(item.qtyCart)
     if (con1) item.qtyCart = Number(item.qty)
-    let noti = { mode: "danger", message: `Not enough items in the store's stock to add to your cart`, lifetime: 2 };
-    if (con1) acts.add(noti)
+    let notify = { mode: "danger", message: `Not enough items in the store's stock to add to your cart`, lifetime: 2 };
+    if (con1) acts.add(notify)
     else item.qtyCart = Number(item.qtyCart)
     if (Math.sign(item.qtyCart) < 1) context.removeFromCart(item)
     context.commit('cart', [...cartVal])

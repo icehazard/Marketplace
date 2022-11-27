@@ -36,111 +36,102 @@
     }
 </script>
 
-{#if $mq.lg_}
-    <div class="w-400 w100">
-        <aside class="shade1 w-400 w100 px-20 curve ">
-            <div class="col py-20 justify-center space-between gap-20">
-                <div class="row align-center gap-10">
-                    <Icon icon="fluent:payment-16-regular" width="22" />
-                    <div>How you'll pay</div>
-                </div>
-                <div class="col align-center gap-20">
-                    <label class="check"
-                        >Bank Transfer
-                        <input type="radio" bind:group={bank} value={"BANK"} />
-                        <span class="checkmark" />
-                    </label>
-                    <label class="check"
-                        >Cryptocurrency
-                        <input type="radio" bind:group={bank} value={"CRYPTO"} />
-                        <span class="checkmark" />
-                    </label>
-                </div>
-            </div>
-            <!-- <hr /> -->
-            <div class="col py-20 justify-center space-between gap-20">
-                <div class="row align-center gap-10 space-between">
-                    <div class="row center gap-10">
-                        <Icon icon="fluent:shopping-bag-16-regular" width="22" />
-                        <div>{pluralize("Item", $sumQtyTotal)} total</div>
-                    </div>
-                    <div class="col align-center gap-10">{formatCurrency($sumPriceTotal)}</div>
-                </div>
-            </div>
-            <!-- <hr /> -->
-            <div class="col py-20 justify-center space-between gap-20">
-                <div class="row align-center gap-10 space-between">
-                    <div class="row center gap-10">
-                        <Icon icon="carbon:delivery-truck" width="22" />
-                        <div>Shipping</div>
-                    </div>
-                    <div class="col align-center gap-10">{formatCurrency(0)}</div>
-                </div>
-            </div>
-            {#if addressError}
-                <div class="row  red--text font-14 weight-600">Please select an address</div>
-            {/if}
-            <div class="row  align-center  py-10">
-              <div class="col grow justify-center gap-10">
-                <span class="font-12 weight-300 opacity-75">Full Name</span>
-                <div class="font-14 weight-300" class:red--text={addressError}>
-                    {$user.fullName || "No Name selected"}
-                </div>
-              </div>
-              <div class="col grow justify-center  gap-10">
-                <span class="font-12 weight-300 opacity-75">Mobile number</span>
-                <div class="font-14 weight-300" class:red--text={addressError}>
-                    {$user.cellNo || "No Number selected"}
-                </div>
-              </div>
-            </div>
-            <span class="font-12 weight-300 opacity-75 ">Delivery Address</span>
-            <div class="row space-between align-center pb-20 pt-10">
-                <div class="font-14 weight-300" class:red--text={addressError}>
-                    {defaultAddress || "No address selected"}
-                </div>
-                <a href="/addresses/choose">
-                    <Icon
-                        icon="fluent:edit-16-regular"
-                        width="22"
-                        color={!addressError ? "var(--primary)" : "var(--red)"}
-                    />
-                </a>
-            </div>
-            <!-- <hr /> -->
-            <div class="col py-20 justify-center space-between gap-20">
-                <div class="row align-center gap-10 space-between">
-                    <div class="row center gap-10">
-                        <Icon icon="fluent:tag-32-regular" width="22" />
-                        <div>
-                            Total ({$sumQtyTotal}
-                            {pluralize("Item", $sumQtyTotal)})
-                        </div>
-                    </div>
-                    <div class="col align-center gap-10">{formatCurrency($sumPriceTotal)}</div>
-                </div>
-            </div>
-            <!-- <hr /> -->
-            <div class="py-20 center">
-                <Button
-                    primary={!addressError}
-                    {pending}
-                    on:click={next}
-                    text="PROCEED TO CHECKOUT"
-                />
-            </div>
-            <div class="col py-20 font-12 text-center gap-10 opacity-75">
-                <p>
-                    This total contains an approximate conversion. You will be charged {formatCurrency(
-                        $sumPriceTotal
-                    )}
-                    by the shop.
-                </p>
-                <p>Local taxes included (where applicable)</p>
-            </div>
-        </aside>
+<aside class="shade1 w100 px-20 curve " class:w-400={$mq.lg_}>
+    <div class="col py-20 justify-center space-between gap-20">
+        <div class="row align-center gap-10">
+            <Icon icon="fluent:payment-16-regular" width="22" />
+            <div>How you'll pay</div>
+        </div>
+        <div class="col align-center gap-20">
+            <label class="check"
+                >Bank Transfer
+                <input type="radio" bind:group={bank} value={"BANK"} />
+                <span class="checkmark" />
+            </label>
+            <label class="check"
+                >Cryptocurrency
+                <input type="radio" bind:group={bank} value={"CRYPTO"} />
+                <span class="checkmark" />
+            </label>
+        </div>
     </div>
-{/if}
+    <!-- <hr /> -->
+    <div class="col py-20 justify-center space-between gap-20">
+        <div class="row align-center gap-10 space-between">
+            <div class="row center gap-10">
+                <Icon icon="fluent:shopping-bag-16-regular" width="22" />
+                <div>{pluralize("Item", $sumQtyTotal)} total</div>
+            </div>
+            <div class="col align-center gap-10">{formatCurrency($sumPriceTotal)}</div>
+        </div>
+    </div>
+    <!-- <hr /> -->
+    <div class="col py-20 justify-center space-between gap-20">
+        <div class="row align-center gap-10 space-between">
+            <div class="row center gap-10">
+                <Icon icon="carbon:delivery-truck" width="22" />
+                <div>Shipping</div>
+            </div>
+            <div class="col align-center gap-10">{formatCurrency(0)}</div>
+        </div>
+    </div>
+    {#if addressError}
+        <div class="row  red--text font-14 weight-600">Please select an address</div>
+    {/if}
+    <div class="row  align-center  py-10">
+        <div class="col grow justify-center gap-10">
+            <span class="font-12 weight-300 opacity-75">Full Name</span>
+            <div class="font-14 weight-300" class:red--text={addressError}>
+                {$user.fullName || "No Name selected"}
+            </div>
+        </div>
+        <div class="col grow justify-center gap-10" class:text-end={!$mq.lg_}>
+            <span class="font-12 weight-300 opacity-75">Mobile number</span>
+            <div class="font-14 weight-300" class:red--text={addressError}>
+                {$user.cellNo || "No Number selected"}
+            </div>
+        </div>
+    </div>
+    <span class="font-12 weight-300 opacity-75 ">Delivery Address</span>
+    <div class="row space-between align-center pb-20 pt-10">
+        <div class="font-14 weight-300" class:red--text={addressError}>
+            {defaultAddress || "No address selected"}
+        </div>
+        <a href="/addresses/choose">
+            <Icon
+                icon="fluent:edit-16-regular"
+                width="22"
+                color={!addressError ? "var(--primary)" : "var(--red)"}
+            />
+        </a>
+    </div>
+    <!-- <hr /> -->
+    <div class="col py-20 justify-center space-between gap-20">
+        <div class="row align-center gap-10 space-between">
+            <div class="row center gap-10">
+                <Icon icon="fluent:tag-32-regular" width="22" />
+                <div>
+                    Total ({$sumQtyTotal}
+                    {pluralize("Item", $sumQtyTotal)})
+                </div>
+            </div>
+            <div class="col align-center gap-10">{formatCurrency($sumPriceTotal)}</div>
+        </div>
+    </div>
+    <!-- <hr /> -->
+    <div class="py-20 center">
+        <Button primary={!addressError} {pending} on:click={next} text="PROCEED TO CHECKOUT" />
+    </div>
+    <div class="col py-20 font-12 text-center gap-10 opacity-75">
+        <p>
+            This total contains an approximate conversion. You will be charged {formatCurrency(
+                $sumPriceTotal
+            )}
+            by the shop.
+        </p>
+        <p>Local taxes included (where applicable)</p>
+    </div>
+</aside>
 
 <style>
     .check {

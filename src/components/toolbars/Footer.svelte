@@ -4,9 +4,11 @@
     import { currencies } from "@/assets/js/options.js";
     import { mq } from "@/assets/js/MediaQuery.svelte";
 
+    let path =  window.location.pathname
+
     $: symbol = currencies.filter((el) => el.id == $user?.currency)[0]?.symbol;
 
-    $: hide = window.location.pathname.includes("/addresses/");
+    $: hide = path.includes("/addresses/") || path.includes("/cart");
 </script>
 
 {#if !hide ||  $mq.sm_}
