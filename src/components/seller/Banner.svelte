@@ -1,7 +1,7 @@
 <script>
     import Icon from "@iconify/svelte";
-
-    import shops, { isOwnShop } from "@/store/shops.js";
+    import { isOwnProduct } from "@/store/products.js";
+    import shops from "@/store/shops.js";
     import Logo from "comp/modals/seller/Logo.svelte";
     import Name from "comp/modals/seller/Name.svelte";
     import Description from "comp/modals/seller/Description.svelte";
@@ -18,10 +18,10 @@
             <img
                 src={`http://localhost:9000/api/image/${$shops.displayPic}`}
                 alt=""
-                class="curve cover h100 w100"
+                class="curve cover h100 w100 contain"
             />
         {/if}
-        {#if $isOwnShop}
+        {#if $isOwnProduct}
             <button
                 on:click={() => openModal(Logo)}
                 class="absolute p-top p-right pa-20 shine curve child"
@@ -40,13 +40,13 @@
                         <span class="font-14 opacity-75">No Name</span>
                     {/if}
                 </div>
-                {#if $isOwnShop}
+                {#if $isOwnProduct}
                     <button on:click={() => openModal(Name)} class="child slow">
                         <Icon icon="fluent:edit-20-regular" width="20" />
                     </button>
                 {/if}
             </div>
-            {#if $isOwnShop}
+            {#if $isOwnProduct}
                 <button
                     on:click={() => openModal(Shipping)}
                     class="row weight-300 font-14 center gap-10 shine pa-5 curve"
@@ -68,13 +68,13 @@
                 {:else}
                     <span class="font-14 opacity-75">No Description</span>
                 {/if}
-                {#if $isOwnShop}
+                {#if $isOwnProduct}
                     <button on:click={() => openModal(Description)} class="child slow">
                         <Icon icon="fluent:edit-20-regular" width="20" />
                     </button>
                 {/if}
             </div>
-            {#if $isOwnShop}
+            {#if $isOwnProduct}
                 <button
                     on:click={() => openModal(PaymentTypes)}
                     class="pa-10 shine curve"
@@ -107,19 +107,19 @@
                 <span class="">No Location</span>
             {/if}
 
-            {#if $isOwnShop}
+            {#if $isOwnProduct}
                 <button on:click={() => openModal(Location)} class="child slow">
                     <Icon icon="fluent:edit-20-regular" width="20" />
                 </button>
             {/if}
         </div>
-        <span>163 Sales 5 out of 5 stars</span>
+        <!-- <span>163 Sales 5 out of 5 stars</span>
         <div class="row align-center gap-10 blue--text">
             <Icon icon="fluent:info-20-regular" width="25" />
             <span class="opacity-75">
                 You may leave reviews only after you have brought from this supplier
             </span>
-        </div>
+        </div> -->
     </div>
     <!-- <div class="col justify-end gap-10 h100">
         <div class="w-70 h-70 shade3 round overflow-hidden">

@@ -1,6 +1,6 @@
 <script>
     import user from "@/store/user.js";
-    import Select from "./../atoms/Select.svelte";
+    import Select from "@/components/atoms/Select.svelte";
     import Icon from "@iconify/svelte";
     import { languages, themes, currencies } from "@/assets/js/options.js";
 

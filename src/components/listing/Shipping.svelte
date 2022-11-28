@@ -1,12 +1,12 @@
 <script>
     import Icon from "@iconify/svelte";
     import { openModal } from "svelte-modals";
-    import { isOwnShop } from "@/store/shops.js";
+    import { isOwnProduct } from "@/store/products.js";
     import Shipping from "comp/modals/listing/Shipping.svelte";
 </script>
 
 <div class="shade1 pa-30 curve col gap-20">
-    {#if $isOwnShop}
+    {#if $isOwnProduct}
         <button
             on:click={() => openModal(Shipping)}
             class="w-fit-content align-center gap-20 shine curve pa-5"
@@ -15,7 +15,7 @@
                 <Icon icon="akar-icons:shipping-box-01" />
                 <div>Shipping</div>
             </div>
-            {#if $isOwnShop}
+            {#if $isOwnProduct}
                 <Icon icon="fluent:edit-16-regular" width="22" color="var(--primary)" />
             {/if}
         </button>

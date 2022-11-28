@@ -77,8 +77,6 @@ export function satoshiToBtcString(x) {
     return (x / 100000000) + ' ฿'
 }
 
-
-
 function getToken() {
     let getUser = localStorage.getItem('user');
     return getUser ? JSON.parse(localStorage.getItem('user')).token : ''
@@ -125,10 +123,10 @@ export function notify(status, message) {
     acts.add(data);
 }
 
-export function tell(res, success, errror) {
+export function tell(res, success, error) {
     let con = res.status == 'ok' || res == 200;
     let mode = con ? "success" : "error";
-    let message = con ? success : errror;
+    let message = con ? success : error;
     let data = { mode, message, lifetime: 2 };
     acts.add(data);
 }

@@ -5,20 +5,19 @@
     import Cover from "comp/seller/Cover.svelte";
     import Pending from "comp/seller/Pending.svelte";
     import AddListing from "comp/seller/AddListing.svelte";
-
     import shops from "@/store/shops.js";
     import user from "@/store/user.js";
     import products from "@/store/products.js";
     import { isShopPending, isShopActive } from "@/store/user.js";
     import { onDestroy } from "svelte";
 
-    export let params = {};
+    $: window.location.path, updatePage();
 
-    user.get();
-    products.get();
-
-    $: if (params.id) {
-        shops.get(params.id);
+    async function updatePage() {
+        let id = Number(window.location.pathname.split("/").pop());
+        user.get();
+        products.get();
+        if (id) shops.get(id);
     }
 
     onDestroy(() => shops.reset());
@@ -36,6 +35,6 @@
         {:else if $isShopActive}
             <AddListing />
         {/if}
-        <Reviews />
+        <!-- <Reviews /> -->
     </section>
 </main>

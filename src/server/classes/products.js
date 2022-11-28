@@ -57,20 +57,21 @@ class Product {
         this.shopID = data.shopID;
         this.price = data.price;
         this.qty = data.qty;
+        this.category = data.category;
         this.photos = data.photos || {};
         this.status = data.status || 0;
         console.log("Status ", this.status)
     }
 
     async saveToDB() {
-        //dont need await
+        //don't need await
         dbhandler.cols.list.colProducts.updateOne({_id: this._id}, {$set: {name: this.name, desc: this.desc,
-             shopID: this.shopID, price: this.price, qty: this.qty, photos: this.photos,
+             shopID: this.shopID, price: this.price, qty: this.qty, photos: this.photos, category: this.category,
                 status: this.status}}, {upsert: true})
     }
 
     async deleteFromDB() {
-        //dont need await
+        //don't need await
         dbhandler.cols.list.colProducts.deleteOne({_id: this._id})
     }
 
@@ -136,6 +137,8 @@ class Product {
         if (payload.hasOwnProperty("status"))
             pobj.status = payload.status
 
+        if (payload.hasOwnProperty("category"))
+            pobj.category = payload.category
         pobj.saveToDB()
         return {status: "ok"}
     }

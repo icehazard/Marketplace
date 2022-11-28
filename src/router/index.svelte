@@ -16,6 +16,7 @@
         let equality = browser === path && browser === $app.url;
         if (!equality) window.history.pushState(null, null, path);
         await loadPage(routes[url].page);
+        hijackAnchors()
     }
     async function loadPage(view) {
         return (Page = (await import(`../views/${view}.svelte`)).default);

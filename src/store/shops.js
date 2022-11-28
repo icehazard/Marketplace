@@ -23,6 +23,7 @@ const context = persist('shops', data)
 
 context.get = async function (id) {
     let res = await get(`api/shop/${id}`)
+    console.log("🚀 ~ res", res)
     let paymentMask = 'paymentMask' in res ? res.paymentMask : 3;
     res = hasError(res, data.products)
     context.commit('id', res._id)
@@ -67,13 +68,5 @@ context.postProfile = async function (data) {
 context.patch = async function (data) {
     return await patch(`api/shop/${context.val('id')}`, data)
 }
-
-export const isOwnShop = derived(context, () => {
-    let ownShops = (user.val('me'));
-    let id = context.val('id');
-    let shopID = ownShops.find((el) => Number(el._id) === id);
-    if (!shopID) return false
-    return shopID._id >= 0 ? true : false;
-});
 
 export default context;

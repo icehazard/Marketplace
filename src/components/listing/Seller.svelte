@@ -23,18 +23,15 @@
                 clickable: true,
             }}
             modules={[Pagination]}
-
         >
-        {#each $products.productsAll as product}
-        <SwiperSlide>
-            <Item data={product} />
-        </SwiperSlide>
-    {/each}
+            {#each $products.productsAll as product}
+                <SwiperSlide>
+                    <Item data={product} />
+                </SwiperSlide>
+            {/each}
         </Swiper>
     </div>
 </div>
 
 <style>
-
-
 </style>

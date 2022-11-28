@@ -10,18 +10,20 @@
     import Seller from "comp/listing/Seller.svelte";
     import Shipping from "comp/listing/Shipping.svelte";
     import shops from "@/store/shops.js";
+    import app from "@/store/app";
     import user from "@/store/user.js";
     import { mq } from "@/assets/js/MediaQuery.svelte";
-    import { onMount } from "svelte";
 
-    let loc = window.location.pathname.split("/");
-    loc = loc[loc.length - 1];
+    $: $app.url, updatePage();
 
-    onMount(async () => {
-       await products.getProduct(loc);
+    async function updatePage() {
+        let path = window.location.pathname;
+        if (path !== $app.url) return;
+        let id = Number(path.split("/").pop());
+        await products.getProduct(id);
         shops.get($products.product.shopID);
         user.get();
-    });
+    }
 </script>
 
 <main class="row container my-50 gap-50 grow">

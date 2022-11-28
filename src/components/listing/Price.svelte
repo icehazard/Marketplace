@@ -6,7 +6,7 @@
     import { push } from "@/assets/js/util";
     import { formatCurrency } from "@/assets/js/util.js";
     import { openModal } from "svelte-modals";
-    import { isOwnShop } from "@/store/shops.js";
+    import { isOwnProduct } from "@/store/products.js";
     import Price from "comp/modals/listing/Price.svelte";
     import Quantity from "comp/modals/listing/Quantity.svelte";
     import CartNewShop from "comp/modals/listing/CartNewShop.svelte";
@@ -45,7 +45,7 @@
 </script>
 
 <div class="shade1 pa-30 curve col gap-20">
-    {#if $isOwnShop}
+    {#if $isOwnProduct}
         <div class="row space-between">
             <button
                 on:click={() => openModal(Price)}
@@ -55,7 +55,7 @@
                     <Icon icon="icomoon-free:price-tag" />
                     <div>Price</div>
                 </div>
-                {#if $isOwnShop}
+                {#if $isOwnProduct}
                     <Icon icon="fluent:edit-16-regular" width="22" color="var(--primary)" />
                 {/if}
             </button>
@@ -67,7 +67,7 @@
                     <Icon icon="ic:round-production-quantity-limits" />
                     <div>Stock</div>
                 </div>
-                {#if $isOwnShop}
+                {#if $isOwnProduct}
                     <Icon icon="fluent:edit-16-regular" width="22" color="var(--primary)" />
                 {/if}
             </button>
@@ -98,7 +98,7 @@
             <span class="font-14 opacity-75">G</span>
         </div>
     </div>
-    {#if !$isOwnShop}
+    {#if !$isOwnProduct}
         <div class="row gap-20">
             <Button primary={inStock} on:click={() => handleClick(false)} text="ADD TO CART" />
             <Button on:click={() => handleClick(true)} text="BUY NOW" />

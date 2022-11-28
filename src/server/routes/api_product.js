@@ -128,7 +128,7 @@ api.patch('/:pid', async (req, res) => {
     const accId = authed._id;
     const pid = parseInt(req.params.pid)
     const data = req.body;
-    console.log("Got edit product data", data)
+    //console.log("Got edit product data", data)
 
     //let shopId = (await accountHandler.Accounts.get(accId).getShopIds())[0]._id
 
@@ -145,7 +145,7 @@ api.patch('/:pid', async (req, res) => {
     if (!await accountHandler.Accounts.get(accId).ownsShopID(sid))
         return res.status(400).json({status: "error", error: "You do not own this shop!"})
 
-    console.log("Got shop ID", sid)
+   // console.log("Got shop ID", sid)
 
     let edit = await shopHandler.Shops.get(parseInt(sid)).editProduct(pid, data)
 

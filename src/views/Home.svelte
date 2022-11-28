@@ -4,8 +4,15 @@
     import products from "@/store/products.js";
     import { searchList } from "@/assets/js/util";
     import user from "@/store/user";
+    import app from "@/store/app";
 
-    products.getAllProducts(true);
+    $: $app.url, updatePage();
+
+    async function updatePage() {
+        let url = $app.url.split("/");
+        if (url.includes("categories")) $products.productsAll = []
+        else products.getAllProducts(true);
+    }
 </script>
 
 <main class="row container my-50 gap-40 grow">

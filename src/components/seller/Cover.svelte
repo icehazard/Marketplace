@@ -1,5 +1,6 @@
 <script>
-    import shops, {isOwnShop} from "@/store/shops.js";
+    import shops from "@/store/shops.js";
+    import { isOwnProduct } from "@/store/products.js";
     import Icon from "@iconify/svelte";
     import Cover from "comp/modals/seller/Cover.svelte";
     import { openModal } from "svelte-modals";
@@ -15,9 +16,9 @@
 
 <div class="h-400 shade1 curve relative parent">
     {#if $shops.coverPic}
-    <img class="curve cover h100 w100" src={`http://localhost:9000/api/image/${$shops.coverPic}`} alt="" />
+    <img class="curve cover h100 w100 contain" src={`http://localhost:9000/api/image/${$shops.coverPic}`} alt="" />
     {/if}
-    {#if $isOwnShop}
+    {#if $isOwnProduct}
         <button on:click={handleOpen} class="absolute p-top p-right pa-20 shine curve child">
             <Icon icon="fluent:image-edit-16-regular" width="20" />
         </button>

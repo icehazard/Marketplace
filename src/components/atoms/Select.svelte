@@ -65,7 +65,7 @@
         </div>
     </div>
     {#if showSearch}
-        <div class="menu w30 shade2 curve overlay absolute w100 z-3">
+        <div class="menu w30 shade2 curve overlay absolute w100 z-3 shadow">
             {#each filteredItems as b}
                 <button
                     class="row align-center px-20 py-15 bank-search-box curve w100 slow"

@@ -1,4 +1,5 @@
 import { persist, post, get, del, patch, hasError } from '@/assets/js/util.js'
+import { tell } from "@/assets/js/util";
 import user from '@/store/user.js'
 import { derived } from "svelte/store";
 import {hasErrorNonRetarded} from "../assets/js/util";
@@ -19,7 +20,8 @@ context.post = async function () {
 context.edit = async function (payload) {
     const id = context.val('product')._id;
     const prod = context.val('product');
-    let res = await patch(`api/product/${id}`, {...prod, ...payload});
+    let res = await patch(`api/product/${id}`, {...payload, id});
+    tell(res, 'Product has been updated', 'Update failed');
     let error = hasErrorNonRetarded(res)
     if (!error)
         context.commit('product', {...prod, ...payload})
@@ -30,6 +32,7 @@ context.get = async function () {
     if (!id) return;
     let res = await get(`api/shop/${id}/product`)
     res = hasError(res, data.products)
+
     return context.commit('products', res)
 }
 context.getProduct = async function (id) {

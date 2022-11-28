@@ -1,6 +1,7 @@
 <script>
     import { push } from "@/assets/js/util";
-    import shops, { isOwnShop } from "@/store/shops";
+    import shops from "@/store/shops";
+    import { isOwnProduct } from "@/store/products.js";
     import products from "@/store/products.js";
     import "@lottiefiles/lottie-player";
     import Item from "comp/listings/Item.svelte";
@@ -28,11 +29,11 @@
 </script>
 
 <section class="col w100 gap-20">
-    {#if $isOwnShop}
+    {#if $isOwnProduct}
         <div>Your Products</div>
     {/if}
     <div class="row gap-10 wrapper overflow-hidden slow " class:h-300={!show} class:h-620={show}>
-        {#if $isOwnShop}
+        {#if $isOwnProduct}
             <button class="w100 shade1 center relative shine h-300" on:click={AddListing}>
                 <lottie-player autoplay mode="normal" src={json} style="width: 70px" />
             </button>

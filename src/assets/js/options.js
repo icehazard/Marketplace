@@ -5,13 +5,20 @@ export let currencies = [
     { id: 'BTC', name: 'Bitcoin', convert: 792961, sign: 4, symbol: '₿' }
 ]
 
+export let themes = [
+    { id: 'dark', name: 'Dark' },
+    { id: 'light', name: 'Light' },
+]
+
+export let categories = [
+    { id: 'flower', name: 'Flower' },
+    { id: 'clones', name: 'Clones' },
+    { id: 'seeds', name: 'Seeds' },
+    { id: 'hydro', name: 'Hydroponics systems' },
+]
+
 export let languages = [
     { id: 'ENG', name: 'English' },
     // { id: 'TH', name: 'Thai' },
     // { id: 'RUS', name: 'Russian' },
-]
-
-export let themes = [
-    { id: 'dark', name: 'Dark' },
-    { id: 'light', name: 'Light' },
 ]

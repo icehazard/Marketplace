@@ -6,7 +6,7 @@
     export let data = [];
 
     function viewListing() {
-        push("/listing");
+        push(`/listing/${data._id}`);
     }
 </script>
 
@@ -27,10 +27,10 @@
         <span class="ellipsis text-start">{data.name ? data.name : "No name set"}</span>
         <span class="weight-600 text-start">{formatCurrency(data.price ? data.price : 0.0)}</span>
         <div class="row space-between gap-10 opacity-60">
-            <div class="row center gap-5 nowrap grow justify-start">
+            <!-- <div class="row center gap-5 nowrap grow justify-start">
                 <Rating rating={Math.random() * 5} />
                 <span class="font-14">({(Math.random() * 1000) | 1})</span>
-            </div>
+            </div> -->
             <div class=" grow justify-end ellipsis">
                 <span class="ellipsis ">{data.shopName || ""}</span>
             </div>
