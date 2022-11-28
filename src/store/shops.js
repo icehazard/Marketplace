@@ -1,6 +1,4 @@
 import { persist, post, get, hasError, postImage, patch, deleteImage, push } from '@/assets/js/util.js'
-import { derived } from "svelte/store";
-import user from '@/store/user'
 import products from '@/store/products'
 
 const data = {
@@ -23,7 +21,6 @@ const context = persist('shops', data)
 
 context.get = async function (id) {
     let res = await get(`api/shop/${id}`)
-    console.log("🚀 ~ res", res)
     let paymentMask = 'paymentMask' in res ? res.paymentMask : 3;
     res = hasError(res, data.products)
     context.commit('id', res._id)

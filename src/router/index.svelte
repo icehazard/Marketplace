@@ -3,7 +3,6 @@
     import app from "@/store/app.js";
     import user from "@/store/user.js";
     import routes from "./routes";
-
     let Page;
     $: $app.url, push($app.url);
 
@@ -74,5 +73,4 @@
         window.onpopstate = () => push(window.location.pathname);
     });
 </script>
-
 <svelte:component this={Page} />
