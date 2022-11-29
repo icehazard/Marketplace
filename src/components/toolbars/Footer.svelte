@@ -1,6 +1,6 @@
 <script>
     import user from "@/store/user.js";
-    import { APP_NAME } from "@/config";
+    import config from "@/config.js";
     import { currencies } from "@/assets/js/options.js";
     import { mq } from "@/assets/js/MediaQuery.svelte";
 
@@ -23,7 +23,7 @@
             <a class="pa-7 curve" href="/settings"> {symbol} ({$user.currency}) </a>
         </div>
         <div class="row line-height-20 nowrap">
-            <button class="pa-7"> © { APP_NAME }</button>
+            <button class="pa-7"> © { config.APP_NAME }</button>
             <span class="pa-7">|</span>
             <a class="pa-7 curve" href='/terms'>Terms of Use</a>
             <span class="pa-7">|</span>

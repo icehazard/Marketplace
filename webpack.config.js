@@ -1,27 +1,19 @@
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const NodePolyfillPlugin = require("node-polyfill-webpack-plugin")
-const preprocess = require("svelte-preprocess")
-const path = require('path');
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import NodePolyfillPlugin from 'node-polyfill-webpack-plugin'
+import preprocess from 'svelte-preprocess'
+import path, { dirname } from 'path';
+import { fileURLToPath } from 'url';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 const mode = process.env.NODE_ENV || 'development';
 const prod = mode === 'production';
-const { API_URL } = require('./src/server/Config.json')
 
-module.exports = {
+export default {
 	entry: {
 		'build/bundle': ['./src/main.js']
 	},
 	resolve: {
-		fallback: {
-			url: require.resolve('url/'),
-			crypto: require.resolve('crypto-browserify'),
-			stream: require.resolve('stream-browserify'),
-			http: require.resolve('stream-http'),
-			os: require.resolve('os-browserify/browser'),
-			https: require.resolve('https-browserify'),
-			path: require.resolve('path-browserify'),
-		},
 		alias: {
-			svelte: path.dirname(require.resolve('svelte/package.json')),
 			'@': path.resolve(__dirname, 'src/'),
 			comp: path.resolve(__dirname, 'src/components/'),
 		},
@@ -98,7 +90,7 @@ module.exports = {
 
 		proxy: {
 			'/api': {
-				target: 'http://' + API_URL,
+				target: 'http://' + "127.0.0.1:9000",
 			},
 		},
 	},

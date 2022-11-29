@@ -5,7 +5,7 @@
   import { ws } from "@/store/ws";
   import orders from "@/store/orders";
   import user from "@/store/user";
-  import { snowflake } from "comp/utils/snowflake";
+  import { snowflake } from "@/assets/js/snowflake.js";
 
   let msg = "";
   let el;

@@ -1,5 +1,5 @@
 <script>
-    import { APP_NAME } from "@/config";
+    import config from "@/config.js";
     import Button from "comp/atoms/Button.svelte";
     import { shopValid, active } from "@/store/store.js";
     import { isShopPending } from "@/store/user.js";
@@ -14,7 +14,7 @@
 
     function submitData() {
         review = true;
-       // $active = 0;
+        // $active = 0;
         submit();
     }
 
@@ -23,7 +23,7 @@
         return false;
     }
 
-   // if ($isShopPending) review = true;
+    // if ($isShopPending) review = true;
 </script>
 
 <form class="center col shade3 curve py-50 px-10 pb-100 gap-20">
@@ -31,9 +31,9 @@
         {#if !review}
             <h1 class="font-36 weight-300">Confirmation</h1>
             <p class="text-center">
-                When you make a sale through {APP_NAME}, you will be charged a transaction fee of 4%
-                of the price you display for each listing. An invoice will be sent every month for
-                any purchases.
+                When you make a sale through {config.APP_NAME}, you will be charged a transaction
+                fee of 4% of the price you display for each listing. An invoice will be sent every
+                month for any purchases.
             </p>
             {#if msg}
                 <div class="row w100 text-center">

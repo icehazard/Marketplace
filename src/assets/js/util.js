@@ -1,5 +1,5 @@
 import { writable, get as getStore } from "svelte/store";
-import { WEBPACK_URL } from "@/config";
+import config from "@/config.js";
 import user from '@/store/user.js'
 import app from "@/store/app.js";
 import { currencies } from '@/assets/js/options.js'
@@ -89,7 +89,7 @@ let headers = {
 }
 
 export async function postImage(route, data) {
-    let url = `http://${WEBPACK_URL}/${route}`;
+    let url = `http://${config.WEBPACK_URL}/${route}`;
     let res = await fetch(url, {
         method: "POST",
         body: data,
@@ -105,7 +105,7 @@ export async function postImage(route, data) {
 }
 
 export async function deleteImage(route, data) {
-    let url = `http://${WEBPACK_URL}/${route}`;
+    let url = `http://${config.WEBPACK_URL}/${route}`;
     let res = await fetch(url, {
         method: "DELETE",
         body: data,
@@ -132,7 +132,7 @@ export function tell(res, success, error) {
 }
 
 export async function post(route, data) {
-    let url = `http://${WEBPACK_URL}/${route}`;
+    let url = `http://${config.WEBPACK_URL}/${route}`;
     let res = await fetch(url, {
         method: "POST",
         body: JSON.stringify(data),
@@ -150,7 +150,7 @@ export async function post(route, data) {
 }
 
 export async function del(route, data) {
-    let url = `http://${WEBPACK_URL}/${route}`;
+    let url = `http://${config.WEBPACK_URL}/${route}`;
     let res = await fetch(url, {
         method: "DELETE",
         body: JSON.stringify(data),
@@ -168,7 +168,7 @@ export async function del(route, data) {
 }
 
 export async function get(route) {
-    let url = `http://${WEBPACK_URL}/${route}`;
+    let url = `http://${config.WEBPACK_URL}/${route}`;
     let res = await fetch(url, {
         method: "GET",
         headers: {
@@ -183,7 +183,7 @@ export async function get(route) {
 }
 
 export async function patch(route, data) {
-    let url = `http://${WEBPACK_URL}/${route}`;
+    let url = `http://${config.WEBPACK_URL}/${route}`;
     let res = await fetch(url, {
         method: "PATCH",
         headers: {

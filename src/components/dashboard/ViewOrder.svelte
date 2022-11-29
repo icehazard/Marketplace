@@ -1,5 +1,5 @@
 <script>
-    import { APP_NAME } from "@/config";
+    import config from "@/config.js";
     let src = "https://cdn.homepro.co.th/ART_IMAGE/00/638/63827/160x160/10072021_63827$Imagec1.jpg";
 </script>
 
@@ -7,7 +7,7 @@
     <div class="w-sm col gap-40 h100">
         <div class="row center py-40 font-36">Confirmation</div>
         <p>
-            Dear Sebastian Whitlock Thank you for shopping with { APP_NAME }. Your order number
+            Dear Sebastian Whitlock Thank you for shopping with {config.APP_NAME}. Your order number
             #3367002 has been confirmed. We are preparing your order and do our best to deliver to
             you. If you have any queries, please contact our Customer Service at 1284.
         </p>
@@ -19,10 +19,9 @@
             <span class="weight-600">Home Delivery</span>
             <span class="weight-600">Sebastian Whitlock</span>
             <span>Mobile No. 0658511826</span>
-            <span 
+            <span
                 >Villa 3, Ananata, 34/67 Soi King Pattana 4, Rawai, Mueang Phuket, Phuket, 83130
             </span>
-
         </div>
         <div class="col gap-5">
             <div class="row space-between shade2 curve pa-20">

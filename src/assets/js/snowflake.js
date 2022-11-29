@@ -1,5 +1,5 @@
 // Declare snowflakey
-const snowflakey = require('snowflakey');
+import snowflakey from 'snowflakey';
 // Create the worker instance
 const snowflake = new snowflakey.Worker({
     name: 'starling',

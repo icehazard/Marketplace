@@ -1,8 +1,6 @@
-import { persist, post, get, del, patch, hasError } from '@/assets/js/util.js'
-import { tell } from "@/assets/js/util";
+import { persist, post, get, del, patch, hasError, tell, hasErrorNonRetarded } from '@/assets/js/util.js'
 import user from '@/store/user.js'
 import { derived } from "svelte/store";
-import {hasErrorNonRetarded} from "../assets/js/util";
 
 const data = {
     products: [],

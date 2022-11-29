@@ -2,7 +2,7 @@
     import Button from "comp/atoms/Button.svelte";
     import Field from "comp/atoms/TextField.svelte";
     import { push } from "@/assets/js/util";
-    import { WEBPACK_URL } from "../../config";
+    import config from "@/config.js";
     import user from "@/store/user.js";
 
     let username = "";
@@ -13,7 +13,7 @@
     async function handleOnSubmit() {
         if (validate()) return;
         let data = { username, password, email };
-        let res = await fetch(`http://${WEBPACK_URL}/api/register`, {
+        let res = await fetch(`http://${config.WEBPACK_URL}/api/register`, {
             method: "POST",
             headers: {
                 Accept: "application/json",

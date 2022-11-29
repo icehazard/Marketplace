@@ -1,5 +1,5 @@
 <script>
-	import { push } from '@/assets/js/util';
+	import { push } from '@/assets/js/util.js';
     import Icon from "@iconify/svelte";
     import Field from "comp/atoms/TextField.svelte";
 

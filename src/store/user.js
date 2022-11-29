@@ -1,5 +1,5 @@
 import { derived } from "svelte/store";
-import cart from './cart'
+import cart from './cart.js'
 import { persist, get, post, patch, hasError, del, push } from '@/assets/js/util.js'
 
 const data = {

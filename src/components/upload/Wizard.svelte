@@ -5,9 +5,8 @@
     import Address from "./Address.svelte";
     import ShopType from "./ShopType.svelte";
     import ShopName from "./ShopName.svelte";
-    import { shopValid, active } from "@/store/store.js";
+    import { active } from "@/store/store.js";
     import Icon from "@iconify/svelte";
-    import { WEBPACK_URL } from "@/config";
     import user from "@/store/user";
     import { onMount } from "svelte";
 

@@ -1,6 +1,7 @@
 {
   "name": "webpack",
   "version": "1.0.0",
+  "type": "module",
   "scripts": {
     "dev": "webpack serve  ",
     "build": "webpack"

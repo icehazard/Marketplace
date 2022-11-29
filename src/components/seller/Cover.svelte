@@ -4,7 +4,6 @@
     import Icon from "@iconify/svelte";
     import Cover from "comp/modals/seller/Cover.svelte";
     import { openModal } from "svelte-modals";
-    import { WEBPACK_URL } from "@/config";
 
 
     //$: url = `http://${WEBPACK_URL}/api/image/${$shops.coverPic}`;
