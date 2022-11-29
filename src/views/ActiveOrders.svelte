@@ -15,6 +15,7 @@
     
     async function update() {
         let loc = $app.url.split("/");
+     
         if (!loc.includes("orders")) return;
         loc = loc[loc.length - 1];
         if (isNaN(loc) && $user.orders.length !== 0) return getLast();
@@ -29,6 +30,7 @@
         let id = $user.orders[0]._id;
         await orders.get(id);
         await orders.getChat(id);
+        if (!$app.url.split("/").includes("orders")) return;
         push(`/orders/active/${id}`);
     }
 
