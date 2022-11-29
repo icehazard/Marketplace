@@ -34,6 +34,7 @@
         bind:this={el}
         on:click={click}
         href="/{to}"
+        aria-label={`Click to view ${tooltip}`}
         onclick="return {goTo};"
         class="font-22 border round center pa-10 shade2 fast btn"
     >

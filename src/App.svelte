@@ -16,7 +16,9 @@
 
 <section class="col vh100" id="app">
 	<Navbar />
-	<RouterView />
+	<div class="grow">
+		<RouterView />
+	</div>
 	<MediaQuery />
 	<Mobile />
 	<Footer />

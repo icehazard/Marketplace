@@ -52,7 +52,7 @@
 	<nav class="row">
 		<div class="container space-between align-center gap-20">
 			<Title />
-			<section class="row gap-20 align-center mobile-w100 ">
+			<section class="row gap-20 justify-center mobile-w100 grow">
 				<Search />
 				{#if $mq.lg_}
 					<div class="row gap-10">
@@ -69,7 +69,7 @@
 						/>
 
 						<Circle
-							to='shops/id/1'
+							to="shops/id/1"
 							tooltip="Shop Manager"
 							icon="fluent:building-shop-16-regular"
 						/>
@@ -81,6 +81,7 @@
 				{#if $mq.lg_}
 					<div class="relative row center" use:clickOutside={close}>
 						<button
+							aria-label="Profile"
 							class="row shine justify-end align-center gap-10 oval  "
 							on:click={toggle}
 						>
@@ -96,7 +97,9 @@
 							{#if $user.username}
 								<DropDown on:click={close} />
 							{:else}
-								<div class="absolute shade1 col w100 glass  w-200 z-2 p-right overflow-hidden">
+								<div
+									class="absolute shade1 col w100 glass  w-200 z-2 p-right overflow-hidden"
+								>
 									<a
 										on:click={close}
 										href="/login"
