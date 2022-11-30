@@ -1,6 +1,6 @@
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import NodePolyfillPlugin from 'node-polyfill-webpack-plugin'
-import preprocess from 'svelte-preprocess'
+import preprocess from 'svelte-preprocess';
 import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
 
