@@ -3,6 +3,7 @@ import NodePolyfillPlugin from 'node-polyfill-webpack-plugin'
 import preprocess from 'svelte-preprocess';
 import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
+import config from "./src/config.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const mode = process.env.NODE_ENV || 'development';
@@ -30,6 +31,7 @@ export default {
 		rules: [
 			{
 				test: /\.svelte$/,
+				exclude: [path.resolve(__dirname, 'src/server/')],
 				use: {
 					loader: 'svelte-loader',
 					options: {
@@ -90,7 +92,7 @@ export default {
 
 		proxy: {
 			'/api': {
-				target: 'http://' + "127.0.0.1:9000",
+				target: `http://${config.API_URL}:9000`,
 			},
 		},
 	},
