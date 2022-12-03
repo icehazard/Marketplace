@@ -95,5 +95,9 @@ export const isShopActive = derived(context, () => {
 export const totalBalance = derived(context, () => {
     return context.val('balances')?.BTCt;
 });
+export const ownShop = derived(context, () => {
+    return context.val('me')[0]?._id || 0;
+
+});
 
 export default context

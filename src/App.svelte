@@ -1,5 +1,5 @@
 <script>
-	import user from "@/store/user.js";
+	import user, { ownShop } from "@/store/user.js";
 	import Footer from "./components/toolbars/Footer.svelte";
 	import Navbar from "comp/toolbars/navbar/Navbar.svelte";
 	import Mobile from "comp/toolbars/Mobile.svelte";

@@ -18,7 +18,9 @@
         hijackAnchors()
     }
     async function loadPage(view) {
-        return (Page = (await import(`../views/${view}.svelte`)).default);
+        let page = await import(`../views/${view}.svelte`);
+        Page = page.default;
+        return Page;
     }
     function handleClick(e) {
         e.preventDefault();
