@@ -9,14 +9,13 @@
     import { push } from "@/assets/js/util";
     import { mq } from "@/assets/js/MediaQuery.svelte";
 
-    $: $app.url, update();
+    $: $app.url, updatePage();
 
     $orders.smMenu = true;
     
-    async function update() {
+    async function updatePage() {
         let loc = $app.url.split("/");
-     
-        if (!loc.includes("orders")) return;
+        if ($app.loading) return;
         loc = loc[loc.length - 1];
         if (isNaN(loc) && $user.orders.length !== 0) return getLast();
         orders.clear("tracking");
@@ -34,7 +33,6 @@
         push(`/orders/active/${id}`);
     }
 
-    update();
     user.get();
 </script>
 

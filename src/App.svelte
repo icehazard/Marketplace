@@ -9,12 +9,14 @@
 	import MediaQuery from "@/assets/js/MediaQuery.svelte";
 	import { Notifications } from "@tadashi/svelte-notification";
 	import RouterView from "@/router/index.svelte";
+    import Progress from "@/components/atoms/Progress.svelte";
 
 	user.get();
 	user.setTheme();
 </script>
 
 <section class="col vh100" id="app">
+	<Progress />
 	<Navbar />
 	<div class="grow">
 		<RouterView />
@@ -35,7 +37,7 @@
 </section>
 
 <style>
-	.backdrop {
+.backdrop {
 		background: rgba(0, 0, 0, 0.25);
 		backdrop-filter: blur(5px);
 	}

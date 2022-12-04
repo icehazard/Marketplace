@@ -18,11 +18,15 @@
         hijackAnchors();
     }
     async function loadPage(view) {
-        return (Page = (await import(`../views/${view}.svelte`)).default);
+        $app.loading = true;
+        let page = await import(`../views/${view}.svelte`);
+        $app.loading = false;
+        Page = page.default;
+        return Page;
     }
     function handleHover() {
         const url = convertToWild(this.pathname);
-        const view = routes[url].page
+        const view = routes[url].page;
         return import(`../views/${view}.svelte`);
     }
     function handleClick(e) {

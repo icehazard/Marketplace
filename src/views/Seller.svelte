@@ -7,14 +7,16 @@
     import AddListing from "comp/seller/AddListing.svelte";
     import shops from "@/store/shops.js";
     import user from "@/store/user.js";
+    import app from "@/store/app";
     import products from "@/store/products.js";
     import { isShopPending, isShopActive } from "@/store/user.js";
     import { onDestroy } from "svelte";
 
-    $: window.location.path, updatePage();
+    $: $app.url, updatePage();
 
     async function updatePage() {
-        let id = Number(window.location.pathname.split("/").pop());
+        if ($app.loading) return;
+        let id = Number($app.url.split("/").pop());
         user.get();
         products.get();
         if (id) shops.get(id);

@@ -18,16 +18,17 @@
     $: $app.url, updatePage();
 
     async function updatePage() {
-        let path = window.location.pathname;
-        if (path !== $app.url) return;
-        let id = Number(path.split("/").pop());
+        if ($app.loading) return;
+        let path = $app.url.split("/");
+        let id = Number(path.pop());
         await products.getProduct(id);
         shops.get($products.product.shopID);
         user.get();
     }
+
     onDestroy(() => {
-        products.clear('product')
-    })
+        products.clear("product");
+    });
 </script>
 
 <main class="row container my-50 gap-50 grow">

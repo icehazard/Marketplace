@@ -34,7 +34,7 @@ context.get = async function (id) {
     context.commit('desc', res.description)
     context.commit('shipping', res.shipping)
     context.commit('paymentMask', paymentMask)
-    if (res.length == 0) push('#/')
+   // if (res.length == 0) push('/')
     return res
 }
 
