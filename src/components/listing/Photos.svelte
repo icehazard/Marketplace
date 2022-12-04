@@ -1,6 +1,5 @@
 <script>
     import products from "@/store/products.js";
-    import Edit from "comp/atoms/Edit.svelte";
     import Icon from "@iconify/svelte";
     import shops from "@/store/shops";
     import { isOwnProduct } from "@/store/products.js";
@@ -17,10 +16,14 @@
     let maxPics = 5;
     let newval = false;
 
+    $: $products.product , handleStoreChange()
     $: currentImg = Object.values($products?.product?.photos || []).slice(0, maxPics);
     $: currentImg, checkIndex();
     $: index, checkIndex();
 
+    function handleStoreChange(){
+        index = 0
+    }
     function checkIndex() {
         if (index + 1 <= currentImg.length) return;
         index = currentImg.length - 1;
@@ -36,7 +39,6 @@
     }
 
     async function upload(e) {
-        console.log('a')
         image.src = URL.createObjectURL(e.target.files.item(0));
         let formData = new FormData(el);
         this.load = true;
@@ -70,21 +72,23 @@
     }
 </script>
 
-<div class="shade1 curve center relative h-400" >
+<div class="shade1 curve center relative h-400">
     <form bind:this={el} class="none" enctype="multipart/form-data">
         <input type="file" on:change={upload} name="avatar" bind:this={picker} />
     </form>
-    <img
-        src={`http://localhost:8080/api/image/` + currentImg[index]}
-        class:none={currentImg[index] ? false : true}
-        class:own={$isOwnProduct}
-        alt=""
-        bind:this={image}
-        class="main w-300 w100 h-400"
-    />
+    {#if currentImg[index]}
+        <img
+            src={`http://localhost:8080/api/image/` + currentImg[index]}
+            class:none={currentImg[index] ? false : true}
+            class:own={$isOwnProduct}
+            alt=""
+            bind:this={image}
+            class="main w-300 w100 h-400"
+        />
+    {/if}
 
     {#if currentImg.length == 0}
-    <Icon icon="carbon:no-image" height="50" color="grey" />
+        <Icon icon="carbon:no-image" height="50" color="grey" />
     {/if}
     {#if currentImg.length > 0}
         <span
@@ -99,7 +103,6 @@
             <Icon icon="fluent:delete-12-regular" width="20" />
         </button>
     {/if}
-    <!-- <div class="edit "><Edit /></div> -->
 </div>
 <div class="curve col gap-20 ">
     <div class="row gap-10 ">

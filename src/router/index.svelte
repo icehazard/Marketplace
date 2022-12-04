@@ -42,12 +42,6 @@
             else a.classList.remove("active");
         }
     }
-    function getRouteFromEl(el) {
-        const name = el.getAttribute("route");
-        const props = el.getAttribute("param");
-        const page = Object.values(routes).find((el) => el.name == name).page;
-        return { name, props, page };
-    }
     function convertURL(str) {
         str = str.split("/").map((el) => (el.startsWith(":") ? "*" : el));
         return str.join("/");
