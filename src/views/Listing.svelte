@@ -13,6 +13,7 @@
     import app from "@/store/app";
     import user from "@/store/user.js";
     import { mq } from "@/assets/js/MediaQuery.svelte";
+    import { onDestroy } from "svelte";
 
     $: $app.url, updatePage();
 
@@ -24,6 +25,9 @@
         shops.get($products.product.shopID);
         user.get();
     }
+    onDestroy(() => {
+        products.clear('product')
+    })
 </script>
 
 <main class="row container my-50 gap-50 grow">

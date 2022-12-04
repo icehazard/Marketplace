@@ -1,6 +1,6 @@
 <script>
     import Icon from "@iconify/svelte";
-    import { isOwnProduct } from "@/store/products.js";
+    import { ownShop } from "@/store/user.js";
     import shops from "@/store/shops.js";
     import Logo from "comp/modals/seller/Logo.svelte";
     import Name from "comp/modals/seller/Name.svelte";
@@ -11,7 +11,6 @@
     import { openModal } from "svelte-modals";
     import { formatCurrency } from "@/assets/js/util.js";
 </script>
-
 <div class="row gap-20 shade1 pa-20 curved center">
     <div class="w-140 h-140 shade3 parent relative">
         {#if $shops.displayPic}
@@ -21,7 +20,7 @@
                 class="curve cover h100 w100 contain"
             />
         {/if}
-        {#if $isOwnProduct}
+        {#if $ownShop === $shops.id}
             <button
                 on:click={() => openModal(Logo)}
                 class="absolute p-top p-right pa-20 shine curve child"
@@ -40,13 +39,13 @@
                         <span class="font-14 opacity-75">No Name</span>
                     {/if}
                 </div>
-                {#if $isOwnProduct}
+                {#if $ownShop === $shops.id}
                     <button on:click={() => openModal(Name)} class="child slow">
                         <Icon icon="fluent:edit-20-regular" width="20" />
                     </button>
                 {/if}
             </div>
-            {#if $isOwnProduct}
+            {#if $ownShop === $shops.id}
                 <button
                     on:click={() => openModal(Shipping)}
                     class="row weight-300 font-14 center gap-10 shine pa-5 curve"
@@ -68,13 +67,13 @@
                 {:else}
                     <span class="font-14 opacity-75">No Description</span>
                 {/if}
-                {#if $isOwnProduct}
+                {#if $ownShop === $shops.id}
                     <button on:click={() => openModal(Description)} class="child slow">
                         <Icon icon="fluent:edit-20-regular" width="20" />
                     </button>
                 {/if}
             </div>
-            {#if $isOwnProduct}
+            {#if $ownShop === $shops.id}
                 <button
                     on:click={() => openModal(PaymentTypes)}
                     class="pa-10 shine curve"
@@ -107,7 +106,7 @@
                 <span class="">No Location</span>
             {/if}
 
-            {#if $isOwnProduct}
+            {#if $ownShop === $shops.id}
                 <button on:click={() => openModal(Location)} class="child slow">
                     <Icon icon="fluent:edit-20-regular" width="20" />
                 </button>

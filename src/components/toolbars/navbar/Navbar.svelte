@@ -10,7 +10,7 @@
 	import cart from "@/store/cart.js";
 	import { clickOutside, formatCurrency, satoshiToBtcString } from "@/assets/js/util.js";
 	import user, { totalBalance } from "@/store/user.js";
-	import { isShopActive } from "@/store/user.js";
+	import { isShopActive, ownShop } from "@/store/user.js";
 	import Icon from "@iconify/svelte";
 	import Notifications from "./Notifications.svelte";
 	import shops from "@/store/shops";
@@ -69,7 +69,7 @@
 						/>
 
 						<Circle
-							to="shops/id/1"
+							to={shopRoute()}
 							tooltip="Shop Manager"
 							icon="fluent:building-shop-16-regular"
 						/>

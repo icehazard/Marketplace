@@ -15,12 +15,15 @@
         let equality = browser === path && browser === $app.url;
         if (!equality) window.history.pushState(null, null, path);
         await loadPage(routes[url].page);
-        hijackAnchors()
+        hijackAnchors();
     }
     async function loadPage(view) {
-        let page = await import(`../views/${view}.svelte`);
-        Page = page.default;
-        return Page;
+        return (Page = (await import(`../views/${view}.svelte`)).default);
+    }
+    function handleHover() {
+        const url = convertToWild(this.pathname);
+        const view = routes[url].page
+        return import(`../views/${view}.svelte`);
     }
     function handleClick(e) {
         e.preventDefault();
@@ -33,10 +36,17 @@
     function hijackAnchors() {
         var els = document.getElementsByTagName("a");
         for (let a of els) {
-            a.addEventListener("click", handleClick, false);
+            a.addEventListener("click", handleClick);
+            a.addEventListener("mouseover", handleHover);
             if (a.pathname == location.pathname) a.classList.add("active");
             else a.classList.remove("active");
         }
+    }
+    function getRouteFromEl(el) {
+        const name = el.getAttribute("route");
+        const props = el.getAttribute("param");
+        const page = Object.values(routes).find((el) => el.name == name).page;
+        return { name, props, page };
     }
     function convertURL(str) {
         str = str.split("/").map((el) => (el.startsWith(":") ? "*" : el));
@@ -75,4 +85,5 @@
         window.onpopstate = () => push(window.location.pathname);
     });
 </script>
+
 <svelte:component this={Page} />

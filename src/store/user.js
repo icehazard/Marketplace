@@ -97,7 +97,6 @@ export const totalBalance = derived(context, () => {
 });
 export const ownShop = derived(context, () => {
     return context.val('me')[0]?._id || 0;
-
 });
 
 export default context

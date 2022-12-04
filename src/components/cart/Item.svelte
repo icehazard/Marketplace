@@ -16,7 +16,7 @@
 
 <div class="row shade1 curve wrapper">
     {#if Object.keys(data.photos).length > 0}
-        <div class="w100 center">
+        <div class="center">
             <img {src} alt="" />
         </div>
     {:else}

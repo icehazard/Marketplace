@@ -9,10 +9,6 @@
     export let data = [];
 
     let menu = false;
-    function viewListing() {
-        $products.product = data;
-        push(`/listing/${data._id}`)
-    }
     function close() {
         menu = false;
     }
@@ -29,10 +25,10 @@
     }
 </script>
 
-<button
+<a
+    href={`/listing/${data._id}`}
     class=" h-300 curve col shade1 fast main"
     class:opacity-60={data.status ? false : true}
-    on:click={viewListing}
 >
     <section class="h-180 center w100 relative overflow-hidden curve-top">
         {#if menu}
@@ -97,7 +93,7 @@
             {/if}
         </div>
     </section>
-</button>
+</a>
 
 <style>
     img {

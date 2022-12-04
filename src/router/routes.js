@@ -1,7 +1,7 @@
 export default {
     "/": { page: "Home", auth: false },
     "/categories/:id": { page: "Home", auth: false },
-    "/top": { page: "Home", auth: false },
+    "/top": { page: "Home", auth: false},
     "/listing/:id": { page: "Listing", auth: false },
 
     "/shops": { page: "Home", auth: false },
