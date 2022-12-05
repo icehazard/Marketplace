@@ -1,6 +1,6 @@
 <script>
-    import Settings from "comp/toolbars/categories/Settings.svelte";
-    import PendingShops from "comp/admin/PendingShops.svelte";
+    import Settings from "#/toolbars/categories/Settings.svelte";
+    import PendingShops from "#/admin/PendingShops.svelte";
     import admin from '@/store/admin'
 
     admin.get()

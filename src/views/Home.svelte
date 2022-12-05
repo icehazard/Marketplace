@@ -1,6 +1,6 @@
 <script>
-    import Categories from "comp/toolbars/categories/Categories.svelte";
-    import Item from "comp/listings/Item.svelte";
+    import Categories from "#/toolbars/categories/Categories.svelte";
+    import Item from "#/listings/Item.svelte";
     import products from "@/store/products.js";
     import { searchList } from "@/assets/js/util";
     import user from "@/store/user";

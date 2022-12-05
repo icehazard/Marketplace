@@ -1,6 +1,6 @@
 <script>
-    import Categories from "comp/toolbars/categories/Settings.svelte";
-    import Settings from "comp/dashboard/SettingsComp.svelte";
+    import Categories from "#/toolbars/categories/Settings.svelte";
+    import Settings from "#/dashboard/SettingsComp.svelte";
   
 </script>
 

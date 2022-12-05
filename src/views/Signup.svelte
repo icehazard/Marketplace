@@ -1,5 +1,5 @@
 <script>
-    import Signin from "comp/auth/Signin.svelte";
+    import Signin from "#/auth/Signin.svelte";
 </script>
 
 <section class="grow center container">

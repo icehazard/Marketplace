@@ -1,6 +1,6 @@
 <script>
-    import Categories from "comp/toolbars/categories/Categories.svelte";
-    import Upload from "comp/upload/Wizard.svelte";
+    import Categories from "#/toolbars/categories/Categories.svelte";
+    import Upload from "#/upload/Wizard.svelte";
   
 </script>
     <section class="row container my-50 gap-50 grow">

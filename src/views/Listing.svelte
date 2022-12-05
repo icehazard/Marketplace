@@ -1,14 +1,14 @@
 <script>
-    import Categories from "comp/toolbars/categories/Categories.svelte";
-    import Edit from "comp/listing/Edit.svelte";
+    import Categories from "#/toolbars/categories/Categories.svelte";
+    import Edit from "#/listing/Edit.svelte";
     import products from "@/store/products";
-    import Title from "comp/listing/Title.svelte";
-    import Description from "comp/listing/Description.svelte";
-    import Photos from "comp/listing/Photos.svelte";
-    import Price from "comp/listing/Price.svelte";
-    import Related from "comp/listing/Related.svelte";
-    import Seller from "comp/listing/Seller.svelte";
-    import Shipping from "comp/listing/Shipping.svelte";
+    import Title from "#/listing/Title.svelte";
+    import Description from "#/listing/Description.svelte";
+    import Photos from "#/listing/Photos.svelte";
+    import Price from "#/listing/Price.svelte";
+    import Related from "#/listing/Related.svelte";
+    import Seller from "#/listing/Seller.svelte";
+    import Shipping from "#/listing/Shipping.svelte";
     import shops from "@/store/shops.js";
     import app from "@/store/app";
     import user from "@/store/user.js";

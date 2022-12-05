@@ -1,8 +1,8 @@
 <script>
-    import Field from "comp/atoms/TextField.svelte";
-    import Upload from "comp/atoms/Upload.svelte";
+    import Field from "#/atoms/TextField.svelte";
+    import Upload from "#/atoms/Upload.svelte";
     import Icon from "@iconify/svelte";
-    import Button from "comp/atoms/Button.svelte";
+    import Button from "#/atoms/Button.svelte";
     import shops from "@/store/shops.js";
     import { closeModal } from "svelte-modals";
     import { scale } from "svelte/transition";

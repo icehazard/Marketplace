@@ -1,6 +1,6 @@
 <script>
     import Icon from "@iconify/svelte";
-    import Button from "comp/atoms/Button.svelte";
+    import Button from "#/atoms/Button.svelte";
     import { mq } from "@/assets/js/MediaQuery.svelte";
     import user from "@/store/user";
     import cart, { sumPriceTotal, sumQtyTotal } from "@/store/cart.js";

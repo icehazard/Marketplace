@@ -2,12 +2,12 @@
     import Icon from "@iconify/svelte";
     import { ownShop } from "@/store/user.js";
     import shops from "@/store/shops.js";
-    import Logo from "comp/modals/seller/Logo.svelte";
-    import Name from "comp/modals/seller/Name.svelte";
-    import Description from "comp/modals/seller/Description.svelte";
-    import Location from "comp/modals/seller/Location.svelte";
-    import Shipping from "comp/modals/seller/Shipping.svelte";
-    import PaymentTypes from "comp/modals/seller/PaymentTypes.svelte";
+    import Logo from "#/modals/seller/Logo.svelte";
+    import Name from "#/modals/seller/Name.svelte";
+    import Description from "#/modals/seller/Description.svelte";
+    import Location from "#/modals/seller/Location.svelte";
+    import Shipping from "#/modals/seller/Shipping.svelte";
+    import PaymentTypes from "#/modals/seller/PaymentTypes.svelte";
     import { openModal } from "svelte-modals";
     import { formatCurrency } from "@/assets/js/util.js";
 </script>

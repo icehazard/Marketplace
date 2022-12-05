@@ -2,7 +2,7 @@
     import { isOwnProduct } from "@/store/products.js";
     import Icon from "@iconify/svelte";
     import { openModal } from "svelte-modals";
-    import Photos from "comp/modals/listing/Photos";
+    import Photos from "#/modals/listing/Photos";
 
     function handleOpen() {
         openModal(Photos);

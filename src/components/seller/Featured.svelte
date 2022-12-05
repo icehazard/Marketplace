@@ -1,6 +1,6 @@
 <script>
     import products from "@/store/products.js";
-    import Item from "comp/listing/Item.svelte";
+    import Item from "#/listing/Item.svelte";
     import { Swiper, SwiperSlide } from "swiper/svelte";
     import { Pagination } from "swiper";
     import "swiper/css";

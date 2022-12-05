@@ -1,8 +1,8 @@
 <script>
-    import HowPay from "comp/cart/HowPay.svelte";
-    import Header from "comp/cart/Header.svelte";
+    import HowPay from "#/cart/HowPay.svelte";
+    import Header from "#/cart/Header.svelte";
     import cart from "@/store/cart.js";
-    import Button from "comp/atoms/Button.svelte";
+    import Button from "#/atoms/Button.svelte";
     import { mq } from "@/assets/js/MediaQuery.svelte";
     import List from "@/components/cart/List.svelte";
 

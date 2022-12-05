@@ -1,7 +1,7 @@
 <script>
     import products from "@/store/products.js";
     import { isOwnProduct } from "@/store/products.js";
-    import Toggle from "comp/atoms/Toggle.svelte";
+    import Toggle from "#/atoms/Toggle.svelte";
     import Select from "@/components/atoms/Select.svelte";
     import Icon from "@iconify/svelte";
     import { categories } from "@/assets/js/options.js";

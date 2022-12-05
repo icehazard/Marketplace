@@ -1,5 +1,5 @@
 <script>
-    import Listing from "comp/listings/Listings.svelte";
+    import Listing from "#/listings/Listings.svelte";
 </script>
 
 <div class="gap-10 col">

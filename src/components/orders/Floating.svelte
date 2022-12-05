@@ -1,6 +1,6 @@
 <script>
     import orders from "@/store/orders";
-    import Review from "comp/orders/Review.svelte";
+    import Review from "#/orders/Review.svelte";
     import Chat from "./Chat.svelte";
 
     let expand = true;

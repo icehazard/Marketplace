@@ -2,7 +2,7 @@
     import TextArea from "./../atoms/TextArea.svelte";
     import Button from "./../atoms/Button.svelte";
     import Icon from "@iconify/svelte";
-    import Rating from "comp/atoms/Rating.svelte";
+    import Rating from "#/atoms/Rating.svelte";
 
     let review = "";
     let disableReview = false;

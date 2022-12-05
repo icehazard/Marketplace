@@ -1,7 +1,7 @@
 <script>
-    import Field from "comp/atoms/TextField.svelte";
-    import Map from "comp/atoms/Map";
-    import Button from "comp/atoms/Button.svelte";
+    import Field from "#/atoms/TextField.svelte";
+    import Map from "#/atoms/Map";
+    import Button from "#/atoms/Button.svelte";
     import Icon from "@iconify/svelte";
     import { push,  pop } from "@/assets/js/util";
     import user from "@/store/user";

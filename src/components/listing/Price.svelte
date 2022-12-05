@@ -1,15 +1,15 @@
 <script>
     import cart from "@/store/cart.js";
     import Icon from "@iconify/svelte";
-    import Button from "comp/atoms/Button.svelte";
+    import Button from "#/atoms/Button.svelte";
     import products from "@/store/products.js";
     import { push } from "@/assets/js/util";
     import { formatCurrency } from "@/assets/js/util.js";
     import { openModal } from "svelte-modals";
     import { isOwnProduct } from "@/store/products.js";
-    import Price from "comp/modals/listing/Price.svelte";
-    import Quantity from "comp/modals/listing/Quantity.svelte";
-    import CartNewShop from "comp/modals/listing/CartNewShop.svelte";
+    import Price from "#/modals/listing/Price.svelte";
+    import Quantity from "#/modals/listing/Quantity.svelte";
+    import CartNewShop from "#/modals/listing/CartNewShop.svelte";
     import { acts } from "@tadashi/svelte-notification";
 
     let noStock = {

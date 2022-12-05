@@ -3,7 +3,7 @@
     import { ownShop } from "@/store/user.js";
     import { isOwnProduct } from "@/store/products.js";
     import Icon from "@iconify/svelte";
-    import Cover from "comp/modals/seller/Cover.svelte";
+    import Cover from "#/modals/seller/Cover.svelte";
     import { openModal } from "svelte-modals";
 
 

@@ -1,6 +1,6 @@
 <script>
-    import TextArea from "comp/atoms/TextArea.svelte";
-    import Button from "comp/atoms/Button.svelte";
+    import TextArea from "#/atoms/TextArea.svelte";
+    import Button from "#/atoms/Button.svelte";
     import products from "@/store/products.js";
     import { closeModal } from "svelte-modals";
     import { scale } from "svelte/transition";

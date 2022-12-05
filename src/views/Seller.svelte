@@ -1,10 +1,10 @@
 <script>
-    import Categories from "comp/toolbars/categories/Categories.svelte";
-    import Banner from "comp/seller/Banner.svelte";
-    import Reviews from "comp/seller/Reviews.svelte";
-    import Cover from "comp/seller/Cover.svelte";
-    import Pending from "comp/seller/Pending.svelte";
-    import AddListing from "comp/seller/AddListing.svelte";
+    import Categories from "#/toolbars/categories/Categories.svelte";
+    import Banner from "#/seller/Banner.svelte";
+    import Reviews from "#/seller/Reviews.svelte";
+    import Cover from "#/seller/Cover.svelte";
+    import Pending from "#/seller/Pending.svelte";
+    import AddListing from "#/seller/AddListing.svelte";
     import shops from "@/store/shops.js";
     import user from "@/store/user.js";
     import app from "@/store/app";

@@ -1,8 +1,8 @@
 <script>
     import { onDestroy, onMount } from "svelte";
-    import Button from "comp/atoms/Button.svelte";
+    import Button from "#/atoms/Button.svelte";
     import Icon from "@iconify/svelte";
-    import Field from "comp/atoms/TextField.svelte";
+    import Field from "#/atoms/TextField.svelte";
     import { push } from "@/assets/js/util";
     import products from "@/store/products.js";
     import config from "@/config.js";

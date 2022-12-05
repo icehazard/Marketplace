@@ -1,6 +1,6 @@
 <script>
-    import Empty from "comp/cart/Empty.svelte";
-    import Item from "comp/cart/Item.svelte";
+    import Empty from "#/cart/Empty.svelte";
+    import Item from "#/cart/Item.svelte";
     import cart from "@/store/cart.js";
 </script>
 

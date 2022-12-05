@@ -14,7 +14,8 @@ export default {
 	resolve: {
 		alias: {
 			'@': `${dirname}src/`,
-			comp: `${dirname}src/components`,
+			"#": `${dirname}src/components`,
+			'%': `${dirname}src/components/atoms`,
 		},
 		extensions: ['.mjs', '.js', '.svelte'],
 		mainFields: ['svelte', 'browser', 'module', 'main']

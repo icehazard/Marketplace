@@ -1,9 +1,12 @@
 <script>
     import Icon from "@iconify/svelte";
-    import products from "@/store/products.js";
+    import products from "@/store/products";
     import { openModal } from "svelte-modals";
-    import { isOwnProduct } from "@/store/products.js";
-    import Description from "comp/modals/listing/Description.svelte";
+    import { isOwnProduct } from "@/store/products";
+    import Description from "#/modals/listing/Description";
+    import Skeleton from '%/Skeleton'
+
+
 </script>
 
 <div class="shade1 pa-30 curve col gap-20">
@@ -26,6 +29,8 @@
             <div>Description</div>
         </div>
     {/if}
+
+    <Skeleton />
 
     <div class="white_space_preline">
         {$products?.product?.desc || "No Description"}

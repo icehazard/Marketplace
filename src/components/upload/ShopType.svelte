@@ -1,6 +1,6 @@
 <script>
     import Icon from "@iconify/svelte";
-    import Button from "comp/atoms/Button.svelte";
+    import Button from "#/atoms/Button.svelte";
     import { shopValid, active } from "@/store/store.js";
     import "@lottiefiles/lottie-player";
 

@@ -2,8 +2,8 @@
     import { push } from "@/assets/js/util.js";
     import Icon from "@iconify/svelte";
     import admin from "@/store/admin";
-    import Field from "comp/atoms/TextField.svelte";
-    import Button from "comp/atoms/Button.svelte";
+    import Field from "#/atoms/TextField.svelte";
+    import Button from "#/atoms/Button.svelte";
     import { notify } from "@/assets/js/util";
 
     function viewProfile(id) {

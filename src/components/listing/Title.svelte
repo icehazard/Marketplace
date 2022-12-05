@@ -2,7 +2,7 @@
     import products from "@/store/products.js";
     import { isOwnProduct } from "@/store/products.js";
     import { openModal } from "svelte-modals";
-    import Title from "comp/modals/listing/Title.svelte";
+    import Title from "#/modals/listing/Title.svelte";
     import Icon from "@iconify/svelte";
 </script>
 

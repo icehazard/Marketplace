@@ -1,11 +1,11 @@
 <script>
 	import DropDown from "./DropDown.svelte";
 	import { push } from "@/assets/js/util";
-	import Button from "comp/atoms/Button.svelte";
+	import Button from "#/atoms/Button.svelte";
 	import { currencies } from "@/assets/js/options.js";
 	import Search from "./Search.svelte";
 	import Title from "./Title.svelte";
-	import Circle from "comp/atoms/Circle.svelte";
+	import Circle from "#/atoms/Circle.svelte";
 	import { mq } from "@/assets/js/MediaQuery.svelte";
 	import cart from "@/store/cart.js";
 	import { clickOutside, formatCurrency, satoshiToBtcString } from "@/assets/js/util.js";

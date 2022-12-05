@@ -1,7 +1,7 @@
 <script>
     import shops from "@/store/shops.js";
     import Icon from "@iconify/svelte";
-    import Field from "comp/atoms/TextField.svelte";
+    import Field from "#/atoms/TextField.svelte";
     import { push } from "@/assets/js/util";
 
     let edit = window.location.pathname.includes("edit");

@@ -1,6 +1,6 @@
 <script>
-    import Field from "comp/atoms/TextField.svelte";
-    import Button from "comp/atoms/Button.svelte";
+    import Field from "#/atoms/TextField.svelte";
+    import Button from "#/atoms/Button.svelte";
     import products from "@/store/products.js";
     import { closeModal } from "svelte-modals";
     import { scale } from "svelte/transition";

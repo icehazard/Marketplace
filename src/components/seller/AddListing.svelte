@@ -4,7 +4,7 @@
     import { isOwnProduct } from "@/store/products.js";
     import products from "@/store/products.js";
     import "@lottiefiles/lottie-player";
-    import Item from "comp/listings/Item.svelte";
+    import Item from "#/listings/Item.svelte";
 
     let json = "https://assets6.lottiefiles.com/packages/lf20_wpfsuumq.json";
     let show = false;

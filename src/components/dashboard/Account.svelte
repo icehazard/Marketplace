@@ -1,6 +1,6 @@
 <script>
     import Icon from "@iconify/svelte";
-    import Field from "comp/atoms/TextField.svelte";
+    import Field from "#/atoms/TextField.svelte";
     import { mq } from "@/assets/js/MediaQuery.svelte";
     import user from "@/store/user";
     import { onDestroy } from "svelte";

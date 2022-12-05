@@ -1,6 +1,6 @@
 <script>
     import { push } from "@/assets/js/util";
-    import Rating from "comp/atoms/Rating.svelte";
+    import Rating from "#/atoms/Rating.svelte";
     import { formatCurrency } from "@/assets/js/util.js";
     import Icon from "@iconify/svelte";
     export let data = [];

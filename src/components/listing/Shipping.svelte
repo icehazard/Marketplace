@@ -2,7 +2,7 @@
     import Icon from "@iconify/svelte";
     import { openModal } from "svelte-modals";
     import { isOwnProduct } from "@/store/products.js";
-    import Shipping from "comp/modals/listing/Shipping.svelte";
+    import Shipping from "#/modals/listing/Shipping.svelte";
 </script>
 
 <div class="shade1 pa-30 curve col gap-20">

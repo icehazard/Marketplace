@@ -1,5 +1,5 @@
 <script>
-    import Field from "comp/atoms/TextField.svelte";
+    import Field from "#/atoms/TextField.svelte";
     import cart from "@/store/cart.js";
     import Icon from "@iconify/svelte";
     import { formatCurrency } from "@/assets/js/util.js";

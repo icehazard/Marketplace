@@ -1,7 +1,7 @@
 <script>
 	import { push } from '@/assets/js/util.js';
     import Icon from "@iconify/svelte";
-    import Field from "comp/atoms/TextField.svelte";
+    import Field from "#/atoms/TextField.svelte";
 
     function handleClick(active){
         let page = active  === 'active' ? 'active' : 'view'

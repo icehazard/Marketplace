@@ -1,15 +1,15 @@
 <script>
-	import user, { ownShop } from "@/store/user.js";
-	import Footer from "./components/toolbars/Footer.svelte";
-	import Navbar from "comp/toolbars/navbar/Navbar.svelte";
-	import Mobile from "comp/toolbars/Mobile.svelte";
-	import Drawer from "comp/toolbars/drawer/Drawer.svelte";
-	import { fade } from "svelte/transition";
-	import { Modals, closeModal } from "svelte-modals";
-	import MediaQuery from "@/assets/js/MediaQuery.svelte";
 	import { Notifications } from "@tadashi/svelte-notification";
-	import RouterView from "@/router/index.svelte";
-    import Progress from "@/components/atoms/Progress.svelte";
+	import { Modals, closeModal } from "svelte-modals";
+	import { fade } from "svelte/transition";
+	import user from "@/store/user";
+	import Footer from "#/toolbars/Footer";
+	import Navbar from "#/toolbars/navbar/Navbar";
+	import Mobile from "#/toolbars/Mobile";
+	import Drawer from "#/toolbars/drawer/Drawer";
+	import MediaQuery from "@/assets/js/MediaQuery";
+	import RouterView from "@/router/index";
+	import Progress from "%/Progress";
 
 	user.get();
 	user.setTheme();
@@ -37,7 +37,7 @@
 </section>
 
 <style>
-.backdrop {
+	.backdrop {
 		background: rgba(0, 0, 0, 0.25);
 		backdrop-filter: blur(5px);
 	}

@@ -1,8 +1,8 @@
 <script>
-    import Floating from "comp/orders/Floating.svelte";
-    import Contacts from "comp/orders/Contacts.svelte";
-    import Map from "comp/atoms/Map";
-    import Details from "comp/orders/Details.svelte";
+    import Floating from "#/orders/Floating.svelte";
+    import Contacts from "#/orders/Contacts.svelte";
+    import Map from "#/atoms/Map";
+    import Details from "#/orders/Details.svelte";
     import orders from "@/store/orders";
     import app from "@/store/app";
     import user from "@/store/user";

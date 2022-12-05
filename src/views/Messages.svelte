@@ -1,6 +1,6 @@
 <script>
-    import Contacts from "comp/messages/Contacts.svelte";
-    import Chat from "comp/messages/Chat.svelte";
+    import Contacts from "#/messages/Contacts.svelte";
+    import Chat from "#/messages/Chat.svelte";
   
 </script>
 

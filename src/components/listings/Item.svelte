@@ -1,6 +1,6 @@
 <script>
     import Icon from "@iconify/svelte";
-    import Rating from "comp/atoms/Rating.svelte";
+    import Rating from "#/atoms/Rating.svelte";
     import products from "@/store/products.js";
     import { slide } from "svelte/transition";
     import { clickOutside, push } from "@/assets/js/util.js";

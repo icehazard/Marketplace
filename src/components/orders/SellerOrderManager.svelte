@@ -1,6 +1,6 @@
 <script>
-    import Button from "comp/atoms/Button.svelte";
-    import TextField from "comp/atoms/TextField.svelte";
+    import Button from "#/atoms/Button.svelte";
+    import TextField from "#/atoms/TextField.svelte";
     import orders from "@/store/orders";
     import user from "@/store/user";
     import { notify } from "@/assets/js/util";
