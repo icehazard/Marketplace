@@ -4,18 +4,6 @@
           <div class="tweet-header">
              <div class="skeleton-line heading" style="width: 60%"></div>
           </div>
-          <div class="tweet-text">
-             <div class="skeleton-line" style="width: 90%"></div>
-             <div class="skeleton-line" style="width: 100%"></div>
-             <div class="skeleton-line" style="width: 35%"></div>
-          </div>
-          
-          <div class="tweet-text mt-50">
-            <div class="skeleton-line" style="width: 90%"></div>
-            <div class="skeleton-line" style="width: 100%"></div>
-            <div class="skeleton-line" style="width: 35%"></div>
-         </div>
-       
        </div> 
     </div>
  </div>
@@ -51,7 +39,6 @@
        
     .tweet
        background-color: $item-bg
-       padding: .8rem .75rem
        margin: 0 auto
        width: 100%
 
@@ -84,10 +71,10 @@
           height: .7rem
           background-color: $skeleton-color
           border-radius: $skeleton-border-radius
-          margin-bottom: .3rem
+
           &.heading 
              height: 1rem
-             margin-bottom: .5rem
+
        &-img 
           height: 250px
           background-color: $skeleton-color

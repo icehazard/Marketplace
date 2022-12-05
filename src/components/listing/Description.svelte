@@ -1,11 +1,10 @@
 <script>
+    import { openModal } from "svelte-modals";
     import Icon from "@iconify/svelte";
     import products from "@/store/products";
-    import { openModal } from "svelte-modals";
     import { isOwnProduct } from "@/store/products";
     import Description from "#/modals/listing/Description";
     import Skeleton from '%/Skeleton'
-
 
 </script>
 
@@ -30,9 +29,16 @@
         </div>
     {/if}
 
-    <Skeleton />
-
+    {#if $products?.product?.desc}
     <div class="white_space_preline">
         {$products?.product?.desc || "No Description"}
     </div>
+    {:else}
+    <Skeleton />
+    {/if}
+
+   
+
+   
 </div>
+
