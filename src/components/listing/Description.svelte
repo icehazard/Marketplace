@@ -4,8 +4,7 @@
     import products from "@/store/products";
     import { isOwnProduct } from "@/store/products";
     import Description from "#/modals/listing/Description";
-    import Skeleton from '%/Skeleton'
-
+    import Skeleton from "%/Skeleton";
 </script>
 
 <div class="shade1 pa-30 curve col gap-20">
@@ -29,16 +28,11 @@
         </div>
     {/if}
 
-    {#if $products?.product?.desc}
-    <div class="white_space_preline">
-        {$products?.product?.desc || "No Description"}
-    </div>
+    {#if Object.keys($products?.product || {}).length > 0}
+        <div class="white_space_preline">
+            {$products?.product?.desc || "No Description"}
+        </div>
     {:else}
-    <Skeleton />
+        <Skeleton />
     {/if}
-
-   
-
-   
 </div>
-

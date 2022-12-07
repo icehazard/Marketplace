@@ -29,6 +29,7 @@
     href={`/listing/${data._id}`}
     class=" h-300 curve col shade1 fast main"
     class:opacity-60={data.status ? false : true}
+    on:click={edit}
 >
     <section class="h-180 center w100 relative overflow-hidden curve-top">
         {#if menu}

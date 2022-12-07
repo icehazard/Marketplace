@@ -11,6 +11,7 @@
     import Quantity from "#/modals/listing/Quantity.svelte";
     import CartNewShop from "#/modals/listing/CartNewShop.svelte";
     import { acts } from "@tadashi/svelte-notification";
+    import SkeletonText from "%/SkeletonText";
 
     let noStock = {
         mode: "danger",
@@ -84,13 +85,17 @@
             </div>
         </div>
     {/if}
-    <div class="row space-between align-center">
-        <div class="font-26">
-            {formatCurrency($products.product.price ? $products.product.price : 0.0)}
-        </div>
+    <div class="row space-between align-center nowrap gap-20">
+    {#if Object.keys($products?.product || {}).length > 0}
+    <div class="font-26">
+        {formatCurrency($products.product.price ? $products.product.price : 0.0)}
+    </div>
+    {:else}
+    <SkeletonText />
+    {/if}
 
-        {#if !inStock}
-            <div class="red--text">Out of stock</div>
+        {#if !inStock && Object.keys($products?.product || {}).length > 0}
+            <div class="red--text nowrap">Out of stock</div>
         {/if}
 
         <div class="font-22">

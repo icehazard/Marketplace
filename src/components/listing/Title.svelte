@@ -21,7 +21,7 @@
                     <Icon icon="fluent:edit-16-regular" width="22" color="var(--primary)" />
                 {/if}
             </button>
-        {:else if $products?.product?.name}
+        {:else if Object.keys($products?.product || {}).length > 0}
             <div class="opacity-75 row align-center gap-10">
                 <h1>{$products?.product?.name || "No title"}</h1>
             </div>
@@ -30,7 +30,7 @@
         {/if}
     </div>
     <div class="row space-between">
-        {#if $products?.product?.shopName}
+        {#if Object.keys($products?.product || {}).length > 0}
         <a href={`/shops/id/${$products?.product?.shopID}`} class="opacity-75 font-18">
             {$products?.product?.shopName || "Untitled Shop name"}
         </a>

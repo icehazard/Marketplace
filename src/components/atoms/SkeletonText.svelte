@@ -16,7 +16,6 @@
     
     $skeleton-color: lighten($item-bg, 7%)
     $skeleton-border-radius: 3px
-    $skeleton-img-border-radius: .75rem
     $skeleton-animation-speed: 1s
     
     =square($size)
@@ -49,24 +48,9 @@
        &-header
           @extend %skeleton-animation
           transform-origin: bottom
-       &-text
-          @extend %skeleton-animation
-          animation-delay: 200ms
-       &-footer
-          display: flex
-          margin-top: 1rem
-          @extend %skeleton-animation
-          transform-origin: bottom
-          animation-delay: 400ms
        
     .skeleton
        background-color: $item-bg
-       &-avatar
-          +square(48px)
-          background-color: $skeleton-color
-          border-radius: 100%
-          float: left
-          @extend %skeleton-animation
        &-line
           height: .7rem
           background-color: $skeleton-color
@@ -75,21 +59,5 @@
           &.heading 
              height: 1rem
 
-       &-img 
-          height: 250px
-          background-color: $skeleton-color
-          border-radius: $skeleton-img-border-radius
-          margin-top: 1.5rem
-          @extend %skeleton-animation
-          animation-delay: 300ms
-       &-button
-          display: block
-          +square(26px)
-          background-color: $skeleton-color
-          flex-shrink: 0
-          &:not(:last-child)
-             margin-right: 2rem
-          &.rounded 
-             border-radius: 100%
     
 </style>
