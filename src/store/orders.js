@@ -27,8 +27,9 @@ context.patch = async function (id, data) {
     return await patch(`api/order/${id}`, data)
 }
 context.track = async function (data) {
-    let order =  context.val('order')
-    let res = await post(`api/order/track`, { trackingNo: data, id: order._id })
+    let order = context.val('order')
+    let payload = { trackingNo: data, id: order._id }
+    let res = await post(`api/order/track`, payload)
     context.commit('tracking', res.data || false)
     return res
 }
