@@ -76,9 +76,11 @@
         let options = { attributes: false, childList: true, subtree: true };
         observer.observe(elementNode, options);
     }
-
+    
+    $app.url = window.location.pathname
     convertToDynamicRoutes();
     onMount(() => {
+       
         observeAnchors();
         window.onpopstate = () => push(window.location.pathname);
     });

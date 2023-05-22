@@ -40,4 +40,5 @@ export default {
     "/policy": { page: "Policy", auth: false },
     "/terms": { page: "Terms", auth: false },
     "/admin": { page: "Admin", auth: false },
+    "/sandbox": { page: "Sandbox", auth: false },
 }

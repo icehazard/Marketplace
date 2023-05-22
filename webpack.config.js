@@ -3,7 +3,7 @@ import NodePolyfillPlugin from 'node-polyfill-webpack-plugin';
 import preprocess from 'svelte-preprocess';
 import config from "./src/config.js";
 
-const dirname = new URL('./', import.meta.url).pathname;
+let dirname = new URL('./', import.meta.url).pathname
 const mode = process.env.NODE_ENV || 'development';
 const prod = mode === 'production';
 
@@ -21,7 +21,7 @@ export default {
 		mainFields: ['svelte', 'browser', 'module', 'main']
 	},
 	output: {
-		path: `${dirname}public/dist/`,
+		path: `${dirname.substring(1)}public/dist/`,
 		filename: '[name].js',
 		chunkFilename: '[name].js',
 		assetModuleFilename: '[name][ext]'

@@ -1,0 +1,40 @@
+/*!*****************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./src/assets/css/swiper.css ***!
+  \*****************************************************************************/
+.swiper-slide {
+  width: auto;
+ 
+}
+
+.swiper-pagination-bullet {
+
+  background: #ffffff;
+}
+
+.swiper-pagination-bullet-active {
+  color: #fff;
+  background: var(--accent);
+}
+
+.swiper-wrapper{
+  gap: 10px;
+}
+
+.swiper{
+  margin-left: 0;
+  margin-right: 0;
+  flex-basis: fit-content;
+  width: 0;
+  height: auto;
+  -webkit-touch-callout: none; 
+    -webkit-user-select: none; 
+     -khtml-user-select: none; 
+       -moz-user-select: none; 
+        -ms-user-select: none; 
+            user-select: none; 
+}
+
+
+
+
+/*# sourceMappingURL=src_views_Listing_svelte.css.map*/
