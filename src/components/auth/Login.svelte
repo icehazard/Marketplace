@@ -19,7 +19,7 @@
             await user.get();
             push("/");
         } else {
-            message = "Account/password not found";
+            message = "Account password not found";
         }
     }
 
